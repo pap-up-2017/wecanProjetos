@@ -1,5 +1,7 @@
 package projeto.entity;
 
+// Classe da entidade do usuário
+
 public class Usuario {
 	
 	private String nome;
