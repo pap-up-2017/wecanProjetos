@@ -1,0 +1,5 @@
+package projeto.entity;
+
+public class TipoUsuario {
+
+}
