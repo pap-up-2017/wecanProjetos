@@ -1,5 +1,7 @@
 package projeto.entity;
 
+//Classe Curso 
+
 public class Curso {
 	private String nome;
 
