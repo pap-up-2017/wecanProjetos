@@ -1,6 +1,5 @@
 package projeto.entity;
 
-// Teste curso 
 public class Curso {
 	private String nome;
 
