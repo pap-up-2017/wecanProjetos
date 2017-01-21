@@ -4,7 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlRootElement;
 
+//rest
+@XmlRootElement
 // tag para o hibernate reconhecer que deve mapear essa classe
 @Entity
 public class Estado {

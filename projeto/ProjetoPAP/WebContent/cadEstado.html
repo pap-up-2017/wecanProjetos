@@ -1,0 +1,36 @@
+	<div ng-app="cadastro">
+        <div ng-controller="HttpPostControllerEstado">
+		{{ Resposta }}
+		<form>
+		  <div class="form-group">
+		 	<input placeholder="nome do Estado" class="form-control" type="text" name="nome" ng-model="nome" required />
+		  </div>
+		  <div class="form-group">
+		    <input placeholder="sigla do Estado" class="form-control" type="text" name="sigla" ng-model="sigla" required />
+		  </div>
+		  <button ng-click="EnviarInformacao()" class="btn btn-primary" style="width:100%">Cadastrar Estado</button>
+		</form>		
+	</div>
+	
+	<div ng-controller="HttpGetControllerEstado">
+		<button ng-click="BuscarInformacao()" style="margin-bottom: 10px; margin-left: 1095px; width: 10%" id="botao" class="btn btn-primary">Buscar</button>
+
+		<table id="tabela" class="blue" style="margin-bottom:20px; margin-left: 150px; width:80%; height: 400px; overflow-y: scroll;">
+			<thead>
+				<tr style="background: #58ACFA !important; color: #ffffff; ">
+					<th>ID</th>
+					<th>NOME</th>
+					<th>SIGLA</th>		
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng:repeat="i in Estado">
+					<td>{{i.idEstado}}</td>
+					<td>{{i.nomeEstado}}</td>
+					<td>{{isiglaEstado}}</td>
+				</tr>
+			</tbody>
+			
+		</table>
+	</div>  
+	</div>
