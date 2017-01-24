@@ -1,0 +1,16 @@
+	<div ng-controller="HttpGetController">
+		<button id="botao" class="btn btn-primary" ng-click="BuscarInformacao()">Buscar</button>
+
+		<table class="table ">
+			<tr>
+				<td>ID</td>
+				<td>NOME</td>
+				<td>LOGIN</td>
+			</tr>
+			<tr ng:repeat="i in cliente">
+				<td>{{i.id}}</td>
+				<td>{{i.nome}}</td>
+				<td>{{i.login}}</td> 
+			</tr>
+		</table>
+	</div>   
