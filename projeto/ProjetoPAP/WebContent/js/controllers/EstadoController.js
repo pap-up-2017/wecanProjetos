@@ -1,4 +1,4 @@
-app.controller('HttpGetEstadoCtrl', function($scope, 
+angular.module("app").controller('HttpGetEstadoCtrl', function($scope, 
 		$http) {
 	
 	$scope.BuscarInformacao = function() {
@@ -19,7 +19,7 @@ app.controller('HttpGetEstadoCtrl', function($scope,
 	$scope.BuscarInformacao();
 });
 
-app.controller("HttpPostEstadoCtrl", function($scope,
+angular.module("app").controller("HttpPostEstadoCtrl", function($scope,
 		$http) {
 
 	$scope.EnviarInformacao = function() {
