@@ -1,16 +1,31 @@
-	<div ng-controller="HttpGetController">
-		<button id="botao" class="btn btn-primary" ng-click="BuscarInformacao()">Buscar</button>
+<br/><br/><br/><br/>
+<div ng-controller="HttpPostEstadoCtrl">
+		{{ Resposta }}
+		<p class="form-group">
+			<input placeholder="Nome" class="form-control" type="text" ng-model="nomeEstado" required />
+		</p class="form-group">
+		<p class="form-group">
+			<input placeholder="Sigla" class="form-control" type="text" ng-model="siglaEstado" required />
+		</p class="form-group">
+		<button class="btn btn-success" ng-click="EnviarInformacao()">Cadastrar</button>
+</div>
+<br/><hr/><br/>
+<div ng-controller="HttpGetEstadoCtrl">
 
+		<button class="btn btn-primary" ng-click="BuscarInformacao()">Buscar estados</button>
+		
+		<br/><br/>
+		
 		<table class="table ">
 			<tr>
 				<td>ID</td>
 				<td>NOME</td>
-				<td>LOGIN</td>
+				<td>SIGLA</td>
 			</tr>
-			<tr ng:repeat="i in cliente">
-				<td>{{i.id}}</td>
-				<td>{{i.nome}}</td>
-				<td>{{i.login}}</td> 
+			<tr ng:repeat="i in estado">
+				<td>{{i.idEstado}}</td>
+				<td>{{i.nomeEstado}}</td>
+				<td>{{i.siglaEstado}}</td> 
 			</tr>
 		</table>
-	</div>   
+</div> 

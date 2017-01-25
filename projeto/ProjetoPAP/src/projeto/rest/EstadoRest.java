@@ -25,6 +25,7 @@ public class EstadoRest {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/post")
 	public void cadastrarEmpresa(Estado estado) {
 		InterfaceDao<Estado> dao = FactoryDao.createEstadoDao();
 		dao.salvar(estado);
