@@ -12,24 +12,30 @@ import projeto.entity.Estado;
 public class TestEstado {
 
 	@Test
-	public void cadastrarCurso(){
+	public void cadastrarEstado(){
 		Estado uf = new Estado();
-		
 		uf.setNomeEstado("Paraná");
 		uf.setSiglaEstado("PR");
-		
 		InterfaceDao<Estado> dao = FactoryDao.createEstadoDao();
 		dao.salvar(uf);
-		
 	}
 	
 	@Test
-	public void listarCurso() {		
+	public void listarEstado() {		
 		List<Estado> estados = FactoryDao.createEstadoDao().listar();
-		
 		if (estados.size() > 0) {
 			//funcionou
 		}
-
 	}
+	
+	@Test
+	public void alterarEstado(){
+		Estado uf = new Estado();
+		uf.setNomeEstado("Teste de alteração");
+		uf.setSiglaEstado("SP");
+		uf.setIdEstado(2);
+		InterfaceDao<Estado> dao = FactoryDao.createEstadoDao();
+		dao.alterar(uf);
+	}
+	
 }

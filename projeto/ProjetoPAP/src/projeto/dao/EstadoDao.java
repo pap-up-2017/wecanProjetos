@@ -35,9 +35,29 @@ public class EstadoDao implements InterfaceDao<Estado> {
 	}
 
 	@Override
-	public Estado getObjById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Estado getObjById(int id) {
+		// cria a instancia
+		EntityManager em = SingletonConection.getInstance();
+		// cria a Query para encontrar os estados
+		Query q = em.createQuery("from Estado where id = " + id);
+		return (Estado) q.getSingleResult();
 	}
-
+	
+	@Override
+	public void alterar(Estado uf){
+		// cria a instancia
+		EntityManager em = SingletonConection.getInstance();
+		// inicia a instancia
+		em.getTransaction().begin();
+		// da um merge nos dados do estado
+		em.merge(uf);
+		// envia os dados do estado
+		em.getTransaction().commit();
+		// fecha a instancia
+		em.close();
+	}
+	
+	@Override
+	public void excluir(Estado uf){
+	}
 }

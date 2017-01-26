@@ -36,9 +36,21 @@ public class ProjetoDao implements InterfaceDao<Projeto> {
 	}
 
 	@Override
-	public Projeto getObjById(Long id) {
+	public Projeto getObjById(int id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void alterar(Projeto t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void excluir(Projeto t) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
