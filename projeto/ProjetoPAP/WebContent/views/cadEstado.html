@@ -38,12 +38,15 @@
 <div ng-controller="HttpGetEstadoCtrl">
 
 		<button class="btn btn-primary" ng-click="BuscarInformacao()">Buscar estados</button>
+		
 		<div class="editpopup editpopup-{{istrue}} ">
 	        <p>edit Id:<input type="text" ng-model="editedid"></p>
 	        <p>edit Estado:<input type="text" ng-model="editedname"></p>
-	        <button ng-click="save(estado)">save</button>
+	        <p>Sigla Estado:<input type="text" ng-model="editedsigla"></p>
+	        <button ng-click="save(editedid, editedname, editedsigla)">save</button>
 	        <button ng-click="closepopup()">cancel</button>
      	</div>		
+     	
 		<br/><br/>
 		
 		<table class="table ">
@@ -52,11 +55,11 @@
 				<td>NOME</td>
 				<td>SIGLA</td>
 			</tr>
-			<tr ng:repeat="i in estado">
-				<td>{{i.idEstado}}</td>
-				<td>{{i.nomeEstado}}</td>
-				<td>{{i.siglaEstado}}</td> 
-				<td><button ng-click="editrow(i)" class="btn btn-primary">Alterar</button></td>
+			<tr ng:repeat="estado in estados">
+				<td>{{estado.idEstado}}</td>
+				<td>{{estado.nomeEstado}}</td>
+				<td>{{estado.siglaEstado}}</td> 
+				<td><button ng-click="editrow(estado)" class="btn btn-primary">Alterar</button></td>
 				<td><button class="btn btn-primary">Excluir</button></td>
 			</tr>
 		</table>

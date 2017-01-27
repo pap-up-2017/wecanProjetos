@@ -6,7 +6,7 @@ angular.module("app").controller('HttpGetEstadoCtrl', function($scope,
 
 		$http.get('http://localhost:8080/ProjetoPAP/rest/estadorest')
 				.success(function(data) {
-					$scope.estado = data["estado"];
+					$scope.estados = data["estado"];
 				}).error(
 						function(data, status, header, config) {
 							$scope.Resposta = "Data: " + data + "<hr />status: "
@@ -16,29 +16,55 @@ angular.module("app").controller('HttpGetEstadoCtrl', function($scope,
 
 	};
 	
-	$scope.editrow = function(i){
+	$scope.editrow = function(estado){
 		$scope.istrue=true;
-	    $scope.oldValue = i.idEstado; // save the old id
-	    $scope.editedid= i.idEstado;
-	    $scope.editedname= i.nomeEstado;
-	    console.log(i)
+	    $scope.oldValue = estado.idEstado; // save the old id
+	    $scope.editedid = estado.idEstado;
+	    $scope.editedname = estado.nomeEstado;
+	    $scope.editedsigla = estado.siglaEstado;
+	    console.log(estado);
 	};
 	
-	$scope.save=function(estado){
-		console.log("função Save();")
-	    $scope.istrue=false;
-	    $scope.estado.forEach(function (estado) {
-	       if(estado.idEstado == $scope.oldValue){
-	    	   estado.idEstado = $scope.editedid;
-	    	   estado.nomeEstado = $scope.editedname;
-	       }
-	    });
+	$scope.save=function(editedid, editedname, editedsigla){
+		console.log("função Save();");	
+		
+		var parameter = JSON.stringify({
+			type : "estado",
+			idEstado : editedid,
+			nomeEstado : editedname,
+			siglaEstado : editedsigla
+		});
+		
+		console.log(parameter);
+
+		var config = {
+			headers : {
+				'Content-Type' : 'application/json;charset=utf-8;'
+			}
+		}
+
+		$http.post(
+				'http://localhost:8080/ProjetoPAP/rest/estadorest/post',
+				parameter, config).success(
+				function(data, status, headers, config) {
+					$scope.Resposta = 'Estado Salvo com Sucesso!';
+					
+					
+				}).error(
+				function(data, status, header, config) {
+					$scope.Resposta = "Data: " + data + "<hr />status: "
+							+ status + "<hr />headers: " + header
+							+ "<hr />config: " + config;
+					
+				
+				});
+		
 	};
-	
+		
 	$scope.closepopup=function(){
 	     $scope.istrue=false;
 
-	  }
+	  };
 
 	
 

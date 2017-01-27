@@ -28,7 +28,12 @@ public class EstadoRest {
 	@Path("/post")
 	public void cadastrarEmpresa(Estado estado) {
 		InterfaceDao<Estado> dao = FactoryDao.createEstadoDao();
-		dao.salvar(estado);
+		if (estado.getIdEstado() > 0){
+			dao.alterar(estado);
+		}
+		else{
+			dao.salvar(estado);
+		}
 	}
 
 }
