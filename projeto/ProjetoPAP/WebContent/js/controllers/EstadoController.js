@@ -15,6 +15,32 @@ angular.module("app").controller('HttpGetEstadoCtrl', function($scope,
 						});
 
 	};
+	
+	$scope.editrow = function(i){
+		$scope.istrue=true;
+	    $scope.oldValue = i.idEstado; // save the old id
+	    $scope.editedid= i.idEstado;
+	    $scope.editedname= i.nomeEstado;
+	    console.log(i)
+	};
+	
+	$scope.save=function(estado){
+		console.log("função Save();")
+	    $scope.istrue=false;
+	    $scope.estado.forEach(function (estado) {
+	       if(estado.idEstado == $scope.oldValue){
+	    	   estado.idEstado = $scope.editedid;
+	    	   estado.nomeEstado = $scope.editedname;
+	       }
+	    });
+	};
+	
+	$scope.closepopup=function(){
+	     $scope.istrue=false;
+
+	  }
+
+	
 
 	$scope.BuscarInformacao();
 });

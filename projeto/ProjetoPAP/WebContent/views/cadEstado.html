@@ -1,3 +1,28 @@
+<style type="text/css">
+  .listv{
+     margin-bottom: 30px;
+  }
+  .editpopup{
+     width: 250px;
+     height: 250px;
+     border: 1px solid black;
+     display: none;
+     position: absolute;
+     top: center;
+     left: center;
+     bottom: center;
+     right: center;
+
+     background-color:gray;
+  }
+  .editpopup-true{
+     display: block;
+  }
+  .editpopup-false{
+     display: none;
+  }
+  </style>
+
 <br/><br/><br/><br/>
 <div ng-controller="HttpPostEstadoCtrl">
 		{{ Resposta }}
@@ -13,7 +38,12 @@
 <div ng-controller="HttpGetEstadoCtrl">
 
 		<button class="btn btn-primary" ng-click="BuscarInformacao()">Buscar estados</button>
-		
+		<div class="editpopup editpopup-{{istrue}} ">
+	        <p>edit Id:<input type="text" ng-model="editedid"></p>
+	        <p>edit Estado:<input type="text" ng-model="editedname"></p>
+	        <button ng-click="save(estado)">save</button>
+	        <button ng-click="closepopup()">cancel</button>
+     	</div>		
 		<br/><br/>
 		
 		<table class="table ">
@@ -26,7 +56,9 @@
 				<td>{{i.idEstado}}</td>
 				<td>{{i.nomeEstado}}</td>
 				<td>{{i.siglaEstado}}</td> 
-				<td><button class="btn btn-primary">Alterar</button></td>
+				<td><button ng-click="editrow(i)" class="btn btn-primary">Alterar</button></td>
+				<td><button class="btn btn-primary">Excluir</button></td>
 			</tr>
 		</table>
+
 </div> 
