@@ -46,6 +46,8 @@ angular.module("app").controller('PageEstadoCtrl', function($scope,
 							+ status + "<hr />headers: " + header
 							+ "<hr />config: " + config;
 				});
+		
+		$scope.BuscarInformacao();
 	};
 	
 	// Envia a informação de alteração de um elemento para o banco ... Via rest
@@ -83,6 +85,8 @@ angular.module("app").controller('PageEstadoCtrl', function($scope,
 				
 				});
 		
+		$scope.BuscarInformacao();
+		
 	};
 	
 	// carrega os dados do elemento selecionado para edição .. 
@@ -93,6 +97,41 @@ angular.module("app").controller('PageEstadoCtrl', function($scope,
 	    $scope.editedname = estado.nomeEstado;
 	    $scope.editedsigla = estado.siglaEstado;
 	    console.log(estado);
+	};
+	
+	// carrega os dados do elemento selecionado para exclusão .. 
+	$scope.ExcluirElemento = function(estado){
+		console.log("Excluir um elemento ...")
+
+		var parameter = JSON.stringify({
+			type : "estado",
+			idEstado : estado.idEstado,
+			nomeEstado : estado.nomeEstado,
+			siglaEstado : estado.siglaEstado
+		});
+
+		var config = {
+			headers : {
+				'Content-Type' : 'application/json;charset=utf-8;'
+			}
+		}
+
+		$http.post(
+				'http://localhost:8080/ProjetoPAP/rest/estadorest/postdel',
+				parameter, config).success(
+				function(data, status, headers, config) {
+					$scope.Resposta = 'Estado excluido com Sucesso!';
+					
+					
+				}).error(
+				function(data, status, header, config) {
+					$scope.Resposta = "Data: " + data + "<hr />status: "
+							+ status + "<hr />headers: " + header
+							+ "<hr />config: " + config;
+				});
+		
+		$scope.BuscarInformacao();
+		
 	};
 		
 	// função para fechar o popUp de edição ... 

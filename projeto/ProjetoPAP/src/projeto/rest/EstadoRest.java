@@ -27,7 +27,7 @@ public class EstadoRest {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/postcad")
-	public void cadastrarEmpresa(Estado estado) {
+	public void cadastrarEstado(Estado estado) {
 		InterfaceDao<Estado> dao = FactoryDao.createEstadoDao();
 		if (estado.getIdEstado() < 1){
 			dao.salvar(estado);		
@@ -38,10 +38,21 @@ public class EstadoRest {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/postalt")
-	public void cadastrarEmpresaa(Estado estado) {
+	public void alterarEstado(Estado estado) {
 		InterfaceDao<Estado> dao = FactoryDao.createEstadoDao();
 		if (estado.getIdEstado() > 0){
 			dao.alterar(estado);
+		}
+	}
+	
+	// post para alterar um dado no banco ... 
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/postdel")
+	public void deletarEstado(Estado estado) {
+		InterfaceDao<Estado> dao = FactoryDao.createEstadoDao();
+		if (estado.getIdEstado() > 0){
+			dao.excluir(estado);
 		}
 	}
 

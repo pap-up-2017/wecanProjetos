@@ -25,8 +25,8 @@ public class CidadeRest {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/post")
-	public void cadastrarEmpresa(Cidade cidade) {
+	@Path("/postcad")
+	public void cadastrarEmpresa(Cidade cidade) {	
 		InterfaceDao<Cidade> dao = FactoryDao.createCidadeDao();
 		dao.salvar(cidade);
 	}
