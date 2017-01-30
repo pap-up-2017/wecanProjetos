@@ -24,7 +24,7 @@
   </style>
 
 <br/><br/><br/><br/>
-<div ng-controller="HttpPostEstadoCtrl">
+<div ng-controller="PageEstadoCtrl">
 		{{ Resposta }}
 		<p class="form-group">
 			<input placeholder="Nome" class="form-control" type="text" ng-model="nomeEstado" required />
@@ -32,10 +32,10 @@
 		<p class="form-group">
 			<input placeholder="Sigla" class="form-control" type="text" ng-model="siglaEstado" required />
 		</p class="form-group">
-		<button class="btn btn-success" ng-click="EnviarInformacao()">Cadastrar</button>
+		<button class="btn btn-success" ng-click="SalvarCadastro()">Cadastrar</button>
 </div>
 <br/><hr/><br/>
-<div ng-controller="HttpGetEstadoCtrl">
+<div ng-controller="PageEstadoCtrl">
 
 		<button class="btn btn-primary" ng-click="BuscarInformacao()">Buscar estados</button>
 		
@@ -43,8 +43,8 @@
 	        <p>edit Id:<input type="text" ng-model="editedid"></p>
 	        <p>edit Estado:<input type="text" ng-model="editedname"></p>
 	        <p>Sigla Estado:<input type="text" ng-model="editedsigla"></p>
-	        <button ng-click="save(editedid, editedname, editedsigla)">save</button>
-	        <button ng-click="closepopup()">cancel</button>
+	        <button ng-click="SalvarAlteracao(editedid, editedname, editedsigla)">save</button>
+	        <button ng-click="FecharPopUpEdicao()">cancel</button>
      	</div>		
      	
 		<br/><br/>
@@ -59,7 +59,7 @@
 				<td>{{estado.idEstado}}</td>
 				<td>{{estado.nomeEstado}}</td>
 				<td>{{estado.siglaEstado}}</td> 
-				<td><button ng-click="editrow(estado)" class="btn btn-primary">Alterar</button></td>
+				<td><button ng-click="CarregarEdicao(estado)" class="btn btn-primary">Alterar</button></td>
 				<td><button class="btn btn-primary">Excluir</button></td>
 			</tr>
 		</table>

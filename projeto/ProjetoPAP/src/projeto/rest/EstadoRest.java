@@ -23,16 +23,25 @@ public class EstadoRest {
 		return dao.listar();	
 	}
 	
+	// post para salvar um dado no banco ... 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/post")
+	@Path("/postcad")
 	public void cadastrarEmpresa(Estado estado) {
+		InterfaceDao<Estado> dao = FactoryDao.createEstadoDao();
+		if (estado.getIdEstado() < 1){
+			dao.salvar(estado);		
+		}
+	}
+	
+	// post para alterar um dado no banco ... 
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/postalt")
+	public void cadastrarEmpresaa(Estado estado) {
 		InterfaceDao<Estado> dao = FactoryDao.createEstadoDao();
 		if (estado.getIdEstado() > 0){
 			dao.alterar(estado);
-		}
-		else{
-			dao.salvar(estado);
 		}
 	}
 
