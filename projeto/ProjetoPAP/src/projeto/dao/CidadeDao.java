@@ -59,8 +59,17 @@ public class CidadeDao implements InterfaceDao<Cidade>{
 	}
 
 	@Override
-	public void excluir(Cidade t) {
-		// TODO Criar metodo excluir
+	public void excluir(Cidade c) {
+		// cria a instancia
+		EntityManager em = SingletonConection.getInstance();
+		// inicia a instancia
+		em.getTransaction().begin();
+		// cria uma query para para exclusão do objeto no banco..
+		em.createQuery("DELETE FROM Cidade WHERE id=" + c.getIdCidade()).executeUpdate();
+		// envia os dados do estado
+		em.getTransaction().commit();
+		// fecha a instancia
+		em.close();
 		
 	}
 

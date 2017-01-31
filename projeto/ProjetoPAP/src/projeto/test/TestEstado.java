@@ -38,4 +38,12 @@ public class TestEstado {
 		dao.alterar(uf);
 	}
 	
+	@Test 
+	public void excluirEstado(){
+		Estado uf = new Estado();
+		InterfaceDao<Estado> dao = FactoryDao.createEstadoDao();
+		uf = dao.getObjById(36);
+		dao.excluir(uf);
+	}
+	
 }

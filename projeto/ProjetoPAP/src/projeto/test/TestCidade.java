@@ -23,7 +23,7 @@ public class TestCidade {
 	}
 	
 	@Test
-	public void listarEstado() {		
+	public void listarCidade() {		
 		List<Cidade> cidades = FactoryDao.createCidadeDao().listar();
 		if (cidades.size() > 0) {
 			//funcionou
@@ -31,13 +31,20 @@ public class TestCidade {
 	}
 	
 	@Test
-	public void alterarEstado(){
+	public void alterarCidade(){
 		InterfaceDao<Cidade> daoCidade = FactoryDao.createCidadeDao();
 		InterfaceDao<Estado> daoEstado = FactoryDao.createEstadoDao();
 		Cidade c = daoCidade.getObjById(2);	
 		c.setNomeCidade("São Paulo");
 		c.setEstadoCidade(daoEstado.getObjById(3));
 		daoCidade.alterar(c);
+	}
+	
+	@Test
+	public void excluirCidade(){
+		InterfaceDao<Cidade> daoCidade = FactoryDao.createCidadeDao();
+		Cidade c = daoCidade.getObjById(3);
+		daoCidade.excluir(c);
 	}
 
 }
