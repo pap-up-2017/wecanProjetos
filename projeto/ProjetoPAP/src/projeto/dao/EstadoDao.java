@@ -59,6 +59,15 @@ public class EstadoDao implements InterfaceDao<Estado> {
 	
 	@Override
 	public void excluir(Estado uf){
-		// TODO Criar metodo excluir
+		// cria a instancia
+		EntityManager em = SingletonConection.getInstance();
+		// inicia a instancia
+		em.getTransaction().begin();
+		// cria uma query para para exclusão do objeto no banco..
+		em.createQuery("DELETE FROM Estado WHERE id=" + uf.getIdEstado()).executeUpdate();
+		// envia os dados do estado
+		em.getTransaction().commit();
+		// fecha a instancia
+		em.close();
 	}
 }
