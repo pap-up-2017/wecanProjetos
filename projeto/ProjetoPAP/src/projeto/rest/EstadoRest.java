@@ -45,7 +45,7 @@ public class EstadoRest {
 		}
 	}
 	
-	// post para alterar um dado no banco ... 
+	// post para excluir um dado no banco ... 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/postdel")

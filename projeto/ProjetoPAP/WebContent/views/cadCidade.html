@@ -1,0 +1,74 @@
+<style type="text/css">
+  .listv{
+     margin-bottom: 30px;
+  }
+  .editpopup{
+     width: 250px;
+     height: 250px;
+     border: 1px solid black;
+     display: none;
+     position: absolute;
+     top: center;
+     left: center;
+     bottom: center;
+     right: center;
+
+     background-color:gray;
+  }
+  .editpopup-true{
+     display: block;
+  }
+  .editpopup-false{
+     display: none;
+  }
+  </style>
+
+<br/><br/><br/><br/>
+<div ng-controller="PageCidadeCtrl"	>
+		{{ Resposta }}
+		<p class="form-group">
+			<input placeholder="Nome" class="form-control" type="text" ng-model="cidade.nomeCidade" required />
+		</p class="form-group">
+		
+		<p class="form-group">
+			<select class="form-control" ng-model="cidade.estadoCidade" ng-options="estado.nomeEstado for estado in estados">
+					<option value="">Selecione um estado...</option>
+			</select>
+		</p class="form-group">
+		
+		<button class="btn btn-success" ng-click="SalvarCadastro(cidade)">Cadastrar</button>
+</div>
+<br/><br/>
+<div ng-controller="PageCidadeCtrl">
+
+		<button class="btn btn-primary" ng-click="BuscarInformacao()">Buscar Cidades</button>
+		
+		<div class="editpopup editpopup-{{istrue}} ">
+	        <p>edit Id:<input type="text" ng-model="editedidCidade"></p>
+	        <p>edit Cidade:<input type="text" ng-model="editednameCidade"></p>
+	        <select selectedIndex="editedEstadoCidade" class="form-control" ng-model="editedEstadoCidade" ng-options="estado.nomeEstado for estado in estados">
+					<option value="">Selecione um estado...</option>
+			</select>
+	        <button ng-click="SalvarAlteracao(editedidCidade, editednameCidade, editedEstadoCidade)">save</button>
+	        <button ng-click="FecharPopUpEdicao()">cancel</button>
+     	</div>		
+     	
+		<br/><br/>
+		<br/><br/>
+		<table class="table ">
+			<tr>
+				<td>ID</td>
+				<td>NOME</td>
+				<td>ESTADO</td>
+			</tr>
+			<tr ng:repeat="cidade in cidades">
+				<td>{{cidade.idCidade}}</td>
+				<td>{{cidade.nomeCidade}}</td>
+				<td>{{cidade.estadoCidade.siglaEstado}}</td> 
+				<td><button ng-click="CarregarEdicao(cidade)" class="btn btn-primary">Alterar</button></td>
+				<td><button class="btn btn-primary" ng-click="ExcluirElemento(cidade)">Excluir</button></td>
+				
+			</tr>
+		</table>
+
+</div> 
