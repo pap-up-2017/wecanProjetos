@@ -2,6 +2,7 @@ package projeto.dao;
 
 import projeto.entity.Cidade;
 import projeto.entity.Estado;
+import projeto.entity.InstituicaoEnsino;
 import projeto.entity.Projeto;
 
 public class FactoryDao {
@@ -20,4 +21,9 @@ public class FactoryDao {
 	public static InterfaceDao<Cidade> createCidadeDao(){
 		return new CidadeDao();
 	}	
+	
+	//InstituicaoEnsinoDao
+	public static InterfaceDao<InstituicaoEnsino> createInstituicaoEnsinoDao(){
+		return new InstituicaoEnsinoDao();
+	}
 }

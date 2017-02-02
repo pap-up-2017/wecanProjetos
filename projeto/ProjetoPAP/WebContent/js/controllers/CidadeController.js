@@ -140,6 +140,7 @@ angular.module("app").controller('PageCidadeCtrl', function($scope, $http) {
 	};
 	
 	// carrega os dados do elemento selecionado para edição .. 
+	// TODO fazer carregamento do combobox com o estado para edição
 	$scope.CarregarEdicao = function(cidade){
 		$scope.istrue=true;
 	    $scope.editedidCidade = cidade.idCidade;
