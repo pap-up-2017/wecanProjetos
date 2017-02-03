@@ -9,7 +9,10 @@ angular.module("app").config(function($routeProvider) {
 	
     .when("/cadCidade", {
         templateUrl : "views/cadCidade.html"
-    });
+    })
 	
+    .when("/cadInstituicao", {
+        templateUrl : "views/cadInstituicao.html"
+    });
 });	
 
