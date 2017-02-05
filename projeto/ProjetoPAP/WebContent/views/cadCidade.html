@@ -22,7 +22,8 @@
      display: none;
   }
   </style>
-
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
 <br/><br/><br/><br/>
 <div ng-controller="PageCidadeCtrl"	>
 		{{ Resposta }}
@@ -38,6 +39,7 @@
 		
 		<button class="btn btn-success" ng-click="SalvarCadastro(cidade)">Cadastrar</button>
 </div>
+
 <br/><br/>
 <div ng-controller="PageCidadeCtrl">
 
@@ -46,13 +48,17 @@
 		<div class="editpopup editpopup-{{istrue}} ">
 	        <p>edit Id:<input type="text" ng-model="editedidCidade"></p>
 	        <p>edit Cidade:<input type="text" ng-model="editednameCidade"></p>
-	        <select selectedIndex="editedEstadoCidade" class="form-control" ng-model="editedEstadoCidade" ng-options="estado.nomeEstado for estado in estados">
-					<option value="">Selecione um estado...</option>
+
+			
+			<select selectedIndex="editedEstadoCidade" class="form-control" ng-model="editedEstadoCidade" ng-options="estado.nomeEstado disable when estado.nomeEstado == editedEstadoCidadeOld.nomeEstado for estado in estados" >
+	        	<option value="" >{{editedEstadoCidadeOld.nomeEstado}}</option>
 			</select>
+    
 	        <button ng-click="SalvarAlteracao(editedidCidade, editednameCidade, editedEstadoCidade)">save</button>
 	        <button ng-click="FecharPopUpEdicao()">cancel</button>
-     	</div>		
+     	</div>	
      	
+    	
 		<br/><br/>
 		<br/><br/>
 		<table class="table ">

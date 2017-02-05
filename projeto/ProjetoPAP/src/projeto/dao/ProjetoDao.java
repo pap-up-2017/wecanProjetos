@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import projeto.entity.InstituicaoEnsino;
 import projeto.entity.Projeto;
 
 public class ProjetoDao implements InterfaceDao<Projeto> {
@@ -37,20 +38,36 @@ public class ProjetoDao implements InterfaceDao<Projeto> {
 
 	@Override
 	public Projeto getObjById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		// cria a Query para encontrar o projeto de acordo com o id
+		Query q = em.createQuery("from Projeto where id = " + id);
+		return (Projeto) q.getSingleResult();
 	}
-
+	
 	@Override
 	public void alterar(Projeto t) {
-		// TODO Auto-generated method stub
-		
+		// inicia a instancia
+		em.getTransaction().begin();
+		// da um merge nos dados da instituicao
+		em.merge(t);
+		// envia os dados da instituicao
+		em.getTransaction().commit();
+		// fecha a instancia
+		em.close();
 	}
-
+	
 	@Override
 	public void excluir(Projeto t) {
-		// TODO Auto-generated method stub
+		// inicia a instancia
+		em.getTransaction().begin();
+		// cria uma query para para exclusão do objeto no banco..
+		em.createQuery("DELETE FROM Projeto WHERE id=" + t.getIdProjeto()).executeUpdate();
+		// envia os dados da Instituicao
+		em.getTransaction().commit();
+		// fecha a instancia
+		em.close();
 		
 	}
+	
+
 
 }

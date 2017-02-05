@@ -33,6 +33,13 @@ public class Projeto {
 	
 	//TODO Desenvolver integração com Feed, acho que o feed será todo a parte desse código
 	
+	public int getIdProjeto() {
+		return idProjeto;
+	}
+	public void setIdProjeto(int idProjeto) {
+		this.idProjeto = idProjeto;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -75,6 +82,7 @@ public class Projeto {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
 	
 
 

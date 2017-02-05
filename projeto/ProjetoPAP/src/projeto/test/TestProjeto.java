@@ -2,6 +2,7 @@ package projeto.test;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -26,6 +27,29 @@ public class TestProjeto {
 		InterfaceDao<Projeto> dao = FactoryDao.createProjetoDao();
 		dao.salvar(p);
 		
+	}
+	
+	@Test
+	public void listarProjeto() {		
+		List<Projeto> projetos = FactoryDao.createProjetoDao().listar();
+		if (projetos.size() > 0) {
+			//funcionou
+		}
+	}
+	
+	@Test
+	public void alterarProjeto(){
+		InterfaceDao<Projeto> daoProj = FactoryDao.createProjetoDao();
+		Projeto proj = daoProj.getObjById(1);	
+		proj.setNome("Projeto Alterado");
+		daoProj.alterar(proj);
+	}
+	
+	@Test
+	public void excluirProjeto(){
+		InterfaceDao<Projeto> daoProj = FactoryDao.createProjetoDao();
+		Projeto proj = daoProj.getObjById(3);	
+		daoProj.excluir(proj);
 	}
 
 }

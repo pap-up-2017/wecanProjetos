@@ -13,6 +13,10 @@ angular.module("app").config(function($routeProvider) {
 	
     .when("/cadInstituicao", {
         templateUrl : "views/cadInstituicao.html"
+    })
+	
+    .when("/cadProjeto", {
+        templateUrl : "views/cadProjeto.html"
     });
 });	
 
