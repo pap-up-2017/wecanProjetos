@@ -2,6 +2,7 @@ package projeto.dao;
 
 import projeto.entity.Cidade;
 import projeto.entity.Competencia;
+import projeto.entity.Curso;
 import projeto.entity.Estado;
 import projeto.entity.InstituicaoEnsino;
 import projeto.entity.Projeto;
@@ -27,9 +28,14 @@ public class FactoryDao {
 	public static InterfaceDao<InstituicaoEnsino> createInstituicaoEnsinoDao(){
 		return new InstituicaoEnsinoDao();
 	}
-
+	
+	//CompetenciaDao
 	public static InterfaceDao<Competencia> createCompetenciaDao() {
-		// TODO Auto-generated method stub
 		return new CompetenciaDao();
+	}
+	
+	//CursoDao
+	public static InterfaceDao<Curso> createCursoDao() {
+		return new CursoDao();
 	}
 }

@@ -86,7 +86,7 @@ angular.module("app").controller('PageInstituicaoCtrl', function($scope, $http) 
 	// Envia a informação de alteração de um elemento para o banco ... Via rest
 	$scope.SalvarAlteracao = function(editedidInstituicao, editednameInstituicao, editedCidadeInstituicao){
 		console.log("Salvar uma nova Alteração ...")
-		
+		// TODO arrumar carregamento automatico do dropDownlist..
 		var parameter = JSON.stringify({
 			type : "instituicaoEnsino",
 			idInstituicao : editedidInstituicao,

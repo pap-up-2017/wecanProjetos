@@ -19,7 +19,7 @@ public class CidadeRest {
 	// get para puxar todas as cidades no banco..
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Cidade> listarMateriais() {
+	public List<Cidade> listarCidades() {
 		InterfaceDao<Cidade> dao = FactoryDao.createCidadeDao();
 		return dao.listar();	
 	}

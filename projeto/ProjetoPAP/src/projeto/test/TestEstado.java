@@ -42,7 +42,7 @@ public class TestEstado {
 	public void excluirEstado(){
 		Estado uf = new Estado();
 		InterfaceDao<Estado> dao = FactoryDao.createEstadoDao();
-		uf = dao.getObjById(36);
+		uf = dao.getObjById(2);
 		dao.excluir(uf);
 	}
 	
