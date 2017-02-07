@@ -1,6 +1,7 @@
 package projeto.dao;
 
 import projeto.entity.Cidade;
+import projeto.entity.Competencia;
 import projeto.entity.Estado;
 import projeto.entity.InstituicaoEnsino;
 import projeto.entity.Projeto;
@@ -25,5 +26,10 @@ public class FactoryDao {
 	//InstituicaoEnsinoDao
 	public static InterfaceDao<InstituicaoEnsino> createInstituicaoEnsinoDao(){
 		return new InstituicaoEnsinoDao();
+	}
+
+	public static InterfaceDao<Competencia> createCompetenciaDao() {
+		// TODO Auto-generated method stub
+		return new CompetenciaDao();
 	}
 }

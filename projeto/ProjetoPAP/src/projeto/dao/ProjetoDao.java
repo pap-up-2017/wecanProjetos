@@ -18,9 +18,9 @@ public class ProjetoDao implements InterfaceDao<Projeto> {
 		
 		// inicia a instancia
 		em.getTransaction().begin();
-		// persiste os dados do estado
+		// persiste os dados do projeto
 		em.persist(p);
-		// envia os dados do estado
+		// envia os dados do projeto
 		em.getTransaction().commit();
 		// fecha a instancia
 		em.close();
@@ -30,7 +30,7 @@ public class ProjetoDao implements InterfaceDao<Projeto> {
 
 	@Override
 	public List<Projeto> listar() {
-		// cria a Query para encontrar os estados
+		// cria a Query para encontrar os projetos
 		Query q = em.createQuery("from Projeto");
 		// retorna os dados encontrados
 		return q.getResultList();
@@ -47,9 +47,9 @@ public class ProjetoDao implements InterfaceDao<Projeto> {
 	public void alterar(Projeto t) {
 		// inicia a instancia
 		em.getTransaction().begin();
-		// da um merge nos dados da instituicao
+		// da um merge nos dados do projeto
 		em.merge(t);
-		// envia os dados da instituicao
+		// envia os dados do projeto
 		em.getTransaction().commit();
 		// fecha a instancia
 		em.close();
@@ -61,7 +61,7 @@ public class ProjetoDao implements InterfaceDao<Projeto> {
 		em.getTransaction().begin();
 		// cria uma query para para exclusão do objeto no banco..
 		em.createQuery("DELETE FROM Projeto WHERE id=" + t.getIdProjeto()).executeUpdate();
-		// envia os dados da Instituicao
+		// envia os dados do projeto
 		em.getTransaction().commit();
 		// fecha a instancia
 		em.close();
