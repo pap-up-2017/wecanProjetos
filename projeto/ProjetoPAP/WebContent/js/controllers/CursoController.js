@@ -49,7 +49,7 @@ angular.module("app").controller('PageCursoCtrl', function($scope, $http) {
 		}
 
 		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/instituicaorest/postcad',
+				'http://localhost:8080/ProjetoPAP/rest/cursorest/postcad',
 				parameter, config).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Curso Salvo com Sucesso!';
@@ -85,7 +85,7 @@ angular.module("app").controller('PageCursoCtrl', function($scope, $http) {
 		}
 
 		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/instituicaorest/postalt',
+				'http://localhost:8080/ProjetoPAP/rest/cursorest/postalt',
 				parameter, config).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Curso salvo com Sucesso!';
@@ -122,7 +122,7 @@ angular.module("app").controller('PageCursoCtrl', function($scope, $http) {
 		}
 
 		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/instituicaorest/postdel',
+				'http://localhost:8080/ProjetoPAP/rest/cursorest/postdel',
 				parameter, config).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Curso excluido com Sucesso!';
