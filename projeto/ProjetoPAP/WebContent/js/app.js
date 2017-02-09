@@ -21,6 +21,10 @@ angular.module("app").config(function($routeProvider) {
 	
     .when("/cadCurso", {
         templateUrl : "views/cadCurso.html"
+    })
+	
+   .when("/cadCompetencia", {
+        templateUrl : "views/cadCompetencia.html"
     });
 });	
 
