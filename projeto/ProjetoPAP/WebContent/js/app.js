@@ -25,6 +25,10 @@ angular.module("app").config(function($routeProvider) {
 	
    .when("/cadCompetencia", {
         templateUrl : "views/cadCompetencia.html"
+    })
+    
+    .when("/cadTipoUsuario", {
+        templateUrl : "views/cadTipoUsuario.html"
     });
 });	
 

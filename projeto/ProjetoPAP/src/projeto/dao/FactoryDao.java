@@ -6,6 +6,7 @@ import projeto.entity.Curso;
 import projeto.entity.Estado;
 import projeto.entity.InstituicaoEnsino;
 import projeto.entity.Projeto;
+import projeto.entity.TipoUsuario;
 
 public class FactoryDao {
 	
@@ -37,5 +38,10 @@ public class FactoryDao {
 	//CursoDao
 	public static InterfaceDao<Curso> createCursoDao() {
 		return new CursoDao();
+	}
+	
+	//TipoUsuarioDao
+	public static InterfaceDao<TipoUsuario> createTipoUsuarioDao() {
+		return new TipoUsuarioDao();
 	}
 }
