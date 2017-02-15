@@ -3,6 +3,7 @@ package projeto.dao;
 import projeto.entity.Cidade;
 import projeto.entity.Competencia;
 import projeto.entity.Curso;
+import projeto.entity.Disciplina;
 import projeto.entity.Estado;
 import projeto.entity.InstituicaoEnsino;
 import projeto.entity.Projeto;
@@ -34,6 +35,11 @@ public class FactoryDao {
 	//CompetenciaDao
 	public static InterfaceDao<Competencia> createCompetenciaDao() {
 		return new CompetenciaDao();
+	}
+	
+	//DisciplinaDao
+	public static InterfaceDao<Disciplina> createDisciplinaDao() {
+		return new DisciplinaDao();
 	}
 	
 	//CursoDao
