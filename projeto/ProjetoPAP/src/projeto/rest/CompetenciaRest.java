@@ -12,7 +12,6 @@ import javax.ws.rs.core.MediaType;
 import projeto.dao.FactoryDao;
 import projeto.dao.InterfaceDao;
 import projeto.entity.Competencia;
-import projeto.entity.Projeto;
 
 @Path("/competenciarest")
 public class CompetenciaRest {

@@ -3,8 +3,8 @@
      margin-bottom: 30px;
   }
   .editpopup{
-     width: 250px;
-     height: 250px;
+     width: 800px;
+     height: 600px;
      border: 1px solid black;
      display: none;
      position: absolute;
@@ -21,7 +21,7 @@
   .editpopup-false{
      display: none;
   }
-  </style>
+</style>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 
@@ -68,9 +68,57 @@
 		<button class="btn btn-success" ng-click="SalvarCadastro(usuario)">Cadastrar</button>
 </div>
 <br/><br/>
+<div ng-controller="PageUsuarioCtrl">	
+	
+</div>
 <div ng-controller="PageUsuarioCtrl">
-
+	
 		<button class="btn btn-primary" ng-click="BuscarInformacao()">Buscar Usuarios</button>
+		
+		<div class="editpopup editpopup-{{istrue}} ">
+			<p class="form-group">
+				<input placeholder="Nome" class="form-control" type="text" ng-model="editedIdUsuario" required />
+			</p>
+	   		<p class="form-group">
+				<input placeholder="Nome" class="form-control" type="text" ng-model="editedNomeUsuario" required />
+			</p>
+			<p class="form-group">
+				<input placeholder="Username" class="form-control" type="text" ng-model="editedUsernameUsuario" required />
+			</p>
+			<p class="form-group">			
+				<input placeholder="Email" class="form-control" type="text" ng-model="editedEmailUsuario" required />
+			<p class="form-group">			
+				<input placeholder="senhaUsuario" class="form-control" type="password" ng-model="editedSenhaUsuario" required />
+			</p>
+			<p class="form-group">			
+				<select class="form-control" ng-init="tipoUsuarios[tipoUsuario.idTipoUsuario]" ng-model="editedTipoUsuario" ng-options="tipoUsuario.tipoUsuario  for tipoUsuario in tipoUsuarios">
+					<option value="">Selecione um tipo de usuário...</option>
+				</select>
+			</p>
+			<p class="form-group">
+				<select	class="form-control" ng-model="editedEstadoSelecionado" ng-options="estado.nomeEstado for estado in estados">
+					<option value="">Selecione um estado...</option>
+				</select>
+			</p>
+			<p class="form-group">			
+				<select class="form-control" ng-model="editedCidadeUsuario" ng-options="cidade.nomeCidade for cidade in cidades | filter: editedEstadoSelecionado.nomeEstado">
+					<option value="">Selecione uma cidade...</option>
+				</select>
+			</p>
+			<p class="form-group">
+				<select class="form-control" ng-model="editedInstituicaoUsuario" ng-options="instituicaoEnsino.nomeInstituicao for instituicaoEnsino in instituicoes | filter: editedCidadeUsuario.nomeCidade">
+					<option value="">Selecione uma Instituição...</option>
+				</select>
+			</p>		
+			<p class="form-group">
+				<select class="form-control" ng-model="editedCursoUsuario" ng-options="curso.nomeCurso for curso in cursos | filter: editedInstituicaoUsuario.nomeInstituicao">
+					<option value="">Selecione um curso...</option>
+				</select>
+			</p>
+	    	<button ng-click="SalvarAlteracao()">save</button>
+	    	<button ng-click="FecharPopUpEdicao()">cancel</button>
+     	</div>		
+     	
 		<br/><br/>
 		<table class="table ">
 			<tr>
@@ -92,7 +140,7 @@
 				<td>{{usuario.cidadeUsuario.nomeCidade}}</td>
 				<td>{{usuario.instituicaoUsuario.nomeInstituicao}}</td>
 				<td>{{usuario.cursoUsuario.nomeCurso}}</td>
-<!-- 			<td><button ng-click="CarregarEdicao(tipoUsuario)" class="btn btn-primary">Alterar</button></td>-->
+				<td><button ng-click="CarregarEdicao(usuario)" class="btn btn-primary">Alterar</button></td>
 				<td><button class="btn btn-primary" ng-click="ExcluirElemento(usuario)">Excluir</button></td> 
 			</tr>
 		</table>

@@ -11,7 +11,6 @@ import javax.ws.rs.core.MediaType;
 
 import projeto.dao.FactoryDao;
 import projeto.dao.InterfaceDao;
-import projeto.entity.Cidade;
 import projeto.entity.Usuario;
 
 @Path("/usuariorest")
