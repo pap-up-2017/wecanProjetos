@@ -1,0 +1,261 @@
+<style>
+	.divMaster{
+		width: 100%;
+		height: auto;
+		float: left;
+	}
+	.divCadastros{
+		width: 50%;
+		padding: 20px;
+		float: left;
+	}
+	.divListas{
+		width: 50%;
+		padding: 20px;
+		float: right;
+	}
+	
+</style>
+
+<style type="text/css">
+  .listv{
+     margin-bottom: 30px;
+  }
+  .editpopup{
+     width: 250px;
+     height: 250px;
+     border: 1px solid black;
+     display: none;
+     position: absolute;
+     top: center;
+     left: center;
+     bottom: center;
+     right: center;
+
+     background-color:gray;
+  }
+  .editpopup-true{
+     display: block;
+  }
+  .editpopup-false{
+     display: none;
+  }
+ </style>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<div class="divMaster">
+	<h1>Cadastros Do Administrador</h1>
+</div>
+<div ng-controller="PageEstadoCtrl" class="divMaster">
+	<h2>Estados</h2>
+	<div class="divCadastros">
+		{{ Resposta }}
+		<p class="form-group">
+			<input placeholder="Nome" class="form-control" type="text" ng-model="nomeEstado" required />
+		</p class="form-group">
+		<p class="form-group">
+			<input placeholder="Sigla" class="form-control" type="text" ng-model="siglaEstado" required />
+		</p class="form-group">
+		<button class="btn btn-success" ng-click="SalvarCadastro()">Cadastrar</button>
+	</div>
+	
+	<div class="divListas">
+
+		<button class="btn btn-primary" ng-click="BuscarInformacao()">Buscar estados</button>
+		
+		<div class="editpopup editpopup-{{istrue}} ">
+	        <p>edit Id:<input type="text" ng-model="editedid"></p>
+	        <p>edit Estado:<input type="text" ng-model="editedname"></p>
+	        <p>Sigla Estado:<input type="text" ng-model="editedsigla"></p>
+	        <button ng-click="SalvarAlteracao(editedid, editedname, editedsigla)">save</button>
+	        <button ng-click="FecharPopUpEdicao()">cancel</button>
+     	</div>		
+     	
+		<br/><br/>
+		
+		<table class="table ">
+			<tr>
+				<td>ID</td>
+				<td>NOME</td>
+				<td>SIGLA</td>
+			</tr>
+			<tr ng:repeat="estado in estados">
+				<td>{{estado.idEstado}}</td>
+				<td>{{estado.nomeEstado}}</td>
+				<td>{{estado.siglaEstado}}</td> 
+				<td><button ng-click="CarregarEdicao(estado)" class="btn btn-primary">Alterar</button></td>
+				<td><button class="btn btn-primary" ng-click="ExcluirElemento(estado)">Excluir</button></td>
+			</tr>
+		</table>
+	</div>
+</div>
+<div class="divMaster">
+	<hr/>
+</div>
+<div ng-controller="PageCidadeCtrl" class="divMaster"> 
+	<h2>Cidades</h2>
+	<div class="divCadastros">
+		{{ Resposta }}
+		<p class="form-group">
+			<input placeholder="Nome" class="form-control" type="text" ng-model="cidade.nomeCidade" required />
+		</p class="form-group">
+		
+		<p class="form-group">
+			<select class="form-control" ng-model="cidade.estadoCidade" ng-options="estado.nomeEstado for estado in estados">
+					<option value="">Selecione um estado...</option>
+			</select>
+		</p class="form-group">
+		
+		<button class="btn btn-success" ng-click="SalvarCadastro(cidade)">Cadastrar</button>
+	</div>
+	
+	<div class="divListas">
+
+		<button class="btn btn-primary" ng-click="BuscarInformacao()">Buscar Cidades</button>
+		
+		<div class="editpopup editpopup-{{istrue}} ">
+	        <p>edit Id:<input type="text" ng-model="editedidCidade"></p>
+	        <p>edit Cidade:<input type="text" ng-model="editednameCidade"></p>
+
+			
+			<select selectedIndex="editedEstadoCidade" class="form-control" ng-model="editedEstadoCidade" ng-options="estado.nomeEstado disable when estado.nomeEstado == editedEstadoCidadeOld.nomeEstado for estado in estados" >
+	        	<option value="" >{{editedEstadoCidadeOld.nomeEstado}}</option>
+			</select>
+    
+	        <button ng-click="SalvarAlteracao(editedidCidade, editednameCidade, editedEstadoCidade)">save</button>
+	        <button ng-click="FecharPopUpEdicao()">cancel</button>
+     	</div>	
+     	
+    	
+		<br/><br/>
+		<br/><br/>
+		<table class="table ">
+			<tr>
+				<td>ID</td>
+				<td>NOME</td>
+				<td>ESTADO</td>
+			</tr>
+			<tr ng:repeat="cidade in cidades">
+				<td>{{cidade.idCidade}}</td>
+				<td>{{cidade.nomeCidade}}</td>
+				<td>{{cidade.estadoCidade.siglaEstado}}</td> 
+				<td><button ng-click="CarregarEdicao(cidade)" class="btn btn-primary">Alterar</button></td>
+				<td><button class="btn btn-primary" ng-click="ExcluirElemento(cidade)">Excluir</button></td>
+				
+			</tr>
+		</table>
+	</div>
+</div>
+<div class="divMaster">
+	<hr/>
+</div>
+<div ng-controller="PageInstituicaoCtrl" class="divMaster"> 
+	<h2>instituções de ensino</h2>
+	<div class="divCadastros">
+		{{ Resposta }}
+		<p class="form-group">
+			<input placeholder="Nome" class="form-control" type="text" ng-model="instituicao.nomeInstituicao" required />
+		</p class="form-group">
+		
+		<p class="form-group">
+			<select ng-change="BuscarInformacaoCidades()" class="form-control" ng-model="estadoSelecionado" ng-options="estado.nomeEstado for estado in estados">
+					<option value="">Selecione um estado...</option>
+			</select>
+		</p class="form-group">
+				<p class="form-group">												
+			<select class="form-control" ng-model="instituicao.cidadeInstituicao" ng-options="cidade.nomeCidade for cidade in cidades | filter: estadoSelecionado.nomeEstado">
+					<option value="">Selecione uma cidade...</option>
+			</select>
+		</p class="form-group">
+		
+		<button class="btn btn-success" ng-click="SalvarCadastro(instituicao)">Cadastrar</button>
+	</div>
+	
+	<div class="divListas">
+		<button class="btn btn-primary" ng-click="BuscarInformacao()">Buscar Instituições</button>
+		
+		<div class="editpopup editpopup-{{istrue}} ">
+	        <p>edit Id:<input type="text" ng-model="editedidInstituicao"></p>
+	        <p>edit Cidade:<input type="text" ng-model="editednameInstituicao"></p>
+	        <select ng-change="BuscarInformacaoCidades()" selectedIndex="editedCidadeInstituicao.estadoCidade.idEstado" class="form-control" ng-model="editedEstadoCidade" ng-options="estado.nomeEstado for estado in estados">
+					<option value="">Selecione um estado...</option>
+			</select>
+			
+			<select selectedIndex="editedCidadeInstituicao.idCidade" class="form-control" ng-model="editedCidadeInstituicao" ng-options="cidade.nomeCidade for cidade in cidades | filter: editedEstadoCidade.nomeEstado">
+					<option value="">Selecione ua cidade...</option>
+			</select>
+	        <button ng-click="SalvarAlteracao(editedidInstituicao, editednameInstituicao, editedCidadeInstituicao)">save</button>
+	        <button ng-click="FecharPopUpEdicao()">cancel</button>
+     	</div>		
+     	
+		<br/><br/>
+		<br/><br/>
+		<table class="table ">
+			<tr>
+				<td>ID</td>
+				<td>NOME</td>
+				<td>LOCALIDADE</td>
+			</tr>
+			<tr ng:repeat="instituicao in instituicoes">
+				<td>{{instituicao.idInstituicao}}</td>
+				<td>{{instituicao.nomeInstituicao}}</td>
+				<td>{{instituicao.cidadeInstituicao.nomeCidade}}</td> 
+				<td><button ng-click="CarregarEdicao(instituicao)" class="btn btn-primary">Alterar</button></td>
+				<td><button class="btn btn-primary" ng-click="ExcluirElemento(instituicao)">Excluir</button></td> 
+			</tr>
+		</table>
+	</div>
+</div>
+<div ng-controller="PageCursoCtrl" class="divMaster">
+	<h2>Cursos</h2> 
+	<div class="divCadastros">
+				{{ Resposta }}
+		<p class="form-group">
+			<input placeholder="Nome" class="form-control" type="text" ng-model="curso.nomeCurso" required />
+		</p class="form-group">
+		
+		<p class="form-group">
+			<select class="form-control" ng-model="curso.instituicaoCurso" ng-options="instituicao.nomeInstituicao for instituicao in instituicoes">
+					<option value="">Selecione uma instituicao...</option>
+			</select>
+		</p class="form-group">
+		
+		<button class="btn btn-success" ng-click="SalvarCadastro(curso)">Cadastrar</button>
+	</div>
+	
+	<div class="divListas">
+		<button class="btn btn-primary" ng-click="BuscarInformacao()">Buscar cursos</button>
+		
+		<div class="editpopup editpopup-{{istrue}} ">
+	        <p>edit Id:<input type="text" ng-model="editedidCurso"></p>
+	        <p>edit Cidade:<input type="text" ng-model="editednameCurso"></p>
+
+			
+			<select class="form-control" ng-model="editedInstituicaoCurso" ng-options="instituicao.nomeInstituicao disable when instituicao.nomeInstituicao == editedInstituicaoCursoOld.nomeInstituicao for instituicao in instituicoes" >
+	        	<option value="" >{{editedInstituicaoCursoOld.nomeInstituicao}}</option>
+			</select>
+    
+	        <button ng-click="SalvarAlteracao(editedidCurso, editednameCurso, editedInstituicaoCurso)">save</button>
+	        <button ng-click="FecharPopUpEdicao()">cancel</button>
+     	</div>	
+     	
+    	
+		<br/><br/>
+		<br/><br/>
+		<table class="table ">
+			<tr>
+				<td>ID</td>
+				<td>NOME</td>
+				<td>ESTADO</td>
+			</tr>
+			<tr ng:repeat="curso in cursos">
+				<td>{{curso.cursoId}}</td>
+				<td>{{curso.nomeCurso}}</td>
+				<td>{{curso.instituicaoCurso.nomeInstituicao}}</td> 
+				<td><button ng-click="CarregarEdicao(curso)" class="btn btn-primary">Alterar</button></td>
+				<td><button class="btn btn-primary" ng-click="ExcluirElemento(curso)">Excluir</button></td>
+				
+			</tr>
+		</table>
+	</div>
+</div>

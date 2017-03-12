@@ -6,7 +6,15 @@ angular.module("app").controller('PageCidadeCtrl', function($scope, $http) {
 
 		$http.get('http://localhost:8080/ProjetoPAP/rest/cidaderest')
 				.success(function(data) {
-					$scope.cidades = data["cidade"];
+					var cidadesBanco = data["cidade"];
+					var arrayBanco = [];
+					if(Array.isArray(cidadesBanco)){
+						arrayBanco = cidadesBanco; 
+					}
+					else{
+						arrayBanco.push(cidadesBanco);
+					}
+					$scope.cidades = arrayBanco;
 				}).error(
 						function(data, status, header, config) {
 							$scope.Resposta = "Data: " + data + "<hr />status: "
@@ -22,7 +30,15 @@ angular.module("app").controller('PageCidadeCtrl', function($scope, $http) {
 
 		$http.get('http://localhost:8080/ProjetoPAP/rest/estadorest')
 				.success(function(data) {
-					$scope.estados = data["estado"];
+					var estadosBanco = data["estado"];
+					var arrayBanco = [];
+					if(Array.isArray(estadosBanco)){
+						arrayBanco = estadosBanco; 
+					}
+					else{
+						arrayBanco.push(estadosBanco);
+					}
+					$scope.estados = arrayBanco;
 				}).error(
 						function(data, status, header, config) {
 							$scope.Resposta = "Data: " + data + "<hr />status: "

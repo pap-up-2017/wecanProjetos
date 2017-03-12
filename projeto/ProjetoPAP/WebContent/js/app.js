@@ -62,6 +62,12 @@ angular.module('app').config(function($stateProvider, $urlRouterProvider, $locat
 		  template: '<h1>Bem vindo!</h1>'
 		}
   
+  var cadastrosAdmin = {
+		  name: 'cadastrosAdmin',
+		  url: '/cadAdmin',
+		  templateUrl: 'views/cadastrosAdmin.html'
+		}
+  
   $urlRouterProvider.otherwise('/');
   
   $stateProvider.state(home);
@@ -74,5 +80,5 @@ angular.module('app').config(function($stateProvider, $urlRouterProvider, $locat
   $stateProvider.state(tipoUsuario);
   $stateProvider.state(usuario);
   $stateProvider.state(disciplina);
-  
+  $stateProvider.state(cadastrosAdmin);
 });

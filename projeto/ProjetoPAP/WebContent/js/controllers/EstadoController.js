@@ -7,7 +7,15 @@ angular.module("app").controller('PageEstadoCtrl', function($scope,
 
 		$http.get('http://localhost:8080/ProjetoPAP/rest/estadorest')
 				.success(function(data) {
-					$scope.estados = data["estado"];
+					var estadosBanco = data["estado"];
+					var arrayBanco = [];
+					if(Array.isArray(estadosBanco)){
+						arrayBanco = estadosBanco; 
+					}
+					else{
+						arrayBanco.push(estadosBanco);
+					}
+					$scope.estados = arrayBanco;
 				}).error(
 						function(data, status, header, config) {
 							$scope.Resposta = "Data: " + data + "<hr />status: "
