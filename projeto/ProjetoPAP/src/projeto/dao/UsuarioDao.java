@@ -5,11 +5,14 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import projeto.entity.Usuario;
+import projeto.util.Criptografia;
 
 public class UsuarioDao implements InterfaceDao<Usuario>{
 
 	@Override
 	public void salvar(Usuario u) {
+		// criptografa a senha para o padrão MD5
+		u.setSenhaUsuario(Criptografia.criptografar(u.getSenhaUsuario()));
 		// cria a instancia
 		EntityManager em = SingletonConection.getInstance();
 		// inicia a instancia
