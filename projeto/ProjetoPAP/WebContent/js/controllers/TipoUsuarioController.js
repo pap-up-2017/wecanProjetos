@@ -7,7 +7,15 @@ angular.module("app").controller('PageTipoUsuarioCtrl', function($scope,
 
 		$http.get('http://localhost:8080/ProjetoPAP/rest/tipousuariorest')
 				.success(function(data) {
-					$scope.tipousuarios = data["tipoUsuario"];
+					var tipousuariosBanco = data["tipoUsuario"];
+					var arrayBanco = [];
+					if(Array.isArray(tipousuariosBanco)){
+						arrayBanco = tipousuariosBanco; 
+					}
+					else{
+						arrayBanco.push(tipousuariosBanco);
+					}
+					$scope.tipousuarios = arrayBanco;
 				}).error(
 						function(data, status, header, config) {
 							$scope.Resposta = "Data: " + data + "<hr />status: "
