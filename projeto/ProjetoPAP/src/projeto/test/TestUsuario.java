@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import projeto.dao.FactoryDao;
 import projeto.dao.InterfaceDao;
+import projeto.dao.UsuarioDao;
 import projeto.entity.Cidade;
 import projeto.entity.Curso;
 import projeto.entity.InstituicaoEnsino;
@@ -13,6 +14,14 @@ import projeto.entity.TipoUsuario;
 import projeto.entity.Usuario;
 
 public class TestUsuario {
+	
+	@Test
+	public void procurarUsuarioPorUsername(){
+		Usuario u = new Usuario();
+		UsuarioDao dao = new UsuarioDao();
+		u = dao.getObjByUsername("gh.toporowicz");
+		System.out.println(u.getNomeUsuario());
+	}
 	
 	@Test
 	public void cadastrarUsuario(){

@@ -71,5 +71,13 @@ public class UsuarioDao implements InterfaceDao<Usuario>{
 		// fecha a instancia
 		em.close();
 	}
+	
+	public Usuario getObjByUsername(String username) {
+		// cria a instancia
+		EntityManager em = SingletonConection.getInstance();
+		// cria a Query para pesquisa de acordo com o ID
+		Query q = em.createQuery("select u from Usuario as u where u.usernameUsuario='" + username+"'");
+		return (Usuario) q.getSingleResult();
+	}
 
 }

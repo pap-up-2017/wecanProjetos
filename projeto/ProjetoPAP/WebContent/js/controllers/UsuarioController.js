@@ -8,7 +8,15 @@ angular.module("app").controller('PageUsuarioCtrl', function($scope, $http) {
 
 		$http.get('http://localhost:8080/ProjetoPAP/rest/usuariorest')
 				.success(function(data) {
-					$scope.usuarios = data["usuario"];
+					var usuariosBanco = data["usuario"];
+					var arrayBanco = [];
+					if(Array.isArray(usuariosBanco)){
+						arrayBanco = usuariosBanco; 
+					}
+					else{
+						arrayBanco.push(usuariosBanco);
+					}
+					$scope.usuarios = arrayBanco;
 				}).error(
 						function(data, status, header, config) {
 							$scope.Resposta = "Data: " + data + "<hr />status: "
@@ -23,7 +31,15 @@ angular.module("app").controller('PageUsuarioCtrl', function($scope, $http) {
 
 		$http.get('http://localhost:8080/ProjetoPAP/rest/tipousuariorest')
 				.success(function(data) {
-					$scope.tipoUsuarios = data["tipoUsuario"];
+					var tipousuariosBanco = data["tipoUsuario"];
+					var arrayBanco = [];
+					if(Array.isArray(tipousuariosBanco)){
+						arrayBanco = tipousuariosBanco; 
+					}
+					else{
+						arrayBanco.push(tipousuariosBanco);
+					}
+					$scope.tipoUsuarios = arrayBanco;
 				}).error(
 						function(data, status, header, config) {
 							$scope.Resposta = "Data: " + data + "<hr />status: "
@@ -38,7 +54,15 @@ angular.module("app").controller('PageUsuarioCtrl', function($scope, $http) {
 
 		$http.get('http://localhost:8080/ProjetoPAP/rest/estadorest')
 				.success(function(data) {
-					$scope.estados = data["estado"];
+					var estadosBanco = data["estado"];
+					var arrayBanco = [];
+					if(Array.isArray(estadosBanco)){
+						arrayBanco = estadosBanco; 
+					}
+					else{
+						arrayBanco.push(estadosBanco);
+					}
+					$scope.estados = arrayBanco;
 				}).error(
 						function(data, status, header, config) {
 							$scope.Resposta = "Data: " + data + "<hr />status: "
@@ -53,7 +77,15 @@ angular.module("app").controller('PageUsuarioCtrl', function($scope, $http) {
 
 		$http.get('http://localhost:8080/ProjetoPAP/rest/cidaderest')
 				.success(function(data) {
-					$scope.cidades = data["cidade"];
+					var cidadesBanco = data["cidade"];
+					var arrayBanco = [];
+					if(Array.isArray(cidadesBanco)){
+						arrayBanco = cidadesBanco; 
+					}
+					else{
+						arrayBanco.push(cidadesBanco);
+					}
+					$scope.cidades = arrayBanco;
 				}).error(
 						function(data, status, header, config) {
 							$scope.Resposta = "Data: " + data + "<hr />status: "
@@ -68,7 +100,15 @@ angular.module("app").controller('PageUsuarioCtrl', function($scope, $http) {
 
 		$http.get('http://localhost:8080/ProjetoPAP/rest/instituicaorest')
 				.success(function(data) {
-					$scope.instituicoes = data["instituicaoEnsino"];
+					var instituicoesBanco = data["instituicaoEnsino"];
+					var arrayBanco = [];
+					if(Array.isArray(instituicoesBanco)){
+						arrayBanco = instituicoesBanco; 
+					}
+					else{
+						arrayBanco.push(instituicoesBanco);
+					}
+					$scope.instituicoes = arrayBanco;
 				}).error(
 						function(data, status, header, config) {
 							$scope.Resposta = "Data: " + data + "<hr />status: "
@@ -83,7 +123,15 @@ angular.module("app").controller('PageUsuarioCtrl', function($scope, $http) {
 
 		$http.get('http://localhost:8080/ProjetoPAP/rest/cursorest')
 				.success(function(data) {
-					$scope.cursos = data["curso"];
+					var cursosBanco = data["curso"];
+					var arrayBanco = [];
+					if(Array.isArray(cursosBanco)){
+						arrayBanco = cursosBanco; 
+					}
+					else{
+						arrayBanco.push(cursosBanco);
+					}
+					$scope.cursos = arrayBanco;
 				}).error(
 						function(data, status, header, config) {
 							$scope.Resposta = "Data: " + data + "<hr />status: "
