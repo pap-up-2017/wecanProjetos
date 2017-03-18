@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="css/bootstrap.css" rel="stylesheet">
+		<link href="css/home/homepage.css" rel="stylesheet">
+		<script src="js/jquery-1.11.3.min.js"></script>
+		<script src="js/bootstrap.js"></script>
+		<script src="js/ancora.js"></script>
+		
+		<!-- Libs angular.js -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+		<script type="text/javascript" src="js/angular-ui-router.js"></script>
+		
+		<!-- javaScript controllers Angular -->
+		<script type="text/javascript" src="js/app.js"></script>
+		<script src="js/controllers/homepageController.js"></script>
+		
+		<title>Wecan</title>
+	</head>
+<!-- ----------------------------------------------------------------------------------------- -->
+	<body ng-app='app'>
+		<div class="container">
+			<header>
+				<nav class="navbar navbar-default navbar-fixed-top">
+				  <div class="container-fluid">
+					<div class="navbar-header">
+					  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					  </button>
+					  <a class="logo navbar-brand" href="#">WECAN</a>
+					</div>
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					  <ul class="nav navbar-nav navbar-right">
+						<li><a href="#home">Home</a></li>
+						<li><a href="#about">Sobre</a></li>
+						<li><a href="#contact">Contato</a></li>
+						<li><a href="#login">Login</a></li>
+						<li><a href="#register">Cadastre-se</a></li>
+					  </ul>
+					</div>
+				  </div>
+				</nav>
+			</header>
+			<div class="home" id="home">
+			</div>
+			<div class="about" id="about">
+				<div class="gallery">
+					<div class="thumbnail">
+					  <h1 class="stats">+2500</h1>
+					  <h4>Alunos</h4>
+					  <p>One line description</p>
+					</div>
+					<div class="thumbnail">
+					  <h1 class="stats">+1300</h1>
+					  <h4>Professores</h4>
+					  <p>One line description</p>
+					</div>
+					<div class="thumbnail">
+					  <h1 class="stats">+500</h1>
+					  <h4>Cursos</h4>
+					  <p>One line description</p>
+					</div>
+					<div class="thumbnail">
+					  <h1 class="stats">+10</h1>
+					  <h4>Universidades</h4>
+					  <p>One line description</p>
+					</div>
+				</div>
+				<div class="paragraph">
+					<p class="text_column">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+					<p class="text_column">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+					<p class="text_column">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+				</div>
+			</div>
+			<div class="login" id="login" ng-controller="HomePageCtrl">
+				<div class="signin">
+					<h2 class="parallax">Login</h2>
+					<label class="label label-default" for="use">Username:</label>
+					<input class="form-control" type="text" placeholder="Insira seu username" ng-model="usernameLogin" id="use">
+					<br/>
+					<label class="label label-default" for="passw">Password:</label>
+					<input class="form-control" type="password" placeholder="Insira sua senha" ng-model="senhaUsername" id="passw">
+					<a style="float: right; color: white" href="#">Esqueceu sua senha/username ?</a>
+					<br/><br/>
+					<a class="btn btn-default enter" ng-click="ValidarLogin()">Entrar</a>
+				</div>
+				<div class="signup">
+					<h2>Ainda não é membro?</h2>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+					<button class="btn btn-default register">CADASTRE-SE</button>
+				</div>
+			</div>
+			<div class="contact" id="contact">
+				<div class="paragraph">
+					<img src="img/26.png">
+					<p class="text_column">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+				</div>
+				<div class="email">
+					<div class="panel panel-default">
+  						<div class="panel-heading">Contato</div>
+							<div class="panel-body">
+								<form>
+									<label class="label label-default" for="nm">Nome completo:</label>
+									<input class="form-control" placeholder="Descreva seu nome completo" id="nm">
+									<br/>
+									<label class="label label-default" for="ema">Email:</label>
+									<input class="form-control" placeholder="email@email.com" id="ema">
+									<br/>
+									<label class="label label-default" for="as">Assunto:</label>
+									<input class="form-control" placeholder="Descreva o assunto do email" id="as">
+									<br/>
+									<label class="label label-default" for="msg">Mensagem:</label>
+									<textarea class="form-control" placeholder="Descreva sua mensagem" id="msg"></textarea>
+									<br/>
+									<button class="btn btn-default btnAcao">Enviar</button>
+								</form>
+							</div>
+					</div>
+				</div>
+			</div>
+			<footer class="footer" id="footer">
+				<hr/>
+			</footer>
+		</div>
+	</body>	
+</html>
