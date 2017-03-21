@@ -6,10 +6,18 @@ import projeto.util.Criptografia;
 
 public class LoginDao {
 	
-	public int verificaLogin(Login loginWebPage){
+	public Usuario verificaLogin(Login loginWebPage){
 		UsuarioDao uDao = new UsuarioDao();
+		Usuario usuarioBanco;
+		
 		// Puxa usuario do banco via username 
-		Usuario usuarioBanco = uDao.getObjByUsername(loginWebPage.getUsernameLogin());
+		try {
+			usuarioBanco = uDao.getObjByUsername(loginWebPage.getUsernameLogin());
+		}
+		catch (Exception ex) {
+			usuarioBanco = null;
+		}
+
 		if(usuarioBanco != null){
 			if(usuarioBanco.getUsernameUsuario().equals(loginWebPage.getUsernameLogin())){
 				// criptografa senha informado pelo usuário no login
@@ -17,11 +25,18 @@ public class LoginDao {
 				if(senhaCrip.equals(usuarioBanco.getSenhaUsuario())){
 					// retorna id do usuario encontrado
 					System.out.println("Usuario logado: "+ usuarioBanco.getNomeUsuario());
-					return usuarioBanco.getIdUsuario();
+					return usuarioBanco;
+				}
+				else{
+					usuarioBanco = null;
 				}
 			}
+			else{
+				usuarioBanco = null;
+			}
+		}else{
+			usuarioBanco = null;
 		}
-		System.out.println("Usuario não encontrado.");
-		return 0;
+		return usuarioBanco;
 	}
 }

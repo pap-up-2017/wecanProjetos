@@ -22,6 +22,7 @@ angular.module("app").controller('HomePageCtrl', function($scope, $http) {
 					console.log(data["token"]);
 				}).error(
 				function(data, status, header, config) {
+					console.log("não foi possivel logar.");
 					$scope.Resposta = "Data: " + data + "<hr />status: "
 							+ status + "<hr />headers: " + header
 							+ "<hr />config: " + config;

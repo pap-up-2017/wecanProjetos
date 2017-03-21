@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import projeto.dao.LoginDao;
 import projeto.entity.Login;
+import projeto.entity.Usuario;
 
 public class TestLogin {
 	
@@ -15,8 +16,8 @@ public class TestLogin {
 		
 		LoginDao logDao = new LoginDao();
 		
-		int resultadoLogin = logDao.verificaLogin(log);
-		if(resultadoLogin > 1 ){
+		Usuario resultadoLogin = logDao.verificaLogin(log);
+		if(resultadoLogin.getIdUsuario() > 1 ){
 			System.out.println("Login confirmado, id = " +resultadoLogin);
 		}
 		else{

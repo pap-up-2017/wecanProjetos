@@ -9,6 +9,7 @@ import projeto.dao.LoginDao;
 import projeto.dao.TokenAcessoDao;
 import projeto.entity.Login;
 import projeto.entity.TokenAcesso;
+import projeto.entity.Usuario;
 
 @Path("/loginrest")
 public class LoginRest {
@@ -19,20 +20,21 @@ public class LoginRest {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public TokenAcesso validarLogin(Login login) {
+		
 		LoginDao logDao = new LoginDao();
 		TokenAcesso token;
 		TokenAcessoDao tokenDao = new TokenAcessoDao();
 
-		
-		int retornoLogin = logDao.verificaLogin(login);
-		System.out.println("login = " +retornoLogin);
-		if(retornoLogin > 0){
+		Usuario retornoLogin = logDao.verificaLogin(login);
+			
+		if(retornoLogin != null){
 			token = tokenDao.criarToken(retornoLogin);
+			return token;
 		}
 		else{
-			token = tokenDao.criarTokenSemUser();
+			return null;
 		}
-		return token;
+
 	}
 
 }

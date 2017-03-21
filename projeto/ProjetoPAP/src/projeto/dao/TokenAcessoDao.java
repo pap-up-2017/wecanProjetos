@@ -5,15 +5,12 @@ import projeto.entity.Usuario;
 
 public class TokenAcessoDao {
 	
-	public TokenAcesso criarToken(int id){
+	public TokenAcesso criarToken(Usuario user){
 		TokenAcesso token = new TokenAcesso();
 		
-		InterfaceDao<Usuario> dao = FactoryDao.createUsuarioDao();
-		Usuario u = dao.getObjById(id);
-		
-		if(u != null){
-			token.setIdUserLogged(u.getIdUsuario());
-			token.setTypeUserLogged(u.getTipoUsuario().getTipoUsuario());
+		if(user != null){
+			token.setIdUserLogged(user.getIdUsuario());
+			token.setTypeUserLogged(user.getTipoUsuario().getTipoUsuario());
 			return token;
 		}	
 		return null;
