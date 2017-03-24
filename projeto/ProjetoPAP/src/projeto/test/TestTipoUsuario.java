@@ -6,8 +6,6 @@ import org.junit.Test;
 
 import projeto.dao.FactoryDao;
 import projeto.dao.InterfaceDao;
-import projeto.entity.Cidade;
-import projeto.entity.Estado;
 import projeto.entity.TipoUsuario;
 
 public class TestTipoUsuario {

@@ -1,7 +1,4 @@
 package projeto.entity;
-
-import java.sql.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
