@@ -7,5 +7,4 @@ public class Datas {
 	public static Date retornaDataAtual(){
 		return new Date(System.currentTimeMillis());
 	}
-
 }
