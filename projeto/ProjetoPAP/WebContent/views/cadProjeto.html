@@ -37,6 +37,34 @@
 			<input placeholder="Descrição" class="form-control" type="text" ng-model="projeto.descricao" required />
 		</p class="form-group">
 		
+		<p class="form-group">
+			<input placeholder="Data Entrega" class="form-control" type="date" ng-model="projeto.dataEntrega" required />
+		</p class="form-group">
+		
+		<p class="form-group">
+			<select class="form-control" ng-model="projeto.competencias" ng-options="competencia.nomeCompetencia for competencia in competencias">
+					<option value="">Selecione uma competência...</option>
+					
+			</select>
+			<button ng-click="adicionaCompetencia()">Adicionar competência</button>
+		</p class="form-group">
+		
+	    <table class="table ">
+	      <thead>
+	        <tr>
+	          <th>Competências necessárias no projeto</th>
+	        </tr>
+	      </thead>
+	      <tbody>
+	        <tr ng-repeat="competenciaDoProjeto in competenciasDoProjeto">
+	          <td><strong>{{ competenciaDoProjeto.nomeCompetencia }}</strong></td>
+	        </tr>
+	      </tbody>
+		</table>
+		
+		
+
+		
 		
 		<button class="btn btn-success" ng-click="SalvarCadastro(projeto)">Cadastrar</button>
 </div>
@@ -48,8 +76,9 @@
 		<div class="editpopup editpopup-{{istrue}} ">
 	        <p>edit Id:<input type="text" ng-model="editedidProjeto"></p>
 	        <p>edit Projeto:<input type="text" ng-model="editednome"></p>
-	        <p>edit Descrição:<input type="text" ng-model="editeddescricao"></p>	    
-	        <button ng-click="SalvarAlteracao(editedidProjeto, editednome, editeddescricao)">Salvar</button>
+	        <p>edit Descrição:<input type="text" ng-model="editeddescricao"></p>
+	        <p>edit Data:<input type="date" ng-model="editeddataEntrega"></p>
+	        <button ng-click="SalvarAlteracao(editedidProjeto, editednome, editeddescricao,editeddataEntrega)">Salvar</button>
 	        <button ng-click="FecharPopUpEdicao()">Cancelar</button>
      	</div>		
      	
@@ -60,11 +89,13 @@
 				<td>ID</td>
 				<td>NOME</td>
 				<td>DESCRIÇÃO</td>
+				<td>Data Entrega</td>
 			</tr>
 			<tr ng:repeat="projeto in projetos">
 				<td>{{projeto.idProjeto}}</td>
 				<td>{{projeto.nome}}</td>
-				<td>{{projeto.descricao}}</td> 
+				<td>{{projeto.descricao}}</td>
+				<td>{{projeto.dataEntrega}}</td>  
 				<td><button ng-click="CarregarEdicao(projeto)" class="btn btn-primary">Alterar</button></td>
 				<td><button class="btn btn-primary" ng-click="ExcluirElemento(projeto)">Excluir</button></td>
 				

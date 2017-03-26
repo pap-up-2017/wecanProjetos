@@ -1,11 +1,15 @@
 package projeto.entity;
 
-import java.sql.Date;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
 //rest
@@ -23,11 +27,12 @@ public class Projeto {
 	private Date dataCriacao;
 	private int vagas;
 	private int participantes;
-	//TODO Verificar se isso não vai na tabela fraca de projeto x partifipante
-	private String competencia;
+	@ManyToMany
+	private List<Competencia> competencias;
 	//Dono do projeto
 	private String organizador;
 	private String descricao;
+	private Date dataEntrega;
 	
 	//TODO desenvolver função para usuário se inscrever no projeto
 	
@@ -64,12 +69,6 @@ public class Projeto {
 	public void setParticipantes(int participantes) {
 		this.participantes = participantes;
 	}
-	public String getCompetencia() {
-		return competencia;
-	}
-	public void setCompetencia(String competencia) {
-		this.competencia = competencia;
-	}
 	public String getOrganizador() {
 		return organizador;
 	}
@@ -81,6 +80,36 @@ public class Projeto {
 	}
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	public List<Competencia> getCompetencias() {
+		return competencias;
+	}
+	public void setCompetencias(List<Competencia> competencias) {
+		this.competencias = competencias;
+	}
+	public Date getDataEntrega() {
+		return dataEntrega;
+	}
+	public void setDataEntrega(String dataEntrega) {
+		
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+	    try {
+	        java.util.Date utilDate = format.parse(dataEntrega);
+	        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+	        this.dataEntrega = sqlDate;
+	    } catch (ParseException e) {
+	        e.printStackTrace();
+	    }
+		
+		
+	}
+	
+	public void setDataEntrega(Date dataEntrega) {
+		
+	        this.dataEntrega = dataEntrega;
+		
 	}
 
 	

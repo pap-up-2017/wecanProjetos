@@ -1,12 +1,14 @@
 angular.module("app").controller('PageProjetoCtrl', function($scope, $http) {
 	
-	// Busca informações de todos os cidades salvas no banco ... Via rest
+	// Busca informações de todos os projetos salvas no banco ... Via rest
 	$scope.BuscarInformacao = function() {
 		console.log("função BuscarInformacao..");
+		
 
 		$http.get('http://localhost:8080/ProjetoPAP/rest/projetorest')
 				.success(function(data) {
 					$scope.projetos = data["projeto"];
+					console.log(data);
 				}).error(
 						function(data, status, header, config) {
 							$scope.Resposta = "Data: " + data + "<hr />status: "
@@ -15,16 +17,59 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http) {
 						});
 	};
 	
+	// Busca informações de todos as competências salvas no banco ... Via rest
+	// para carregar o comboBox..
+	$scope.BuscarInformacaoCompetencias = function() {
+		console.log("função buscar informações de competências");
+
+		$http.get('http://localhost:8080/ProjetoPAP/rest/competenciarest')
+				.success(function(data) {
+					var competenciasBanco = data["competencia"];
+					var arrayBanco = [];
+					if(Array.isArray(competenciasBanco)){
+						arrayBanco = competenciasBanco; 
+					}
+					else{
+						arrayBanco.push(competenciasBanco);
+					}
+					$scope.competencias = arrayBanco;
+				}).error(
+						function(data, status, header, config) {
+							$scope.Resposta = "Data: " + data + "<hr />status: "
+									+ status + "<hr />headers: " + header
+									+ "<hr />config: " + config;
+						});
+
+	};
+	
+    $scope.competenciasDoProjeto = [
+                    //Inicio a lista competencias do projeto vazia.
+                ];
+	
+   $scope.adicionaCompetencia = function () {
+        $scope.competenciasDoProjeto.push({ idCompetencia : $scope.projeto.competencias.idCompetencia,
+        	                                nomeCompetencia : $scope.projeto.competencias.nomeCompetencia});
+        //console.log($scope.competenciasDoProjeto);
+        //console.log($scope.projeto.competencias.nomeCompetencia);
+        
+    };
+	
 
 	// envia a informação de um novo cadastro de para o banco ... Via rest
 	$scope.SalvarCadastro = function(projeto) {
 		console.log("Salvar um novo cadastro ...")
-
+		
 		var parameter = JSON.stringify({
 			type : "projeto",
 			nome : projeto.nome,
-			descricao : projeto.descricao
+			descricao : projeto.descricao,
+			dataEntrega : projeto.dataEntrega,
+			competencias : $scope.competenciasDoProjeto
 		});
+		
+		console.log(parameter);
+		
+		
 		
 		var config = {
 			headers : {
@@ -50,7 +95,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http) {
 	};
 	
 	// Envia a informação de alteração de um elemento para o banco ... Via rest
-	$scope.SalvarAlteracao = function(editedidProjeto, editednome, editeddescricao){
+	$scope.SalvarAlteracao = function(editedidProjeto, editednome, editeddescricao, editeddataentrega){
 		console.log("Salvar uma nova Alteração ...")
 		console.log(editedidProjeto)
 		
@@ -58,7 +103,9 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http) {
 			type : "projeto",
 			idProjeto : editedidProjeto,
 			nome : editednome,
-			descricao : editeddescricao			
+			descricao : editeddescricao	,
+			dataentrega : editeddataentrega
+			
 		});
 		
 		console.log(parameter);
@@ -99,6 +146,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http) {
 	    $scope.editedidProjeto = projeto.idProjeto;
 	    $scope.editednome = projeto.nome;
 	    $scope.editeddescricao = projeto.descricao;
+	    $scope.editeddataentrega = projeto.dataentrega;
 	    console.log(projeto);
 	};
 	
@@ -110,7 +158,9 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http) {
 			type : "projeto",
 			idProjeto : projeto.idProjeto,
 			nome : projeto.nome,
-			descricao : projeto.descricao
+			descricao : projeto.descricao,
+			dataentrega : projeto.dataentrega
+			
 		});
 		
 		var config = {
@@ -146,7 +196,22 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http) {
 			console.log("Iniciando a tela");
 			
 			$scope.BuscarInformacao();
+			$scope.BuscarInformacaoCompetencias();
 		};
 		$scope.iniciaTela();
+		
+	// função para fechar o popUp de edição ... 
+	$scope.DateDbConvert = function(data){
+		ano = data.getFullYear(); 
+		//console.log(ano)
+		mes = data.getMonth()+1;
+		//console.log(mes)
+		dia = data.getDate();
+		//console.log(dia)
+		dataDb = ano + "-" + mes + "-" + dia;
+		//console.log(dataDb)		
+		return dataDb;
+	     
+	  };
 	
 });

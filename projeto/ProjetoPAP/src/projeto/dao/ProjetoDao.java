@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
-import projeto.entity.InstituicaoEnsino;
 import projeto.entity.Projeto;
 
 public class ProjetoDao implements InterfaceDao<Projeto> {

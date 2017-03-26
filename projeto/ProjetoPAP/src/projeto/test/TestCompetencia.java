@@ -16,7 +16,7 @@ public class TestCompetencia {
 	public void cadastrarCompetencia(){
 		Competencia c = new Competencia();
 		
-		c.setNomeCompetencia("Competência X");
+		c.setNomeCompetencia("Competência Y");
 
 		InterfaceDao<Competencia> dao = FactoryDao.createCompetenciaDao();
 		dao.salvar(c);
