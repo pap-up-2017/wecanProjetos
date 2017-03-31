@@ -47,7 +47,7 @@
 					
 			</select>
 			<button ng-click="adicionaCompetencia()">Adicionar competência</button>
-		</p class="form-group">
+			
 		
 	    <table class="table ">
 	      <thead>
@@ -57,12 +57,33 @@
 	      </thead>
 	      <tbody>
 	        <tr ng-repeat="competenciaDoProjeto in competenciasDoProjeto">
-	          <td><strong>{{ competenciaDoProjeto.nomeCompetencia }}</strong></td>
+	          <td>{{ competenciaDoProjeto.nomeCompetencia }}</td>
 	        </tr>
 	      </tbody>
 		</table>
 		
+		</p class="form-group">
+
+		<p class="form-group">
+			<select class="form-control" ng-model="projeto.usuarios" ng-options="usuario.nomeUsuario for usuario in usuarios">
+					<option value="">Selecione um usuário...</option>
+					
+			</select>
+			<button ng-click="adicionaUsuario()">Adicionar usuário</button>
+		</p class="form-group">
 		
+	    <table class="table ">
+	      <thead>
+	        <tr>
+	          <th>Equipe do projeto</th>
+	        </tr>
+	      </thead>
+	      <tbody>
+	        <tr ng-repeat="usuarioDoProjeto in usuariosDoProjeto">
+	          <td>{{ usuarioDoProjeto.nomeUsuario }}</td>
+	        </tr>
+	      </tbody>
+		</table>
 
 		
 		

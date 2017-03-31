@@ -29,6 +29,9 @@ public class Projeto {
 	private int participantes;
 	@ManyToMany
 	private List<Competencia> competencias;
+	@ManyToMany
+	private List<Usuario> usuarios;
+	
 	//Dono do projeto
 	private String organizador;
 	private String descricao;
@@ -110,6 +113,12 @@ public class Projeto {
 		
 	        this.dataEntrega = dataEntrega;
 		
+	}
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
 	}
 
 	

@@ -12,6 +12,7 @@ import projeto.dao.FactoryDao;
 import projeto.dao.InterfaceDao;
 import projeto.entity.Competencia;
 import projeto.entity.Projeto;
+import projeto.entity.Usuario;
 
 public class TestProjeto {
 	
@@ -27,13 +28,7 @@ public class TestProjeto {
 		System.out.println(data.toString());
 		p.setDataEntrega("2017/03/20");
 		
-	
-	    
-		
-		
-		System.out.println("TESTE!!!!!!!!!!!!!");
-		
-		
+		// Teste de inclusão de competencias
 		InterfaceDao<Competencia> daoComp = FactoryDao.createCompetenciaDao();
 		
 		List<Competencia> competencias = new ArrayList<Competencia>();;
@@ -48,9 +43,28 @@ public class TestProjeto {
 		
 		competencias.add(c);
 		
+		p.setCompetencias((List<Competencia>) competencias);
+		
+		
+		// Teste de inclusão de equipe no projeto
+		// Teste de inclusão de competencias
+		InterfaceDao<Usuario> daoUsu = FactoryDao.createUsuarioDao();
+		
+		List<Usuario> usuarios = new ArrayList<Usuario>();;
+		
+		Usuario u = new Usuario();
+		
+		u = daoUsu.getObjById(1);
+		
+		usuarios.add(u);
+		
+		u = daoUsu.getObjById(2);		
+		
+		usuarios.add(u);
+		
 
 		
-		p.setCompetencias((List<Competencia>) competencias);
+		p.setUsuarios((List<Usuario>) usuarios);
 		
 		InterfaceDao<Projeto> dao = FactoryDao.createProjetoDao();
 		dao.salvar(p);
