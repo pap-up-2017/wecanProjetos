@@ -7,6 +7,7 @@ import projeto.entity.Disciplina;
 import projeto.entity.Estado;
 import projeto.entity.InstituicaoEnsino;
 import projeto.entity.Projeto;
+import projeto.entity.Tarefa;
 import projeto.entity.TipoUsuario;
 import projeto.entity.Usuario;
 import projeto.entity.UsuarioLogado;
@@ -21,6 +22,11 @@ public class FactoryDao {
 	//ProjetoDao
 	public static InterfaceDao<Projeto> createProjetoDao(){
 		return new ProjetoDao();
+	}	
+	
+	//TarefaDao
+		public static InterfaceDao<Tarefa> createTarefaDao(){
+			return new TarefaDao();
 	}	
 	
 	//CidadeDao

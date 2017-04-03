@@ -1,0 +1,91 @@
+<style type="text/css">
+  .listv{
+     margin-bottom: 30px;
+  }
+  .editpopup{
+     width: 250px;
+     height: 250px;
+     border: 1px solid black;
+     display: none;
+     position: absolute;
+     top: center;
+     left: center;
+     bottom: center;
+     right: center;
+
+     background-color:gray;
+  }
+  .editpopup-true{
+     display: block;
+  }
+  .editpopup-false{
+     display: none;
+  }
+  </style>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<br/><br/><br/><br/>
+<div ng-controller="PageTarefaCtrl"	>
+		{{ Resposta }}
+		<p class="form-group">
+			<input placeholder="Nome" class="form-control" type="text" ng-model="tarefa.nomeTarefa" required />
+		</p class="form-group">
+		
+		<p class="form-group">
+			<input placeholder="Descrição" class="form-control" type="text" ng-model="tarefa.descricaoTarefa" required />
+		</p class="form-group">
+		
+		<p class="form-group">
+			<input placeholder="Prazo de entrega" class="form-control" type="date" ng-model="tarefa.prazoEntrega" required />
+		</p class="form-group">
+		
+		
+		
+		<p class="form-group">
+			<select class="form-control" ng-model="tarefa.projetoTarefa" ng-options="projeto.nome for projeto in projetos">
+					<option value="">Selecione um projeto...</option>
+			</select>
+		</p class="form-group">
+		
+		<button class="btn btn-success" ng-click="SalvarCadastro(tarefa)">Cadastrar</button>
+</div>
+
+<br/><br/>
+<div ng-controller="PageTarefaCtrl">
+
+		<button class="btn btn-primary" ng-click="BuscarInformacao()">Buscar Tarefas</button>
+		
+		<div class="editpopup editpopup-{{istrue}} ">
+	        <p>edit Id:<input type="text" ng-model="editedidTarefa"></p>
+	        <p>edit Tarefa:<input type="text" ng-model="editednameTarefa"></p>
+	        <p>edit Descrição:<input type="text" ng-model="editeddescricaoTarefa"></p>
+	        <p>edit Prazo de entrega:<input type="date" ng-model="editedprazoEntrega"></p>
+
+			
+			<select selectedIndex="editedProjetoTarefa" class="form-control" ng-model="editedProjetoTarefa" ng-options="projeto.nome disable when projeto.nome == editedProjetoTarefaOld.nome for projeto in projetos" >
+	        	<option value="" >{{editedProjetoTarefaOld.nome}}</option>
+			</select>
+    
+	        <button ng-click="SalvarAlteracao(editedidTarefa, editednameTarefa, editedProjetoTarefa, editeddescricaoTarefa, editedprazoEntrega)">save</button>
+	        <button ng-click="FecharPopUpEdicao()">cancel</button>
+     	</div>	
+     	
+    	
+		<br/><br/>
+		<br/><br/>
+		<table class="table ">
+			<tr>
+				<td>ID</td>
+				<td>NOME</td>
+				<td>PROJETO</td>
+			</tr>
+			<tr ng:repeat="tarefa in tarefas">
+				<td>{{tarefa.idTarefa}}</td>
+				<td>{{tarefa.nomeTarefa}}</td>
+				<td>{{tarefa.projetoTarefa.nome}}</td> 
+				<td><button ng-click="CarregarEdicao(tarefa)" class="btn btn-primary">Alterar</button></td>
+				<td><button class="btn btn-primary" ng-click="ExcluirElemento(tarefa)">Excluir</button></td>
+				
+			</tr>
+		</table>
+</div> 

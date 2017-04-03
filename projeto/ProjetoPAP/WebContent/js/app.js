@@ -26,6 +26,12 @@ angular.module('app').config(function($stateProvider, $urlRouterProvider, $locat
 		  templateUrl: 'views/cadProjeto.html'
 		}
   
+  var tarefa = {
+		  name: 'pageTarefa',
+		  url: '/pageTarefa',
+		  templateUrl: 'views/cadTarefa.html'
+		}
+  
   var curso = {
 		  name: 'pageCurso',
 		  url: '/pageCurso',
@@ -75,6 +81,7 @@ angular.module('app').config(function($stateProvider, $urlRouterProvider, $locat
   $stateProvider.state(cidade);
   $stateProvider.state(instituicao);
   $stateProvider.state(projeto);
+  $stateProvider.state(tarefa);
   $stateProvider.state(curso);
   $stateProvider.state(competencia);
   $stateProvider.state(tipoUsuario);
