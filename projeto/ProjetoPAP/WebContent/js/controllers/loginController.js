@@ -6,8 +6,17 @@ angular.module("app").controller('loginCtrl', function($scope, $http, $cookies, 
 	$scope.ValidarLogin = function() {
 		postValidarLogin();
 	};
-	
-	
+	$scope.logout = function() {
+		postDestroySession();
+		$cookieStore.remove("session_id");
+		$cookieStore.remove("session_user_id");
+		$cookieStore.remove("session_data_val");
+		$cookieStore.remove("session_token_val");
+		$cookieStore.remove("session_tipo_usuario");
+	};
+	postDestroySession = function(){
+		console.log("Logout ok");
+	}
 	postValidarLogin = function(){
 		var parameter = JSON.stringify({
 			type : "login",
