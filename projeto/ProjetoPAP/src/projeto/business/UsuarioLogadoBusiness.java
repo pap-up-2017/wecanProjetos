@@ -40,8 +40,8 @@ public class UsuarioLogadoBusiness {
 			// verifica a token
 			if(loggedUser.getToken().equals(loggedUserBanco.getToken())){
 				// if para fazer a verificação do tempo da session
-				// TODO verificação de distancia entre as datas
-				if(true){
+				if(loggedUser.getDataCriacao().getTime()+(Datas.getMinute()*5) == 
+						Datas.retornaDataAtual().getTime()){
 					return true;
 				}
 			}
