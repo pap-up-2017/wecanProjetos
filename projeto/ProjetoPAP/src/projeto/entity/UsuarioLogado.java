@@ -21,8 +21,7 @@ public class UsuarioLogado {
 	private int idUsuarioLogado;
 	private Date dataCriacao;
 	private String token;
-	@ManyToOne
-	private TipoUsuario tipoUsuarioLogado;
+	private String tipoUsuarioLogado;
 	
 	public int getId() {
 		return id;
@@ -48,10 +47,10 @@ public class UsuarioLogado {
 	public void setToken(String token) {
 		this.token = token;
 	}
-	public TipoUsuario getTipoUsuarioLogado() {
+	public String getTipoUsuarioLogado() {
 		return tipoUsuarioLogado;
 	}
-	public void setTipoUsuarioLogado(TipoUsuario tipoUsuarioLogado) {
+	public void setTipoUsuarioLogado(String tipoUsuarioLogado) {
 		this.tipoUsuarioLogado = tipoUsuarioLogado;
 	}
 

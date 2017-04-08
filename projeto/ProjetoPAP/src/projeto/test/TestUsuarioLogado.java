@@ -21,7 +21,7 @@ public class TestUsuarioLogado {
 		
 		UsuarioLogado uLog = new UsuarioLogado();
 		uLog.setIdUsuarioLogado(u.getIdUsuario());
-		uLog.setTipoUsuarioLogado(u.getTipoUsuario());
+		uLog.setTipoUsuarioLogado(u.getTipoUsuario().getTipoUsuario());
 		InterfaceDao<UsuarioLogado> dao = FactoryDao.createUsuarioLogadoDao();
 		dao.salvar(uLog);
 	}

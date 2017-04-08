@@ -1,4 +1,5 @@
-angular.module('app', ['ui.router']);
+angular.module('app', ['ngCookies'
+                      ,'ui.router']);
 
 angular.module('app').config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   
@@ -65,7 +66,7 @@ angular.module('app').config(function($stateProvider, $urlRouterProvider, $locat
   var home = {
 		  name: 'pageHome',
 		  url: '/',
-		  template: '<h1>Bem vindo!</h1>'
+		  templateUrl: 'views/dashboard.html'
 		}
   
   var cadastrosAdmin = {
