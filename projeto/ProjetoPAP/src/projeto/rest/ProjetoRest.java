@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import projeto.dao.FactoryDao;
 import projeto.dao.InterfaceDao;
 import projeto.entity.Projeto;
+import projeto.util.Datas;
 
 @Path("/projetorest")
 public class ProjetoRest {
@@ -31,6 +32,10 @@ public class ProjetoRest {
 	public void cadastrarProjeto(Projeto projeto) {	
 		InterfaceDao<Projeto> dao = FactoryDao.createProjetoDao();
 		if (projeto.getIdProjeto() < 1){
+			// Registro a quantidade de participantes mais o organizador
+			projeto.setParticipantes(projeto.getUsuarios().size()+1);
+			projeto.setDataCriacao(Datas.retornaDataAtual());
+			projeto.setStatus("Aberto");
 			dao.salvar(projeto);		
 		}
 	}

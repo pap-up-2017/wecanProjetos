@@ -38,6 +38,17 @@
 		</p class="form-group">
 		
 		<p class="form-group">
+			<select class="form-control" ng-model="projeto.organizador" ng-options="usuario.nomeUsuario for usuario in usuarios">
+					<option value="">Selecione o organizador do projeto...</option>					
+			</select>
+		</p class="form-group">
+		
+		<p class="form-group">
+			<input placeholder="Vagas" class="form-control" type="text" ng-model="projeto.vagas" required />
+		</p class="form-group">		
+		
+		
+		<p class="form-group">
 			<input placeholder="Data Entrega" class="form-control" type="date" ng-model="projeto.dataEntrega" required />
 		</p class="form-group">
 		
@@ -116,7 +127,8 @@
 				<td>{{projeto.idProjeto}}</td>
 				<td>{{projeto.nome}}</td>
 				<td>{{projeto.descricao}}</td>
-				<td>{{projeto.dataEntrega}}</td>  
+				<td>{{projeto.dataEntrega}}</td>
+				<!-- <td>{{projeto.usuarios[0].nomeUsuario}}</td>  -->
 				<td><button ng-click="CarregarEdicao(projeto)" class="btn btn-primary">Alterar</button></td>
 				<td><button class="btn btn-primary" ng-click="ExcluirElemento(projeto)">Excluir</button></td>
 				

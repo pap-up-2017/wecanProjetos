@@ -1,0 +1,56 @@
+<style type="text/css">
+  .listv{
+     margin-bottom: 30px;
+  }
+  .editpopup{
+     width: 250px;
+     height: 250px;
+     border: 1px solid black;
+     display: none;
+     position: absolute;
+     top: center;
+     left: center;
+     bottom: center;
+     right: center;
+
+     background-color:gray;
+  }
+  .editpopup-true{
+     display: block;
+  }
+  .editpopup-false{
+     display: none;
+  }
+  </style>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+
+<div ng-controller="PageProjetoCtrl">
+
+		<button class="btn btn-primary" ng-click="BuscarInformacao()">Buscar projetos</button>
+
+		
+		
+		<a class="btn btn-primary" ng-href="#/pageProjeto">Criar um projeto</a>
+    	
+		<br/><br/>
+		<br/><br/>
+		<table class="table ">
+			<tr>
+				<td>Integrantes</td>
+				<td>NOME</td>
+				<td>Nome do usuário</td>
+				<td>Nome do curso</td>
+				<td>DESCRIÇÃO</td>
+			</tr>
+			<tr ng:repeat="projeto in projetos">
+				<td>{{projeto.participantes}}</td>
+				<td>{{projeto.nome}}</td>
+				<td>{{projeto.organizador.nomeUsuario}}</td>
+				<td>{{projeto.organizador.cursoUsuario.nomeCurso}}</td>
+				<td>{{projeto.descricao}}</td>
+			</tr>
+		</table>
+
+</div> 

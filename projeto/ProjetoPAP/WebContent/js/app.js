@@ -83,6 +83,12 @@ function route($stateProvider, $urlRouterProvider, $locationProvider){
 			  url: '/cadAdmin',
 			  templateUrl: 'views/cadastrosAdmin.html'
 			}
+	
+	  var listaProjetos = {
+			  name: 'pageListaProjetos',
+			  url: '/pageListaProjetos',
+			  templateUrl: 'views/listaProjetos.html'
+			}
 	  
 	  $urlRouterProvider.otherwise('/');
 	  
@@ -98,4 +104,5 @@ function route($stateProvider, $urlRouterProvider, $locationProvider){
 	  $stateProvider.state(usuario);
 	  $stateProvider.state(disciplina);
 	  $stateProvider.state(cadastrosAdmin);
+	  $stateProvider.state(listaProjetos);
 }

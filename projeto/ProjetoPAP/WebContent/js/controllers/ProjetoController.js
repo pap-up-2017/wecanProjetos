@@ -8,7 +8,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http) {
 		$http.get('http://localhost:8080/ProjetoPAP/rest/projetorest')
 				.success(function(data) {
 					$scope.projetos = data["projeto"];
-					//console.log(data);
+					console.log($scope.projetos);
 				}).error(
 						function(data, status, header, config) {
 							$scope.Resposta = "Data: " + data + "<hr />status: "
@@ -82,14 +82,10 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http) {
 	
     $scope.usuariosDoProjeto = [
                     //Iniciar a lista usuários do projeto vazia.
-                ];
-	
+                ];	
    $scope.adicionaUsuario = function () {
         $scope.usuariosDoProjeto.push({ idUsuario : $scope.projeto.usuarios.idUsuario,
-        	                                nomeUsuario : $scope.projeto.usuarios.nomeUsuario});
-        //console.log($scope.competenciasDoProjeto);
-        //console.log($scope.projeto.competencias.nomeCompetencia);
-        
+        	                            nomeUsuario : $scope.projeto.usuarios.nomeUsuario});
     };
 
     
@@ -97,12 +93,14 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http) {
 	// envia a informação de um novo cadastro de para o banco ... Via rest
 	$scope.SalvarCadastro = function(projeto) {
 		console.log("Salvar um novo cadastro ...");
-		console.log($scope);
+		//console.log($scope);
 		
 		var parameter = JSON.stringify({
 			type : "projeto",
 			nome : projeto.nome,
 			descricao : projeto.descricao,
+			organizador : projeto.organizador,
+			vagas : projeto.vagas,
 			dataEntrega : projeto.dataEntrega,
 			competencias : $scope.competenciasDoProjeto,
 			usuarios : $scope.usuariosDoProjeto
@@ -255,5 +253,8 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http) {
 		return dataDb;
 	     
 	  };
+	  
+
 	
 });
+

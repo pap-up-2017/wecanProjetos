@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 
 //rest
@@ -33,9 +34,11 @@ public class Projeto {
 	private List<Usuario> usuarios;
 	
 	//Dono do projeto
-	private String organizador;
+	@OneToOne
+	private Usuario organizador;
 	private String descricao;
 	private Date dataEntrega;
+	private String status;
 	
 	//TODO desenvolver função para usuário se inscrever no projeto
 	
@@ -72,10 +75,10 @@ public class Projeto {
 	public void setParticipantes(int participantes) {
 		this.participantes = participantes;
 	}
-	public String getOrganizador() {
+	public Usuario getOrganizador() {
 		return organizador;
 	}
-	public void setOrganizador(String organizador) {
+	public void setOrganizador(Usuario organizador) {
 		this.organizador = organizador;
 	}
 	public String getDescricao() {
@@ -119,6 +122,12 @@ public class Projeto {
 	}
 	public void setUsuarios(List<Usuario> usuarios) {
 		this.usuarios = usuarios;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	
