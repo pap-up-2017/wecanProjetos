@@ -20,7 +20,7 @@ public class FactoryDao {
 	}	
 	
 	//ProjetoDao
-	public static InterfaceDao<Projeto> createProjetoDao(){
+	public static InterfaceProjetoDao<Projeto> createProjetoDao(){
 		return new ProjetoDao();
 	}	
 	

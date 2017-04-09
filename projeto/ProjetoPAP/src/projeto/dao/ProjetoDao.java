@@ -5,8 +5,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import projeto.entity.Projeto;
+import projeto.entity.Usuario;
 
-public class ProjetoDao implements InterfaceDao<Projeto> {
+public class ProjetoDao implements InterfaceProjetoDao<Projeto> {
 	
 	// cria a instancia
 	EntityManager em = SingletonConection.getInstance();
@@ -22,8 +23,6 @@ public class ProjetoDao implements InterfaceDao<Projeto> {
 		em.getTransaction().commit();
 		// fecha a instancia
 		em.close();
-		
-		
 	}
 
 	@Override
@@ -65,6 +64,16 @@ public class ProjetoDao implements InterfaceDao<Projeto> {
 		em.close();
 		
 	}
+
+	@Override
+	public List<Projeto> listarMeusProjetos(String id) {
+		// cria a Query para encontrar os projetos
+		Query q = em.createQuery("from Projeto where organizador_idUsuario = " + id);
+		// retorna os dados encontrados
+		return q.getResultList();
+	}
+
+
 	
 
 

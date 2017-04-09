@@ -6,12 +6,16 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import projeto.dao.FactoryDao;
 import projeto.dao.InterfaceDao;
+import projeto.dao.InterfaceProjetoDao;
 import projeto.entity.Projeto;
+import projeto.entity.Usuario;
 import projeto.util.Datas;
 
 @Path("/projetorest")
@@ -21,7 +25,7 @@ public class ProjetoRest {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Projeto> listarProjetos() {
-		InterfaceDao<Projeto> dao = FactoryDao.createProjetoDao();
+		InterfaceProjetoDao<Projeto> dao = FactoryDao.createProjetoDao();
 		return dao.listar();	
 	}
 	
@@ -30,7 +34,7 @@ public class ProjetoRest {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/postcad")
 	public void cadastrarProjeto(Projeto projeto) {	
-		InterfaceDao<Projeto> dao = FactoryDao.createProjetoDao();
+		InterfaceProjetoDao<Projeto> dao = FactoryDao.createProjetoDao();
 		if (projeto.getIdProjeto() < 1){
 			// Registro a quantidade de participantes mais o organizador
 			projeto.setParticipantes(projeto.getUsuarios().size()+1);
@@ -45,7 +49,7 @@ public class ProjetoRest {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/postalt")
 	public void alterarProjeto(Projeto projeto) {
-		InterfaceDao<Projeto> dao = FactoryDao.createProjetoDao();
+		InterfaceProjetoDao<Projeto> dao = FactoryDao.createProjetoDao();
 		if (projeto.getIdProjeto() > 0){
 			dao.alterar(projeto);
 		}
@@ -56,9 +60,19 @@ public class ProjetoRest {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/postdel")
 	public void deletarProjeto(Projeto projeto) {
-		InterfaceDao<Projeto> dao = FactoryDao.createProjetoDao();
+		InterfaceProjetoDao<Projeto> dao = FactoryDao.createProjetoDao();
 		if (projeto.getIdProjeto() > 0){
 			dao.excluir(projeto);
 		}
 	}
+	
+	// get para puxar todos os meus projetos do banco..
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("{id}")
+	public List<Projeto> listarMeusProjetos(@PathParam("id") String id) {
+		InterfaceProjetoDao<Projeto> dao = FactoryDao.createProjetoDao();
+		return dao.listarMeusProjetos(id);
+	}
+	
 }

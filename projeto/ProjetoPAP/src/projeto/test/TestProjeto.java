@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import projeto.dao.FactoryDao;
 import projeto.dao.InterfaceDao;
+import projeto.dao.InterfaceProjetoDao;
 import projeto.entity.Competencia;
 import projeto.entity.Projeto;
 import projeto.entity.Usuario;
@@ -66,7 +67,7 @@ public class TestProjeto {
 		
 		p.setUsuarios((List<Usuario>) usuarios);
 		
-		InterfaceDao<Projeto> dao = FactoryDao.createProjetoDao();
+		InterfaceProjetoDao<Projeto> dao = FactoryDao.createProjetoDao();
 		dao.salvar(p);
 		
 	}
@@ -81,7 +82,7 @@ public class TestProjeto {
 	
 	@Test
 	public void alterarProjeto(){
-		InterfaceDao<Projeto> daoProj = FactoryDao.createProjetoDao();
+		InterfaceProjetoDao<Projeto> daoProj = FactoryDao.createProjetoDao();
 		Projeto proj = daoProj.getObjById(1);	
 		proj.setNome("Projeto Alterado");
 		daoProj.alterar(proj);
@@ -89,7 +90,7 @@ public class TestProjeto {
 	
 	@Test
 	public void excluirProjeto(){
-		InterfaceDao<Projeto> daoProj = FactoryDao.createProjetoDao();
+		InterfaceProjetoDao<Projeto> daoProj = FactoryDao.createProjetoDao();
 		Projeto proj = daoProj.getObjById(3);	
 		daoProj.excluir(proj);
 	}

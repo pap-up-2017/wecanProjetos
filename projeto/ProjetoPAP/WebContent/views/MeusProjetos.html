@@ -1,0 +1,33 @@
+<style type="text/css">
+  .listv{
+     margin-bottom: 30px;
+  }
+  </style>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+
+<div ng-controller="PageMeusProjetosCtrl">
+
+		
+
+		<button class="btn btn-primary" ng-click="BuscarMeusProjetos(UsuarioLogado)">Buscar projetos meus projetos</button>
+		<br/><br/><br/><br/>
+		<table class="table ">
+			<tr>
+				<td>Integrantes</td>
+				<td>NOME</td>
+				<td>Nome do usuário</td>
+				<td>Nome do curso</td>
+				<td>DESCRIÇÃO</td>
+			</tr>
+			<tr ng:repeat="projeto in projetos">
+				<td>{{projeto.participantes}}</td>
+				<td>{{projeto.nome}}</td>
+				<td>{{projeto.organizador.nomeUsuario}}</td>
+				<td>{{projeto.organizador.cursoUsuario.nomeCurso}}</td>
+				<td>{{projeto.descricao}}</td>
+			</tr>
+		</table>
+
+</div> 
