@@ -49,6 +49,16 @@ public class UsuarioLogadoBusiness {
 		return false;
 	}
 	
+	public String logout(int id){
+		InterfaceDao<UsuarioLogado> dao = FactoryDao.createUsuarioLogadoDao();
+		try{
+			dao.excluir(dao.getObjById(id));
+			return "Session deletada com sucesso!";
+		}catch(Exception ex){
+			return "Não foi possivel deletar a session";
+		}
+	}
+	
 	// gera token
 	private String criarToken(){
 		String uuid = UUID.randomUUID().toString();

@@ -1,0 +1,102 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Stylesheet -->
+		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet"> 
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<link rel="stylesheet" href="css/register.css">
+		<!-- end Stylesheet  -->
+		
+		<title>WECAN</title>
+</head>
+<body ng-app='app'>
+		<header>
+			<ul id="menu">	
+				<li><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+			</ul>
+		</header>
+		<div class="panel panel-default" ng-controller="PageUsuarioCtrl">
+					<div class="panel-body">
+						<div class="campos">
+							<form>
+								<div class="campos_cadastro01">
+									<label class="label label-default" for="tu">Tipo de usuário:</label>
+									<br/>
+									<div class="btn-group" data-toggle="buttons" id="tu">
+									<select class="form-control" id="tu" class="form-control" ng-model="usuario.tipoUsuario" ng-options="tipoUsuario.tipoUsuario for tipoUsuario in tipoUsuarios">
+										<option value="">Selecione um Tipo de usuário...</option>
+									</select>
+									<br/>
+									</div>
+									<br/>
+									<label class="label label-default" for="nc">Nome completo:</label>
+									<input class="form-control" placeholder="Nome completo" id="nc" ng-model="usuario.nomeUsuario" required/>
+									<br/>
+									<label class="label label-default" for="us">Username:</label>
+									<input class="form-control" placeholder="Username" id="us" ng-model="usuario.usernameUsuario" required/>
+									<br/>
+									<label class="label label-default" for="em">Email:</label>
+									<input class="form-control" placeholder="Email" id="em" ng-model="usuario.emailUsuario">
+									<br/>
+									<label class="label label-default" for="em">Senha:</label>
+									<input class="form-control" placeholder="Senha" id="sn" type="password" ng-model="usuario.senhaUsuario" required/>
+									<br/>
+								</div>
+								<div class="campos_cadastro02">
+									<label class="label label-default" for="es">Estado:</label>
+									<select class="form-control" id="es" ng-change="BuscarInformacaoCidades()" class="form-control" ng-model="estadoSelecionado" ng-options="estado.nomeEstado for estado in estados">
+										<option value="">Selecione um estado...</option>
+									</select>
+									<br/>
+									<label class="label label-default" for="cd">Cidade:</label>
+										<select ng-change="BuscarInformacaoInstituicoes()" class="form-control" id="cd" class="form-control" ng-model="usuario.cidadeUsuario" ng-options="cidade.nomeCidade for cidade in cidades | filter: estadoSelecionado.nomeEstado">
+											<option value="">Selecione uma cidade..</option>
+										</select>
+										<br/>
+									<label class="label label-default" for="ie">Instituição de ensino:</label>
+										<select class="form-control" id="ie" class="form-control" ng-model="usuario.instituicaoUsuario" ng-options="instituicaoEnsino.nomeInstituicao for instituicaoEnsino in instituicoes | filter: usuario.cidadeUsuario.nomeCidade">
+											<option value="">Selecione uma Instituicao de ensino..</option>
+										</select>
+									<br/>
+									<label class="label label-default" for="cs">Curso:</label>
+										<select class="form-control" id="cs"class="form-control" ng-model="usuario.cursoUsuario" ng-options="curso.nomeCurso for curso in cursos | filter: usuario.instituicaoUsuario.nomeInstituicao">
+											<option value="">Selecione um curso..</option>
+										</select>
+									<br/>
+									<br/>
+									<div class="acaoCadastroConcluir">
+									<button class="btnAcao btn btn-default" ng-click="SalvarCadastro(usuario)">Concluir</button>
+								</div>
+								<div class="acaoCadastroCancelar">
+									<script type="text/javascript">
+									function home()
+									{
+										window.location.href = "http://localhost:8080/ProjetoPAP/home.html";
+									}
+									</script>
+									<button  onclick="home()" class="btnAcao btn btn-default ">Cancelar</button>
+								</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				
+		<script src="js/jquery-3.2.0.min.js"></script>
+		<script src="js/bootstrap.js"></script>
+		<script src="https://use.fontawesome.com/2af5f88198.js"></script>
+		
+		<!-- Libs angular.js -->
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-cookies.js"></script>
+		<script type="text/javascript" src="js/angular-ui-router.js"></script>
+		
+		<!-- javaScript controllers Angular -->
+		<script type="text/javascript" src="js/app.js"></script>
+		<script type="text/javascript" src="js/controllers/UsuarioController.js"></script>
+</body>
+</html>

@@ -4,8 +4,6 @@ angular.module("app").controller('PageUsuarioCtrl', function($scope, $http) {
 	
 	// Busca informações no banco.. 
 	$scope.BuscarInformacao = function() {
-		console.log("função BuscarInformacao..");
-
 		$http.get('http://localhost:8080/ProjetoPAP/rest/usuariorest')
 				.success(function(data) {
 					var usuariosBanco = data["usuario"];
@@ -27,8 +25,6 @@ angular.module("app").controller('PageUsuarioCtrl', function($scope, $http) {
 	
 	//Busca informações do Tipos de usuarios
 	$scope.BuscarInformacaoTipoUsuarios = function() {
-		console.log("função BuscarInformacao..");
-
 		$http.get('http://localhost:8080/ProjetoPAP/rest/tipousuariorest')
 				.success(function(data) {
 					var tipousuariosBanco = data["tipoUsuario"];
@@ -50,8 +46,6 @@ angular.module("app").controller('PageUsuarioCtrl', function($scope, $http) {
 	
 	//Busca informações do estados
 	$scope.BuscarInformacaoEstados = function() {
-		console.log("função BuscarInformacao..");
-
 		$http.get('http://localhost:8080/ProjetoPAP/rest/estadorest')
 				.success(function(data) {
 					var estadosBanco = data["estado"];
@@ -73,8 +67,6 @@ angular.module("app").controller('PageUsuarioCtrl', function($scope, $http) {
 	
 	//Busca informações de cidades
 	$scope.BuscarInformacaoCidades = function() {
-		console.log("função BuscarInformacao..");
-
 		$http.get('http://localhost:8080/ProjetoPAP/rest/cidaderest')
 				.success(function(data) {
 					var cidadesBanco = data["cidade"];
@@ -96,8 +88,6 @@ angular.module("app").controller('PageUsuarioCtrl', function($scope, $http) {
 	
 	//Busca informações de instituicoes de Ensino
 	$scope.BuscarInformacaoInstituicoes = function() {
-		console.log("função BuscarInformacao..");
-
 		$http.get('http://localhost:8080/ProjetoPAP/rest/instituicaorest')
 				.success(function(data) {
 					var instituicoesBanco = data["instituicaoEnsino"];
@@ -119,8 +109,6 @@ angular.module("app").controller('PageUsuarioCtrl', function($scope, $http) {
 	
 	//Busca informações de cursos
 	$scope.BuscarInformacaoCursos = function() {
-		console.log("função BuscarInformacao..");
-
 		$http.get('http://localhost:8080/ProjetoPAP/rest/cursorest')
 				.success(function(data) {
 					var cursosBanco = data["curso"];
@@ -142,8 +130,6 @@ angular.module("app").controller('PageUsuarioCtrl', function($scope, $http) {
 	
 	// envia a informação de um novo cadastro de para o banco ... Via rest
 	$scope.SalvarCadastro = function(usuario) {
-		console.log("Salvar um novo cadastro ...")
-
 		var parameter = JSON.stringify({
 			type : "usuario",
 			nomeUsuario : usuario.nomeUsuario,
@@ -167,13 +153,7 @@ angular.module("app").controller('PageUsuarioCtrl', function($scope, $http) {
 				parameter, config).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Usuario salvo com Sucesso!';
-					
-					
-				}).error(
-				function(data, status, header, config) {
-					$scope.Resposta = "Data: " + data + "<hr />status: "
-							+ status + "<hr />headers: " + header
-							+ "<hr />config: " + config;
+					window.location.href = "http://localhost:8080/ProjetoPAP/home.html";
 				});
 	};
 	
