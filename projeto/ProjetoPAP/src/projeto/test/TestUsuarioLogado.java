@@ -17,7 +17,7 @@ public class TestUsuarioLogado {
 	@Test
 	public void cadastrarUsuarioLogado(){
 		InterfaceDao<Usuario> daoUser = FactoryDao.createUsuarioDao();
-		Usuario u = daoUser.getObjById(2);
+		Usuario u = daoUser.getObjById(5);
 		
 		UsuarioLogado uLog = new UsuarioLogado();
 		uLog.setIdUsuarioLogado(u.getIdUsuario());

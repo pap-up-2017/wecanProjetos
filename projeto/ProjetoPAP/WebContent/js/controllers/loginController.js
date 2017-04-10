@@ -1,7 +1,5 @@
 angular.module("app").controller('loginCtrl', function($scope, $http, $cookies, $cookieStore) {
 	
-	var urlBase = "http://localhost:8080/ProjetoPAP/rest/";
-	
 	// envia informação para validar Login ... 
 	$scope.ValidarLogin = function() {
 		postValidarLogin();
@@ -9,14 +7,21 @@ angular.module("app").controller('loginCtrl', function($scope, $http, $cookies, 
 	$scope.logout = function() {
 		postDestroySession();
 	};
+	
 	postDestroySession = function(){
-		console.log("Logout ok");
-		$cookieStore.remove("session_id");
-		$cookieStore.remove("session_user_id");
-		$cookieStore.remove("session_data_val");
-		$cookieStore.remove("session_token_val");
-		$cookieStore.remove("session_tipo_usuario");
+		
+		$http.post('http://localhost:8080/ProjetoPAP/rest/loginrest/logout/'+$cookieStore.get("session_id"))
+		.success(function(){
+			$cookieStore.remove("session_id");
+			$cookieStore.remove("session_user_id");
+			$cookieStore.remove("session_data_val");
+			$cookieStore.remove("session_token_val");
+			$cookieStore.remove("session_tipo_usuario");
+			console.log("logout com sucesso!");
+			window.location.href = "http://localhost:8080/ProjetoPAP/index.html";
+		});
 	}
+	
 	postValidarLogin = function(){
 		var parameter = JSON.stringify({
 			type : "login",
@@ -30,7 +35,7 @@ angular.module("app").controller('loginCtrl', function($scope, $http, $cookies, 
 			}
 		}
 		$http.post(
-				urlBase+'loginrest/postlogin',
+				'http://localhost:8080/ProjetoPAP/rest/loginrest/login',
 				parameter, config).success(
 				function(data, status, headers, config) {
 					if(loginfactory(data)){

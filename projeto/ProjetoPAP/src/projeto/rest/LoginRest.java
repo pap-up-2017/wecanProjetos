@@ -3,6 +3,7 @@ package projeto.rest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -16,7 +17,7 @@ public class LoginRest {
 	
 	// post para verificação de login
 	@POST
-	@Path("/postlogin")
+	@Path("/login")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public UsuarioLogado validarLogin(Login login) {
@@ -24,6 +25,18 @@ public class LoginRest {
 		UsuarioLogado loggedUser =  userBusiness.login(login);
 		return loggedUser;
 	}
+	
+	// post para verificação de login
+	@POST
+	@Path("/logout/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	//@Produces(MediaType.APPLICATION_JSON)
+	public void logout(@PathParam("id") String id) {
+		UsuarioLogadoBusiness logBus = new UsuarioLogadoBusiness();
+		String result = logBus.logout(Integer.parseInt(id));
+		System.out.println(result);
+	}
+	
 	
 	// post para verificação de login
 	@POST
@@ -45,5 +58,4 @@ public class LoginRest {
 		UsuarioLogadoBusiness loggedUserBusiness = new UsuarioLogadoBusiness();
 		return loggedUserBusiness.verificarSession(usuarioLogado);
 	}
-
 }
