@@ -9,12 +9,17 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.google.gson.Gson;
+
+import projeto.business.UsuarioBusiness;
 import projeto.dao.FactoryDao;
 import projeto.dao.InterfaceDao;
 import projeto.entity.Usuario;
 
 @Path("/usuariorest")
 public class UsuarioRest {
+	
+	Gson gson = new Gson();
 	
 	// get para puxar todas os dados no banco..
 	@GET
@@ -27,12 +32,16 @@ public class UsuarioRest {
 	// post para cadastro..
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/postcad")
-	public void cadastrarUsuario(Usuario usuario) {	
-		InterfaceDao<Usuario> dao = FactoryDao.createUsuarioDao();
+	public String cadastrarUsuario(Usuario usuario) {
+		String result = "";
+		UsuarioBusiness userBus = new UsuarioBusiness();
 		if (usuario.getIdUsuario() < 1){
-			dao.salvar(usuario);		
+			result = userBus.create(usuario);
 		}
+		System.out.println(result);
+		return gson.toJson(result);
 	}
 	
 	// post para alterar..

@@ -8,6 +8,23 @@ import projeto.util.Criptografia;
 
 public class UsuarioBusiness {
 	
+	public String create(Usuario u){
+		Usuario uTestUsername;
+		UsuarioDao uDao = new UsuarioDao();
+		try{
+			uTestUsername = uDao.getObjByUsername(u.getUsernameUsuario());
+		}catch(Exception ex){
+			uTestUsername = null;
+		}
+		if(uTestUsername != null){
+			return "Username duplicado";
+		}
+		else{
+			uDao.salvar(u);
+			return "salvo com sucesso!";
+		}
+	}
+	
 	public UsuarioLogado login (Login loginWeb){
 	
 		UsuarioDao uDao = new UsuarioDao();

@@ -152,8 +152,13 @@ angular.module("app").controller('PageUsuarioCtrl', function($scope, $http) {
 				'http://localhost:8080/ProjetoPAP/rest/usuariorest/postcad',
 				parameter, config).success(
 				function(data, status, headers, config) {
-					$scope.Resposta = 'Usuario salvo com Sucesso!';
-					window.location.href = "http://localhost:8080/ProjetoPAP/home.html";
+					if(data=="Username duplicado"){
+						console.log(data);
+					}
+					else{
+						window.location.href = "http://localhost:8080/ProjetoPAP/index.html";
+					}
+					
 				});
 	};
 	
