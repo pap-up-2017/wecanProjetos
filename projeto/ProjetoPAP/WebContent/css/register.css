@@ -2,7 +2,7 @@ html, body
 {
 	top: 0px;
 	margin: 0px;
-	background-color: #121d27;
+	background-image: url('http://i65.tinypic.com/1zn94iv.png');
 }
 header
 {
@@ -34,9 +34,13 @@ header #menu li a
 		text-decoration: none;
 		color: #35ff99;
 	}
+#menu img
+{
+	width: 80px;
+}
 .panel
 {
-	background-color: #121d27;
+	background-image: url('http://i65.tinypic.com/1zn94iv.png');
 	border: 0px;
 }
 	.btnAcao
@@ -60,6 +64,11 @@ header #menu li a
 		float: left;
 		padding: 20px;
 		margin-bottom: 20px;
+	}
+	.label
+	{
+		background-color: #11161c !important;
+		color: #fff !important;
 	}
 @media screen and (min-width: 769px)
 {
@@ -96,10 +105,6 @@ header #menu li a
 		float: left;
 		padding: 20px;
 		padding-top: 94px;
-	}
-	.label
-	{
-		background-color: #383838;
 	}
 	.btnAcao
 	{
