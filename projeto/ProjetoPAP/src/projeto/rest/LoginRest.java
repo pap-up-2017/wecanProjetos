@@ -7,6 +7,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.google.gson.Gson;
+
 import projeto.business.UsuarioBusiness;
 import projeto.business.UsuarioLogadoBusiness;
 import projeto.entity.Login;
@@ -14,6 +16,8 @@ import projeto.entity.UsuarioLogado;
 
 @Path("/loginrest")
 public class LoginRest {
+	
+	Gson gson = new Gson();
 	
 	// post para verificação de login
 	@POST
@@ -30,11 +34,12 @@ public class LoginRest {
 	@POST
 	@Path("/logout/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	//@Produces(MediaType.APPLICATION_JSON)
-	public void logout(@PathParam("id") String id) {
+	@Produces(MediaType.APPLICATION_JSON)
+	public String logout(@PathParam("id") String id) {
 		UsuarioLogadoBusiness logBus = new UsuarioLogadoBusiness();
 		String result = logBus.logout(Integer.parseInt(id));
 		System.out.println(result);
+		return gson.toJson(result);
 	}
 	
 	

@@ -11,13 +11,13 @@ angular.module("app").controller('loginCtrl', function($scope, $http, $cookies, 
 	postDestroySession = function(){
 		
 		$http.post('http://localhost:8080/ProjetoPAP/rest/loginrest/logout/'+$cookieStore.get("session_id"))
-		.success(function(){
+		.success(function(data){
+			console.log(data);
 			$cookieStore.remove("session_id");
 			$cookieStore.remove("session_user_id");
 			$cookieStore.remove("session_data_val");
 			$cookieStore.remove("session_token_val");
-			$cookieStore.remove("session_tipo_usuario");
-			console.log("logout com sucesso!");
+			$cookieStore.remove("session_tipo_usuario");;
 			window.location.href = "http://localhost:8080/ProjetoPAP/index.html";
 		});
 	}
