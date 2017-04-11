@@ -89,12 +89,19 @@ function route($stateProvider, $urlRouterProvider, $locationProvider){
 			  url: '/pageListaProjetos',
 			  templateUrl: 'views/listaProjetos.html'
 			}
-	  var MeusProjetos = {
+	  var meusProjetos = {
 			  name: 'pageMeusProjetos',
 			  url: '/pageMeusProjetos',
-			  templateUrl: 'views/MeusProjetos.html'
+			  templateUrl: 'views/meusProjetos.html'
 			}
-	  
+
+	  var alterarProjeto = {
+			  name: 'pageAlterarProjeto',
+			  url: '/pageAlterarProjeto/{idProjeto}',
+			  templateUrl: 'views/altProjeto.html',
+			}
+			
+	
 	  $urlRouterProvider.otherwise('/');
 	  
 	  $stateProvider.state(home);
@@ -110,5 +117,6 @@ function route($stateProvider, $urlRouterProvider, $locationProvider){
 	  $stateProvider.state(disciplina);
 	  $stateProvider.state(cadastrosAdmin);
 	  $stateProvider.state(listaProjetos);
-	  $stateProvider.state(MeusProjetos);
+	  $stateProvider.state(meusProjetos);
+	  $stateProvider.state(alterarProjeto);
 }

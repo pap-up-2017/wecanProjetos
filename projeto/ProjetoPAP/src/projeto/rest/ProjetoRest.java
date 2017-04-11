@@ -69,10 +69,19 @@ public class ProjetoRest {
 	// get para puxar todos os meus projetos do banco..
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("{id}")
+	@Path("/user/{id}")
 	public List<Projeto> listarMeusProjetos(@PathParam("id") String id) {
 		InterfaceProjetoDao<Projeto> dao = FactoryDao.createProjetoDao();
 		return dao.listarMeusProjetos(id);
+	}
+	
+	// get para puxar um projeto por id.
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("{id}")
+	public Projeto getProjetoById(@PathParam("id") int id) {
+		InterfaceProjetoDao<Projeto> dao = FactoryDao.createProjetoDao();
+		return dao.getObjById(id);	
 	}
 	
 }

@@ -1,14 +1,16 @@
-angular.module("app").controller('PageProjetoCtrl', function($scope, $http) {
+angular.module("app").controller('PageProjetoCtrl', function($scope, $http, $stateParams) {
+	
+	//console.log($stateParams.idProjeto);
 	
 	// Busca informações de todos os projetos salvas no banco ... Via rest
 	$scope.BuscarInformacao = function() {
-		console.log("função BuscarInformacao..");
+		console.log("função BuscarInformacao dos projetos..");
 		
 
 		$http.get('http://localhost:8080/ProjetoPAP/rest/projetorest')
 				.success(function(data) {
 					$scope.projetos = data["projeto"];
-					console.log($scope.projetos);
+					//console.log($scope.projetos);
 				}).error(
 						function(data, status, header, config) {
 							$scope.Resposta = "Data: " + data + "<hr />status: "
@@ -106,7 +108,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http) {
 			usuarios : $scope.usuariosDoProjeto
 		});
 		
-		console.log(parameter);
+		//console.log(parameter);
 		
 		
 		
@@ -134,16 +136,20 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http) {
 	};
 	
 	// Envia a informação de alteração de um elemento para o banco ... Via rest
-	$scope.SalvarAlteracao = function(editedidProjeto, editednome, editeddescricao, editeddataentrega){
+	$scope.SalvarAlteracao = function(projeto){
 		console.log("Salvar uma nova Alteração ...")
-		console.log(editedidProjeto)
+		console.log(projeto)
 		
 		var parameter = JSON.stringify({
 			type : "projeto",
-			idProjeto : editedidProjeto,
-			nome : editednome,
-			descricao : editeddescricao	,
-			dataentrega : editeddataentrega
+			idProjeto :  projeto.idProjeto,
+			nome : projeto.nome,
+			descricao : projeto.descricao,
+			organizador : projeto.organizador,
+			vagas : projeto.vagas,
+			dataEntrega : projeto.dataEntrega,
+			competencias : $scope.competenciasDoProjeto,
+			usuarios : $scope.usuariosDoProjeto
 			
 		});
 		
@@ -180,13 +186,61 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http) {
 	};
 	
 	// carrega os dados do elemento selecionado para edição .. 
-	$scope.CarregarEdicao = function(projeto){
+	$scope.CarregarEdicao = function(){
+		console.log("carregando edição");
+
+		$http.get('http://localhost:8080/ProjetoPAP/rest/projetorest/'+$stateParams.idProjeto)
+		.success(function(data) {
+			$scope.projeto = data;
+			console.log($scope.projeto);
+			//Iniciar a lista usuários do projeto com dados do banco.
+			
+			//console.log(angular.isArray($scope.projeto.usuarios));
+			//console.log(angular.isArray($scope.projeto.competencias));
+		    if (angular.isArray($scope.projeto.competencias)){
+			    $scope.competenciasDoProjeto = [];
+			    for (var i = 0; i < $scope.projeto.competencias.length; i++) {
+			    	$scope.competenciasDoProjeto.push({ idCompetencia : $scope.projeto.competencias[i].idCompetencia,
+			    										nomeCompetencia : $scope.projeto.competencias[i].nomeCompetencia});
+			    }
+		    }else{
+		    	if($scope.projeto.competencias != null){
+			    	$scope.competenciasDoProjeto.push({ idCompetencia : $scope.projeto.competencias.idCompetencia,
+						nomeCompetencia : $scope.projeto.competencias.nomeCompetencia});
+		    	}
+				
+			}
+		    
+		    
+			if (angular.isArray($scope.projeto.usuarios)){
+				$scope.usuariosDoProjeto = [];
+			    for (var i = 0; i < $scope.projeto.usuarios.length; i++) {
+			    	$scope.usuariosDoProjeto.push({ idUsuario : $scope.projeto.usuarios[i].idUsuario,
+	                    							nomeUsuario : $scope.projeto.usuarios[i].nomeUsuario});
+			    }
+			}else{
+			   	if($scope.projeto.usuarios != null){
+			   		$scope.usuariosDoProjeto.push({ idUsuario : $scope.projeto.usuarios.idUsuario,
+			   			nomeUsuario : $scope.projeto.usuarios.nomeUsuario});
+			   	}
+			}
+		
+		}).error(
+				function(data, status, header, config) {
+					$scope.Resposta = "Data: " + data + "<hr />status: "
+							+ status + "<hr />headers: " + header
+							+ "<hr />config: " + config;
+				});
+		
+		
+		/*
 		$scope.istrue=true;
 	    $scope.editedidProjeto = projeto.idProjeto;
 	    $scope.editednome = projeto.nome;
 	    $scope.editeddescricao = projeto.descricao;
 	    $scope.editeddataentrega = projeto.dataentrega;
-	    console.log(projeto);
+	    //console.log(projeto);
+	    */
 	};
 	
 	// carrega os dados do elemento selecionado para exclusão .. 
@@ -237,6 +291,11 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http) {
 			$scope.BuscarInformacao();
 			$scope.BuscarInformacaoCompetencias();
 			$scope.BuscarInformacaoUsuarios();
+			// Validação para não carregar dados no cadastro de novo projetos
+			if($stateParams.idProjeto != null){
+				$scope.CarregarEdicao();
+				
+			}
 		};
 		$scope.iniciaTela();
 		
