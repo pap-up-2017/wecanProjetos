@@ -17,7 +17,7 @@ public class TestResposta {
 		
 		r.setTextoResposta("Resposta do feed");
 		InterfaceDao<Feed> daoFeed = FactoryDao.createFeedDao();
-		r.setFeedResposta(daoFeed.getObjById(2));
+		r.setFeedResposta(daoFeed.getObjById(3));
 		
 		InterfaceDao<Resposta> dao = FactoryDao.createRespostaDao();
 		dao.salvar(r);

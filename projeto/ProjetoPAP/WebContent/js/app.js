@@ -107,6 +107,12 @@ function route($stateProvider, $urlRouterProvider, $locationProvider){
 			  templateUrl: 'views/detalhesProjeto.html'
 			}
 	
+	var feed = {
+			  name: 'feed',
+			  url: '/feed',
+			  templateUrl: 'views/feed.html'
+			}
+	
 	  $urlRouterProvider.otherwise('/');
 	  
 	  $stateProvider.state(home);
@@ -125,4 +131,5 @@ function route($stateProvider, $urlRouterProvider, $locationProvider){
 	  $stateProvider.state(meusProjetos);
 	  $stateProvider.state(alterarProjeto);
 	  $stateProvider.state(detalhesProjeto);
+	  $stateProvider.state(feed);
 }

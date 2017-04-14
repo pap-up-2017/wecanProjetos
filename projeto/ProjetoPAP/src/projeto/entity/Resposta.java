@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 
 //rest
@@ -21,6 +22,8 @@ public class Resposta {
 	private String textoResposta;
 	@ManyToOne
 	private Feed feedResposta;
+	@ManyToOne
+	private Usuario usuarioResposta;
 	
 	public int getIdResposta() {
 		return idResposta;
@@ -39,5 +42,11 @@ public class Resposta {
 	}
 	public void setFeedResposta(Feed feedResposta) {
 		this.feedResposta = feedResposta;
+	}
+	public Usuario getUsuarioResposta() {
+		return usuarioResposta;
+	}
+	public void setUsuarioResposta(Usuario usuarioResposta) {
+		this.usuarioResposta = usuarioResposta;
 	}
 }

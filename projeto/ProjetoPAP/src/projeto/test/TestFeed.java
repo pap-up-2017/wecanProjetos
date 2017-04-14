@@ -29,11 +29,11 @@ public class TestFeed{
 	}
 	
 	@Test
-	public void alterarTarefa(){
+	public void alterarFeed(){
 		InterfaceDao<Feed> dao = FactoryDao.createFeedDao();
 		
-		Feed f = dao.getObjById(1);
-		f.setTituloFeed("Titulo de feed Teste");
+		Feed f = dao.getObjById(3);
+		f.setTituloFeed("projeto 546789");
 		dao.alterar(f);
 	}
 	

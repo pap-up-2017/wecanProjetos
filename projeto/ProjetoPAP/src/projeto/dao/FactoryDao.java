@@ -10,7 +10,6 @@ import projeto.entity.Feed;
 import projeto.entity.InstituicaoEnsino;
 import projeto.entity.Projeto;
 import projeto.entity.Resposta;
-import projeto.entity.RespostaResposta;
 import projeto.entity.Tarefa;
 import projeto.entity.TipoUsuario;
 import projeto.entity.Usuario;
@@ -87,9 +86,4 @@ public class FactoryDao {
 	public static InterfaceDao<Resposta> createRespostaDao(){
 		return new RespostaDao();
 	}
-	
-	//RespostaRespostaDao
-	public static InterfaceDao<RespostaResposta> createRespostaRespostaDao(){
-		return new RespostaRespostaDao();
-	}	
 }
