@@ -1,0 +1,463 @@
+html, body
+{
+	margin: 0px;
+	top: 0px;
+	font-family: 'Raleway', Tahoma !important;
+}
+.menu_mluv_retratil nav 
+{
+	margin: 0;
+	padding: 0; 
+	list-style: none; 
+	float: right;
+	width: 100%;
+	height: 40px;
+	background: #131922;
+}
+.menu_mluv_retratil nav li
+{
+	padding: 10px;
+	margin-right: 10px;
+	list-style: none; 
+	float: right;
+}
+.menu_mluv_retratil nav a 
+{
+	color: #fff; 
+	font-size: 15px;
+	text-decoration: none;
+	-webkit-transition:All 0.5s ease; 
+		-moz-transition:All 0.5s ease; 
+		-o-transition:All 0.5s ease;
+}
+.menu_mluv_retratil nav a:hover 
+{
+	color: rgba(53, 255, 153, 1);
+	
+}
+.menu_mluv_retratil 
+{
+	background-image: url('http://i65.tinypic.com/1zn94iv.png');
+}
+@media screen and (min-width: 781px)
+{
+	.menu_mluv_retratil 
+	{
+		width: 100%; 
+		height: 450px; 
+		display: block;
+		position: fixed; 
+		top: 0; 
+		z-index: 999;  
+		-webkit-transition:All 0.5s ease; 
+		-moz-transition:All 0.5s ease; 
+		-o-transition:All 0.5s ease;
+	}
+	.menu_mluv_retratil.esconder 
+	{
+		top: -450px; 
+		position: fixed;
+	}
+	.menu_mluv_retratil a.mostra-esconde-menu 
+	{
+		width: 98px; 
+		height: 25px; 
+		display: block; 
+		line-height: 25px; 
+		background: rgba(53, 255, 153, 1); 
+		position: absolute;
+		top: 450px; 
+		right: 20px; 
+		font-size: 12px; 
+		font-family: 'Raleway', sans-serif; 
+		font-weight: 500; 
+		letter-spacing: 2px; 
+		text-transform: uppercase; 
+		text-align: center; 
+		color: #383838; 
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+		z-index: 100; 
+		text-decoration: none; 
+		-webkit-transition:All 0.5s ease; 
+		-moz-transition:All 0.5s ease; 
+		-o-transition:All 0.5s ease;
+	}
+	.menu_mluv_retratil a.mostra-esconde-menu.acao-menu 
+	{
+		margin-top: -400px;
+	}
+	header
+	{
+		background: rgba(18, 29, 39, 1);
+		margin-top: -17px;
+		width: 100%;
+		height: 50px;
+		position: fixed;
+		z-index: 999;
+	}
+	#menu
+	{
+		list-style: none;
+		margin-right: 150px;
+	}
+	#menu li
+	{
+		display: inline-block;
+		float: right;
+		margin-right: 10px;
+		padding-top: 10px;
+		padding-bottom: 20px;
+		font-size: 14px;
+	}
+	#menu li::after
+	{
+		content: '';
+		display: block;
+		width: 0;
+		height: 2px;
+		border-bottom: 5px solid rgba(53, 255, 153, 1);
+		padding-bottom: 20px;
+		transition: width .3s;
+	}
+		#menu li:hover::after
+		{
+			width: 100%;
+			padding-bottom: 20px;
+		}
+	#menu a
+	{
+		text-decoration: none;
+		color: #fff;
+		font-size: 13px;
+		padding: 15px;
+		-webkit-transition:All 0.5s ease; 
+		-moz-transition:All 0.5s ease; 
+		-o-transition:All 0.5s ease;
+		
+	}
+		#menu a:hover
+		{
+			color: rgba(53, 255, 153, 1); 
+		}
+	.perfilInf
+	{
+		float: left;
+		margin-top: 30px;
+		width: 50%;
+		height: 200px;
+		background-color: transparent;
+		padding-left: 100px;
+	}
+	.perfilInf #img
+	{
+		float: left;
+		width: 150px;
+		height: 150px;
+		border-radius: 10px;
+	}
+	.perfilInf #img img
+	{
+		width: 100%;
+		border-radius: 10px;
+	}
+	.perfilInf #inf
+	{
+		margin-top: 15px;
+		width: 300px;
+		height: 120px;
+		float: left;
+		color: #fff;
+		margin-left: 5px;
+	}
+	.perfilInf #inf label
+	{
+		font-size: 14px;
+	}
+	.perfilInf #inf .label
+	{
+		background-color: #2d3443;
+		font-size: 8px;
+		border-radius: 3px;
+		padding: 2px;
+	}
+	.perfilInf #inf p
+	{
+		margin-top: 5px;
+		margin-bottom: 10px;
+	}
+	.perfilInf #inf #pontuacao
+	{
+		color: #35ff99;
+	}
+	.perfilHab
+	{
+		height: 300px;
+		width: 30%;
+		margin-top: 20px;
+		margin-right: 50px;
+		color: #fff;
+		overflow: auto;
+		float: right;
+	}
+	.perfilHab p
+	{
+		margin-top: 5px;
+		margin-bottom: 5px;
+		font-size: 14px;
+	}
+	.perfilHab .label
+	{
+		background-color: #2d3443;
+		font-size: 8px;
+		border-radius: 3px;
+		padding: 2px;
+	}
+}
+@media screen and (min-width: 481px) and (max-width: 780px)
+{
+	.menu_mluv_retratil 
+	{
+		width: 100%; 
+		height: 400px; 
+		display: block;
+		position: fixed; 
+		top: 0; 
+		z-index: 999;  
+		-webkit-transition:All 0.5s ease; 
+		-moz-transition:All 0.5s ease; 
+		-o-transition:All 0.5s ease;
+	}
+	.menu_mluv_retratil.esconder 
+	{
+		top: -400px; 
+		position: fixed;
+	}
+	.menu_mluv_retratil a.mostra-esconde-menu 
+	{
+		width: 98px; 
+		height: 25px; 
+		display: block; 
+		line-height: 25px; 
+		background: rgba(53, 255, 153, 1); 
+		position: absolute;
+		top: 400px; 
+		right: 20px; 
+		font-size: 12px; 
+		font-family: 'Raleway', sans-serif; 
+		font-weight: 500; 
+		letter-spacing: 2px; 
+		text-transform: uppercase; 
+		text-align: center; 
+		color: #383838; 
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+		z-index: 100; 
+		text-decoration: none; 
+		-webkit-transition:All 0.5s ease; 
+		-moz-transition:All 0.5s ease; 
+		-o-transition:All 0.5s ease;
+	}
+	.menu_mluv_retratil a.mostra-esconde-menu.acao-menu 
+	{
+		margin-top: -400px;
+	}
+	.perfilInf
+	{
+		float: left;
+		margin-top: 30px;
+		width: 100%;
+		height: 120px;
+		padding-left: 10px;
+	}
+	.perfilInf #img
+	{
+		float: left;
+		width: 100px;
+		height: 100px;
+		border-radius: 10px;
+	}
+	.perfilInf #img img
+	{
+		width: 100%;
+		border-radius: 10px;
+	}
+	.perfilInf #inf
+	{
+		margin-top: 0px;
+		width: 300px;
+		height: 110px;
+		float: left;
+		color: #fff;
+		padding-left: 2px;
+	}
+	.perfilInf #inf label
+	{
+		font-size: 12px;
+	}
+	.perfilInf #inf .label
+	{
+		background-color: #2d3443;
+		font-size: 8px;
+		border-radius: 3px;
+		padding: 2px;
+	}
+	.perfilInf #inf p
+	{
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+	.perfilInf #inf #pontuacao
+	{
+		color: #35ff99;
+	}
+	.perfilHab
+	{
+		height: 150px;
+		width: 100%;
+		margin-top: 20px;
+		margin-right: 50px;
+		color: #fff;
+		overflow: auto;
+		float: left;
+		padding-left: 10px;
+	}
+	.perfilHab p
+	{
+		margin-top: 5px;
+		margin-bottom: 5px;
+		font-size: 12px;
+	}
+	.perfilHab .label
+	{
+		background-color: #2d3443;
+		font-size: 8px;
+		border-radius: 3px;
+		padding: 2px;
+	}
+}
+@media screen and (max-width: 480px)
+{
+	.menu_mluv_retratil 
+	{
+		width: 100%; 
+		height: 450px; 
+		display: block;
+		position: fixed; 
+		top: 0; 
+		z-index: 999;  
+		-webkit-transition:All 0.5s ease; 
+		-moz-transition:All 0.5s ease; 
+		-o-transition:All 0.5s ease;
+	}
+	.menu_mluv_retratil.esconder 
+	{
+		top: -450px; 
+		position: fixed;
+	}
+	.menu_mluv_retratil a.mostra-esconde-menu 
+	{
+		width: 98px; 
+		height: 25px; 
+		display: block; 
+		line-height: 25px; 
+		background: rgba(53, 255, 153, 1); 
+		position: absolute;
+		top: 450px; 
+		right: 20px; 
+		font-size: 12px; 
+		font-family: 'Raleway', sans-serif; 
+		font-weight: 500; 
+		letter-spacing: 2px; 
+		text-transform: uppercase; 
+		text-align: center; 
+		color: #383838; 
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+		z-index: 100; 
+		text-decoration: none; 
+		-webkit-transition:All 0.5s ease; 
+		-moz-transition:All 0.5s ease; 
+		-o-transition:All 0.5s ease;
+	}
+	.menu_mluv_retratil a.mostra-esconde-menu.acao-menu 
+	{
+		margin-top: -500px;
+	}
+	.perfilInf
+	{
+		float: left;
+		margin-top: 30px;
+		width: 100%;
+		height: 120px;
+	}
+	.perfilInf #img
+	{
+		float: left;
+		width: 100px;
+		height: 100px;
+		margin-left: 36%;
+		border-radius: 10px;
+		text-align: center;
+	}
+	.perfilInf #img img
+	{
+		width: 100%;
+		border-radius: 10px;
+	}
+	.perfilInf #inf
+	{
+		margin-top: 20px;
+		width: 100%;
+		height: 110px;
+		margin-bottom: 10px;
+		float: left;
+		color: #fff;
+		padding-left: 2px;
+		text-align: center;
+	}
+	.perfilInf #inf label
+	{
+		font-size: 12px;
+	}
+	.perfilInf #inf .label
+	{
+		background-color: #2d3443;
+		font-size: 8px;
+		border-radius: 3px;
+		padding: 2px;
+	}
+	.perfilInf #inf p
+	{
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+	.perfilInf #inf #pontuacao
+	{
+		color: #35ff99;
+	}
+	.perfilHab
+	{
+		height: 130px;
+		width: 100%;
+		margin-top: 130px;
+		margin-right: 50px;
+		color: #fff;
+		overflow: auto;
+		float: left;
+		text-align: center;
+	}
+	.perfilHab p
+	{
+		margin-top: 5px;
+		margin-bottom: 5px;
+		font-size: 12px;
+	}
+	.perfilHab .label
+	{
+		background-color: #2d3443;
+		font-size: 8px;
+		border-radius: 3px;
+		padding: 2px;
+	}
+}

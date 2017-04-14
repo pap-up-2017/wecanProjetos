@@ -1,0 +1,1034 @@
+.rodape
+{
+	clear: both;
+	width: 100%;
+	height: 300px;
+	background-color: #121d27;
+}
+body
+{
+	font-family: 'PT Sans', sans-serif !important;
+}
+@media screen and (min-width: 1281px)
+{
+	.head
+	{
+		float: left;
+		width: 100%;
+		height: 400px;
+		margin: 0px;
+		padding-top: 80px;
+		background-attachment: fixed;
+		background-image: url('http://i66.tinypic.com/5kox2b.jpg');
+		font-family: 'Raleway', Tahoma;
+		background-color: #121d27;
+	}
+	.head #logo
+	{
+		width: 30%;
+		height: 200px;
+		margin-left: 25%;
+	}
+	.head #logo img
+	{
+		width: 100%;
+	}
+	.head p
+	{
+		color: #fff;
+		margin-left: 38%;
+		margin-top: -5%;	
+	}
+	.head .btnRegistro
+	{
+		margin-left: 38%;
+		margin-top: 10px;
+		width: 200px;
+		padding: 5px;
+		background-color: #121d27;
+		border: 2px solid #35ff99;
+		color: #fff;
+		font-weight: bold;
+		border-radius: 100px;
+	}
+	.head .btnRegistro:hover
+	{
+		background-color: #35ff99;
+		color: #121d27;
+		border: 2px solid #121d27;
+	}
+	.projeto
+	{
+		float: left;
+		height: 750px;
+		width: 100%;
+		padding-top: 80px;
+		background-image:url('http://i65.tinypic.com/1zn94iv.png');
+		font-family: 'kaleway', Tahoma;
+	}
+	.projeto .icon
+	{
+		font-size: 90px;
+		color: #35ff99;
+	}
+	.projeto .aceitarIntegrantes
+	{
+		float: left;
+		width: 35%;
+		height: 250px;
+		padding: 0px;
+		text-align: center;
+		color: #fff;
+		margin-left: 180px;
+	}
+	.projeto .aceitarIntegrantes h4
+	{
+		font-size: 24px;
+		text-align: center;
+		color: #35ff99;
+		margin-bottom: 5px;
+	}
+	.projeto .integrantes
+	{
+		float: left;
+		width: 35%;
+		height: 250px;
+		padding: 0px;
+		text-align: center;
+		color: #fff;
+	}
+	.projeto .integrantes h4
+	{
+		font-size: 24px;
+		text-align: center;
+		color: #35ff99;
+		margin-bottom: 5px;
+	}
+	.projeto .criarProjeto
+	{
+		float: left;
+		width: 35%;
+		height: 250px;
+		padding: 0px;
+		text-align: center;
+		color: #fff;
+		margin-left: 180px;
+	}
+	.projeto .criarProjeto h4
+	{
+		font-size: 24px;
+		text-align: center;
+		color: #35ff99;
+		margin-bottom: 5px;
+	}
+	.projeto .desenvolverProjeto
+	{
+		float: left;
+		width: 35%;
+		height: 250px;
+		padding: 0px;
+		text-align: center;
+		color: #fff;
+	}
+	.projeto .desenvolverProjeto h4
+	{
+		font-size: 24px;
+		text-align: center;
+		color: #35ff99;
+		margin-bottom: 5px;
+	}
+	.projeto .concluirProjeto
+	{
+		float: left;
+		width: 35%;
+		height: 250px;
+		padding: 0px;
+		text-align: center;
+		color: #fff;
+		margin-left: 430px;
+			
+	}
+	.projeto .concluirProjeto h4
+	{
+		font-size: 24px;
+		text-align: center;
+		color: #35ff99;
+		margin-bottom: 5px;
+	}
+	.login
+	{
+		float: left;
+		width: 100%;
+		height: 400px;
+		font-family: 'kaleway', Tahoma;
+		background-attachment: fixed;
+		background-image: url('http://i63.tinypic.com/w6trf5.jpg');
+		background-repeat: no-repeat;
+		background-color: #121d27;
+	}
+	.login div
+	{
+		width: 30%;
+		height: 300px;
+		margin-left: 200px;
+		padding-left: 50px;
+		padding-top: 100px;
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+	.login label
+	{
+		background-color: #2d3443;
+		font-size: 12px;
+		border-radius: 3px;
+		padding: 5px;
+		color: #fff;
+	}
+	.login input
+	{
+		width: 90%;
+		height: 30px;
+		margin-top: 10px;
+		border-right: 0px;
+		border-left: 0px;
+		border-top: 0px;
+		border-bottom: 1px solid #35ff99;
+		padding: 0px;
+		font-size: 15px;
+		background-color: transparent;
+		color: #fff;
+	}
+	.login div button
+	{
+		width: 90%;
+		background-color: rgba(45, 52, 67, 0.6);
+		border: 2px solid rgba(45, 52, 67, 1);
+		color: #fff;
+		padding: 8px;
+		margin-top: 25px;
+		border-radius: 5px;
+	}
+	.login div button:hover
+	{
+		background-color: rgba(45, 52, 67, 1);
+	}
+}
+@media screen and (min-width: 981px) and (max-width: 1280px)
+{
+	.head
+	{
+		float: left;
+		width: 100%;
+		height: 350px;
+		margin: 0px;
+		padding-top: 80px;
+		background-attachment: fixed;
+		background-image: url('http://i66.tinypic.com/5kox2b.jpg');
+		background-repeat: no-repeat;
+		font-family: 'Raleway', Tahoma;
+		background-color: #121d27;
+	}
+	.head #logo
+	{
+		width: 30%;
+		height: 200px;
+		margin-left: 35%;
+	}
+	.head #logo img
+	{
+		width: 350px;
+	}
+	.head p
+	{
+		color: #fff;
+		margin-left: 30%;
+		margin-top: -2%;	
+	}
+	.head .btnRegistro
+	{
+		margin-left: 42%;
+		margin-top: 10px;
+		width: 200px;
+		padding: 5px;
+		background-color: #121d27;
+		border: 2px solid #35ff99;
+		color: #fff;
+		font-weight: bold;
+		border-radius: 100px;
+	}
+	.head .btnRegistro:hover
+	{
+		background-color: #35ff99;
+		color: #121d27;
+		border: 2px solid #121d27;
+	}
+	.projeto
+	{
+		float: left;
+		height: 780px;
+		width: 100%;
+		padding-top: 80px;
+		background-image:url('http://i65.tinypic.com/1zn94iv.png');
+		font-family: 'kaleway', Tahoma;
+	}
+	.projeto .icon
+	{
+		font-size: 84px;
+		margin-top: 0px;
+		color: #35ff99;
+	}
+	.projeto .aceitarIntegrantes
+	{
+		float: left;
+		width: 35%;
+		height: 200px;
+		margin-bottom: 50px;
+		text-align: center;
+		color: #fff;
+		margin-left: 100px;
+	}
+	.projeto .aceitarIntegrantes h4
+	{
+		font-size: 24px;
+		text-align: center;
+		color: #35ff99;
+		margin-bottom: 5px;
+	}
+	.projeto .integrantes
+	{
+		float: left;
+		width: 35%;
+		height: 200px;
+		text-align: center;
+		color: #fff;
+		margin-bottom: 70px;
+		margin-left: 150px;
+	}
+	.projeto .integrantes h4
+	{
+		font-size: 24px;
+		text-align: center;
+		color: #35ff99;
+		margin-bottom: 5px;
+	}
+	.projeto .criarProjeto
+	{
+		float: left;
+		width: 35%;
+		height: 200px;
+		text-align: center;
+		color: #fff;
+		margin-left: 100px;
+	}
+	.projeto .criarProjeto h4
+	{
+		font-size: 24px;
+		text-align: center;
+		color: #35ff99;
+		margin-bottom: 5px;
+	}
+	.projeto .desenvolverProjeto
+	{
+		float: left;
+		width: 35%;
+		height: 200px;
+		text-align: center;
+		color: #fff;
+		margin-bottom: 70px;
+		margin-left: 150px;
+	}
+	.projeto .desenvolverProjeto h4
+	{
+		font-size: 24px;
+		text-align: center;
+		color: #35ff99;
+		margin-bottom: 5px;
+	}
+	.projeto .concluirProjeto
+	{
+		float: left;
+		width: 35%;
+		height: 200px;
+		text-align: center;
+		color: #fff;
+		margin-left: 400px;
+			
+	}
+	.projeto .concluirProjeto h4
+	{
+		font-size: 24px;
+		text-align: center;
+		color: #35ff99;
+		margin-bottom: 5px;
+	}
+		.login
+	{
+		float: left;
+		width: 100%;
+		height: 500px;
+		font-family: 'kaleway', Tahoma;
+		background-attachment: fixed;
+		background-image: url('http://i63.tinypic.com/w6trf5.jpg');
+		background-color: #2d3443;
+		background-repeat: no-repeat;
+	}
+	.login div
+	{
+		width: 40%;
+		height: 400px;
+		margin-left: 150px;
+		padding-left: 25px;
+		padding-top: 100px;
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+	.login label
+	{
+		background-color: #2d3443;
+		font-size: 12px;
+		border-radius: 3px;
+		padding: 5px;
+		color: #fff;
+	}
+	.login input
+	{
+		width: 90%;
+		height: 30px;
+		margin-top: 10px;
+		border-right: 0px;
+		border-left: 0px;
+		border-top: 0px;
+		border-bottom: 1px solid #35ff99;
+		padding: 0px;
+		font-size: 15px;
+		background-color: transparent;
+		color: #fff;
+	}
+	.login div button
+	{
+		width: 90%;
+		background-color: rgba(45, 52, 67, 0.6);
+		border: 2px solid rgba(45, 52, 67, 1);
+		color: #fff;
+		padding: 8px;
+		margin-top: 25px;
+		border-radius: 5px;
+	}
+	.login div button:hover
+	{
+		background-color: rgba(45, 52, 67, 1);
+	}
+}
+@media screen and (min-width: 781px) and (max-width: 980px)
+{
+	.head
+	{
+		float: left;
+		width: 100%;
+		height: 350px;
+		margin: 0px;
+		padding-top: 80px;
+		background-image: url('http://i66.tinypic.com/5kox2b.jpg');
+		background-repeat: no-repeat;
+		background-position: center;
+		font-family: 'Raleway', Tahoma;
+		background-color: #121d27;
+	}
+	.head #logo
+	{
+		width: 30%;
+		height: 200px;
+		margin-left: 25%;
+	}
+	.head #logo img
+	{
+		width: 350px;
+	}
+	.head p
+	{
+		color: #fff;
+		margin-left: 20%;
+		margin-top: -2%;	
+	}
+	.head .btnRegistro
+	{
+		margin-left: 38%;
+		margin-top: 10px;
+		width: 200px;
+		padding: 5px;
+		background-color: #121d27;
+		border: 2px solid #35ff99;
+		color: #fff;
+		font-weight: bold;
+		border-radius: 100px;
+	}
+	.head .btnRegistro:hover
+	{
+		background-color: #35ff99;
+		color: #121d27;
+		border: 2px solid #121d27;
+	}
+	.projeto
+	{
+		float: left;
+		height: 780px;
+		width: 100%;
+		padding-top: 80px;
+		background-image:url('http://i65.tinypic.com/1zn94iv.png');
+		font-family: 'kaleway', Tahoma;
+	}
+	.projeto .icon
+	{
+		font-size: 84px;
+		margin-top: 0px;
+		color: #35ff99;
+	}
+	.projeto .aceitarIntegrantes
+	{
+		float: left;
+		width: 35%;
+		height: 200px;
+		margin-bottom: 50px;
+		text-align: center;
+		color: #fff;
+		margin-left: 50px;
+	}
+	.projeto .aceitarIntegrantes h4
+	{
+		font-size: 24px;
+		text-align: center;
+		color: #35ff99;
+		margin-bottom: 5px;
+	}
+	.projeto .integrantes
+	{
+		float: left;
+		width: 35%;
+		height: 200px;
+		text-align: center;
+		color: #fff;
+		margin-bottom: 70px;
+		margin-left: 150px;
+	}
+	.projeto .integrantes h4
+	{
+		font-size: 24px;
+		text-align: center;
+		color: #35ff99;
+		margin-bottom: 5px;
+	}
+	.projeto .criarProjeto
+	{
+		float: left;
+		width: 35%;
+		height: 200px;
+		text-align: center;
+		color: #fff;
+		margin-left: 50px;
+	}
+	.projeto .criarProjeto h4
+	{
+		font-size: 24px;
+		text-align: center;
+		color: #35ff99;
+		margin-bottom: 5px;
+	}
+	.projeto .desenvolverProjeto
+	{
+		float: left;
+		width: 35%;
+		height: 200px;
+		text-align: center;
+		color: #fff;
+		margin-bottom: 70px;
+		margin-left: 150px;
+	}
+	.projeto .desenvolverProjeto h4
+	{
+		font-size: 24px;
+		text-align: center;
+		color: #35ff99;
+		margin-bottom: 5px;
+	}
+	.projeto .concluirProjeto
+	{
+		float: left;
+		width: 35%;
+		height: 200px;
+		text-align: center;
+		color: #fff;
+		margin-left: 250px;
+			
+	}
+	.projeto .concluirProjeto h4
+	{
+		font-size: 24px;
+		text-align: center;
+		color: #35ff99;
+		margin-bottom: 5px;
+	}
+		.login
+	{
+		float: left;
+		width: 100%;
+		height: 400px;
+		font-family: 'kaleway', Tahoma;
+		background-image: url('http://i63.tinypic.com/w6trf5.jpg');
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+	.login div
+	{
+		width: 40%;
+		height: 380px;
+		margin-left: 100px;
+		padding-left: 25px;
+		padding-top: 20px;
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+	.login label
+	{
+		background-color: #2d3443;
+		font-size: 12px;
+		border-radius: 3px;
+		padding: 5px;
+		color: #fff;
+	}
+	.login input
+	{
+		width: 90%;
+		height: 30px;
+		margin-top: 10px;
+		border-right: 0px;
+		border-left: 0px;
+		border-top: 0px;
+		border-bottom: 1px solid #35ff99;
+		padding: 0px;
+		font-size: 15px;
+		background-color: transparent;
+		color: #fff;
+	}
+	.login div button
+	{
+		width: 90%;
+		background-color: rgba(45, 52, 67, 0.6);
+		border: 2px solid rgba(45, 52, 67, 1);
+		color: #fff;
+		padding: 8px;
+		margin-top: 25px;
+		border-radius: 5px;
+	}
+	.login div button:hover
+	{
+		background-color: rgba(45, 52, 67, 1);
+	}
+}
+@media screen and (min-width: 481px) and (max-width: 780px)
+{
+	.head
+	{
+		float: left;
+		width: 100%;
+		height: 300px;
+		margin: 0px;
+		padding-top: 80px;
+		background-image: url('http://i66.tinypic.com/213rt7c.jpg');
+		background-color: #2d3443;
+		background-repeat: no-repeat;
+		background-position: center;
+		font-family: 'Raleway', Tahoma;
+	}
+	.head #logo
+	{
+		width: 30%;
+		height: 200px;
+		margin-left: 20%;
+	}
+	.head #logo img
+	{
+		width: 350px;
+	}
+	.head p
+	{
+		color: #fff;
+		margin-left: 15%;
+		margin-top: -2%;	
+	}
+	.head .btnRegistro
+	{
+		margin-left: 35%;
+		margin-top: 10px;
+		width: 200px;
+		padding: 5px;
+		background-color: #121d27;
+		border: 2px solid #35ff99;
+		color: #fff;
+		font-weight: bold;
+		border-radius: 100px;
+	}
+	.head .btnRegistro:hover
+	{
+		background-color: #35ff99;
+		color: #121d27;
+		border: 2px solid #121d27;
+	}
+	.projeto
+	{
+		float: left;
+		height: 1200px;
+		width: 100%;
+		padding-top: 80px;
+		background-image:url('http://i65.tinypic.com/1zn94iv.png');
+		background-color: #2d3443;
+		font-family: 'kaleway', Tahoma;
+	}
+	.projeto .icon
+	{
+		font-size: 94px;
+		margin-top: 10px;
+		color: #35ff99;
+	}
+	.projeto .aceitarIntegrantes
+	{
+		float: left;
+		width: 100%;
+		height: 200px;
+		margin-bottom: 50px;
+		text-align: center;
+		color: #fff;
+	}
+	.projeto .aceitarIntegrantes h4
+	{
+		font-size: 24px;
+		text-align: center;
+		color: #35ff99;
+		margin-bottom: 5px;
+	}
+	.projeto .integrantes
+	{
+		float: left;
+		width: 100%;
+		height: 200px;
+		margin-bottom: 50px;
+		text-align: center;
+		color: #fff;
+	}
+	.projeto .integrantes h4
+	{
+		font-size: 24px;
+		text-align: center;
+		color: #35ff99;
+		margin-bottom: 5px;
+	}
+	.projeto .criarProjeto
+	{
+		float: left;
+		width: 100%;
+		height: 200px;
+		margin-bottom: 50px;
+		text-align: center;
+		color: #fff;
+	}
+	.projeto .criarProjeto h4
+	{
+		font-size: 24px;
+		text-align: center;
+		color: #35ff99;
+		margin-bottom: 5px;
+	}
+	.projeto .desenvolverProjeto
+	{
+		float: left;
+		width: 30%;
+		width: 100%;
+		height: 200px;
+		margin-bottom: 50px;
+		text-align: center;
+		color: #fff;
+	}
+	.projeto .desenvolverProjeto h4
+	{
+		font-size: 24px;
+		text-align: center;
+		color: #35ff99;
+		margin-bottom: 5px;
+	}
+	.projeto .concluirProjeto
+	{
+		float: left;
+		width: 30%;
+		width: 100%;
+		height: 200px;
+		margin-bottom: 50px;
+		text-align: center;
+		color: #fff;
+			
+	}
+	.projeto .concluirProjeto h4
+	{
+		font-size: 24px;
+		text-align: center;
+		color: #35ff99;
+		margin-bottom: 5px;
+	}
+	.login
+	{
+		float: left;
+		width: 100%;
+		height: 380px;
+		font-family: 'kaleway', Tahoma;
+		background-image: url('http://i68.tinypic.com/j5fekl.jpg');
+		background-repeat: no-repeat;
+		background-position: center;
+		background-color: #2d3443;
+	}
+	.login div
+	{
+		width: 60%;
+		height: 340px;
+		padding-top: 40px;
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+	.login label
+	{
+		background-color: #2d3443;
+		font-size: 12px;
+		border-radius: 3px;
+		padding: 5px;
+		margin-left: 20px;
+		margin-top: 50px;
+		color: #fff;
+	}
+	.login input
+	{
+		width: 90%;
+		height: 30px;
+		margin-top: 10px;
+		border-right: 0px;
+		border-left: 0px;
+		border-top: 0px;
+		margin-left: 20px;
+		border-bottom: 1px solid #35ff99;
+		padding: 0px;
+		font-size: 15px;
+		background-color: transparent;
+		color: #fff;
+	}
+	.login div button
+	{
+		width: 100%;
+		background-color: rgba(45, 52, 67, 0.6);
+		border: 2px solid rgba(45, 52, 67, 1);
+		color: #fff;
+		padding: 8px;
+		margin-top: 25px;
+		border-radius: 5px;
+	}
+	.login div button:hover
+	{
+		background-color: rgba(45, 52, 67, 1);
+	}
+}
+@media screen and (max-width: 480px)
+{
+	.head
+	{
+		float: left;
+		width: 100%;
+		height: 220px;
+		margin: 0px;
+		padding-top: 30px;
+		background-image: url('http://i65.tinypic.com/e96bye.jpg');
+		background-repeat: no-repeat;
+		background-position: center;
+		font-family: 'Raleway', Tahoma;
+	}
+	.head #logo
+	{
+		width: 30%;
+		height: 200px;
+		margin-left: 20%;
+	}
+	.head #logo img
+	{
+		width: 200px;
+	}
+	.head p
+	{
+		color: #fff;
+		margin-left: 17%;
+		margin-top: -25%;	
+	}
+	.head .btnRegistro
+	{
+		margin-left: 15%;
+		margin-top: 10px;
+		width: 250px;
+		padding: 5px;
+		background-color: #121d27;
+		border: 2px solid #35ff99;
+		color: #fff;
+		font-weight: bold;
+		border-radius: 100px;
+	}
+	.head .btnRegistro:hover
+	{
+		background-color: #35ff99;
+		color: #121d27;
+		border: 2px solid #121d27;
+	}
+	.projeto
+	{
+		float: left;
+		height: 1250px;
+		width: 100%;
+		padding-top: 80px;
+		background-image:url('http://i65.tinypic.com/1zn94iv.png');
+		background-position: center;
+		font-family: 'kaleway', Tahoma;
+	}
+	.projeto .icon
+	{
+		font-size: 84px;
+		margin-top: 0px;
+		color: #35ff99;
+	}
+	.projeto .aceitarIntegrantes
+	{
+		float: left;
+		width: 100%;
+		height: 200px;
+		margin-bottom: 50px;
+		text-align: center;
+		color: #fff;
+	}
+	.projeto .aceitarIntegrantes h4
+	{
+		font-size: 24px;
+		text-align: center;
+		color: #35ff99;
+		margin-bottom: 5px;
+	}
+	.projeto .integrantes
+	{
+		float: left;
+		width: 100%;
+		height: 200px;
+		margin-bottom: 50px;
+		text-align: center;
+		color: #fff;
+	}
+	.projeto .integrantes h4
+	{
+		font-size: 24px;
+		text-align: center;
+		color: #35ff99;
+		margin-bottom: 5px;
+	}
+	.projeto .criarProjeto
+	{
+		float: left;
+		width: 100%;
+		height: 200px;
+		margin-bottom: 50px;
+		text-align: center;
+		color: #fff;
+	}
+	.projeto .criarProjeto h4
+	{
+		font-size: 24px;
+		text-align: center;
+		color: #35ff99;
+		margin-bottom: 5px;
+	}
+	.projeto .desenvolverProjeto
+	{
+		float: left;
+		width: 30%;
+		width: 100%;
+		height: 200px;
+		margin-bottom: 50px;
+		text-align: center;
+		color: #fff;
+	}
+	.projeto .desenvolverProjeto h4
+	{
+		font-size: 24px;
+		text-align: center;
+		color: #35ff99;
+		margin-bottom: 5px;
+	}
+	.projeto .concluirProjeto
+	{
+		float: left;
+		width: 30%;
+		width: 100%;
+		height: 200px;
+		margin-bottom: 50px;
+		text-align: center;
+		color: #fff;
+			
+	}
+	.projeto .concluirProjeto h4
+	{
+		font-size: 24px;
+		text-align: center;
+		color: #35ff99;
+		margin-bottom: 5px;
+	}
+	.login
+	{
+		float: left;
+		width: 100%;
+		height: 280px;
+		font-family: 'kaleway', Tahoma;
+		background-image: url('http://i65.tinypic.com/15hh45u.jpg');
+		background-repeat: no-repeat;
+	}
+	.login div
+	{
+		width: 100%;
+		height: 260px;
+		padding-top: 20px;
+		margin-left: 0px;
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+	.login label
+	{
+		background-color: #2d3443;
+		font-size: 12px;
+		border-radius: 3px;
+		padding: 5px;
+		margin-left: 5px;
+		margin-top: 10px;
+		color: #fff;
+	}
+	.login input
+	{
+		width: 90%;
+		height: 30px;
+		margin-top: 10px;
+		margin-left: 5px;
+		border-right: 0px;
+		border-left: 0px;
+		border-top: 0px;
+		border-bottom: 1px solid #35ff99;
+		padding: 0px;
+		font-size: 15px;
+		background-color: transparent;
+		color: #fff;
+	}
+	.login div button
+	{
+		width: 100%;
+		background-color: rgba(45, 52, 67, 0.6);
+		border: 2px solid rgba(45, 52, 67, 1);
+		color: #fff;
+		padding: 8px;
+		margin-top: 25px;
+		border-radius: 5px;
+	}
+	.login div button:hover
+	{
+		background-color: rgba(45, 52, 67, 1);
+	}
+}
+
