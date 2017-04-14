@@ -6,8 +6,11 @@ import projeto.entity.Competencia;
 import projeto.entity.Curso;
 import projeto.entity.Disciplina;
 import projeto.entity.Estado;
+import projeto.entity.Feed;
 import projeto.entity.InstituicaoEnsino;
 import projeto.entity.Projeto;
+import projeto.entity.Resposta;
+import projeto.entity.RespostaResposta;
 import projeto.entity.Tarefa;
 import projeto.entity.TipoUsuario;
 import projeto.entity.Usuario;
@@ -69,8 +72,24 @@ public class FactoryDao {
 	public static InterfaceDao<UsuarioLogado> createUsuarioLogadoDao() {
 		return new UsuarioLogadoDao();
 	}
-
+	
+	//AprovaçãoParticipanteDao
 	public static InterfaceDao<AprovacaoParticipante> createAprovacaoParticipanteDao() {
 		return new AprovacaoParticipanteDao();
 	}
+	
+	//FeedDao
+	public static InterfaceDao<Feed> createFeedDao(){
+		return new FeedDao();
+	}	
+	
+	//RespostaDao
+	public static InterfaceDao<Resposta> createRespostaDao(){
+		return new RespostaDao();
+	}
+	
+	//RespostaRespostaDao
+	public static InterfaceDao<RespostaResposta> createRespostaRespostaDao(){
+		return new RespostaRespostaDao();
+	}	
 }
