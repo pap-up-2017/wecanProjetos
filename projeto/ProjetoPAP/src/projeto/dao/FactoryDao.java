@@ -1,5 +1,6 @@
 package projeto.dao;
 
+import projeto.entity.AprovacaoParticipante;
 import projeto.entity.Cidade;
 import projeto.entity.Competencia;
 import projeto.entity.Curso;
@@ -67,5 +68,9 @@ public class FactoryDao {
 	//UsuarioLogadoDao
 	public static InterfaceDao<UsuarioLogado> createUsuarioLogadoDao() {
 		return new UsuarioLogadoDao();
+	}
+
+	public static InterfaceDao<AprovacaoParticipante> createAprovacaoParticipanteDao() {
+		return new AprovacaoParticipanteDao();
 	}
 }

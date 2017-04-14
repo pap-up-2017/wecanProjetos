@@ -1,6 +1,8 @@
-angular.module("app").controller('PageProjetoCtrl', function($scope, $http, $stateParams) {
+angular.module("app").controller('PageProjetoCtrl', function($scope, $http, $stateParams, $cookieStore) {
 	
-	//console.log($stateParams.idProjeto);
+	console.log("Parametros");
+	console.log($stateParams);
+	$scope.UsuarioLogado = $cookieStore.get("session_user_id");
 	
 	// Busca informações de todos os projetos salvas no banco ... Via rest
 	$scope.BuscarInformacao = function() {
@@ -188,15 +190,13 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http, $sta
 	// carrega os dados do elemento selecionado para edição .. 
 	$scope.CarregarEdicao = function(){
 		console.log("carregando edição");
-
 		$http.get('http://localhost:8080/ProjetoPAP/rest/projetorest/'+$stateParams.idProjeto)
 		.success(function(data) {
 			$scope.projeto = data;
 			console.log($scope.projeto);
 			//Iniciar a lista usuários do projeto com dados do banco.
 			
-			//console.log(angular.isArray($scope.projeto.usuarios));
-			//console.log(angular.isArray($scope.projeto.competencias));
+			//Validação para exibir um elemento, array de elementos pu não exibir
 		    if (angular.isArray($scope.projeto.competencias)){
 			    $scope.competenciasDoProjeto = [];
 			    for (var i = 0; i < $scope.projeto.competencias.length; i++) {
@@ -211,7 +211,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http, $sta
 				
 			}
 		    
-		    
+		    // Validação para exibir um elemento, array de elementos pu não exibir
 			if (angular.isArray($scope.projeto.usuarios)){
 				$scope.usuariosDoProjeto = [];
 			    for (var i = 0; i < $scope.projeto.usuarios.length; i++) {
@@ -279,6 +279,38 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http, $sta
 		$scope.BuscarInformacao();
 		
 	};
+	
+	
+	// Solicita participação no projeto
+	$scope.SolicitaParticipacao = function(projeto){
+		console.log("Pede para entrar no projetos ...")
+		
+		var config = {
+			headers : {
+				'Content-Type' : 'application/json;charset=utf-8;'
+			}
+		}
+
+		$http.post(
+				'http://localhost:8080/ProjetoPAP/rest/projetorest/solAprov/'+$scope.UsuarioLogado+'/'+$stateParams.idProjeto,
+				null, config).success(
+				function(data, status, headers, config) {
+					$scope.Resposta = 'Soliciação realizada com sucesso!';
+				}).error(
+				function(data, status, header, config) {
+					$scope.Resposta = "Data: " + data + "<hr />status: "
+							+ status + "<hr />headers: " + header
+							+ "<hr />config: " + config;
+					
+				
+				});
+		
+
+		
+		
+	};
+	
+
 	
 	// função para fechar o popUp de edição ... 
 	$scope.FecharPopUpEdicao = function(){

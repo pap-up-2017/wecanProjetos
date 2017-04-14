@@ -11,9 +11,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import projeto.business.AprovacaoParticipanteBusiness;
 import projeto.dao.FactoryDao;
 import projeto.dao.InterfaceDao;
 import projeto.dao.InterfaceProjetoDao;
+import projeto.entity.AprovacaoParticipante;
 import projeto.entity.Projeto;
 import projeto.entity.Usuario;
 import projeto.util.Datas;
@@ -83,5 +85,26 @@ public class ProjetoRest {
 		InterfaceProjetoDao<Projeto> dao = FactoryDao.createProjetoDao();
 		return dao.getObjById(id);	
 	}
+	
+	// post solicitar participação no projeto 
+		@POST
+		@Consumes(MediaType.APPLICATION_JSON)
+		@Path("/solAprov/{idUsuario}/{idProjeto}")
+		public void solicitar(@PathParam("idUsuario") int idUsuario, @PathParam("idProjeto") int idProjeto) {
+
+			InterfaceDao<Usuario> daoUser = FactoryDao.createUsuarioDao();
+			Usuario u = daoUser.getObjById(idUsuario);
+			InterfaceProjetoDao<Projeto> daoProj = FactoryDao.createProjetoDao();
+			Projeto p = daoProj.getObjById(idProjeto);	
+			AprovacaoParticipanteBusiness AprovPart = new AprovacaoParticipanteBusiness();
+			AprovPart.solicitar(u, p);
+			//AprovacaoParticipante AprovPart = new AprovacaoParticipante();
+			//AprovPart.setIdUsuarioSolicitante(u.getIdUsuario());
+			//AprovPart.setIdProjeto(p.getIdProjeto());
+			//AprovPart.setDataCriacao(Datas.retornaDataAtual());
+			//InterfaceDao<AprovacaoParticipante> dao = FactoryDao.createAprovacaoParticipanteDao();
+			//dao.salvar(AprovPart);
+		
+		}
 	
 }
