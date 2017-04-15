@@ -1,11 +1,14 @@
 package projeto.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 
 //rest
@@ -17,8 +20,11 @@ public class AprovacaoParticipante {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-	private int idProjeto;
-	private int idUsuarioSolicitante;
+	//Dono do projeto
+	@OneToOne
+	private Projeto idProjeto; 
+	@OneToOne
+	private Usuario idUsuarioSolicitante;
 	private Date dataCriacao;
 	private String status; //Aguardando Aprovação / Aprovado / Recusado 
 	public int getId() {
@@ -27,29 +33,32 @@ public class AprovacaoParticipante {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getIdUsuarioSolicitante() {
+
+	public Usuario getIdUsuarioSolicitante() {
 		return idUsuarioSolicitante;
 	}
-	public void setIdUsuarioSolicitante(int idUsuarioSolicitante) {
+	public void setIdUsuarioSolicitante(Usuario idUsuarioSolicitante) {
 		this.idUsuarioSolicitante = idUsuarioSolicitante;
 	}
+
 	public Date getDataCriacao() {
 		return dataCriacao;
 	}
 	public void setDataCriacao(Date dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
-	public int getIdProjeto() {
-		return idProjeto;
-	}
-	public void setIdProjeto(int idProjeto) {
-		this.idProjeto = idProjeto;
-	}
+
 	public String getStatus() {
 		return status;
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public Projeto getIdProjeto() {
+		return idProjeto;
+	}
+	public void setIdProjeto(Projeto idProjeto) {
+		this.idProjeto = idProjeto;
 	}
 
 	

@@ -1,6 +1,6 @@
 package projeto.business;
 
-import projeto.dao.UsuarioDao;
+import projeto.dao.UsuarioDao; 
 import projeto.entity.Login;
 import projeto.entity.Usuario;
 import projeto.entity.UsuarioLogado;

@@ -73,7 +73,7 @@ public class FactoryDao {
 	}
 	
 	//AprovaçãoParticipanteDao
-	public static InterfaceDao<AprovacaoParticipante> createAprovacaoParticipanteDao() {
+	public static AprovacaoParticipanteDao createAprovacaoParticipanteDao() {
 		return new AprovacaoParticipanteDao();
 	}
 	

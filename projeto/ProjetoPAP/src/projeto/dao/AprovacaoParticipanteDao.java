@@ -7,9 +7,8 @@ import javax.persistence.Query;
 import projeto.entity.AprovacaoParticipante;
 import projeto.entity.UsuarioLogado;
 
-public class AprovacaoParticipanteDao implements InterfaceDao<AprovacaoParticipante> {
+public class AprovacaoParticipanteDao {
 	
-	@Override
 	public void salvar(AprovacaoParticipante t) {
 		// cria a instancia
 		EntityManager em = SingletonConection.getInstance();
@@ -23,17 +22,16 @@ public class AprovacaoParticipanteDao implements InterfaceDao<AprovacaoParticipa
 		em.close();
 	}
 
-	@Override
 	public List<AprovacaoParticipante> listar() {
 		// cria a instancia
 		EntityManager em = SingletonConection.getInstance();
 		// cria a Query para encontrar as cidades
-		Query q = em.createQuery("FROM UsuarioLogado");
+		Query q = em.createQuery("FROM AprovacaoParticipante");
 		// retorna os dados encontrados
 		return q.getResultList();
 	}
 
-	@Override
+
 	public AprovacaoParticipante getObjById(int id) {
 		// cria a instancia
 		EntityManager em = SingletonConection.getInstance();
@@ -42,7 +40,6 @@ public class AprovacaoParticipanteDao implements InterfaceDao<AprovacaoParticipa
 		return (AprovacaoParticipante) q.getSingleResult();
 	}
 
-	@Override
 	public void alterar(AprovacaoParticipante t) {
 		// cria a instancia
 		EntityManager em = SingletonConection.getInstance();
@@ -56,7 +53,7 @@ public class AprovacaoParticipanteDao implements InterfaceDao<AprovacaoParticipa
 		em.close();
 	}
 
-	@Override
+
 	public void excluir(AprovacaoParticipante t) {
 		// cria a instancia
 		EntityManager em = SingletonConection.getInstance();
@@ -69,4 +66,14 @@ public class AprovacaoParticipanteDao implements InterfaceDao<AprovacaoParticipa
 		// fecha a instancia
 		em.close();			
 	}
+	
+	public List<AprovacaoParticipante> listarProjeto(int id) {
+		// cria a instancia
+		EntityManager em = SingletonConection.getInstance();
+		// cria a Query para encontrar as cidades
+		Query q = em.createQuery("FROM AprovacaoParticipante where idProjeto = " + id);
+		// retorna os dados encontrados
+		return q.getResultList();
+	}
+
 }

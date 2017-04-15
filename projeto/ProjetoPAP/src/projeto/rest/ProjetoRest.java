@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import projeto.business.AprovacaoParticipanteBusiness;
+import projeto.dao.AprovacaoParticipanteDao;
 import projeto.dao.FactoryDao;
 import projeto.dao.InterfaceDao;
 import projeto.dao.InterfaceProjetoDao;
@@ -87,24 +88,52 @@ public class ProjetoRest {
 	}
 	
 	// post solicitar participação no projeto 
-		@POST
-		@Consumes(MediaType.APPLICATION_JSON)
-		@Path("/solAprov/{idUsuario}/{idProjeto}")
-		public void solicitar(@PathParam("idUsuario") int idUsuario, @PathParam("idProjeto") int idProjeto) {
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/solAprov/{idUsuario}/{idProjeto}")
+	public void solicitar(@PathParam("idUsuario") int idUsuario, @PathParam("idProjeto") int idProjeto) {
 
-			InterfaceDao<Usuario> daoUser = FactoryDao.createUsuarioDao();
-			Usuario u = daoUser.getObjById(idUsuario);
-			InterfaceProjetoDao<Projeto> daoProj = FactoryDao.createProjetoDao();
-			Projeto p = daoProj.getObjById(idProjeto);	
-			AprovacaoParticipanteBusiness AprovPart = new AprovacaoParticipanteBusiness();
-			AprovPart.solicitar(u, p);
-			//AprovacaoParticipante AprovPart = new AprovacaoParticipante();
-			//AprovPart.setIdUsuarioSolicitante(u.getIdUsuario());
-			//AprovPart.setIdProjeto(p.getIdProjeto());
-			//AprovPart.setDataCriacao(Datas.retornaDataAtual());
-			//InterfaceDao<AprovacaoParticipante> dao = FactoryDao.createAprovacaoParticipanteDao();
-			//dao.salvar(AprovPart);
-		
-		}
+		InterfaceDao<Usuario> daoUser = FactoryDao.createUsuarioDao();
+		Usuario u = daoUser.getObjById(idUsuario);
+		InterfaceProjetoDao<Projeto> daoProj = FactoryDao.createProjetoDao();
+		Projeto p = daoProj.getObjById(idProjeto);	
+		AprovacaoParticipanteBusiness AprovPart = new AprovacaoParticipanteBusiness();
+		AprovPart.solicitar(u, p);
+	}
+	
+	// get para puxar lista de aprovação por projeto
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/GetAprov/{idProjeto}")
+	public List<AprovacaoParticipante> listarProjeto(@PathParam("idProjeto") int id) {
+		AprovacaoParticipanteDao dao = FactoryDao.createAprovacaoParticipanteDao();
+		return dao.listarProjeto(id);	
+	}
+	
+	// post aceitar participação no projeto 
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/Aceitar/{id}")
+	public void aceitar(@PathParam("id") int id) {
+
+		AprovacaoParticipanteDao daoAprov = FactoryDao.createAprovacaoParticipanteDao();
+		AprovacaoParticipante AprovPart = daoAprov.getObjById(id);
+
+		AprovacaoParticipanteBusiness AprovPartBusiness = new AprovacaoParticipanteBusiness();
+		AprovPartBusiness.aceitar(AprovPart);
+	}
+	
+	// post recusar participação no projeto 
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/Recusar/{id}")
+	public void recusar(@PathParam("id") int id) {
+
+		AprovacaoParticipanteDao daoAprov = FactoryDao.createAprovacaoParticipanteDao();
+		AprovacaoParticipante AprovPart = daoAprov.getObjById(id);
+
+		AprovacaoParticipanteBusiness AprovPartBusiness = new AprovacaoParticipanteBusiness();
+		AprovPartBusiness.recusar(AprovPart);
+	}
 	
 }

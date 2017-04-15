@@ -1,9 +1,10 @@
-package projeto.test;
+package projeto.test; 
 
 import java.util.List;
 
 import org.junit.Test;
 
+import projeto.dao.AprovacaoParticipanteDao;
 import projeto.dao.FactoryDao;
 import projeto.dao.InterfaceDao;
 import projeto.dao.InterfaceProjetoDao;
@@ -21,10 +22,10 @@ public class TestAprovacaoParticipante {
 		InterfaceProjetoDao<Projeto> daoProj = FactoryDao.createProjetoDao();
 		Projeto p = daoProj.getObjById(5);		
 		AprovacaoParticipante AprovPart = new AprovacaoParticipante();
-		AprovPart.setIdUsuarioSolicitante(u.getIdUsuario());
-		AprovPart.setIdProjeto(p.getIdProjeto());
+		AprovPart.setIdUsuarioSolicitante(u);
+		AprovPart.setIdProjeto(p);
 		AprovPart.setDataCriacao(Datas.retornaDataAtual());
-		InterfaceDao<AprovacaoParticipante> dao = FactoryDao.createAprovacaoParticipanteDao();
+		AprovacaoParticipanteDao dao = FactoryDao.createAprovacaoParticipanteDao();
 		dao.salvar(AprovPart);
 	}
 	
@@ -38,7 +39,7 @@ public class TestAprovacaoParticipante {
 	
 	@Test
 	public void excluirAprovacaoParticipante(){
-		InterfaceDao<AprovacaoParticipante> dao = FactoryDao.createAprovacaoParticipanteDao();
+		AprovacaoParticipanteDao dao = FactoryDao.createAprovacaoParticipanteDao();
 		AprovacaoParticipante u = dao.getObjById(3);
 		dao.excluir(u);
 	}

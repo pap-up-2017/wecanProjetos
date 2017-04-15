@@ -1,7 +1,7 @@
 angular.module("app").controller('PageProjetoCtrl', function($scope, $http, $stateParams, $cookieStore) {
 	
-	console.log("Parametros");
-	console.log($stateParams);
+	//console.log("Parametros");
+	//console.log($stateParams);
 	$scope.UsuarioLogado = $cookieStore.get("session_user_id");
 	
 	// Busca informações de todos os projetos salvas no banco ... Via rest
@@ -193,7 +193,13 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http, $sta
 		$http.get('http://localhost:8080/ProjetoPAP/rest/projetorest/'+$stateParams.idProjeto)
 		.success(function(data) {
 			$scope.projeto = data;
-			console.log($scope.projeto);
+			// Validação para seber se é organizador do projeto
+			if($scope.UsuarioLogado == $scope.projeto.organizador.idUsuario ){
+				$scope.istrueorganizador=false;
+			}else{
+				$scope.istrueorganizador=true;
+			}
+			
 			//Iniciar a lista usuários do projeto com dados do banco.
 			
 			//Validação para exibir um elemento, array de elementos pu não exibir
@@ -217,13 +223,54 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http, $sta
 			    for (var i = 0; i < $scope.projeto.usuarios.length; i++) {
 			    	$scope.usuariosDoProjeto.push({ idUsuario : $scope.projeto.usuarios[i].idUsuario,
 	                    							nomeUsuario : $scope.projeto.usuarios[i].nomeUsuario});
+			    	// Validação para seber se é participante do projeto
+					if($scope.UsuarioLogado == $scope.projeto.usuarios[i].idUsuario ){
+						$scope.istrueparticipante=false;
+					}
 			    }
 			}else{
 			   	if($scope.projeto.usuarios != null){
 			   		$scope.usuariosDoProjeto.push({ idUsuario : $scope.projeto.usuarios.idUsuario,
 			   			nomeUsuario : $scope.projeto.usuarios.nomeUsuario});
+			   		// Validação para seber se é participante do projeto
+					if($scope.UsuarioLogado == $scope.projeto.usuarios.idUsuario ){
+						$scope.istrueparticipante=false;
+					}
 			   	}
 			}
+			
+	//		console.log($scope.projeto.idProjeto)
+			$http.get('http://localhost:8080/ProjetoPAP/rest/projetorest/GetAprov/'+$scope.projeto.idProjeto)
+			.success(function(data) {
+				//$scope.aprovacaoUsuarios = data["aprovacaoParticipante"];
+			    // Validação para exibir um elemento, array de elementos para não exibir
+				if(data != null){
+					$scope.aprovacaoUsuarios = [];
+					 if( !angular.isArray(data["aprovacaoParticipante"])){
+						
+						$scope.aprovacaoUsuarios.push({ id : data["aprovacaoParticipante"].id,
+								idUsuario : data["aprovacaoParticipante"].idUsuarioSolicitante.idUsuario,
+								nomeUsuario : data["aprovacaoParticipante"].idUsuarioSolicitante.nomeUsuario,
+								dataCriacao : data["aprovacaoParticipante"].dataCriacao,
+								status : data["aprovacaoParticipante"].status});					
+					}else{
+						 for (var i = 0; i < data["aprovacaoParticipante"].length; i++) {
+							 $scope.aprovacaoUsuarios.push({ id : data["aprovacaoParticipante"][i].id,
+									idUsuario : data["aprovacaoParticipante"][i].idUsuarioSolicitante.idUsuario,
+									nomeUsuario : data["aprovacaoParticipante"][i].idUsuarioSolicitante.nomeUsuario,
+									dataCriacao : data["aprovacaoParticipante"][i].dataCriacao,
+									status : data["aprovacaoParticipante"][i].status});
+							 		
+						    }
+					}
+				}
+			}).error(
+					function(data, status, header, config) {
+						$scope.Resposta = "Data: " + data + "<hr />status: "
+								+ status + "<hr />headers: " + header
+								+ "<hr />config: " + config;
+					});
+			
 		
 		}).error(
 				function(data, status, header, config) {
@@ -233,14 +280,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http, $sta
 				});
 		
 		
-		/*
-		$scope.istrue=true;
-	    $scope.editedidProjeto = projeto.idProjeto;
-	    $scope.editednome = projeto.nome;
-	    $scope.editeddescricao = projeto.descricao;
-	    $scope.editeddataentrega = projeto.dataentrega;
-	    //console.log(projeto);
-	    */
+		
 	};
 	
 	// carrega os dados do elemento selecionado para exclusão .. 
@@ -267,8 +307,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http, $sta
 				parameter, config).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Projeto excluido com sucesso!';
-					
-					
+
 				}).error(
 				function(data, status, header, config) {
 					$scope.Resposta = "Data: " + data + "<hr />status: "
@@ -301,14 +340,60 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http, $sta
 					$scope.Resposta = "Data: " + data + "<hr />status: "
 							+ status + "<hr />headers: " + header
 							+ "<hr />config: " + config;
-					
-				
 				});
 		
-
+	};
+	
+	
+	// Aceitar participante no projeto
+	$scope.AceitarParticipante = function(aprovacaoUsuario){
+		console.log("Dono do projeto aceita participante ...")
+		console.log(aprovacaoUsuario.id)
+		var config = {
+			headers : {
+				'Content-Type' : 'application/json;charset=utf-8;'
+			}
+		}
 		
+		$http.post(
+				'http://localhost:8080/ProjetoPAP/rest/projetorest/Aceitar/'+aprovacaoUsuario.id,
+				null, config).success(
+				function(data, status, headers, config) {
+					$scope.Resposta = 'Aprovação realizada com sucesso!';
+				}).error(
+				function(data, status, header, config) {
+					$scope.Resposta = "Data: " + data + "<hr />status: "
+							+ status + "<hr />headers: " + header
+							+ "<hr />config: " + config;
+				});
 		
 	};
+	
+	// Recusar participante no projeto
+	$scope.RecusarParticipante = function(aprovacaoUsuario){
+		console.log("Dono do projeto recusa participante ...")
+		//console.log(aprovacaoUsuario.id)
+		var config = {
+			headers : {
+				'Content-Type' : 'application/json;charset=utf-8;'
+			}
+		}
+		
+		$http.post(
+				'http://localhost:8080/ProjetoPAP/rest/projetorest/Recusar/'+aprovacaoUsuario.id,
+				null, config).success(
+				function(data, status, headers, config) {
+					$scope.Resposta = 'Recusa realizada com sucesso!';
+				}).error(
+				function(data, status, header, config) {
+					$scope.Resposta = "Data: " + data + "<hr />status: "
+							+ status + "<hr />headers: " + header
+							+ "<hr />config: " + config;
+				});
+		
+	};
+	
+	
 	
 
 	
@@ -319,7 +404,6 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http, $sta
 	// função que inicia a tela
 		$scope.iniciaTela = function() {
 			console.log("Iniciando a tela");
-			
 			$scope.BuscarInformacao();
 			$scope.BuscarInformacaoCompetencias();
 			$scope.BuscarInformacaoUsuarios();
@@ -328,6 +412,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http, $sta
 				$scope.CarregarEdicao();
 				
 			}
+				
 		};
 		$scope.iniciaTela();
 		

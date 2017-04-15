@@ -50,6 +50,8 @@
 				<td>{{projeto.organizador.nomeUsuario}}</td>
 				<td>{{projeto.organizador.cursoUsuario.nomeCurso}}</td>
 				<td>{{projeto.descricao}}</td>
+				<td><a class="btn btn-primary" ui-sref="pageDetalhesProjeto({idProjeto:{{projeto.idProjeto}}})">Visualizar</a></td>	
+				<td><a class="btn btn-primary" ui-sref="pageAlterarProjeto({idProjeto:{{projeto.idProjeto}}})">Alterar</a></td>		
 			</tr>
 		</table>
 

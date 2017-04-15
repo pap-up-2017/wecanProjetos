@@ -27,8 +27,8 @@
 				<td>{{projeto.organizador.nomeUsuario}}</td>
 				<td>{{projeto.organizador.cursoUsuario.nomeCurso}}</td>
 				<td>{{projeto.descricao}}</td>
-				<td><a ui-sref="pageDetalhesProjeto({idProjeto:{{projeto.idProjeto}}})">Visualizar</a></td>	
-				<td><a ui-sref="pageAlterarProjeto({idProjeto:{{projeto.idProjeto}}})">Alterar</a></td>				
+				<td><a class="btn btn-primary" ui-sref="pageDetalhesProjeto({idProjeto:{{projeto.idProjeto}}})">Visualizar</a></td>	
+				<td><a class="btn btn-primary" ui-sref="pageAlterarProjeto({idProjeto:{{projeto.idProjeto}}})">Alterar</a></td>				
 				<!-- <td><button ng-click="CarregarEdicao(projeto)" class="btn btn-primary">Alterar</button></td> -->
 				<td><button class="btn btn-primary" ng-click="ExcluirElemento(projeto)">Excluir</button></td>
 			</tr>
