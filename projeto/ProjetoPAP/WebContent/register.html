@@ -31,8 +31,8 @@
 									<label class="label label-default" for="tu">Tipo de usuário:</label>
 									<br/>
 									<div class="btn-group" data-toggle="buttons" id="tu">
-									<select class="form-control" id="tu" class="form-control" ng-model="usuario.tipoUsuario" ng-options="tipoUsuario.tipoUsuario for tipoUsuario in tipoUsuarios">
-										<option value="">Selecione um Tipo de usuário...</option>
+									<!-- TODO fazer verificação de tipoUsuario em branco -->
+									<select class="form-control" id="tu" class="form-control" ng-model="usuario.tipoUsuario" ng-options="tipoUsuario.tipoUsuario for tipoUsuario in tipoUsuarios" required>
 									</select>
 									<br/>
 									</div>
@@ -44,7 +44,7 @@
 									<input class="form-control" placeholder="Username" id="us" ng-model="usuario.usernameUsuario" required/>
 									<br/>
 									<label class="label label-default" for="em">Email:</label>
-									<input class="form-control" placeholder="Email" id="em" ng-model="usuario.emailUsuario">
+									<input type="email" class="form-control" placeholder="Email" id="em" ng-model="usuario.emailUsuario">
 									<br/>
 									<label class="label label-default" for="em">Senha:</label>
 									<input class="form-control" placeholder="Senha" id="sn" type="password" ng-model="usuario.senhaUsuario" required/>

@@ -6,6 +6,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -64,6 +65,17 @@ public class UsuarioRest {
 		if (usuario.getIdUsuario() > 0){
 			dao.excluir(usuario);
 		}
+	}
+	
+	// post para pesquisa por id..
+	@POST
+	@Path("/busca/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Usuario buscarUsuario(@PathParam("id") String id) {
+		UsuarioBusiness userBus = new UsuarioBusiness();
+		Usuario usuario = userBus.buscaUsuarioId(Integer.parseInt(id));
+		return usuario; 
 	}
 
 }

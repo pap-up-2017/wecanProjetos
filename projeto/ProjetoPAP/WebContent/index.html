@@ -1,59 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html ng-app='app'>
+<!-- Configurações da página -->
 	<head>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
-
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-		<title>We Can</title>
-	
-		<!-- Bootstrap CSS -->
-		<link href="css/bootstrap.css" rel="stylesheet"/>
-		
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		<link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-		<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-		<script src="js/ie-emulation-modes-warning.js"></script>
-
+		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet"> 
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<link rel="stylesheet" href="css/principal.css">
+		<link rel="stylesheet" href="css/slicknav.css">
+		<link rel="stylesheet" href="css/reset.css">
+		<title>WECAN</title>
 	</head>
-
-	<body ng-app='app'>
-		<nav class="navbar navbar-default">
-    		<div class="container-fluid">
-      			<div class="navbar-header">
-        			<a class="navbar-brand" ui-sref="pageHome">We Can</a>
-      			</div>
-      			<div>
-        			<ul class="nav navbar-nav">
-<!--         				<li class=""><a ui-sref="pageEstado" ui-sref-active="active">Estados</a></li>
-        				<li class=""><a ui-sref="pageCidade" ui-sref-active="active">Cidades</a></li>
-        				<li class=""><a ui-sref="pageInstituicao" ui-sref-active="active">Instituições</a></li>
-        				<li class=""><a ui-sref="pageTipoUsuario" ui-sref-active="active">Tipo Usuarios</a></li>
-        				<li class=""><a ui-sref="pageCurso" ui-sref-active="active">Cursos</a></li> -->
-        				<li class=""><a ui-sref="feed" ui-sref-active="active">Feed</a></li>
-        				<li class=""><a ui-sref="pageProjeto" ui-sref-active="active">Cadastrar Projetos</a></li>
-        				<li class=""><a ui-sref="pageListaProjetos" ui-sref-active="active">Lista de projetos</a></li>
-        				<li class=""><a ui-sref="pageMeusProjetos" ui-sref-active="active">Meus projetos</a></li>
-        				<li class=""><a ui-sref="pageTarefa" ui-sref-active="active">Tarefas</a></li>
-        				<li class=""><a ui-sref="pageCompetencia" ui-sref-active="active">Competencias</a></li>
-        				<li class=""><a ui-sref="pageUsuario" ui-sref-active="active">Usuarios</a></li>
-        				<li class=""><a ui-sref="pageDisciplina" ui-sref-active="active">Disciplinas</a></li>
-        				<li class=""><a ui-sref="cadastrosAdmin" ui-sref-active="active">Admin</a></li>
-        				
-        			</ul>
-     			</div>
-    		</div>
-  		</nav>
-		<div ng-controller="loginCtrl"><button class="btn btn-success" ng-click="logout()">Logout</button></div>
-		<div ui-view class="headerLogo"></div>
-		<!--Lib jquery.js  -->
+<!-- ------------------------- -->
+<!-- Divisões da página -->	
+	<body>
+		<header>
+			<div class="menu_mluv_retratil">
+				<nav>
+					<ul id="menuPerfil">
+						<li><div ng-controller="loginCtrl"><a href="#" ng-click="logout()"><i style="font-size: 20px;" class="fa fa-sign-out" aria-hidden="true"></i> Sair</a></div></li>	
+						<li><a ui-sref="pageMeusProjetos" ui-sref-active="active"><i style="font-size: 20px;" class="fa fa-area-chart" aria-hidden="true"></i> Meus projetos</a></li>
+						<li><a href="#"><i style="font-size: 20px;" class="fa fa-user-circle" aria-hidden="true"></i> Perfil</a></li>
+					</ul>
+				</nav>
+				<div class="perfilInf">
+					<div id="img"><img src="http://lastpage.in/blogAsset/img/avatar-na.png"/></div>
+					<div id="inf" ng-controller="PerfilCtrl">
+						<label for="nome" class="label">NOME</label><br/>
+						<label><p id="nome">{{nomeUsuario}}</p></label><br/>
+						<label for="curso" class="label">CURSO</label><br/>
+						<label><p id="curso">{{cursoUsuario}}</p></label><br/>
+						<label for="instituicao" class="label">INSTITUICAO</label><br/>
+						<label><p id="instituicao">{{instituicaoUsuario}}</p></label>
+					</div>
+				</div>
+				<div class="perfilHab">
+					<label class="label">HABILIDADES</label><br/>
+					<label><p>Nome da habilidade</p></label>
+					<div class="progress">
+					  <div class="progress-bar" role="progressbar" aria-valuenow="VALOR DA HABILIDADE" aria-valuemin="0" aria-valuemax="100">
+						0%
+					  </div>
+				</div>
+				</div>
+				<a class="mostra-esconde-menu" href="javascript:void(0);">Perfil ▲</a>
+			</div>
+			<ul id="menu">	
+				<li><a href="#"><i style="font-size: 20px;" class="fa fa-bell" aria-hidden="true"></i> Notificações</a></li>
+				<li><a href="#"><i style="font-size: 20px;" class="fa fa-users" aria-hidden="true"></i> Fórum</a></li>
+				<li><a ui-sref="pageListaProjetos" ui-sref-active="active"><i style="font-size: 20px;" class="fa fa-area-chart" aria-hidden="true"></i> Projetos</a></li>
+				<li><a href="#"><i style="font-size: 20px;" class="fa fa-clipboard" aria-hidden="true"></i> Avaliações</a></li>
+				<li><a ui-sref="cadastrosAdmin" ui-sref-active="active"><i style="font-size: 20px;" class="fa fa-clipboard" aria-hidden="true"></i> Administrador</a></li>
+			</ul>
+		</header>
+		<br/><br/>
+		<div class="conteudo" ui-view></div>	
+		<!-- Scripts tela -->
 		<script src="js/jquery-3.2.0.min.js"></script>
-		<!-- bootstrap.js  -->
 		<script src="js/bootstrap.js"></script>
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		<script src="js/ie10-viewport-bug-workaround.js"></script>
+		<script src="js/principal.js"></script>
+		<script src="js/modernizr.js"></script>
+		<script src="https://use.fontawesome.com/2af5f88198.js"></script>
+		<script src="js/jquery.slicknav.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function()
+			{
+				$('#menu').slicknav();
+			});
+		</script>
 		
 		<!-- Libs angular.js -->
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
@@ -79,5 +95,8 @@
 		<script type="text/javascript" src="js/controllers/DashBoardController.js"></script>
 		<script type="text/javascript" src="js/controllers/loginController.js"></script>
 		<script type="text/javascript" src="js/controllers/FeedController.js"></script>
-	</body>
+		<script type="text/javascript" src="js/controllers/PerfilController.js"></script>
 </html>
+<!--         			<li class=""><a ui-sref="pageTarefa" ui-sref-active="active">Tarefas</a></li>
+        				<li class=""><a ui-sref="pageCompetencia" ui-sref-active="active">Competencias</a></li>
+        				<li class=""><a ui-sref="pageDisciplina" ui-sref-active="active">Disciplinas</a></li> -->

@@ -1,5 +1,7 @@
 package projeto.business;
 
+import projeto.dao.FactoryDao;
+import projeto.dao.InterfaceDao;
 import projeto.dao.UsuarioDao; 
 import projeto.entity.Login;
 import projeto.entity.Usuario;
@@ -22,6 +24,17 @@ public class UsuarioBusiness {
 		else{
 			uDao.salvar(u);
 			return "salvo com sucesso!";
+		}
+	}
+	
+	public Usuario buscaUsuarioId(int id){
+		
+		InterfaceDao<Usuario> userDao = FactoryDao.createUsuarioDao();
+		try{
+			Usuario userBanco = userDao.getObjById(id);
+			return userBanco;
+		}catch(Exception ex){
+			return null;
 		}
 	}
 	
