@@ -27,6 +27,19 @@ public class UsuarioBusiness {
 		}
 	}
 	
+	public String delete(int id){
+		String result = "";
+		try{
+			InterfaceDao<Usuario> userDao = FactoryDao.createUsuarioDao();
+			Usuario u = userDao.getObjById(id);
+			userDao.excluir(u);
+			result = "Excluido com sucesso!";
+		}catch(Exception ex){
+			result = "Não foi possivel excluir";
+		}
+		return result;
+	}
+	
 	public Usuario buscaUsuarioId(int id){
 		
 		InterfaceDao<Usuario> userDao = FactoryDao.createUsuarioDao();

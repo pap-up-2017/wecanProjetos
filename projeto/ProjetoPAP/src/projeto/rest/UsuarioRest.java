@@ -59,12 +59,11 @@ public class UsuarioRest {
 	// post para excluir..
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/postdel")
-	public void deletarUsuario(Usuario usuario) {
-		InterfaceDao<Usuario> dao = FactoryDao.createUsuarioDao();
-		if (usuario.getIdUsuario() > 0){
-			dao.excluir(usuario);
-		}
+	@Path("/postdel/{id}")
+	public String deletarUsuario(@PathParam("id") String id){
+		UsuarioBusiness userBus = new UsuarioBusiness();
+		String result = userBus.delete(Integer.parseInt(id));
+		return gson.toJson(result);
 	}
 	
 	// post para pesquisa por id..

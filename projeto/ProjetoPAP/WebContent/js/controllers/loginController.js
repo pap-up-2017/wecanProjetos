@@ -18,7 +18,7 @@ angular.module("app").controller('loginCtrl', function($scope, $http, $cookies, 
 			$cookieStore.remove("session_data_val");
 			$cookieStore.remove("session_token_val");
 			$cookieStore.remove("session_tipo_usuario");;
-			window.location.href = "http://localhost:8080/ProjetoPAP/index.html";
+			window.location.href = "http://localhost:8080/ProjetoPAP/home.html";
 		});
 	}
 	
