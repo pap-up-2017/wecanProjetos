@@ -113,6 +113,12 @@ function route($stateProvider, $urlRouterProvider, $locationProvider){
 			  templateUrl: 'views/feed.html'
 			}
 	
+	var perfil = {
+			  name: 'perfil',
+			  url: '/perfil',
+			  templateUrl: 'views/perfil.html'
+			}
+	
 	  $urlRouterProvider.otherwise('/');
 	  
 	  $stateProvider.state(home);
@@ -132,4 +138,5 @@ function route($stateProvider, $urlRouterProvider, $locationProvider){
 	  $stateProvider.state(alterarProjeto);
 	  $stateProvider.state(detalhesProjeto);
 	  $stateProvider.state(feed);
+	  $stateProvider.state(perfil);
 }
