@@ -1,29 +1,6 @@
-angular.module("app").controller('PageUsuarioCtrl', function($scope, $http) {
-	
-	$scope.editedUsuario;
-	
-	// Busca informações no banco.. 
-	$scope.BuscarInformacao = function() {
-		$http.get('http://localhost:8080/ProjetoPAP/rest/usuariorest')
-				.success(function(data) {
-					var usuariosBanco = data["usuario"];
-					var arrayBanco = [];
-					if(Array.isArray(usuariosBanco)){
-						arrayBanco = usuariosBanco; 
-					}
-					else{
-						arrayBanco.push(usuariosBanco);
-					}
-					$scope.usuarios = arrayBanco;
-				}).error(
-						function(data, status, header, config) {
-							$scope.Resposta = "Data: " + data + "<hr />status: "
-									+ status + "<hr />headers: " + header
-									+ "<hr />config: " + config;
-						});
-	};
-	
-	//Busca informações do Tipos de usuarios
+angular.module("app").controller('UsuarioCtrl', function($scope, $http, $cookieStore) {
+		
+	//Busca Tipos usuarios
 	$scope.BuscarInformacaoTipoUsuarios = function() {
 		$http.get('http://localhost:8080/ProjetoPAP/rest/tipousuariorest')
 				.success(function(data) {
@@ -36,15 +13,10 @@ angular.module("app").controller('PageUsuarioCtrl', function($scope, $http) {
 						arrayBanco.push(tipousuariosBanco);
 					}
 					$scope.tipoUsuarios = arrayBanco;
-				}).error(
-						function(data, status, header, config) {
-							$scope.Resposta = "Data: " + data + "<hr />status: "
-									+ status + "<hr />headers: " + header
-									+ "<hr />config: " + config;
-						});
+				});
 	};
 	
-	//Busca informações do estados
+	//Busca estados
 	$scope.BuscarInformacaoEstados = function() {
 		$http.get('http://localhost:8080/ProjetoPAP/rest/estadorest')
 				.success(function(data) {
@@ -57,15 +29,10 @@ angular.module("app").controller('PageUsuarioCtrl', function($scope, $http) {
 						arrayBanco.push(estadosBanco);
 					}
 					$scope.estados = arrayBanco;
-				}).error(
-						function(data, status, header, config) {
-							$scope.Resposta = "Data: " + data + "<hr />status: "
-									+ status + "<hr />headers: " + header
-									+ "<hr />config: " + config;
-						});
+				});
 	};
 	
-	//Busca informações de cidades
+	//Busca cidades
 	$scope.BuscarInformacaoCidades = function() {
 		$http.get('http://localhost:8080/ProjetoPAP/rest/cidaderest')
 				.success(function(data) {
@@ -78,15 +45,10 @@ angular.module("app").controller('PageUsuarioCtrl', function($scope, $http) {
 						arrayBanco.push(cidadesBanco);
 					}
 					$scope.cidades = arrayBanco;
-				}).error(
-						function(data, status, header, config) {
-							$scope.Resposta = "Data: " + data + "<hr />status: "
-									+ status + "<hr />headers: " + header
-									+ "<hr />config: " + config;
-						});
+				});
 	};
 	
-	//Busca informações de instituicoes de Ensino
+	//Busca instituições
 	$scope.BuscarInformacaoInstituicoes = function() {
 		$http.get('http://localhost:8080/ProjetoPAP/rest/instituicaorest')
 				.success(function(data) {
@@ -99,15 +61,10 @@ angular.module("app").controller('PageUsuarioCtrl', function($scope, $http) {
 						arrayBanco.push(instituicoesBanco);
 					}
 					$scope.instituicoes = arrayBanco;
-				}).error(
-						function(data, status, header, config) {
-							$scope.Resposta = "Data: " + data + "<hr />status: "
-									+ status + "<hr />headers: " + header
-									+ "<hr />config: " + config;
-						});
+				});
 	};
 	
-	//Busca informações de cursos
+	//Busca cursos
 	$scope.BuscarInformacaoCursos = function() {
 		$http.get('http://localhost:8080/ProjetoPAP/rest/cursorest')
 				.success(function(data) {
@@ -120,86 +77,17 @@ angular.module("app").controller('PageUsuarioCtrl', function($scope, $http) {
 						arrayBanco.push(cursosBanco);
 					}
 					$scope.cursos = arrayBanco;
-				}).error(
-						function(data, status, header, config) {
-							$scope.Resposta = "Data: " + data + "<hr />status: "
-									+ status + "<hr />headers: " + header
-									+ "<hr />config: " + config;
-						});
-	};
-	
-	// envia a informação de um novo cadastro de para o banco ... Via rest
-	$scope.SalvarCadastro = function(usuario) {
-		var parameter = JSON.stringify({
-			type : "usuario",
-			nomeUsuario : usuario.nomeUsuario,
-			usernameUsuario : usuario.usernameUsuario,
-			emailUsuario : usuario.emailUsuario,
-			senhaUsuario : usuario.senhaUsuario,
-			tipoUsuario : usuario.tipoUsuario,
-			cidadeUsuario : usuario.cidadeUsuario,
-			instituicaoUsuario : usuario.instituicaoUsuario,
-			cursoUsuario : usuario.cursoUsuario
-		});
-
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
-
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/usuariorest/postcad',
-				parameter, config).success(
-				function(data, status, headers, config) {
-					if(data=="Username duplicado"){
-						console.log(data);
-						swal("Este username já está em uso. Por favor, escolha outro.");
-					}
-					else{
-						window.location.href = "http://localhost:8080/ProjetoPAP/index.html";
-					}
-					
 				});
 	};
 	
-	// carrega os dados do elemento selecionado para exclusão .. 
-	$scope.ExcluirElemento = function(usuario){
-		console.log("Excluir um elemento ...")
-
-		var parameter = JSON.stringify({
-			type : "usuario",
-			idUsuario : usuario.idUsuario,
-			nomeUsuario : usuario.nomeUsuario,
-			usernameUsuario : usuario.usernameUsuario,
-			emailUsuario : usuario.emailUsuario,
-			senhaUsuario : usuario.senhaUsuario,
-			tipoUsuario : usuario.tipoUsuario,
-			cidadeUsuario : usuario.cidadeUsuario,
-			instituicaoUsuario : usuario.instituicaoUsuario,
-			cursoUsuario : usuario.cursoUsuario
+	$scope.carregaEdição = function(){
+		$http.post('http://localhost:8080/ProjetoPAP/rest/usuariorest/busca/'+$cookieStore.get("session_user_id"))
+		.success(function(data) {
+			$scope.usuario = data;	
+			$scope.estadoSelecionado = $scope.usuario.cidadeUsuario.estadoCidade;
 		});
-		
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
-
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/usuariorest/postdel',
-				parameter, config).success(
-				function(data, status, headers, config) {
-					$scope.Resposta = 'Usuario excluido com Sucesso!';
-					
-					
-				}).error(
-				function(data, status, header, config) {
-					$scope.Resposta = "Data: " + data + "<hr />status: "
-							+ status + "<hr />headers: " + header
-							+ "<hr />config: " + config;
-				});
 	};
+	
 	
 	// Envia a informação de alteração de um elemento para o banco ... Via rest
 	$scope.SalvarAlteracao = function(editedUsuario){
@@ -240,13 +128,10 @@ angular.module("app").controller('PageUsuarioCtrl', function($scope, $http) {
 							+ "<hr />config: " + config;
 					
 				
-				});
-		
-		$scope.BuscarInformacao();
-		
+				});		
 	};
 	
-	// carrega os dados do elemento selecionado para edição .. 
+/*	// carrega os dados do elemento selecionado para edição .. 
 	// TODO fazer carregamento do combobox com o estado para edição
 	$scope.CarregarEdicao = function(usuario){
 		$scope.istrue=true;
@@ -268,7 +153,7 @@ angular.module("app").controller('PageUsuarioCtrl', function($scope, $http) {
 		$scope.editedEstadoSelecionadoOld = usuario.cidadeUsuario.estadoCidade;
 		
 	    console.log(usuario);
-	};
+	};*/
 	
 	// função para fechar o popUp de edição ... 
 	$scope.FecharPopUpEdicao = function(){
@@ -278,13 +163,12 @@ angular.module("app").controller('PageUsuarioCtrl', function($scope, $http) {
 	// função que inicia a tela
 	$scope.iniciaTela = function() {
 		console.log("Iniciando a tela");
-							
-		$scope.BuscarInformacao();
 		$scope.BuscarInformacaoTipoUsuarios();
 		$scope.BuscarInformacaoEstados();
 		$scope.BuscarInformacaoCidades();
 		$scope.BuscarInformacaoInstituicoes();
 		$scope.BuscarInformacaoCursos();
+		$scope.carregaEdição();
 	};
-	$scope.iniciaTela();
+	$scope.iniciaTela();	
 });

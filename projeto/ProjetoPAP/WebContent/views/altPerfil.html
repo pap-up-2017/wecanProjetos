@@ -1,0 +1,78 @@
+<link rel="stylesheet" href="css/interno/perfil.css">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<div class="perfil" ng-controller="UsuarioCtrl">
+			<div class="hab">
+				<label class="label">Habilidades</label><br/>
+				<label><p>Nome da habilidade</p></label><br/>
+				<div class="progress">
+					  <div class="progress-bar" role="progressbar" aria-valuenow="VALOR DA HABILIDADE" aria-valuemin="0" aria-valuemax="100">
+						0%
+					  </div>
+				</div>
+			</div>
+			<div class="info">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="campos">
+							<div class="img">
+								<img src="http://lastpage.in/blogAsset/img/avatar-na.png"/>
+							</div>
+							<form>
+								<div class="campos_perfil01">
+									<label class="label label-default" for="tu">Tipo de usuário:</label>
+									<select ng-model="usuario.tipoUsuario" class="form-control" id="tu" class="form-control" ng-options="tipoUsuario.tipoUsuario for tipoUsuario in tipoUsuarios">
+									</select>
+									<br/>
+									<label class="label label-default" for="nc">Nome completo</label><br/>
+									<input class="form-control" id="nc" placeholder="Nome do usuário" ng-model="usuario.nomeUsuario"/>
+									<br/>
+									<label class="label label-default" for="us">Username</label><br/>
+									<input class="form-control" id="us" placeholder="Username do usuário" ng-model="usuario.usernameUsuario"/>
+									<br/>
+									<label class="label label-default" for="em">Email</label><br/>
+									<input class="form-control" id="em" placeholder="Email do usuário" ng-model="usuario.emailUsuario"/>
+									<br/>
+									<label class="label label-default" for="sn">Senha</label><br/>
+									<input class="form-control" id="sn" placeholder="Senha do usuário" ng-model="usuario.senhaUsuario"/>
+								</div>
+								<div class="campos_perfil02">
+									<label class="label label-default" for="es">Estado:</label>
+									<select class="form-control" id="es" ng-change="BuscarInformacaoCidades()" class="form-control" ng-model="estadoSelecionado" ng-options="estado.nomeEstado for estado in estados">
+										<option value="">Selecione um estado...</option>
+									</select>
+									<br/>
+									<label class="label label-default" for="cd">Cidade:</label>
+										<select ng-change="BuscarInformacaoInstituicoes()" class="form-control" id="cd" class="form-control" ng-model="usuario.cidadeUsuario" ng-options="cidade.nomeCidade for cidade in cidades | filter: estadoSelecionado.nomeEstado">
+											<option value="">Selecione uma cidade..</option>
+										</select>
+										<br/>
+									<label class="label label-default" for="ie">Instituição de ensino:</label>
+										<select class="form-control" id="ie" class="form-control" ng-model="usuario.instituicaoUsuario" ng-options="instituicaoEnsino.nomeInstituicao for instituicaoEnsino in instituicoes | filter: usuario.cidadeUsuario.nomeCidade">
+											<option value="">Selecione uma Instituicao de ensino..</option>
+										</select>
+									<br/>
+									<label class="label label-default" for="cs">Curso:</label>
+										<select class="form-control" id="cs"class="form-control" ng-model="usuario.cursoUsuario" ng-options="curso.nomeCurso for curso in cursos | filter: usuario.instituicaoUsuario.nomeInstituicao">
+											<option value="">Selecione um curso..</option>
+										</select>
+									<br/>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="acaoEditar">
+							<script>
+								function home()
+								{
+									location.href="wecanHome.html";
+								}
+							</script>
+							<button class="btnAcao btn btn-primary">Salvar Alterações</button>
+						</div>
+						<div class="acaoExcluir">
+							<button  onclick="home()" class="btnAcao btn btn-danger">Cancelar alterações</button>
+						</div>
+			</div>
+		</div>	
