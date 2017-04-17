@@ -21,7 +21,8 @@
 							<form>
 								<div class="campos_perfil01">
 									<label class="label label-default" for="tu">Tipo de usuário:</label>
-									<select ng-model="usuario.tipoUsuario" class="form-control" id="tu" class="form-control" ng-options="tipoUsuario.tipoUsuario for tipoUsuario in tipoUsuarios">
+									<select ng-model="usuario.tipoUsuario" ng-selectedItem="usuario.tipoUsuario" class="form-control" id="tu" class="form-control" ng-options="tipoUsuario.tipoUsuario for tipoUsuario in tipoUsuarios">
+										<option ng-show="!usuario.tipoUsuario" value="">{{usuario.tipoUsuario.tipoUsuario}}</option>
 									</select>
 									<br/>
 									<label class="label label-default" for="nc">Nome completo</label><br/>
@@ -33,28 +34,30 @@
 									<label class="label label-default" for="em">Email</label><br/>
 									<input class="form-control" id="em" placeholder="Email do usuário" ng-model="usuario.emailUsuario"/>
 									<br/>
-									<label class="label label-default" for="sn">Senha</label><br/>
+									<label class="label label-default" for="sn">Senha antiga</label><br/>
 									<input class="form-control" id="sn" placeholder="Senha do usuário" ng-model="usuario.senhaUsuario"/>
+									<label class="label label-default" for="sn">Nova senha</label><br/>
+									<input class="form-control" id="sn" placeholder="Nova senha do usuário" ng-model="usuario.senhaUsuario"/>
 								</div>
 								<div class="campos_perfil02">
 									<label class="label label-default" for="es">Estado:</label>
-									<select class="form-control" id="es" ng-change="BuscarInformacaoCidades()" class="form-control" ng-model="estadoSelecionado" ng-options="estado.nomeEstado for estado in estados">
-										<option value="">Selecione um estado...</option>
+									<select class="form-control" id="es" ng-change="BuscarInformacaoCidades()" class="form-control" ng-model="estadoSelecionado" ng-options="estado.nomeEstado disable when estado.nomeEstado == editedNomeEstadoSelecionadoOld for estado in estados ">
+										<option ng-show="!estadoSelecionado" value="">{{usuario.cidadeUsuario.estadoCidade.nomeEstado}}</option>
 									</select>
 									<br/>
 									<label class="label label-default" for="cd">Cidade:</label>
 										<select ng-change="BuscarInformacaoInstituicoes()" class="form-control" id="cd" class="form-control" ng-model="usuario.cidadeUsuario" ng-options="cidade.nomeCidade for cidade in cidades | filter: estadoSelecionado.nomeEstado">
-											<option value="">Selecione uma cidade..</option>
+											<option ng-show="!usuario.cidadeUsuario" value="">{{usuario.cidadeUsuario.nomeCidade}}</option>
 										</select>
 										<br/>
 									<label class="label label-default" for="ie">Instituição de ensino:</label>
 										<select class="form-control" id="ie" class="form-control" ng-model="usuario.instituicaoUsuario" ng-options="instituicaoEnsino.nomeInstituicao for instituicaoEnsino in instituicoes | filter: usuario.cidadeUsuario.nomeCidade">
-											<option value="">Selecione uma Instituicao de ensino..</option>
+											<option ng-show="!usuario.instituicaoUsuario" value="">{{usuario.instituicaoUsuario.nomeInstituicao}}</option>
 										</select>
 									<br/>
 									<label class="label label-default" for="cs">Curso:</label>
 										<select class="form-control" id="cs"class="form-control" ng-model="usuario.cursoUsuario" ng-options="curso.nomeCurso for curso in cursos | filter: usuario.instituicaoUsuario.nomeInstituicao">
-											<option value="">Selecione um curso..</option>
+											<option ng-show="!usuario.cursoUsuario" value="">{{usuario.cursoUsuario.nomeCurso}}</option>
 										</select>
 									<br/>
 								</div>
@@ -63,16 +66,10 @@
 					</div>
 				</div>
 				<div class="acaoEditar">
-							<script>
-								function home()
-								{
-									location.href="wecanHome.html";
-								}
-							</script>
-							<button class="btnAcao btn btn-primary">Salvar Alterações</button>
-						</div>
-						<div class="acaoExcluir">
-							<button  onclick="home()" class="btnAcao btn btn-danger">Cancelar alterações</button>
-						</div>
+					<button ng-click="SalvarAlteracao()" class="btnAcao btn btn-primary">Salvar Alterações</button>
+				</div>
+				<div class="acaoExcluir">
+					<a ui-sref="perfil" ui-sref-active="active" class="btnAcao btn btn-danger">Cancelar alterações</a>
+				</div>
 			</div>
 		</div>	

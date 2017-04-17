@@ -90,45 +90,31 @@ angular.module("app").controller('UsuarioCtrl', function($scope, $http, $cookieS
 	
 	
 	// Envia a informação de alteração de um elemento para o banco ... Via rest
-	$scope.SalvarAlteracao = function(editedUsuario){
-		console.log("Salvar uma nova Alteração ...")
-		// TODO arrumar carregamento automatico do dropDownlist..
+	$scope.SalvarAlteracao = function(){
+		
 		var parameter = JSON.stringify({
 			type : "usuario",
-			idUsuario : $scope.editedIdUsuario,
-			nomeUsuario : $scope.editedNomeUsuario,
-			usernameUsuario : $scope.editedUsernameUsuario,
-			emailUsuario : $scope.editedEmailUsuario,
-			senhaUsuario : $scope.editedSenhaUsuario,
-			tipoUsuario : $scope.editedTipoUsuario,
-			cidadeUsuario : $scope.editedCidadeUsuario,
-			instituicaoUsuario : $scope.editedInstituicaoUsuario,
-			cursoUsuario : $scope.editedCursoUsuario
+			idUsuario : $scope.usuario.idUsuario,
+			nomeUsuario : $scope.usuario.nomeUsuario,
+			usernameUsuario : $scope.usuario.usernameUsuario,
+			emailUsuario : $scope.usuario.emailUsuario,
+			senhaUsuario : $scope.usuario.senhaUsuario,
+			tipoUsuario : $scope.usuario.tipoUsuario,
+			cidadeUsuario : $scope.usuario.cidadeUsuario,
+			instituicaoUsuario : $scope.usuario.instituicaoUsuario,
+			cursoUsuario : $scope.usuario.cursoUsuario
 		});
-		
 		console.log(parameter);
-
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
+		var config = {headers : {
+				'Content-Type' : 'application/json;charset=utf-8;'}}
 
 		$http.post(
 				'http://localhost:8080/ProjetoPAP/rest/usuariorest/postalt',
 				parameter, config).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Usuario salvo com Sucesso!';
-					
-					
-				}).error(
-				function(data, status, header, config) {
-					$scope.Resposta = "Data: " + data + "<hr />status: "
-							+ status + "<hr />headers: " + header
-							+ "<hr />config: " + config;
-					
-				
-				});		
+					console.log($scope.Resposta);
+					});
 	};
 	
 /*	// carrega os dados do elemento selecionado para edição .. 
