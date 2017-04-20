@@ -16,6 +16,7 @@ import projeto.business.UsuarioBusiness;
 import projeto.dao.FactoryDao;
 import projeto.dao.InterfaceDao;
 import projeto.entity.Usuario;
+import projeto.util.Criptografia;
 
 @Path("/usuariorest")
 public class UsuarioRest {
@@ -48,12 +49,16 @@ public class UsuarioRest {
 	// post para alterar..
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/postalt")
-	public void alterarUsuario(Usuario usuario) {
-		InterfaceDao<Usuario> dao = FactoryDao.createUsuarioDao();
+	public String alterarUsuario(Usuario usuario) {
+		String result = "";
+		UsuarioBusiness userBus = new UsuarioBusiness();
 		if (usuario.getIdUsuario() > 0){
-			dao.alterar(usuario);
+			result = userBus.update(usuario);
 		}
+		System.out.println(result);
+		return gson.toJson(result);
 	}
 	
 	// post para excluir..
@@ -76,5 +81,13 @@ public class UsuarioRest {
 		Usuario usuario = userBus.buscaUsuarioId(Integer.parseInt(id));
 		return usuario; 
 	}
-
+	
+	// Criptografa senha
+	@POST
+	@Path("/cripSenha/{senha}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String criptografaSenha(@PathParam("senha") String senha) {
+		return gson.toJson(Criptografia.criptografar(senha));
+	}
 }

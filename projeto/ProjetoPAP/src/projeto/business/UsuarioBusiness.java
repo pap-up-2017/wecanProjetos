@@ -27,6 +27,25 @@ public class UsuarioBusiness {
 		}
 	}
 	
+	public String update(Usuario u){
+		Usuario uTestUsername;
+		UsuarioDao uDao = new UsuarioDao();
+		try{
+			uTestUsername = uDao.getObjByUsername(u.getUsernameUsuario());
+		}catch(Exception ex){
+			uTestUsername = null;
+		}
+		// verifica se há algum usuário com o mesmo username
+		if(uTestUsername != null){
+			// verifica se o usuario possui o mesmo id
+			if(uTestUsername.getIdUsuario() != u.getIdUsuario()){
+				return "Username duplicado";
+			}
+		}
+		uDao.alterar(u);
+		return "Salvo com sucesso.";
+	}
+	
 	public String delete(int id){
 		String result = "";
 		try{

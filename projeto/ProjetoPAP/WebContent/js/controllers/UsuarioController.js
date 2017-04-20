@@ -1,4 +1,4 @@
-angular.module("app").controller('UsuarioCtrl', function($scope, $http, $cookieStore) {
+angular.module("app").controller('UsuarioCtrl', function($scope, $http, $cookieStore, $state) {
 		
 	//Busca Tipos usuarios
 	$scope.BuscarInformacaoTipoUsuarios = function() {
@@ -92,6 +92,37 @@ angular.module("app").controller('UsuarioCtrl', function($scope, $http, $cookieS
 	// Envia a informação de alteração de um elemento para o banco ... Via rest
 	$scope.SalvarAlteracao = function(){
 		
+		var trocaSenha = false;
+		
+		if($scope.senhaUsuarioNew != null){
+			console.log("new "+$scope.senhaUsuarioNew);
+			if($scope.senhaUsuarioOld != null){
+				console.log("Old "+$scope.senhaUsuarioOld);
+				$http.post( 'http://localhost:8080/ProjetoPAP/rest/usuariorest/cripSenha/'+$scope.senhaUsuarioOld)
+				.success( function(data, status, headers, config) {
+					console.log("Old crip "+ data);
+					if($scope.usuario.senhaUsuario == data){
+						$http.post( 'http://localhost:8080/ProjetoPAP/rest/usuariorest/cripSenha/'+$scope.senhaUsuarioNew)
+						.success( function(data, status, headers, config) {
+							console.log("new crip "+ data);
+							$scope.usuario.senhaUsuario = data;
+							trocaSenha = true;
+							console.log("nova senha banco: "+ $scope.usuario.senhaUsuario); 
+						});
+					}
+					else{
+						swal("Senha antiga incorreta.");
+					}
+					
+				});
+			}
+			else{
+				swal("Você deve digitar sua senha antiga.");
+			}
+		}
+		
+		$scope.senhaUsuarioNew = null;
+		$scope.senhaUsuarioOld = null;
 		var parameter = JSON.stringify({
 			type : "usuario",
 			idUsuario : $scope.usuario.idUsuario,
@@ -103,7 +134,8 @@ angular.module("app").controller('UsuarioCtrl', function($scope, $http, $cookieS
 			cidadeUsuario : $scope.usuario.cidadeUsuario,
 			instituicaoUsuario : $scope.usuario.instituicaoUsuario,
 			cursoUsuario : $scope.usuario.cursoUsuario
-		});
+		});	
+		
 		console.log(parameter);
 		var config = {headers : {
 				'Content-Type' : 'application/json;charset=utf-8;'}}
@@ -112,39 +144,16 @@ angular.module("app").controller('UsuarioCtrl', function($scope, $http, $cookieS
 				'http://localhost:8080/ProjetoPAP/rest/usuariorest/postalt',
 				parameter, config).success(
 				function(data, status, headers, config) {
-					$scope.Resposta = 'Usuario salvo com Sucesso!';
-					console.log($scope.Resposta);
+					if(data=="Username duplicado"){
+						console.log(data);
+						swal("Este username já está em uso. Por favor, escolha outro.");
+					}
+					else{
+						$state.go("perfil");
+					}
+					
 					});
 	};
-	
-/*	// carrega os dados do elemento selecionado para edição .. 
-	// TODO fazer carregamento do combobox com o estado para edição
-	$scope.CarregarEdicao = function(usuario){
-		$scope.istrue=true;
-		$scope.editedIdUsuario = usuario.idUsuario;
-		$scope.editedNomeUsuario = usuario.nomeUsuario;	
-		$scope.editedUsernameUsuario = usuario.usernameUsuario;
-		$scope.editedEmailUsuario = usuario.emailUsuario;
-		$scope.editedSenhaUsuario = usuario.senhaUsuario;
-		$scope.editedTipoUsuario = usuario.tipoUsuario;
-		$scope.editedEstadoSelecionado = usuario.cidadeUsuario.estadoCidade;
-		$scope.editedCidadeUsuario = usuario.cidadeUsuario;
-		$scope.editedInstituicaoUsuario = usuario.instituicaoUsuario;
-		$scope.editedCursoUsuario = usuario.cursoUsuario;
-		
-		$scope.editedTipoUsuarioOld = usuario.tipoUsuario;
-		$scope.editedCidadeUsuarioOld = usuario.cidadeUsuario;
-		$scope.editedInstituicaoUsuarioOld = usuario.instituicaoUsuario;
-		$scope.editedCursoUsuarioOld = usuario.cursoUsuario;
-		$scope.editedEstadoSelecionadoOld = usuario.cidadeUsuario.estadoCidade;
-		
-	    console.log(usuario);
-	};*/
-	
-	// função para fechar o popUp de edição ... 
-	$scope.FecharPopUpEdicao = function(){
-	     $scope.istrue=false;
-	  };
 	
 	// função que inicia a tela
 	$scope.iniciaTela = function() {
@@ -156,5 +165,14 @@ angular.module("app").controller('UsuarioCtrl', function($scope, $http, $cookieS
 		$scope.BuscarInformacaoCursos();
 		$scope.carregaEdição();
 	};
+	
 	$scope.iniciaTela();	
+	
+	loginfactory = function(data){
+		$cookieStore.put("session_id",data["id"]);
+		$cookieStore.put("session_user_id",data["idUsuarioLogado"]);
+		$cookieStore.put("session_data_val",data["dataCriacao"]);
+		$cookieStore.put("session_token_val",data["token"]);
+		$cookieStore.put("session_tipo_usuario",data["tipoUsuarioLogado"]);
+	}
 });
