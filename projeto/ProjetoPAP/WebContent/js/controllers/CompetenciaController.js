@@ -6,7 +6,15 @@ angular.module("app").controller('PageCompetenciaCtrl', function($scope, $http) 
 
 		$http.get('http://localhost:8080/ProjetoPAP/rest/competenciarest')
 				.success(function(data) {
-					$scope.competencias = data["competencia"];
+					var competenciasBanco = data["competencia"];
+					var arrayBanco = [];
+					if(Array.isArray(competenciasBanco)){
+						arrayBanco = competenciasBanco; 
+					}
+					else{
+						arrayBanco.push(competenciasBanco);
+					}
+					$scope.competencias = arrayBanco;
 				}).error(
 						function(data, status, header, config) {
 							$scope.Resposta = "Data: " + data + "<hr />status: "
