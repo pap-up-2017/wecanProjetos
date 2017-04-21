@@ -1,7 +1,5 @@
-angular.module("app").controller('PageProjetoCtrl', function($scope, $http, $stateParams, $cookieStore) {
-	
-	//console.log("Parametros");
-	//console.log($stateParams);
+angular.module("app").controller('PageProjetoCtrl', function($scope, $http, $stateParams, $cookieStore, $state) {
+
 	$scope.UsuarioLogado = $cookieStore.get("session_user_id");
 	
 	// Busca informações de todos os projetos salvas no banco ... Via rest
@@ -127,14 +125,10 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http, $sta
 				'http://localhost:8080/ProjetoPAP/rest/projetorest/postcad',
 				parameter, config).success(
 				function(data, status, headers, config) {
-					$scope.Resposta = 'Projeto salvo com sucesso!';
-					
-					
+					$state.go("pageMeusProjetos");
 				}).error(
 				function(data, status, header, config) {
-					$scope.Resposta = "Data: " + data + "<hr />status: "
-							+ status + "<hr />headers: " + header
-							+ "<hr />config: " + config;
+					swal("Não foi possivel criar o projeto, tente novamente.");
 				});
 		
 		$scope.BuscarInformacao();
