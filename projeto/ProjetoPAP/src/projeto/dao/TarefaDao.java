@@ -6,9 +6,9 @@ import javax.persistence.Query;
 
 import projeto.entity.Tarefa;
 
-public class TarefaDao implements InterfaceDao<Tarefa>{
+public class TarefaDao {
 
-	@Override
+
 	public void salvar(Tarefa t) {
 		// cria a instancia
 		EntityManager em = SingletonConection.getInstance();
@@ -23,7 +23,7 @@ public class TarefaDao implements InterfaceDao<Tarefa>{
 		
 	}
 
-	@Override
+
 	public List<Tarefa> listar() {
 		// cria a instancia
 		EntityManager em = SingletonConection.getInstance();
@@ -32,8 +32,18 @@ public class TarefaDao implements InterfaceDao<Tarefa>{
 		// retorna os dados encontrados
 		return q.getResultList();
 	}
+	
+	public List<Tarefa> listarPorProjeto(int id) {
+		// cria a instancia
+		EntityManager em = SingletonConection.getInstance();
+		// cria a Query para encontrar as tarefa
+		Query q = em.createQuery("from Tarefa where projetoTarefa_idProjeto = "+ id);
+		// retorna os dados encontrados
+		return q.getResultList();
+	}
 
-	@Override
+
+
 	public Tarefa getObjById(int id) {
 		// cria a instancia
 		EntityManager em = SingletonConection.getInstance();
@@ -42,7 +52,7 @@ public class TarefaDao implements InterfaceDao<Tarefa>{
 		return (Tarefa) q.getSingleResult();
 	}
 
-	@Override
+
 	public void alterar(Tarefa t) {
 		// cria a instancia
 		EntityManager em = SingletonConection.getInstance();
@@ -56,7 +66,7 @@ public class TarefaDao implements InterfaceDao<Tarefa>{
 		em.close();
 	}
 
-	@Override
+
 	public void excluir(Tarefa t) {
 		// cria a instancia
 		EntityManager em = SingletonConection.getInstance();

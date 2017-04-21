@@ -2,6 +2,7 @@ package projeto.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +14,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 //tag para o hibernate reconhecer que deve mapear essa classe
 @Entity
+@org.hibernate.annotations.Entity(
+		dynamicUpdate = true
+)
 public class Tarefa {
 	
 	// tag para indicar o id da classe

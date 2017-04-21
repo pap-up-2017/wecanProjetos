@@ -24,6 +24,7 @@
   </style>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
+<!--  
 <br/><br/><br/><br/>
 <div ng-controller="PageTarefaCtrl"	>
 		{{ Resposta }}
@@ -49,12 +50,44 @@
 		
 		<button class="btn btn-success" ng-click="SalvarCadastro(tarefa)">Cadastrar</button>
 </div>
-
 <br/><br/>
+ -->
 <div ng-controller="PageTarefaCtrl">
 
-		<button class="btn btn-primary" ng-click="BuscarInformacao()">Buscar Tarefas</button>
+		{{Resposta}}
+
+		<!-- <button class="btn btn-primary" ng-click="BuscarInformacao()">Buscar Tarefas</button>  -->
+
+		<br/><br/>
+		<br/><br/>
 		
+		<div id='Pendente' style="background: red; height: 300px; width: 200px; float: left;" id="div1" ondrop="angular.element(this).scope().drop(event)" ondragover="angular.element(this).scope().allowDrop(event)">
+			<div ng:repeat="tarefa in tarefas | filter: statusTarefa = 'Pendente'">
+				<div id="{{tarefa.idTarefa}}" style="background: white;" draggable="true"
+			      ondragstart="angular.element(this).scope().drag(event)">{{tarefa.nomeTarefa}}
+			    </div>
+			</div>
+		
+		</div>
+		
+		<div id='Em andamento' style="background: yellow; height: 300px; width: 200px; float: left;" id="div2" ondrop="angular.element(this).scope().drop(event)" ondragover="angular.element(this).scope().allowDrop(event)">
+			<div ng:repeat="tarefa in tarefas | filter: statusTarefa = 'Em andamento'">
+				<div id="{{tarefa.idTarefa}}" style="background: white;" draggable="true"
+			      ondragstart="angular.element(this).scope().drag(event)">{{tarefa.nomeTarefa}}
+			    </div>
+			</div>
+		</div>
+		<div id='Concluído' style="background: green; height: 300px; width: 200px; float: left;" id="div3" ondrop="angular.element(this).scope().drop(event)" ondragover="angular.element(this).scope().allowDrop(event)">
+			<div ng:repeat="tarefa in tarefas | filter: statusTarefa = 'Concluído'">
+				<div id="{{tarefa.idTarefa}}" style="background: white;" draggable="true"
+			      ondragstart="angular.element(this).scope().drag(event)">{{tarefa.nomeTarefa}}
+			    </div>
+			</div>
+		</div>
+		
+		
+		
+	<!-- 
 		<div class="editpopup editpopup-{{istrue}} ">
 	        <p>edit Id:<input type="text" ng-model="editedidTarefa"></p>
 	        <p>edit Tarefa:<input type="text" ng-model="editednameTarefa"></p>
@@ -88,4 +121,5 @@
 				
 			</tr>
 		</table>
+		 -->
 </div> 

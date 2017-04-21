@@ -5,6 +5,7 @@ import org.junit.Test;
 import projeto.dao.FactoryDao;
 import projeto.dao.InterfaceDao;
 import projeto.dao.InterfaceProjetoDao;
+import projeto.dao.TarefaDao;
 import projeto.entity.Projeto;
 import projeto.entity.Tarefa;
 
@@ -18,7 +19,7 @@ public class TestTarefa {
 		t.setNomeTarefa("Tarefa 1 teste");
 		InterfaceProjetoDao<Projeto> daoProjeto = FactoryDao.createProjetoDao();
 		t.setProjetoTarefa(daoProjeto.getObjById(1));
-		InterfaceDao<Tarefa> daoTarefa = FactoryDao.createTarefaDao();
+		TarefaDao daoTarefa = FactoryDao.createTarefaDao();
 		daoTarefa.salvar(t);
 	}
 	
@@ -32,7 +33,7 @@ public class TestTarefa {
 	
 	@Test
 	public void alterarTarefa(){
-		InterfaceDao<Tarefa> daoTarefa = FactoryDao.createTarefaDao();
+		TarefaDao daoTarefa = FactoryDao.createTarefaDao();
 		InterfaceProjetoDao<Projeto> daoProjeto = FactoryDao.createProjetoDao();
 		Tarefa t = daoTarefa.getObjById(2);	
 		t.setNomeTarefa("Tarefa 1 teste alterada");
@@ -42,7 +43,7 @@ public class TestTarefa {
 	
 	@Test
 	public void excluirTarefa(){
-		InterfaceDao<Tarefa> daoTarefa = FactoryDao.createTarefaDao();
+		TarefaDao daoTarefa = FactoryDao.createTarefaDao();
 		Tarefa t = daoTarefa.getObjById(3);
 		daoTarefa.excluir(t);
 	}

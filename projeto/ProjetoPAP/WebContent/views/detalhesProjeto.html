@@ -2,6 +2,28 @@
    .listv{
    margin-bottom: 30px;
    }
+   
+   .editpopup{
+     width: 250px;
+
+     border: 1px solid black;
+     display: none;
+     position: absolute;
+     top: center;
+     left: center;
+     bottom: center;
+     right: center;
+
+     background-color:#c2c2d6;
+    
+  }
+  .editpopup-true{
+     display: block;
+  }
+  .editpopup-false{
+     display: none;
+  }
+   
    .botao{
    float:right;
    }
@@ -74,6 +96,8 @@
 <br/>
 <div class="panel-body" ng-controller="PageProjetoCtrl"	>
    {{ Resposta }}
+   
+      
    <div class="headerLogo">
       <div>
       <button class="btn btn-primary botao organizador-{{istrueorganizador}} participante-{{istrueparticipante}}" ng-click="SolicitaParticipacao(projeto)">Participar do projeto</button>
@@ -119,4 +143,49 @@
          
       </div>
    </div>
+   
+   <div ng-controller="PageTarefaCtrl">
+
+		<br/><br/>
+		<button ng-click="CriarTarefa()">+</button>
+		<br/>
+		
+		<div class="editpopup editpopup-{{istrue}} ">
+			<p class="form-group">
+					<input placeholder="Nome" class="form-control" type="text" ng-model="tarefa.nomeTarefa" required />
+					<input placeholder="Descrição" class="form-control" type="text" ng-model="tarefa.descricaoTarefa" required />
+					<input placeholder="Prazo de entrega" class="form-control" type="date" ng-model="tarefa.prazoEntrega" required />
+			</p class="form-group">
+				
+				<button ng-click="SalvarCadastro(tarefa)">Cadastrar</button>
+    
+	        <button ng-click="FecharPopUpEdicao()">Cancelar</button>
+     	</div>	
+		
+		
+		<div id='Pendente' style="background: red; height: 300px; width: 200px; float: left;" id="div1" ondrop="angular.element(this).scope().drop(event)" ondragover="angular.element(this).scope().allowDrop(event)">
+			<div ng:repeat="tarefa in tarefas | filter: statusTarefa = 'Pendente'">
+				<div id="{{tarefa.idTarefa}}" style="background: white;" draggable="true"
+			      ondragstart="angular.element(this).scope().drag(event)">{{tarefa.nomeTarefa}}
+			    </div>
+			</div>
+		
+		</div>
+		
+		<div id='Em andamento' style="background: yellow; height: 300px; width: 200px; float: left;" id="div2" ondrop="angular.element(this).scope().drop(event)" ondragover="angular.element(this).scope().allowDrop(event)">
+			<div ng:repeat="tarefa in tarefas |  filter: statusTarefa = 'Em Andamento'">
+				<div id="{{tarefa.idTarefa}}" style="background: white;" draggable="true"
+			      ondragstart="angular.element(this).scope().drag(event)">{{tarefa.nomeTarefa}}
+			    </div>
+			</div>
+		</div>
+		<div id='Concluído' style="background: green; height: 300px; width: 200px; float: left;" id="div3" ondrop="angular.element(this).scope().drop(event)" ondragover="angular.element(this).scope().allowDrop(event)">
+			<div ng:repeat="tarefa in tarefas | filter: statusTarefa = 'Concluído'">
+				<div id="{{tarefa.idTarefa}}" style="background: white;" draggable="true"
+			      ondragstart="angular.element(this).scope().drag(event)">{{tarefa.nomeTarefa}}
+			    </div>
+			</div>
+		</div>
+   </div>
+   
 </div>

@@ -2,6 +2,8 @@ package projeto.dao;
 
 import java.util.List;
 
+import projeto.entity.Tarefa;
+
 
 // interface para padronizar a forma que os daos serão criados.
 public interface InterfaceDao<T> {

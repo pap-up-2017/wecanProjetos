@@ -28,7 +28,7 @@ public class FactoryDao {
 	}	
 	
 	//TarefaDao
-		public static InterfaceDao<Tarefa> createTarefaDao(){
+		public static TarefaDao createTarefaDao(){
 			return new TarefaDao();
 	}	
 	
