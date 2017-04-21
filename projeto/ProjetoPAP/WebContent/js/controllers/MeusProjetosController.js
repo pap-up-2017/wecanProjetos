@@ -10,7 +10,15 @@ angular.module("app").controller('PageMeusProjetosCtrl', function($scope, $http,
 		$http.get('http://localhost:8080/ProjetoPAP/rest/projetorest/user/'+$scope.UsuarioLogado)
 				.success(function(data) {
 					//console.log(data["projeto"]);
-					$scope.projetos = data["projeto"];
+					var projetosBanco = data["projeto"];
+					var arrayBanco = [];
+					if(Array.isArray(projetosBanco)){
+						arrayBanco = projetosBanco; 
+					}
+					else{
+						arrayBanco.push(projetosBanco);
+					}
+					$scope.projetos = arrayBanco;
 					
 				}).error(
 						function(data, status, header, config) {

@@ -17,7 +17,9 @@
 							<p>Integrantes</p>
 						</div>
 						<div class="projetoDesc">
-							<a ui-sref="pageDetalhesProjeto({idProjeto:{{projeto.idProjeto}}})" id="titulo">{{projeto.nome}}</a><p><label>{{projeto.organizador.nomeUsuario}}</label><label>{{projeto.organizador.cursoUsuario.nomeCurso}}</label><label><a ui-sref="pageAlterarProjeto({idProjeto:{{projeto.idProjeto}}})">Alterar</a></label></p>
+							<a ui-sref="pageDetalhesProjeto({idProjeto:{{projeto.idProjeto}}})" id="titulo">{{projeto.nome}}</a>
+								<p><label>{{projeto.organizador.nomeUsuario}}</label><label>{{projeto.organizador.cursoUsuario.nomeCurso}}</label>
+								<label><a ui-sref="pageAlterarProjeto({idProjeto:{{projeto.idProjeto}}})" ng-show="{{projeto.organizador.idUsuario}} == {{UsuarioLogado}}">Alterar</a></label></p>
 							<p><div id="desc" >{{projeto.descricao}}</div>
 							</p>
 						</div>
