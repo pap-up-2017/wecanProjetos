@@ -43,6 +43,7 @@ angular.module("app").controller('loginCtrl', function($scope, $http, $cookies, 
 					}
 					else{
 						console.log("login incorreto");
+						swal("Login incorreto.");
 					}
 				}).error(
 				function(data, status, header, config) {});
