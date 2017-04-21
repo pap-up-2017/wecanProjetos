@@ -1,7 +1,40 @@
+ 
 <style type="text/css">
+
+.panel-heading {
+	background-color: #11161c!important;
+	color: #fff!important;
+	border: 1px solid #ddd!important;}
+	
+.panel-info {
+
+	    border-color: #ddd!important;
+	}
+
    .listv{
    margin-bottom: 30px;
    }
+   
+   .createpopup{
+     width: 250px;
+
+     border: 1px solid black;
+     display: none;
+     position: absolute;
+     top: center;
+     left: center;
+     bottom: center;
+     right: center;
+
+     background-color:#c2c2d6;
+    
+  }
+  .createpopup-true{
+     display: block;
+  }
+  .createpopup-false{
+     display: none;
+  }   
    
    .editpopup{
      width: 250px;
@@ -96,8 +129,6 @@
 <br/>
 <div class="panel-body" ng-controller="PageProjetoCtrl"	>
    {{ Resposta }}
-   
-      
    <div class="headerLogo">
       <div>
       <button class="btn btn-primary botao organizador-{{istrueorganizador}} participante-{{istrueparticipante}}" ng-click="SolicitaParticipacao(projeto)">Participar do projeto</button>
@@ -145,12 +176,11 @@
    </div>
    
    <div ng-controller="PageTarefaCtrl">
-
 		<br/><br/>
 		<button ng-click="CriarTarefa()">+</button>
 		<br/>
 		
-		<div class="editpopup editpopup-{{istrue}} ">
+		<div class="createpopup createpopup-{{createIstrue}} ">
 			<p class="form-group">
 					<input placeholder="Nome" class="form-control" type="text" ng-model="tarefa.nomeTarefa" required />
 					<input placeholder="Descrição" class="form-control" type="text" ng-model="tarefa.descricaoTarefa" required />
@@ -159,32 +189,71 @@
 				
 				<button ng-click="SalvarCadastro(tarefa)">Cadastrar</button>
     
+	        <button ng-click="FecharPopUpCriacao()">Cancelar</button>
+     	</div>	
+     	
+     	<div class="editpopup editpopup-{{editIstrue}} ">
+	        <p>Nome:<input type="text" ng-model="editednameTarefa"></p>
+	        <p>Descrição:<input type="text" ng-model="editeddescricaoTarefa"></p>
+	        <p>Prazo de entrega:<input type="date" ng-model="editedprazoEntrega"></p>
+
+	        <button ng-click="SalvarAlteracao(editedidTarefa, editednameTarefa, editedProjetoTarefa, editeddescricaoTarefa, editedprazoEntrega)">Salvar</button>
 	        <button ng-click="FecharPopUpEdicao()">Cancelar</button>
      	</div>	
+     	
 		
-		
-		<div id='Pendente' style="background: red; height: 300px; width: 200px; float: left;" id="div1" ondrop="angular.element(this).scope().drop(event)" ondragover="angular.element(this).scope().allowDrop(event)">
-			<div ng:repeat="tarefa in tarefas | filter: statusTarefa = 'Pendente'">
-				<div id="{{tarefa.idTarefa}}" style="background: white;" draggable="true"
-			      ondragstart="angular.element(this).scope().drag(event)">{{tarefa.nomeTarefa}}
-			    </div>
+		<div class="panel panel-info" style="height: 300px; width: 33%; float: left;" ondrop="angular.element(this).scope().drop(event)" ondragover="angular.element(this).scope().allowDrop(event)">
+		<div class="panel-heading">
+                <h3 class="panel-title">Pendente</h3>
+            </div>
+            <div id ="Pendente" class="panel-body" style="  height: 90%; width: 100%; float: left;">
+				<div id="{{tarefa.idTarefa}}rep"ng:repeat="tarefa in tarefas | filter: statusTarefa = 'Pendente'">
+					<div id="{{tarefa.idTarefa}}" style="background: white;" draggable="true"
+				      ondragstart="angular.element(this).scope().drag(event)">{{tarefa.nomeTarefa}}  
+				      <button style="float:right" ng-click="ExcluirElemento(tarefa)">-</button>
+				      <button style="float:right" ng-click="CarregarEdicao(tarefa)">Alt</button>
+				      
+				    </div>
+				    <br>
+				</div>
 			</div>
 		
 		</div>
 		
-		<div id='Em andamento' style="background: yellow; height: 300px; width: 200px; float: left;" id="div2" ondrop="angular.element(this).scope().drop(event)" ondragover="angular.element(this).scope().allowDrop(event)">
-			<div ng:repeat="tarefa in tarefas |  filter: statusTarefa = 'Em Andamento'">
-				<div id="{{tarefa.idTarefa}}" style="background: white;" draggable="true"
-			      ondragstart="angular.element(this).scope().drag(event)">{{tarefa.nomeTarefa}}
-			    </div>
+		<div class="panel panel-info" style="height: 300px; width: 33%; float: left;" ondrop="angular.element(this).scope().drop(event)" ondragover="angular.element(this).scope().allowDrop(event)">
+		<div class="panel-heading">
+                <h3 class="panel-title">Em andamento</h3>
+            </div>
+            <div id ="Em andamento" class="panel-body" style="  height: 90%; width: 100%; float: left;">
+				<div id="{{tarefa.idTarefa}}rep"ng:repeat="tarefa in tarefas | filter: statusTarefa = 'Em andamento'">
+					<div id="{{tarefa.idTarefa}}" style="background: white;" draggable="true"
+				      ondragstart="angular.element(this).scope().drag(event)">{{tarefa.nomeTarefa}}  
+				      <button style="float:right" ng-click="ExcluirElemento(tarefa)">-</button>
+				      <button style="float:right" ng-click="CarregarEdicao(tarefa)">Alt</button>
+				      
+				    </div>
+				    <br>
+				</div>
 			</div>
+		
 		</div>
-		<div id='Concluído' style="background: green; height: 300px; width: 200px; float: left;" id="div3" ondrop="angular.element(this).scope().drop(event)" ondragover="angular.element(this).scope().allowDrop(event)">
-			<div ng:repeat="tarefa in tarefas | filter: statusTarefa = 'Concluído'">
-				<div id="{{tarefa.idTarefa}}" style="background: white;" draggable="true"
-			      ondragstart="angular.element(this).scope().drag(event)">{{tarefa.nomeTarefa}}
-			    </div>
+		
+		<div class="panel panel-info" style="height: 300px; width: 33%; float: left;" ondrop="angular.element(this).scope().drop(event)" ondragover="angular.element(this).scope().allowDrop(event)">
+		<div class="panel-heading">
+                <h3 class="panel-title">Concluído</h3>
+            </div>
+            <div id ="Concluído" class="panel-body" style="  height: 90%; width: 100%; float: left;">
+				<div id="{{tarefa.idTarefa}}rep"ng:repeat="tarefa in tarefas | filter: statusTarefa = 'Concluído'">
+					<div id="{{tarefa.idTarefa}}" style="background: white;" draggable="true"
+				      ondragstart="angular.element(this).scope().drag(event)">{{tarefa.nomeTarefa}}  
+				      <button style="float:right" ng-click="ExcluirElemento(tarefa)">-</button>
+				      <button style="float:right" ng-click="CarregarEdicao(tarefa)">Alt</button>
+				      
+				    </div>
+				    <br>
+				</div>
 			</div>
+		
 		</div>
    </div>
    

@@ -1,9 +1,7 @@
 angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stateParams) {
 	
-
 	$scope.drag = function(ev) {
 		ev.dataTransfer.setData("text", ev.target.id);
-		
 	};
 	
 	$scope.allowDrop = function (ev) {
@@ -13,13 +11,17 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 	$scope.drop = function (ev) {
 	    ev.preventDefault();
 	    var data = ev.dataTransfer.getData("text");
-	    ev.target.appendChild(document.getElementById(data));
+	    //ev.target.appendChild(document.getElementById(data));	   
+	    //console.log(ev.target);
+	    // Precisou criar um id unico para a div do repeat para levar ela toda e não dar erro na alteração da tarefa
+	    ev.target.append(document.getElementById(data+'rep'));
 	    
 	    // Pega o id da tarefa
-	    console.log( "Id da tarefa: " + ev.dataTransfer.getData("text"));
-	    $scope.editedIdTarefa = ev.dataTransfer.getData("text"); 
+	    //console.log( "Id da tarefa: " + ev.dataTransfer.getData("text"));
+	    //$scope.editedIdTarefa = ev.dataTransfer.getData("text"); 
+	    $scope.editedIdTarefa = ev.dataTransfer.getData("text");
 	    //Pega o novo status da tarefa
-	    console.log( "Novo status da tarefa: " + ev.target.id);
+	    //console.log( "Novo status da tarefa: " + ev.target.id);
 	    $scope.editedStatusTarefa = ev.target.id;
 	    
 	    $scope.AtualizaStatus($scope.editedIdTarefa,$scope.editedStatusTarefa);
@@ -48,8 +50,6 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 									+ "<hr />config: " + config;
 						});
 	};
-	
-	
 	
 	
 	// envia a informação de um novo cadastro de para o banco ... Via rest
@@ -82,7 +82,7 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Tarefa salva com sucesso!';
 					$scope.BuscarTarefaProjeto();
-					$scope.FecharPopUpEdicao();
+					$scope.FecharPopUpCriacao();
 					
 				}).error(
 				function(data, status, header, config) {
@@ -120,6 +120,8 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 				parameter, config).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Tarefa alterada com sucesso!';
+					$scope.BuscarTarefaProjeto();
+					$scope.FecharPopUpEdicao();
 					
 					
 				}).error(
@@ -135,6 +137,8 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 		
 	};
 	
+
+	
 	// Atualiza status da tarefa
 	$scope.AtualizaStatus = function(editedidTarefa, editedStatusTarefa ){
 		console.log("Atualiza Status ...")
@@ -149,7 +153,7 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 			//prazoEntrega: editedprazoEntrega
 		});
 		
-		console.log(parameter);
+//		console.log(parameter);
 
 		var config = {
 			headers : {
@@ -204,7 +208,7 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 				parameter, config).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Tarefa excluida com Sucesso!';
-					
+					$scope.BuscarTarefaProjeto();
 					
 				}).error(
 				function(data, status, header, config) {
@@ -218,24 +222,29 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 	};
 	
 	$scope.CriarTarefa = function(){
-		$scope.istrue=true;
+		$scope.createIstrue=true;
 	};
 	
 	// carrega os dados do elemento selecionado para edição .. 
 	$scope.CarregarEdicao = function(tarefa){
-		$scope.istrue=true;
+		$scope.editIstrue=true;
 	    $scope.editedidTarefa = tarefa.idTarefa;
 	    $scope.editednameTarefa = tarefa.nomeTarefa;
 	    $scope.editedProjetoTarefa = tarefa.projetoTarefa;
 	    $scope.editedProjetoTarefaOld = tarefa.projetoTarefa;
 	    $scope.editeddescricaoTarefa = tarefa.descricaoTarefa;
-	    $scope.editedprazoEntrega = tarefa.prazoEntrega;
-	    console.log(tarefa);
+	    $scope.editedprazoEntrega = new Date(tarefa.prazoEntrega);
+	    //console.log(tarefa);
 	};
 	
 	// função para fechar o popUp de edição ... 
 	$scope.FecharPopUpEdicao = function(){
-	     $scope.istrue=false;
+	     $scope.editIstrue=false;
+	  };
+	  
+	// função para fechar o popUp de criação ... 
+	$scope.FecharPopUpCriacao = function(){
+	     $scope.createIstrue=false;
 	  };
 	
 	// função que inicia a tela
