@@ -107,7 +107,10 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http, $sta
 			vagas : projeto.vagas,
 			dataEntrega : projeto.dataEntrega,
 			competencias : $scope.competenciasDoProjeto,
-			usuarios : $scope.usuariosDoProjeto
+			usuarios : $scope.usuariosDoProjeto,
+			organizador : {idUsuario : $scope.UsuarioLogado}
+			
+
 		});
 		
 		//console.log(parameter);
@@ -151,7 +154,9 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http, $sta
 			vagas : projeto.vagas,
 			dataEntrega : projeto.dataEntrega,
 			competencias : $scope.competenciasDoProjeto,
-			usuarios : $scope.usuariosDoProjeto
+			usuarios : $scope.usuariosDoProjeto,
+			organizador : {idUsuario : $scope.UsuarioLogado},
+			status : projeto.status
 			
 		});
 		
