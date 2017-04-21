@@ -1,58 +1,28 @@
-<style type="text/css">
-  .listv{
-     margin-bottom: 30px;
-  }
-  .editpopup{
-     width: 250px;
-     height: 250px;
-     border: 1px solid black;
-     display: none;
-     position: absolute;
-     top: center;
-     left: center;
-     bottom: center;
-     right: center;
-
-     background-color:gray;
-  }
-  .editpopup-true{
-     display: block;
-  }
-  .editpopup-false{
-     display: none;
-  }
-  </style>
-
+<link rel="stylesheet" href="css/interno/listarprojeto.css">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
+<div ng-controller="ListarProjetosCtrl">
 
-<div ng-controller="PageProjetoCtrl">
-
-		<button class="btn btn-primary" ng-click="BuscarInformacao()">Buscar projetos</button>
-
-		
-		
-		<a class="btn btn-primary" ng-href="#/pageProjeto">Criar um projeto</a>
-    	
-		<br/><br/>
-		<br/><br/>
-		<table class="table ">
-			<tr>
-				<td>Integrantes</td>
-				<td>NOME</td>
-				<td>Nome do usuário</td>
-				<td>Nome do curso</td>
-				<td>DESCRIÇÃO</td>
-			</tr>
-			<tr ng:repeat="projeto in projetos">
-				<td>{{projeto.participantes}}</td>
-				<td>{{projeto.nome}}</td>
-				<td>{{projeto.organizador.nomeUsuario}}</td>
-				<td>{{projeto.organizador.cursoUsuario.nomeCurso}}</td>
-				<td>{{projeto.descricao}}</td>
-				<td><a class="btn btn-primary" ui-sref="pageDetalhesProjeto({idProjeto:{{projeto.idProjeto}}})">Visualizar</a></td>	
-				<td><a class="btn btn-primary" ui-sref="pageAlterarProjeto({idProjeto:{{projeto.idProjeto}}})">Alterar</a></td>		
-			</tr>
-		</table>
-
-</div> 
+		<div class="listarProjetos">
+			<div class="search">
+					<input ng-model="search" type="text" size="40" placeholder="search..." ng-change="BuscarInformacao()"/>
+					<i style="font-size: 18px; color: #131922" class="fa fa-search" aria-hidden="true"></i>
+					<a id="criarProjeto" ng-href="#/pageProjeto">+</a>
+			</div>
+			<div class="panelcriar panel-default" ng:repeat="projeto in projetos | filter: search">
+				<div class="panel-body">
+					<div class="projetoInf">
+						<div class="integrantes">
+							<label>{{projeto.participantes}}</label>
+							<p>Integrantes</p>
+						</div>
+						<div class="projetoDesc">
+							<a ui-sref="pageDetalhesProjeto({idProjeto:{{projeto.idProjeto}}})" id="titulo">{{projeto.nome}}</a><p><label>{{projeto.organizador.nomeUsuario}}</label><label>{{projeto.organizador.cursoUsuario.nomeCurso}}</label><label><a ui-sref="pageAlterarProjeto({idProjeto:{{projeto.idProjeto}}})">Alterar</a></label></p>
+							<p><div id="desc" >{{projeto.descricao}}</div>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
