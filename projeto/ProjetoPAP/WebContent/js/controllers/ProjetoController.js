@@ -94,9 +94,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http, $sta
     
 	// envia a informação de um novo cadastro de para o banco ... Via rest
 	$scope.SalvarCadastro = function(projeto) {
-		console.log("Salvar um novo cadastro ...");
-		//console.log($scope);
-		
+
 		var parameter = JSON.stringify({
 			type : "projeto",
 			nome : projeto.nome,
@@ -133,6 +131,18 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http, $sta
 		
 		$scope.BuscarInformacao();
 	};
+	
+	$scope.IniciarProjeto = function(idProjeto){
+		console.log("iniciando projeto");
+		$http.post(
+				'http://localhost:8080/ProjetoPAP/rest/projetorest/iniciar/'+idProjeto).success(
+				function(data) {
+					swal(data);
+				}).error(
+				function(data, status, header, config) {
+					swal("Não foi possivel iniciar o projeto, tente novamente.");
+				});
+	}
 	
 	// Envia a informação de alteração de um elemento para o banco ... Via rest
 	$scope.SalvarAlteracao = function(projeto){
