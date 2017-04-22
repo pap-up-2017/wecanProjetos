@@ -132,18 +132,45 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 		$scope.BuscarInformacao();
 	};
 	
-	$scope.IniciarProjeto = function(idProjeto){
-		console.log("iniciando projeto");
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/projetorest/iniciar/'+idProjeto).success(
-				function(data) {
-					swal(data);
-				}).error(
-				function(data, status, header, config) {
-					swal("Não foi possivel iniciar o projeto, tente novamente.");
-				});
-	}
+		// inicia projeto
+		$scope.IniciarProjeto = function(projeto){
+			var init;
+			if($scope.usuariosDoProjeto.length < projeto.vagas){
+				swal({
+					  title: "Você tem certeza?",
+					  text: "O projeto tem apenas "+$scope.usuariosDoProjeto.length+" integrantes, de um total de "
+					  	+projeto.vagas+" vagas, deseja continuar?",
+					  type: "warning",
+					  showCancelButton: true,
+					  confirmButtonColor: "#DD6B55",
+					  confirmButtonText: "Sim, tenho certeza.",
+					  closeOnConfirm: false
+					},
+					function(){
+						console.log("projeto iniciado");
+						$http.post(
+								'http://localhost:8080/ProjetoPAP/rest/projetorest/iniciar/'+projeto.idProjeto).success(
+								function(data) {
+									swal("Muito bem",data,"success");
+								}).error(
+								function(data, status, header, config) {
+									swal("Ops","Não foi possivel iniciar o projeto, tente novamente.");
+							});
+					});
+				}
+			else{
+				$http.post(
+						'http://localhost:8080/ProjetoPAP/rest/projetorest/iniciar/'+projeto.idProjeto).success(
+						function(data) {
+							swal("Muito bem",data);
+						}).error(
+						function(data, status, header, config) {
+							swal("Ops","Não foi possivel iniciar o projeto, tente novamente.");
+					});
+			}		
+		}
 	
+	/**/
 	// Envia a informação de alteração de um elemento para o banco ... Via rest
 	$scope.SalvarAlteracao = function(projeto){
 		console.log("Salvar uma nova Alteração ...")
@@ -455,6 +482,23 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 				
 		};
 		$scope.iniciaTela();
+		
+	$scope.filtroTela = function(idOrganizador, usuariosDoProjetoo, aprovacaoUsuarioss){
+		if(idOrganizador == $scope.UsuarioLogado){
+			return false;
+		}
+		for (i = 0; i < usuariosDoProjetoo.length; i++) {
+		   if(usuariosDoProjetoo[i].idUsuario == $scope.UsuarioLogado){
+			   return false;
+		   }
+		}
+		for (i = 0; i < aprovacaoUsuarioss.length; i++) {
+			if(aprovacaoUsuarioss[i].idUsuario == $scope.UsuarioLogado){
+				return false;
+			}
+		}
+		return true;
+	}
 		
 	// função para fechar o popUp de edição ... 
 	$scope.DateDbConvert = function(data){

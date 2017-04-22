@@ -1,3 +1,5 @@
+
+
 <style type="text/css">
    .panel-heading {
    background-color: #11161c!important;
@@ -114,49 +116,59 @@
    {{ Resposta }}
    <div class="headerLogo">
       <div>
-         <button class="btn btn-primary botao organizador-{{istrueorganizador}} participante-{{istrueparticipante}}" ng-click="SolicitaParticipacao(projeto)">Participar do projeto</button>
-         <p class="form-group">
+         <!-- Comum -->
          <div>
-            <h2 class="topName">{{projeto.nome}}</h2>
+            <p class="form-group">
+            <div>
+               <h2 class="topName">{{projeto.nome}}</h2>
+            </div>
+            <h3 class="mainTitle">Descrição do projeto</h3>
+            <div style="display: block;">{{projeto.descricao}}</div>
+            <h3 class="mainTitle">Competências necessárias</h3>
+            <table class="table-bordered" width="100%" style="background-color:#f2f2f2">
+               <tbody>
+                  <tr ng-repeat="competenciaDoProjeto in competenciasDoProjeto">
+                     <td>{{ competenciaDoProjeto.nomeCompetencia }}</td>
+                  </tr>
+               </tbody>
+            </table>
+            </br>
+            <h3 class="mainTitle">Integrantes</h3>
+            <table class="table-bordered" width="100%" style="background-color:#f2f2f2">
+               <tbody>
+                  <tr ng-repeat="usuarioDoProjeto in usuariosDoProjeto">
+                     <td><a ui-sref="perfil({idUsuario: {{usuarioDoProjeto.idUsuario}} })" ui-sref-active="active">{{usuarioDoProjeto.nomeUsuario}}</a></td>
+                  </tr>
+               </tbody>
+            </table>
+            </p>	
+            </br>
          </div>
-         <h3 class="mainTitle">Descrição do projeto</h3>
-         <div style="display: block;">{{projeto.descricao}}</div>
-         <h3 class="mainTitle">Competências necessárias</h3>
-         <table class="table-bordered" width="100%" style="background-color:#f2f2f2">
-            <tbody>
-               <tr ng-repeat="competenciaDoProjeto in competenciasDoProjeto">
-                  <td>{{ competenciaDoProjeto.nomeCompetencia }}</td>
-               </tr>
-            </tbody>
-         </table>
-         </br>
-         <h3 class="mainTitle">Integrantes</h3>
-         <table class="table-bordered" width="100%" style="background-color:#f2f2f2">
-            <tbody>
-               <tr ng-repeat="usuarioDoProjeto in usuariosDoProjeto">
-                      <td><a ui-sref="perfil({idUsuario: {{usuarioDoProjeto.idUsuario}} })" ui-sref-active="active">{{usuarioDoProjeto.nomeUsuario}}</a></td>
-               </tr>
-            </tbody>
-         </table>
-         </p class="form-group">	
-         </br>
-         <h3 class="mainTitle">Candidatos</h3>
-         <table class="table-bordered" width="100%" style="background-color:#f2f2f2">
-            <tbody>
-               <tr ng-repeat="aprovacaoUsuario in aprovacaoUsuarios">
-                  <td><a ui-sref="perfil({idUsuario: {{aprovacaoUsuario.idUsuario}} })" ui-sref-active="active">{{ aprovacaoUsuario.nomeUsuario }}</a></td>
-                  <td>{{ aprovacaoUsuario.dataCriacao }}</td>
-                  <td>{{ aprovacaoUsuario.status }}</td>
-                  <td><button class="btn btn-primary botao organizador-{{!istrueorganizador}} avaliado-{{ aprovacaoUsuario.status == 'Aguardando Aprovação' ? 'true' : 'false' }} " ng-click="AceitarParticipante(aprovacaoUsuario) " >Aceitar</button></td>
-                  <td><button class="btn btn-primary botao organizador-{{!istrueorganizador}} avaliado-{{ aprovacaoUsuario.status == 'Aguardando Aprovação' ? 'true' : 'false' }} " ng-click="RecusarParticipante(aprovacaoUsuario) " >Recusar</button></td>
-               </tr>
-            </tbody>
-         </table>
-         </p class="form-group">	
+         <!-- End comum -->
+         <!-- aberto-->
+         <div ng-show="projeto.status == 'Aberto'">
+            <h3 class="mainTitle">Candidatos</h3>
+            <table class="table-bordered" width="100%" style="background-color:#f2f2f2">
+               <tbody>
+                  <tr ng-repeat="aprovacaoUsuario in aprovacaoUsuarios">
+                     <td><a ui-sref="perfil({idUsuario: {{aprovacaoUsuario.idUsuario}} })" ui-sref-active="active">{{ aprovacaoUsuario.nomeUsuario }}</a></td>
+                     <td>{{ aprovacaoUsuario.dataCriacao }}</td>
+                     <td>{{ aprovacaoUsuario.status }}</td>
+                     <td><button ng-show="projeto.organizador.idUsuario == UsuarioLogado" class="btn btn-primary botao avaliado-{{ aprovacaoUsuario.status == 'Aguardando Aprovação' ? 'true' : 'false' }} " ng-click="AceitarParticipante(aprovacaoUsuario) "  >Aceitar</button></td>
+                     <td><button ng-show="projeto.organizador.idUsuario == UsuarioLogado" class="btn btn-primary botao avaliado-{{ aprovacaoUsuario.status == 'Aguardando Aprovação' ? 'true' : 'false' }} " ng-click="RecusarParticipante(aprovacaoUsuario) " >Recusar</button></td>
+                  </tr>
+               </tbody>
+            </table>
+            </p>	
+            <button class="btn btn-primary" ng-show="projeto.organizador.idUsuario == UsuarioLogado" ng-click="IniciarProjeto(projeto)">Iniciar Projeto</button>
+         	<button ng-show="filtroTela(projeto.organizador.idUsuario, usuariosDoProjeto, aprovacaoUsuarios)" 
+            	class="btn btn-primary" ng-click="SolicitaParticipacao(projeto)">Participar do projeto</button>
+         </div>
+         <!-- fim aberto -->
       </div>
-      <button class="btn btn-primary" ng-show="projeto.organizador.idUsuario == UsuarioLogado" ng-click="IniciarProjeto(projeto.idProjeto)">Iniciar Projeto</button>
    </div>
-   <div ng-controller="PageTarefaCtrl">
+   <!-- em antamento -->
+   <div ng-controller="PageTarefaCtrl" ng-show="projeto.status == 'em andamento'">
       <br/><br/>
       <button ng-click="CriarTarefa()">+</button>
       <br/>
@@ -222,4 +234,6 @@
          </div>
       </div>
    </div>
+   <!-- end em andamento  -->
 </div>
+
