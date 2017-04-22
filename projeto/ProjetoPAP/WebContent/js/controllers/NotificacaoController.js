@@ -6,11 +6,11 @@ angular.module("app").controller('PageNotificacaoCtrl', function($scope, $http, 
 	// Busca informações salvas no banco... via rest
 	$scope.BuscarNotificacoes = function() {
 		console.log("função BuscarNotificações..");
-		$rootScope.NotificacoesPendentes = 0;
 		$http.get('http://localhost:8080/ProjetoPAP/rest/notificacaorest/user/'+ $scope.UsuarioLogado)
 				.success(function(data) {
 					var notificacoesBanco = data["notificacao"];
 					var arrayBanco = [];
+					$rootScope.NotificacoesPendentes = 0;
 					if(Array.isArray(notificacoesBanco)){
 						arrayBanco = notificacoesBanco;
 						for (i = 0; i < arrayBanco.length; i++) {
