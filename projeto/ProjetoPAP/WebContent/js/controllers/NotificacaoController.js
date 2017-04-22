@@ -8,25 +8,28 @@ angular.module("app").controller('PageNotificacaoCtrl', function($scope, $http, 
 		console.log("função BuscarNotificações..");
 		$http.get('http://localhost:8080/ProjetoPAP/rest/notificacaorest/user/'+ $scope.UsuarioLogado)
 				.success(function(data) {
-					var notificacoesBanco = data["notificacao"];
-					var arrayBanco = [];
 					$rootScope.NotificacoesPendentes = 0;
-					if(Array.isArray(notificacoesBanco)){
-						arrayBanco = notificacoesBanco;
-						for (i = 0; i < arrayBanco.length; i++) {
-							if(arrayBanco[i].statusNotificacao != 'Lida'){
-								$rootScope.NotificacoesPendentes++;
+					if(data != null){
+						var notificacoesBanco = data["notificacao"];
+						var arrayBanco = [];
+						if(Array.isArray(notificacoesBanco)){
+							arrayBanco = notificacoesBanco;
+							for (i = 0; i < arrayBanco.length; i++) {
+								if(arrayBanco[i].statusNotificacao != 'Lida'){
+									$rootScope.NotificacoesPendentes++;
+								}
 							}
 						}
-					}
-					else{
-						arrayBanco.push(notificacoesBanco);
-						if(arrayBanco.statusNotificacao != 'Lida'){
-							$rootScope.NotificacoesPendentes++;
+						else{
+							arrayBanco.push(notificacoesBanco);
+							if(arrayBanco.statusNotificacao != 'Lida'){
+								$rootScope.NotificacoesPendentes++;
+							}
+						
 						}
-					
+						$scope.notificacoes = arrayBanco;
 					}
-					$scope.notificacoes = arrayBanco;
+					
 				}).error(
 						function(data, status, header, config) {
 							$scope.Resposta = "Data: " + data + "<hr />status: "
@@ -36,7 +39,7 @@ angular.module("app").controller('PageNotificacaoCtrl', function($scope, $http, 
 	};
 	
 	// envia a informação de um novo cadastro no banco .. via rest .. 
-	$scope.SalvarCadastro = function(notificacao) {
+	$rootScope.InserirNotificacao = function(notificacao) {
 		console.log("Salvar um novo cadastro de notificacao ...")
 
 		var parameter = JSON.stringify({
@@ -44,7 +47,7 @@ angular.module("app").controller('PageNotificacaoCtrl', function($scope, $http, 
 			tituloNotificacao : notificacao.tituloNotificacao,
 			textoNotificacao : notificacao.textoNotificacao,
 			linkAcessoNotificacao : notificacao.linkAcessoNotificacao,
-			usuario : { idUsuario: $scope.UsuarioLogado} 
+			usuario : { idUsuario: notificacao.usuario} 
 		});
 
 		var config = {

@@ -1,4 +1,4 @@
-angular.module("app").controller('PageProjetoCtrl', function($scope, $http, $stateParams, $cookieStore, $state) {
+angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope, $http, $stateParams, $cookieStore, $state) {
 
 	$scope.UsuarioLogado = $cookieStore.get("session_user_id");
 	
@@ -331,7 +331,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http, $sta
 	
 	// Solicita participação no projeto
 	$scope.SolicitaParticipacao = function(projeto){
-		console.log("Pede para entrar no projetos ...")
+		console.log("Solicita para entrar no projetos ...")
 		
 		var config = {
 			headers : {
@@ -344,6 +344,17 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $http, $sta
 				null, config).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Soliciação realizada com sucesso!';
+					
+					// Gera notificação de participante
+					$scope.notificacao = {
+							type : "notificacao",
+							tituloNotificacao : 'Solicitação de participante' ,
+							textoNotificacao : 'o usuário '+ $scope.UsuarioLogado + ' solicitou participação no projeto '+ $scope.projeto.nome,
+							linkAcessoNotificacao : 'pageDetalhesProjeto({idProjeto:' + $scope.projeto.idProjeto +'})',
+							usuario : $scope.projeto.organizador.idUsuario }
+					
+					$rootScope.InserirNotificacao($scope.notificacao);
+					
 				}).error(
 				function(data, status, header, config) {
 					$scope.Resposta = "Data: " + data + "<hr />status: "

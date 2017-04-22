@@ -70,7 +70,7 @@
 		<input placeholder="Texto" class="form-control" type="text" ng-model="notificacao.textoNotificacao" required />
 		<input placeholder="Link de acesso" class="form-control" type="text" ng-model="notificacao.linkAcessoNotificacao" required />
 	</p class="form-group">
-	<button class="btn btn-success" ng-click="SalvarCadastro(notificacao)">Cadastrar</button>
+	<button class="btn btn-success" ng-click="InserirNotificacao(notificacao)">Cadastrar</button>
 	<br/><br/>
 	<button class="btn btn-primary" ng-click="BuscarNotificacoes()">Buscar Notificações</button>
 	<br/><br/><br/><br/>
@@ -91,14 +91,18 @@
 			<td>Link de acesso</td>
 			<td>Usuário</td>
 			<td>Status</td>
+			
+			
 		</tr>
 		<tr ng:repeat="notificacao in notificacoes">
 			<td>{{notificacao.idNotificacao}}</td>
-			<td>{{notificacao.tituloNotificacao}}</td>
+			<td><a ui-sref="{{notificacao.linkAcessoNotificacao}}" id="titulo">{{notificacao.tituloNotificacao}}</a></td>
 			<td>{{notificacao.textoNotificacao}}</td>
 			<td>{{notificacao.linkAcessoNotificacao}}</td>
 			<td>{{notificacao.usuario.nomeUsuario}}</td>   
 			<td>{{notificacao.statusNotificacao}}</td>
+			
+							
 			    
 			<td><button ng-click="CarregarEdicao(notificacao)" class="btn btn-primary">Alterar</button></td>
 			<td><button class="btn btn-primary" ng-click="ExcluirElemento(notificacao)">Excluir</button></td>

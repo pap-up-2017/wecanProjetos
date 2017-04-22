@@ -34,15 +34,17 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 
 		$http.get('http://localhost:8080/ProjetoPAP/rest/tarefarest/proj/'+$stateParams.idProjeto)
 				.success(function(data) {
-					var tarefasBanco = data["tarefa"];
-					var arrayBanco = [];
-					if(Array.isArray(tarefasBanco)){
-						arrayBanco = tarefasBanco; 
+					if(data != null){
+						var tarefasBanco = data["tarefa"];
+						var arrayBanco = [];
+						if(Array.isArray(tarefasBanco)){
+							arrayBanco = tarefasBanco; 
+						}
+						else{
+							arrayBanco.push(tarefasBanco);
+						}
+						$scope.tarefas = arrayBanco;
 					}
-					else{
-						arrayBanco.push(tarefasBanco);
-					}
-					$scope.tarefas = arrayBanco;
 				}).error(
 						function(data, status, header, config) {
 							$scope.Resposta = "Data: " + data + "<hr />status: "
