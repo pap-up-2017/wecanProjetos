@@ -382,6 +382,15 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 				null, config).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Aprovação realizada com sucesso!';
+					// Gera notificação de aprovação
+					$scope.notificacao = {
+							type : "notificacao",
+							tituloNotificacao : 'Aprovação no projeto' ,
+							textoNotificacao : 'Você foi aprovado no projeto '+ $scope.projeto.nome,
+							linkAcessoNotificacao : 'pageDetalhesProjeto({idProjeto:' + $scope.projeto.idProjeto +'})',
+							usuario : aprovacaoUsuario.idUsuario }
+					
+					$rootScope.InserirNotificacao($scope.notificacao);
 				}).error(
 				function(data, status, header, config) {
 					$scope.Resposta = "Data: " + data + "<hr />status: "
@@ -406,6 +415,15 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 				null, config).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Recusa realizada com sucesso!';
+					// Gera notificação de recusa
+					$scope.notificacao = {
+							type : "notificacao",
+							tituloNotificacao : 'Recusa no projeto' ,
+							textoNotificacao : 'Não foi aprovada sua participação no projeto '+ $scope.projeto.nome,
+							linkAcessoNotificacao : 'pageDetalhesProjeto({idProjeto:' + $scope.projeto.idProjeto +'})',
+							usuario : aprovacaoUsuario.idUsuario }
+					
+					$rootScope.InserirNotificacao($scope.notificacao);
 				}).error(
 				function(data, status, header, config) {
 					$scope.Resposta = "Data: " + data + "<hr />status: "
