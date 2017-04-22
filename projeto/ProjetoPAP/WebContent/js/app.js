@@ -115,7 +115,7 @@ function route($stateProvider, $urlRouterProvider, $locationProvider){
 	
 	var perfil = {
 			  name: 'perfil',
-			  url: '/perfil',
+			  url: '/perfil/{idUsuario}',
 			  templateUrl: 'views/perfil.html'
 			}
 	
