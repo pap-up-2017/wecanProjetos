@@ -9,9 +9,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+
+import com.google.gson.Gson;
 
 import projeto.business.AprovacaoParticipanteBusiness;
+import projeto.business.ProjetoBusiness;
 import projeto.dao.AprovacaoParticipanteDao;
 import projeto.dao.FactoryDao;
 import projeto.dao.InterfaceDao;
@@ -23,6 +25,8 @@ import projeto.util.Datas;
 
 @Path("/projetorest")
 public class ProjetoRest {
+	
+	Gson gson = new Gson();
 
 	// get para puxar todos os projetos do banco..
 	@GET
@@ -134,6 +138,17 @@ public class ProjetoRest {
 
 		AprovacaoParticipanteBusiness AprovPartBusiness = new AprovacaoParticipanteBusiness();
 		AprovPartBusiness.recusar(AprovPart);
+	}
+	
+	// post recusar participação no projeto 
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/iniciar/{id}")
+	public String iniciarProjeto(@PathParam("id") int id) {
+		ProjetoBusiness pBus = new ProjetoBusiness();
+		String result = pBus.inciar(id);
+		return  gson.toJson(result);
 	}
 	
 }
