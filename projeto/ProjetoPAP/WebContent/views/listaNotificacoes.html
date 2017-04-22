@@ -1,0 +1,110 @@
+<style type="text/css">
+
+
+/* Create the blue navigation bar */
+.navbar {
+  background-color: #3b5998;
+  font-size: 22px;
+  padding: 5px 10px;
+}
+
+/* Define how each icon button should look like */
+.button {
+  color: white;
+  display: inline-block; /* Inline elements with width and height. TL;DR they make the icon buttons stack from left-to-right instead of top-to-bottom */
+  position: relative; /* All 'absolute'ly positioned elements are relative to this one */
+  padding: 2px 5px; /* Add some padding so it looks nice */
+}
+
+/* Make the badge float in the top right corner of the button */
+.button__badge {
+  background-color: #fa3e3e;
+  border-radius: 2px;
+  color: white;
+ 
+  padding: 1px 3px;
+  font-size: 10px;
+  
+  position: absolute; /* Position the badge within the relatively positioned button */
+  top: 0;
+  right: 0;
+}
+
+
+
+  .listv{
+     margin-bottom: 30px;
+  }
+  .editpopup{
+     width: 250px;
+     height: 250px;
+     border: 1px solid black;
+     display: none;
+     position: absolute;
+     top: center;
+     left: center;
+     bottom: center;
+     right: center;
+
+     background-color:gray;
+  }
+  .editpopup-true{
+     display: block;
+  }
+  .editpopup-false{
+     display: none;
+  }
+  </style>
+
+<!-- Font Awesome is a great free icon font. -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"/>
+
+  
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<br/>
+<div ng-controller="PageNotificacaoCtrl">
+	{{ Resposta }}
+	<p class="form-group">
+		<input placeholder="Titulo" class="form-control" type="text" ng-model="notificacao.tituloNotificacao" required />
+		<input placeholder="Texto" class="form-control" type="text" ng-model="notificacao.textoNotificacao" required />
+		<input placeholder="Link de acesso" class="form-control" type="text" ng-model="notificacao.linkAcessoNotificacao" required />
+	</p class="form-group">
+	<button class="btn btn-success" ng-click="SalvarCadastro(notificacao)">Cadastrar</button>
+	<br/><br/>
+	<button class="btn btn-primary" ng-click="BuscarNotificacoes()">Buscar Notificações</button>
+	<br/><br/><br/><br/>
+
+	<div class="editpopup editpopup-{{istrue}} ">
+        <p>Titulo:<input type="text" ng-model="editedtituloNotificacao"></p>
+        <p>Texto:<input type="text" ng-model="editedtextoNotificacao"></p>
+        <p>Link de acesso:<input type="text" ng-model="editedlinkAcessoNotificacao"></p>
+        <button ng-click="SalvarAlteracao(editedidNotificacao, editedtituloNotificacao, editedtextoNotificacao, editedlinkAcessoNotificacao)">Salvar</button>
+        <button ng-click="FecharPopUpEdicao()">Cancelar</button>
+    	</div>	
+     	
+	<table class="table ">
+		<tr>
+			<td>ID</td>
+			<td>Titulo</td>
+			<td>Texto</td>
+			<td>Link de acesso</td>
+			<td>Usuário</td>
+			<td>Status</td>
+		</tr>
+		<tr ng:repeat="notificacao in notificacoes">
+			<td>{{notificacao.idNotificacao}}</td>
+			<td>{{notificacao.tituloNotificacao}}</td>
+			<td>{{notificacao.textoNotificacao}}</td>
+			<td>{{notificacao.linkAcessoNotificacao}}</td>
+			<td>{{notificacao.usuario.nomeUsuario}}</td>   
+			<td>{{notificacao.statusNotificacao}}</td>
+			    
+			<td><button ng-click="CarregarEdicao(notificacao)" class="btn btn-primary">Alterar</button></td>
+			<td><button class="btn btn-primary" ng-click="ExcluirElemento(notificacao)">Excluir</button></td>
+			<td><button class="btn btn-primary" ng-click="AtualizaStatus(notificacao)">Atualiza Status</button></td>
+			
+		</tr>
+	</table>
+
+</div> 

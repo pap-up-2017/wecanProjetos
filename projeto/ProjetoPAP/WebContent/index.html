@@ -51,7 +51,7 @@
 				<a class="mostra-esconde-menu" href="javascript:void(0);">Perfil ▲</a>
 			</div>
 			<ul id="menu">	
-				<li><a href="#"><i style="font-size: 20px;" class="fa fa-bell" aria-hidden="true"></i> Notificações</a></li>
+				<li><a href="#pageListaNotificacoes"><div class="button" ng-controller="PageNotificacaoCtrl"><i style="font-size: 20px;" class="fa fa-bell" aria-hidden="true"><span class="button__badge">{{NotificacoesPendentes}}</span></i></div> Notificações</a></li>
 				<li><a href="#"><i style="font-size: 20px;" class="fa fa-users" aria-hidden="true"></i> Fórum</a></li>
 				<li><a ui-sref="pageListaProjetos" ui-sref-active="active"><i style="font-size: 20px;" class="fa fa-area-chart" aria-hidden="true"></i> Projetos</a></li>
 				<li><a href="#"><i style="font-size: 20px;" class="fa fa-clipboard" aria-hidden="true"></i> Avaliações</a></li>
@@ -104,6 +104,7 @@
 		<script type="text/javascript" src="js/controllers/PerfilController.js"></script>
 		<script type="text/javascript" src="js/controllers/ExcluirUsuarioController.js"></script>
 		<script type="text/javascript" src="js/controllers/ListarProjetosController.js"></script>
+		<script type="text/javascript" src="js/controllers/NotificacaoController.js"></script>
 </html>
 <!--         			<li class=""><a ui-sref="pageTarefa" ui-sref-active="active">Tarefas</a></li>
         				<li class=""><a ui-sref="pageCompetencia" ui-sref-active="active">Competencias</a></li>

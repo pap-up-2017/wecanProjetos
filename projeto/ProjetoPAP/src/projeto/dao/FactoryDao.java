@@ -1,6 +1,5 @@
 package projeto.dao;
 
-import projeto.entity.AprovacaoParticipante;
 import projeto.entity.Cidade;
 import projeto.entity.Competencia;
 import projeto.entity.Curso;
@@ -10,10 +9,10 @@ import projeto.entity.Feed;
 import projeto.entity.InstituicaoEnsino;
 import projeto.entity.Projeto;
 import projeto.entity.Resposta;
-import projeto.entity.Tarefa;
 import projeto.entity.TipoUsuario;
 import projeto.entity.Usuario;
 import projeto.entity.UsuarioLogado;
+
 
 public class FactoryDao {
 	
@@ -85,5 +84,10 @@ public class FactoryDao {
 	//RespostaDao
 	public static InterfaceDao<Resposta> createRespostaDao(){
 		return new RespostaDao();
+	}
+
+	public static NotificacaoDao createNotificacaoDao() {
+		// TODO Auto-generated method stub
+		return new NotificacaoDao();
 	}
 }

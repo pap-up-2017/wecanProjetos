@@ -125,6 +125,13 @@ function route($stateProvider, $urlRouterProvider, $locationProvider){
 			  templateUrl: 'views/altPerfil.html'
 			}
 	
+	var listaNotificacoes = {
+			  name: 'pageListaNotificacoes',
+			  url: '/pageListaNotificacoes',
+			  templateUrl: 'views/listaNotificacoes.html'
+			}
+	
+	
 	  $urlRouterProvider.otherwise('/');
 	  
 	  $stateProvider.state(home);
@@ -146,4 +153,5 @@ function route($stateProvider, $urlRouterProvider, $locationProvider){
 	  $stateProvider.state(feed);
 	  $stateProvider.state(perfil);
 	  $stateProvider.state(altPerfil);
+	  $stateProvider.state(listaNotificacoes);
 }
