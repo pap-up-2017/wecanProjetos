@@ -9,6 +9,7 @@ import projeto.entity.Feed;
 import projeto.entity.InstituicaoEnsino;
 import projeto.entity.Projeto;
 import projeto.entity.Resposta;
+import projeto.entity.RespostaAtividade;
 import projeto.entity.TipoUsuario;
 import projeto.entity.Usuario;
 import projeto.entity.UsuarioLogado;
@@ -87,7 +88,22 @@ public class FactoryDao {
 	}
 
 	public static NotificacaoDao createNotificacaoDao() {
-		// TODO Auto-generated method stub
 		return new NotificacaoDao();
+	}
+
+	public static AtividadeDao createAtividadeDao() {
+		return new AtividadeDao();
+	}
+
+	public static ExercicioDao createExercicioDao() {
+		return new ExercicioDao();
+	}
+
+	public static RespostaAtividadeDao createRespostaAtividadeDao() {
+		return new RespostaAtividadeDao();
+	}
+
+	public static RespostaUsuarioDao createRespostaUsuarioDao() {
+		return new RespostaUsuarioDao();
 	}
 }

@@ -3,7 +3,6 @@ package projeto.test;
 import java.util.List;
 import org.junit.Test;
 import projeto.dao.FactoryDao;
-import projeto.dao.InterfaceDao;
 import projeto.dao.InterfaceProjetoDao;
 import projeto.dao.TarefaDao;
 import projeto.entity.Projeto;

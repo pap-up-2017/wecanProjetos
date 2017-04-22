@@ -2,29 +2,37 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 	
 	$scope.drag = function(ev) {
 		ev.dataTransfer.setData("text", ev.target.id);
+		ev.dataTransfer.setData("valida", true);
 	};
 	
 	$scope.allowDrop = function (ev) {
 	    ev.preventDefault();
+	    if (ev.target.getAttribute("draggable") == "true" || ev.toElement.id == ''){
+	        ev.dataTransfer.dropEffect = "none"; // dropping is not allowed
+	    }else{
+	        ev.dataTransfer.dropEffect = "all"; // drop it like it's hot
+	    }
 	};
 	
 	$scope.drop = function (ev) {
 	    ev.preventDefault();
-	    var data = ev.dataTransfer.getData("text");
-	    //ev.target.appendChild(document.getElementById(data));	   
-	    //console.log(ev.target);
-	    // Precisou criar um id unico para a div do repeat para levar ela toda e não dar erro na alteração da tarefa
-	    ev.target.append(document.getElementById(data+'rep'));
-	    
-	    // Pega o id da tarefa
-	    //console.log( "Id da tarefa: " + ev.dataTransfer.getData("text"));
-	    //$scope.editedIdTarefa = ev.dataTransfer.getData("text"); 
-	    $scope.editedIdTarefa = ev.dataTransfer.getData("text");
-	    //Pega o novo status da tarefa
-	    //console.log( "Novo status da tarefa: " + ev.target.id);
-	    $scope.editedStatusTarefa = ev.target.id;
-	    
-	    $scope.AtualizaStatus($scope.editedIdTarefa,$scope.editedStatusTarefa);
+	    if(ev.dataTransfer.getData("text") != null && ev.dataTransfer.getData("valida") != ''){
+		    var data = ev.dataTransfer.getData("text");
+		    //ev.target.appendChild(document.getElementById(data));	   
+		    //console.log(ev.target);
+		    // Precisou criar um id unico para a div do repeat para levar ela toda e não dar erro na alteração da tarefa
+		    ev.target.append(document.getElementById(data+'rep'));
+		    
+		    // Pega o id da tarefa
+		    //console.log( "Id da tarefa: " + ev.dataTransfer.getData("text"));
+		    //$scope.editedIdTarefa = ev.dataTransfer.getData("text"); 
+		    $scope.editedIdTarefa = ev.dataTransfer.getData("text");
+		    //Pega o novo status da tarefa
+		    //console.log( "Novo status da tarefa: " + ev.target.id);
+		    $scope.editedStatusTarefa = ev.target.id;
+		    
+		    $scope.AtualizaStatus($scope.editedIdTarefa,$scope.editedStatusTarefa);
+	    }
 	    
 	};
 	
