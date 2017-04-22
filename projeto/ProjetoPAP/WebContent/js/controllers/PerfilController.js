@@ -1,4 +1,4 @@
-angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieStore, $state	) {
+angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieStore, $state, $stateParams) {
 	
 	$scope.UsuarioLogado = $cookieStore.get("session_user_id");
 	
@@ -19,6 +19,7 @@ angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieSt
 	$scope.detalharUsuario = function() {
 		$http.post('http://localhost:8080/ProjetoPAP/rest/usuariorest/busca/'+$stateParams.idUsuario)
 				.success(function(data) {
+					$scope.idUsuairiod = data["idUsuario"];
 					$scope.nomeUsuariod = data["nomeUsuario"];
 					$scope.usernameUsuariod = data["usernameUsuario"];
 					$scope.emailUsuariod = data["emailUsuario"];
@@ -29,5 +30,15 @@ angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieSt
 					$scope.instituicaoUsuariod = (data["instituicaoUsuario"]["nomeInstituicao"]);	
 				});
 	};
-	$scope.BuscarInformacao();
+
+	// função que inicia a tela
+	$scope.iniciaTela = function() {
+		console.log("Iniciando a tela");
+		
+		$scope.detalharUsuario();
+		$scope.BuscarInformacao();
+		
+	};
+	
+	$scope.iniciaTela();
 });

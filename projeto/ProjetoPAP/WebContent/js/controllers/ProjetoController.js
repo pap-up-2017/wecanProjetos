@@ -332,6 +332,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 	// Solicita participação no projeto
 	$scope.SolicitaParticipacao = function(projeto){
 		console.log("Solicita para entrar no projetos ...")
+		console.log($scope.UsuarioLogado+'/'+$stateParams.idProjeto);
 		
 		var config = {
 			headers : {
@@ -344,6 +345,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 				null, config).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Soliciação realizada com sucesso!';
+					console.log('antes da notificação');
 					
 					// Gera notificação de participante
 					$scope.notificacao = {

@@ -134,7 +134,7 @@
          <table class="table-bordered" width="100%" style="background-color:#f2f2f2">
             <tbody>
                <tr ng-repeat="usuarioDoProjeto in usuariosDoProjeto">
-                  <td>{{ usuarioDoProjeto.nomeUsuario }}</td>
+                      <td><a ui-sref="perfil({idUsuario: {{usuarioDoProjeto.idUsuario}} })" ui-sref-active="active">{{usuarioDoProjeto.nomeUsuario}}</a></td>
                </tr>
             </tbody>
          </table>
@@ -144,7 +144,7 @@
          <table class="table-bordered" width="100%" style="background-color:#f2f2f2">
             <tbody>
                <tr ng-repeat="aprovacaoUsuario in aprovacaoUsuarios">
-                  <td>{{ aprovacaoUsuario.nomeUsuario }}</td>
+                  <td><a ui-sref="perfil({idUsuario: {{aprovacaoUsuario.idUsuario}} })" ui-sref-active="active">{{ aprovacaoUsuario.nomeUsuario }}</a></td>
                   <td>{{ aprovacaoUsuario.dataCriacao }}</td>
                   <td>{{ aprovacaoUsuario.status }}</td>
                   <td><button class="btn btn-primary botao organizador-{{!istrueorganizador}} avaliado-{{ aprovacaoUsuario.status == 'Aguardando Aprovação' ? 'true' : 'false' }} " ng-click="AceitarParticipante(aprovacaoUsuario) " >Aceitar</button></td>

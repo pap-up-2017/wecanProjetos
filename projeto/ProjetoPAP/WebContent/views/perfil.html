@@ -59,10 +59,10 @@
 									location.href="wecanHome.html";
 								}
 							</script>
-							<a ui-sref="altPerfil" ui-sref-active="active" class="btnAcao btn btn-primary">Editar perfil</a>
+							<a ui-sref="altPerfil" ui-sref-active="active" class="btnAcao btn btn-primary" ng-show="idUsuairiod == UsuarioLogado">Editar perfil</a>
 						</div>
 						<div class="acaoExcluir" ng-controller="excluirUsuarioCtrl"> 
-							<button ng-click="ExcluirElemento()" class="btnAcao btn btn-danger">Excluir perfil</button>
+							<button ng-click="ExcluirElemento()" class="btnAcao btn btn-danger" ng-show="idUsuairiod == UsuarioLogado">Excluir perfil</button>
 						</div>
 			</div>
 		</div>
