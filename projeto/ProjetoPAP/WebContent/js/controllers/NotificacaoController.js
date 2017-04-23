@@ -22,7 +22,8 @@ angular.module("app").controller('PageNotificacaoCtrl', function($scope, $http, 
 						}
 						else{
 							arrayBanco.push(notificacoesBanco);
-							if(arrayBanco.statusNotificacao != 'Lida'){
+							console.log(arrayBanco);
+							if(arrayBanco[0].statusNotificacao != 'Lida'){
 								$rootScope.NotificacoesPendentes++;
 							}
 						

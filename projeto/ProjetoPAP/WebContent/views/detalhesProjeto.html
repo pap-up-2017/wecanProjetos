@@ -193,7 +193,7 @@
             <h3 class="panel-title">Pendente</h3>
          </div>
          <div id ="Pendente" class="panel-body" style="  height: 90%; width: 100%; float: left;">
-            <div id="{{tarefa.idTarefa}}rep"ng:repeat="tarefa in tarefas | filter: statusTarefa = 'Pendente'">
+            <div id="{{tarefa.idTarefa}}rep"ng:repeat="tarefa in tarefas | filter: {statusTarefa : 'Pendente'}">
                <div id="{{tarefa.idTarefa}}" style="background: white;" draggable="true"
                   ondragstart="angular.element(this).scope().drag(event)">{{tarefa.nomeTarefa}}  
                   <button style="float:right" ng-click="ExcluirElemento(tarefa)">-</button>
@@ -208,7 +208,7 @@
             <h3 class="panel-title">Em andamento</h3>
          </div>
          <div id ="Em andamento" class="panel-body" style="  height: 90%; width: 100%; float: left;">
-            <div id="{{tarefa.idTarefa}}rep"ng:repeat="tarefa in tarefas | filter: statusTarefa = 'Em andamento'">
+            <div id="{{tarefa.idTarefa}}rep"ng:repeat="tarefa in tarefas | filter: {statusTarefa : 'Em andamento'}">
                <div id="{{tarefa.idTarefa}}" style="background: white;" draggable="true"
                   ondragstart="angular.element(this).scope().drag(event)">{{tarefa.nomeTarefa}}  
                   <button style="float:right" ng-click="ExcluirElemento(tarefa)">-</button>
@@ -223,7 +223,7 @@
             <h3 class="panel-title">Concluído</h3>
          </div>
          <div id ="Concluído" class="panel-body" style="  height: 90%; width: 100%; float: left;">
-            <div id="{{tarefa.idTarefa}}rep"ng:repeat="tarefa in tarefas | filter: statusTarefa = 'Concluído'">
+            <div id="{{tarefa.idTarefa}}rep"ng:repeat="tarefa in tarefas | filter: {statusTarefa : 'Concluído'}">
                <div id="{{tarefa.idTarefa}}" style="background: white;" draggable="true"
                   ondragstart="angular.element(this).scope().drag(event)">{{tarefa.nomeTarefa}}  
                   <button style="float:right" ng-click="ExcluirElemento(tarefa)">-</button>
