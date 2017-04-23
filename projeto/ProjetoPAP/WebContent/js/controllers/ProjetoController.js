@@ -134,7 +134,6 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 	
 		// inicia projeto
 		$scope.IniciarProjeto = function(projeto){
-			var init;
 			if($scope.usuariosDoProjeto.length < projeto.vagas){
 				swal({
 					  title: "Você tem certeza?",
@@ -152,6 +151,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 								'http://localhost:8080/ProjetoPAP/rest/projetorest/iniciar/'+projeto.idProjeto).success(
 								function(data) {
 									swal("Muito bem",data,"success");
+									$scope.iniciaTela();
 								}).error(
 								function(data, status, header, config) {
 									swal("Ops","Não foi possivel iniciar o projeto, tente novamente.");
@@ -383,6 +383,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 							usuario : $scope.projeto.organizador.idUsuario }
 					
 					$rootScope.InserirNotificacao($scope.notificacao);
+					$scope.iniciaTela();
 					
 				}).error(
 				function(data, status, header, config) {
@@ -418,6 +419,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 							usuario : aprovacaoUsuario.idUsuario }
 					
 					$rootScope.InserirNotificacao($scope.notificacao);
+					$scope.iniciaTela();
 				}).error(
 				function(data, status, header, config) {
 					$scope.Resposta = "Data: " + data + "<hr />status: "
@@ -451,6 +453,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 							usuario : aprovacaoUsuario.idUsuario }
 					
 					$rootScope.InserirNotificacao($scope.notificacao);
+					$scope.iniciaTela();
 				}).error(
 				function(data, status, header, config) {
 					$scope.Resposta = "Data: " + data + "<hr />status: "
@@ -492,9 +495,11 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 			   return false;
 		   }
 		}
-		for (i = 0; i < aprovacaoUsuarioss.length; i++) {
-			if(aprovacaoUsuarioss[i].idUsuario == $scope.UsuarioLogado){
-				return false;
+		if(aprovacaoUsuarioss != null){
+			for (i = 0; i < aprovacaoUsuarioss.length; i++) {
+				if(aprovacaoUsuarioss[i].idUsuario == $scope.UsuarioLogado){
+					return false;
+				}
 			}
 		}
 		return true;
