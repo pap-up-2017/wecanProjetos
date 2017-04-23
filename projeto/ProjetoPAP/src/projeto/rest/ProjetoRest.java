@@ -148,7 +148,16 @@ public class ProjetoRest {
 	public String iniciarProjeto(@PathParam("id") int id) {
 		ProjetoBusiness pBus = new ProjetoBusiness();
 		String result = pBus.inciar(id);
-		return  gson.toJson(result);
+		return gson.toJson(result);
+	}
+	
+	// get para puxar todos os meus projetos do banco..
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/buscaPorUsuario/{id}")
+	public List<Projeto> buscarPorUsuario(@PathParam("id") String id) {
+		ProjetoBusiness pBus = new ProjetoBusiness();
+		return pBus.projetosPorUsuario(Integer.parseInt(id));
 	}
 	
 }

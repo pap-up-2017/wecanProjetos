@@ -21,21 +21,43 @@ angular.module("app").controller('ListarProjetosCtrl', function($scope, $http, $
 							swal("Não foi possivel listar, por favor tente novamente.");					
 						});
 	};
+	
+	// Busca projetos geral
+	$scope.BuscarProjetosUsuario = function() {
+		$http.get('http://localhost:8080/ProjetoPAP/rest/projetorest/buscaPorUsuario/'+$scope.UsuarioLogado)
+				.success(function(data) {
+					if(data != null){
+						var projetosBanco = data["projeto"];
+						var arrayBanco = [];
+						if(Array.isArray(projetosBanco)){
+							arrayBanco = projetosBanco; 
+						}
+						else{
+							arrayBanco.push(projetosBanco);
+						}
+						$scope.projetosPorUsuario = arrayBanco;
+					}
+				}).error(
+						function(data, status, header, config) {
+							swal("Não foi possivel listar, por favor tente novamente.");					
+						});
+	};
 		
 	// Busca projetos do usuário
 	$scope.BuscarMeusProjetos = function() {
 		$http.get('http://localhost:8080/ProjetoPAP/rest/projetorest/user/'+$scope.UsuarioLogado)
 				.success(function(data) {
-					var projetosBanco = data["projeto"];
-					var arrayBanco = [];
-					if(Array.isArray(projetosBanco)){
-						arrayBanco = projetosBanco; 
+					if(data != null){
+						var projetosBanco = data["projeto"];
+						var arrayBanco = [];
+						if(Array.isArray(projetosBanco)){
+							arrayBanco = projetosBanco; 
+						}
+						else{
+							arrayBanco.push(projetosBanco);
+						}
+						$scope.meusProjetos = arrayBanco;
 					}
-					else{
-						arrayBanco.push(projetosBanco);
-					}
-					$scope.meusProjetos = arrayBanco;
-					
 				}).error(
 						function(data, status, header, config) {
 							swal("Não foi possivel listar, por favor tente novamente.");					
@@ -44,6 +66,7 @@ angular.module("app").controller('ListarProjetosCtrl', function($scope, $http, $
 	
 	$scope.BuscarInformacao();
 	$scope.BuscarMeusProjetos();	
+	$scope.BuscarProjetosUsuario();
 });
 
 
