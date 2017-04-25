@@ -13,7 +13,7 @@ public class ProjetoDao implements InterfaceProjetoDao<Projeto> {
 	EntityManager em = SingletonConection.getInstance();
 	
 	@Override
-	public void salvar(Projeto p) {
+	public int salvar(Projeto p) {
 		
 		// inicia a instancia
 		em.getTransaction().begin();
@@ -22,7 +22,9 @@ public class ProjetoDao implements InterfaceProjetoDao<Projeto> {
 		// envia os dados do projeto
 		em.getTransaction().commit();
 		// fecha a instancia
+		int id = p.getIdProjeto();
 		em.close();
+		return id;
 	}
 
 	@Override

@@ -10,6 +10,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import projeto.business.FeedBusiness;
 import projeto.dao.FactoryDao;
 import projeto.dao.InterfaceDao;
 import projeto.entity.Feed;
@@ -24,6 +25,18 @@ public class FeedRest {
 	public List<Feed> listarFeeds() {
 		InterfaceDao<Feed> dao = FactoryDao.createFeedDao();
 		return dao.listar();	
+	}
+	
+	// post para salvar um dado no banco ... 
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/buscaFeedProjeto/{id}")
+	public Feed buscaFeedProjeto(@PathParam("id") int id){
+		 
+		FeedBusiness fbus = new FeedBusiness();
+		Feed f = fbus.buscaPorProjeto(id);
+		return f;
 	}
 	
 	@GET

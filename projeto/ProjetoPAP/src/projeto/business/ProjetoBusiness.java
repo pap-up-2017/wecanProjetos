@@ -7,8 +7,27 @@ import projeto.dao.FactoryDao;
 import projeto.dao.InterfaceProjetoDao;
 import projeto.entity.Projeto;
 import projeto.entity.Usuario;
+import projeto.util.Datas;
 
 public class ProjetoBusiness {
+	
+	public String create (Projeto p){
+		int id = 0;
+		InterfaceProjetoDao<Projeto> dao = FactoryDao.createProjetoDao();
+		if (p.getIdProjeto() < 1){
+			// Registro a quantidade de participantes mais o organizador
+			p.setParticipantes(p.getUsuarios().size()+1);
+			p.setDataCriacao(Datas.retornaDataAtual());
+			p.setStatus("Aberto");
+			id = dao.salvar(p);
+			
+			FeedBusiness fBus = new FeedBusiness();
+			fBus.create(id);
+		}
+		
+		
+		return ""+ id;
+	}
 	
 	// inicia o projeto
 	public String inciar(int id){

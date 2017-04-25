@@ -41,14 +41,8 @@ public class ProjetoRest {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/postcad")
 	public void cadastrarProjeto(Projeto projeto) {	
-		InterfaceProjetoDao<Projeto> dao = FactoryDao.createProjetoDao();
-		if (projeto.getIdProjeto() < 1){
-			// Registro a quantidade de participantes mais o organizador
-			projeto.setParticipantes(projeto.getUsuarios().size()+1);
-			projeto.setDataCriacao(Datas.retornaDataAtual());
-			projeto.setStatus("Aberto");
-			dao.salvar(projeto);		
-		}
+		ProjetoBusiness pBus = new ProjetoBusiness();
+		String result = pBus.create(projeto);
 	}
 	
 	// post para alterar um projeto no banco ... 

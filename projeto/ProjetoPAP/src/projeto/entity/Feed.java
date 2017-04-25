@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 
 //rest
@@ -19,6 +20,8 @@ public class Feed {
 	private int idFeed;
 	private String tituloFeed;
 	private String textoFeed;
+	@OneToOne
+	private Projeto projetoFeed;
 	
 	public int getIdFeed() {
 		return idFeed;
@@ -37,5 +40,11 @@ public class Feed {
 	}
 	public void setTextoFeed(String textoFeed) {
 		this.textoFeed = textoFeed;
+	}
+	public Projeto getProjetoFeed() {
+		return projetoFeed;
+	}
+	public void setProjetoFeed(Projeto projetoFeed) {
+		this.projetoFeed = projetoFeed;
 	}
 }
