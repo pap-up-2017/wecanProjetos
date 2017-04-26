@@ -36,7 +36,7 @@
 {
 	.listarProjetos
 	{
-		margin-top: 50px;
+		margin-top: 0px;
 		float: left;
 		width: 100%;
 		height: auto;
@@ -49,16 +49,19 @@
 		border: 0px;
 		padding: 30px;
 		border-radius: 0px;
-		margin-bottom: 0px;
+		margin-bottom: 10px;
 		background: rgba(18, 29, 39, 0);
 	}
 	.projetoInf
 	{
-		padding-top: 30px;
+		padding-top: 20px;
+		padding-bottom: 30px;
+		padding-left: 30px;
 		float: left;
 		width: 100%;
 		height: 150px;
-		border-bottom: 1px solid #B5B5B5;
+		background: rgba(18, 29, 39, 1);
+		border-radius: 20px;
 	}
 	.projetoInf .integrantes
 	{
@@ -69,6 +72,7 @@
 		border: 3px solid rgba(53, 255, 153, 1);
 		padding-top: 30px;
 		border-radius: 100px;
+		color: yellow;
 	}
 	.projetoDesc
 	{
@@ -82,7 +86,7 @@
 	{
 		text-decoration: none;
 		font-size: 20px;
-		color: #131922;
+		color: rgba(53, 255, 153, 1);
 		margin-right: 30px;
 		margin-left: 10px;
 	}
@@ -93,7 +97,8 @@
 	.projetoDesc label
 	{
 		font-size: 15px;
-		color: #979797;
+		padding: 10px;
+		color: #fff;
 		margin-right: 20px;
 	}
 	.projetoDesc #desc
@@ -107,7 +112,6 @@
 		color: #979797;
 		font-size: 15px;
 		border-radius: 10px;
-		border: 1px solid #E9E9E9;
 	}
 	#criarProjeto
 	{
@@ -145,10 +149,12 @@
 	.projetoInf
 	{
 		padding-top: 30px;
+		padding-bottom: 30px;
 		float: left;
 		width: 100%;
 		height: auto;
-		border-bottom: 1px solid #B5B5B5;
+		background: rgba(18, 29, 39, 1);
+		border-radius: 20px;
 	}
 	.projetoInf .integrantes
 	{
@@ -160,6 +166,7 @@
 		padding-top: 30px;
 		border-radius: 100px;
 		margin-left: 35%;
+		color: yellow;
 	}
 	.projetoDesc
 	{
@@ -173,7 +180,7 @@
 	{
 		text-decoration: none;
 		font-size: 20px;
-		color: #131922;
+		color: rgba(53, 255, 153, 1);
 		margin-right: 30px;
 		margin-left: 10px;
 	}
@@ -183,10 +190,10 @@
 	}
 	.projetoDesc label
 	{
-		padding-top: 5px;
 		font-size: 15px;
 		color: #979797;
 		margin-right: 20px;
+		padding: 5px;
 	}
 	.projetoDesc #desc
 	{
@@ -198,7 +205,6 @@
 		color: #979797;
 		font-size: 15px;
 		border-radius: 10px;
-		border: 1px solid #E9E9E9;
 	}
 	#criarProjeto
 	{
@@ -239,6 +245,7 @@
 		float: left;
 		width: 100%;
 		height: auto;
+		text-align: center;
 		border-bottom: 1px solid #B5B5B5;
 	}
 	.projetoInf .integrantes
@@ -251,6 +258,7 @@
 		padding-top: 30px;
 		border-radius: 100px;
 		margin-left: 35%;
+		color: yellow;
 	}
 	.projetoDesc
 	{

@@ -6,10 +6,10 @@ html, body
 }
 
 .button {
-  color: white;
   display: inline-block; /* Inline elements with width and height. TL;DR they make the icon buttons stack from left-to-right instead of top-to-bottom */
   position: relative; /* All 'absolute'ly positioned elements are relative to this one */
-  padding: 2px 5px; /* Add some padding so it looks nice */
+  padding: 0px 0px; /* Add some padding so it looks nice */
+  font-family:'Raleway';
 }
 
 .button__badge {
@@ -17,12 +17,13 @@ html, body
   border-radius: 2px;
   color: white;
  
-  padding: 1px 3px;
+  padding: 1px 2px;
   font-size: 10px;
   
   position: absolute; /* Position the badge within the relatively positioned button */
   top: 0;
   right: 0;
+  font-family:'Raleway';
 }
 .conteudo 
 {
@@ -128,16 +129,23 @@ html, body
 		list-style: none;
 		margin-right: 150px;
 	}
-	#menu li
+	#menu li a
 	{
 		display: inline-block;
 		float: right;
-		margin-right: 10px;
+		margin-right: 30px;
 		padding-top: 10px;
 		padding-bottom: 20px;
 		font-size: 14px;
+		text-decoration: none;
+		color: #fff;
+		text-align:center;
+		font-size: 13px;
+		-webkit-transition:All 0.5s ease; 
+		-moz-transition:All 0.5s ease; 
+		-o-transition:All 0.5s ease;
 	}
-	#menu li::after
+	#menu li a::after
 	{
 		content: '';
 		display: block;
@@ -147,22 +155,11 @@ html, body
 		padding-bottom: 20px;
 		transition: width .3s;
 	}
-		#menu li:hover::after
+		#menu li a:hover::after
 		{
 			width: 100%;
 			padding-bottom: 20px;
 		}
-	#menu a
-	{
-		text-decoration: none;
-		color: #fff;
-		font-size: 13px;
-		padding: 15px;
-		-webkit-transition:All 0.5s ease; 
-		-moz-transition:All 0.5s ease; 
-		-o-transition:All 0.5s ease;
-		
-	}
 		#menu a:hover
 		{
 			color: rgba(53, 255, 153, 1); 
