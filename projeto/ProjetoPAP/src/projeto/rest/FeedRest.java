@@ -11,6 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import projeto.business.FeedBusiness;
+import projeto.business.RespostaBusiness;
 import projeto.dao.FactoryDao;
 import projeto.dao.InterfaceDao;
 import projeto.entity.Feed;
@@ -33,18 +34,19 @@ public class FeedRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/buscaFeedProjeto/{id}")
 	public Feed buscaFeedProjeto(@PathParam("id") int id){
-		 
+		System.out.println("Feed projeto: " +id);
 		FeedBusiness fbus = new FeedBusiness();
 		Feed f = fbus.buscaPorProjeto(id);
 		return f;
 	}
 	
-	@GET
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getresposta")
-	public List<Resposta> listarRespostas() {
-		InterfaceDao<Resposta> dao = FactoryDao.createRespostaDao();
-		return dao.listar();	
+	@Path("/getresposta/{id}")
+	public List<Resposta> listarRespostas(@PathParam("id") int id) {
+		RespostaBusiness rbus = new RespostaBusiness();
+		return rbus.buscaRespostasFeed(id);
 	}
 	
 	// post para salvar um dado no banco ... 
@@ -62,12 +64,10 @@ public class FeedRest {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/postcadresposta/{id}")
-	public void cadastrarResposta(@PathParam("id") String id, Resposta r) {
-		InterfaceDao<Resposta> dao = FactoryDao.createRespostaDao();
-		InterfaceDao<Usuario> userDao = FactoryDao.createUsuarioDao();
-		r.setUsuarioResposta(userDao.getObjById(Integer.parseInt(id)));
+	public void cadastrarResposta(@PathParam("id") int id, Resposta r) {
+		RespostaBusiness rbus = new RespostaBusiness();
 		if (r.getIdResposta() < 1){
-			dao.salvar(r);		
+			rbus.create(r, id);		
 		}
 	}
 	

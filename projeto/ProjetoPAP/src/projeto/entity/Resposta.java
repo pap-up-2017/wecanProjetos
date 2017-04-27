@@ -1,5 +1,7 @@
 package projeto.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +26,7 @@ public class Resposta {
 	private Feed feedResposta;
 	@ManyToOne
 	private Usuario usuarioResposta;
+	private Date dataResposta;
 	
 	public int getIdResposta() {
 		return idResposta;
@@ -48,5 +51,11 @@ public class Resposta {
 	}
 	public void setUsuarioResposta(Usuario usuarioResposta) {
 		this.usuarioResposta = usuarioResposta;
+	}
+	public Date getDataResposta() {
+		return dataResposta;
+	}
+	public void setDataResposta(Date dataResposta) {
+		this.dataResposta = dataResposta;
 	}
 }

@@ -1,33 +1,33 @@
-angular.module("app").controller('FeedCtrl', function($scope, $http, $cookieStore) {
-	
-	$scope.buscarFeeds = function(){
-		$http.get('http://localhost:8080/ProjetoPAP/rest/feedrest')
-		.success(function(data) {
-			var feedsBanco = data["feed"];
-			var arrayBanco = [];
-			if(Array.isArray(feedsBanco)){
-				arrayBanco = feedsBanco; 
-			}
-			else{
-				arrayBanco.push(feedsBanco);
-			}
-			$scope.feeds = arrayBanco;
-		});
+angular.module("app").controller('FeedCtrl', function($scope, $http, $cookieStore, $rootScope) {
 		
-		$http.get('http://localhost:8080/ProjetoPAP/rest/feedrest/getresposta')
+	$scope.buscarFeedProjeto = function(){
+		$http.post('http://localhost:8080/ProjetoPAP/rest/feedrest/buscaFeedProjeto/'+$rootScope.projeto_selecionado_id)
 		.success(function(data) {
-			var respostaBanco = data["resposta"];
-			var arrayBanco = [];
-			if(Array.isArray(respostaBanco)){
-				arrayBanco = respostaBanco; 
+			if(data != null){
+				$scope.feed = data;
+				$scope.idFeed = data['idFeed']
+				$scope.buscarRespostas();
 			}
-			else{
-				arrayBanco.push(respostaBanco);
-			}
-			$scope.respostas = arrayBanco;
-		});
-
+		});	
 	} 
+	
+	$scope.buscarRespostas = function(idFeed){
+		$http.post('http://localhost:8080/ProjetoPAP/rest/feedrest/getresposta/'+$scope.idFeed)
+		.success(function(data) {
+			if(data != null){
+				var respostaBanco = data["resposta"];
+				var arrayBanco = [];
+				if(Array.isArray(respostaBanco)){
+					arrayBanco = respostaBanco; 
+				}
+				else{
+					arrayBanco.push(respostaBanco);
+				}
+				$scope.respostasFeed = arrayBanco;
+			}
+		});
+	}
+	
 	
 	$scope.salvarPost = function(feed, respostaFeed){
 		var parameter = JSON.stringify({
@@ -43,11 +43,19 @@ angular.module("app").controller('FeedCtrl', function($scope, $http, $cookieStor
 					parameter, config).success(
 					function(data, status, headers, config) {
 						console.log("Salvo com sucesso!");		
-						$scope.buscarFeeds();
+						$scope.buscarRespostas();
+						$scope.comentarioFeed = null;
 					});
-		$scope.buscarFeeds();
+
 	}
 	
-	$scope.buscarFeeds();
+	$scope.iniciaTela = function(){
+		if($rootScope.projeto_selecionado_id != null){
+			$scope.buscarFeedProjeto();
+		}
+	}
+	$scope.iniciaTela();
+	
+
 });
 

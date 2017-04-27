@@ -480,6 +480,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 			// Validação para não carregar dados no cadastro de novo projetos
 			if($stateParams.idProjeto != null){
 				$scope.CarregarEdicao();
+				$rootScope.projeto_selecionado_id = $stateParams.idProjeto;	
 				
 			}
 				

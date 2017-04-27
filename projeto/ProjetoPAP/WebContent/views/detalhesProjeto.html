@@ -235,5 +235,25 @@
       </div>
    </div>
    <!-- end em andamento  -->
+   <br/>
+   <!-- Comum -->
+   <div ng-controller="FeedCtrl">
+   		<div>
+   			<h2>{{feed.tituloFeed}}</h2>
+   			<p>{{feed.textoFeed}}</p>
+   		</div>
+   		<hr/>	
+   		<div>
+   			<p><textarea class="form-control" cols="20" rows="6" maxlength="500" placeholder="Comente aqui (No máximo 500 caracteres)." id="dp" ng-model="comentarioFeed" required></textarea></p>
+   			<button style="float:left" class="btn btn-primary" ng-click="salvarPost(feed, comentarioFeed)">Comentar</button>
+   		</div>
+   		<hr/>	
+   		<div ng:repeat="resposta in respostasFeed | orderBy : idResposta : true">
+   			<p><a ui-sref="perfil({idUsuario: {{resposta.usuarioResposta.idUsuario}} })" ui-sref-active="active">{{resposta.usuarioResposta.usernameUsuario}}</a> | {{ resposta.dataResposta | date: 'dd/MM/yyyy - HH:mm:ss'  }}</p>
+   			<p>{{resposta.textoResposta}}</p>
+   			<hr/>	
+   		</div>
+   </div>
+   <!-- End Comum -->
 </div>
 
