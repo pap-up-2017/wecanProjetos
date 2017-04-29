@@ -247,6 +247,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 			    }
 		    }else{
 		    	if($scope.projeto.competencias != null){
+		    		$scope.competenciasDoProjeto = [];
 			    	$scope.competenciasDoProjeto.push({ idCompetencia : $scope.projeto.competencias.idCompetencia,
 						nomeCompetencia : $scope.projeto.competencias.nomeCompetencia});
 		    	}
@@ -266,6 +267,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 			    }
 			}else{
 			   	if($scope.projeto.usuarios != null){
+			   		$scope.usuariosDoProjeto = [];
 			   		$scope.usuariosDoProjeto.push({ idUsuario : $scope.projeto.usuarios.idUsuario,
 			   			nomeUsuario : $scope.projeto.usuarios.nomeUsuario});
 			   		// Validação para seber se é participante do projeto
@@ -473,7 +475,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 	  };
 	// função que inicia a tela
 		$scope.iniciaTela = function() {
-			console.log("Iniciando a tela");
+			console.log("Iniciando a tela projetos");
 			$scope.BuscarInformacao();
 			$scope.BuscarInformacaoCompetencias();
 			$scope.BuscarInformacaoUsuarios();

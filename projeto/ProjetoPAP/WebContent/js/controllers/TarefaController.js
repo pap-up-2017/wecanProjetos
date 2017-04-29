@@ -3,6 +3,7 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 	$scope.drag = function(ev) {
 		ev.dataTransfer.setData("text", ev.target.id);
 		ev.dataTransfer.setData("valida", true);
+		//console.log('Teste');
 	};
 	
 	$scope.allowDrop = function (ev) {

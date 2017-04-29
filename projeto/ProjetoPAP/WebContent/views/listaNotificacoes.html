@@ -38,7 +38,7 @@
 			
 			
 		</tr>
-		<tr ng:repeat="notificacao in notificacoes">
+		<tr ng:repeat="notificacao in notificacoes | orderBy : idNotificacao : true">
 			<td>{{notificacao.idNotificacao}}</td>
 			<td><a ui-sref="{{notificacao.linkAcessoNotificacao}}" id="titulo">{{notificacao.tituloNotificacao}}</a></td>
 			<td>{{notificacao.textoNotificacao}}</td>

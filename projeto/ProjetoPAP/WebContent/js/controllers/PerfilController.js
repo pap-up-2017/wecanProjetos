@@ -35,7 +35,9 @@ angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieSt
 	$scope.iniciaTela = function() {
 		console.log("Iniciando a tela");
 		
-		$scope.detalharUsuario();
+		if($stateParams.idUsuario != null){
+			$scope.detalharUsuario();
+		}
 		$scope.BuscarInformacao();
 		
 	};
