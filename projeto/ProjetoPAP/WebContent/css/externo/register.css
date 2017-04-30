@@ -2,14 +2,16 @@ html, body
 {
 	top: 0px;
 	margin: 0px;
-	background-image: url('http://i65.tinypic.com/1zn94iv.png');
+	font-family: 'Raleway';
+	background-position: center;
+	background-image: url('http://i63.tinypic.com/nb3s78.png');
 }
 header
 {
 	top: 0px;
 	margin: 0px;
 	width: 100%;
-	height: 40px;
+	height: 60px;
 	background-color: #0b1117;
 }
 header #menu
@@ -18,11 +20,13 @@ header #menu
 	list-style: none;
 	text-decoration: none;
 	color: #fff;
+	margin-top: 5px;
 }
 header #menu li
 {
 	display: inline-block;
 	padding: 10px;
+	font-size: 20px;
 }
 header #menu li a
 {
@@ -40,14 +44,23 @@ header #menu li a
 }
 .panel
 {
-	background-image: url('http://i65.tinypic.com/1zn94iv.png');
 	border: 0px;
+	background-color: rgba(18, 29, 39, 0.0);
+	height: 400px;
 }
 	.btnAcao
 	{
 		width: 100%;
-		background-color: #D6D6D6;
-		color: #0B173B;
+		background-color: #121d27 !important;
+		color: #fff !important;
+		-webkit-transition:All 0.3s ease; 
+		-moz-transition:All 0.3s ease; 
+		-o-transition:All 0.3s ease;
+	}
+	.btnAcao:hover
+	{
+		background-color: #35ff99 !important;
+		color: #121d27 !important;
 	}
 	.acaoCadastroConcluir
 	{
@@ -69,15 +82,35 @@ header #menu li a
 	{
 		background-color: #11161c !important;
 		color: #fff !important;
+		font-size: 12px;
+		border-bottom-right-radius: 0px;
+		border-bottom-left-radius: 0px;
 	}
+.rodape
+{
+	clear: both;
+	width: 100%;
+	height: 150px;
+	background-color: #121d27;
+	color: #fff;
+	font-size: 15px;
+	text-align: center;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.rodape p
+{
+	margin-top: 20px;
+}
 @media screen and (min-width: 769px)
 {
 	.panel
 	{
 		padding-top: 10px;
-		background-color: #121d27;
+		background-color: rgba(18, 29, 39, 0.0);
 		border: 0px;
 		border-radius: 0px;
+		height: 400px;
 	}
 	.panel-heading
 	{
