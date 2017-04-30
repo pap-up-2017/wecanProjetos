@@ -134,7 +134,7 @@ angular.module("app").controller('CadastrarUsuarioCtrl', function($scope, $http)
 						swal("Este username já está em uso. Por favor, escolha outro.");
 					}
 					else{
-						window.location.href = "http://localhost:8080/ProjetoPAP/index.html";
+						window.location.href = "http://localhost:8080/ProjetoPAP/home.html";
 					}
 					
 				});

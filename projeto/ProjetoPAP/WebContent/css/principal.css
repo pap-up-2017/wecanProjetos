@@ -75,7 +75,7 @@ html, body
 		height: 450px; 
 		display: block;
 		position: fixed; 
-		top: 0; 
+		top: -450px;
 		z-index: 999;  
 		-webkit-transition:All 0.5s ease; 
 		-moz-transition:All 0.5s ease; 
@@ -83,7 +83,7 @@ html, body
 	}
 	.menu_mluv_retratil.esconder 
 	{
-		top: -450px; 
+		top: 0; 
 		position: fixed;
 	}
 	.menu_mluv_retratil a.mostra-esconde-menu 

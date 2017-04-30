@@ -6,6 +6,6 @@ $(document).ready(function() {
       if ($(this).text() != "Perfil ▼")
        $(this).text("Perfil ▼")
         else
-       $(this).text("Perfil ▲");      
+       $(this).text("Perfil ▲"); 
   }); 
 });
