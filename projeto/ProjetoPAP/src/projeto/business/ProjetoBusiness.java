@@ -41,7 +41,7 @@ public class ProjetoBusiness {
 			return "projeto não encontrado";
 		}
 		
-		p.setStatus("em andamento");
+		p.setStatus("Em andamento");
 		dao.alterar(p);
 		return "Projeto iniciado com sucesso."; 
 	}

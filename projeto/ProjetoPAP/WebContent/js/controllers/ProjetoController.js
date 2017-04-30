@@ -133,44 +133,58 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 	};
 	
 		// inicia projeto
-		$scope.IniciarProjeto = function(projeto){
-			if($scope.usuariosDoProjeto.length < projeto.vagas){
-				swal({
-					  title: "Você tem certeza?",
-					  text: "O projeto tem apenas "+$scope.usuariosDoProjeto.length+" integrantes, de um total de "
-					  	+projeto.vagas+" vagas, deseja continuar?",
-					  type: "warning",
-					  showCancelButton: true,
-					  confirmButtonColor: "#DD6B55",
-					  confirmButtonText: "Sim, tenho certeza.",
-					  closeOnConfirm: false
-					},
-					function(){
-						console.log("projeto iniciado");
-						$http.post(
-								'http://localhost:8080/ProjetoPAP/rest/projetorest/iniciar/'+projeto.idProjeto).success(
-								function(data) {
-									swal("Muito bem",data,"success");
-									$scope.iniciaTela();
-								}).error(
-								function(data, status, header, config) {
-									swal("Ops","Não foi possivel iniciar o projeto, tente novamente.");
-							});
-					});
-				}
-			else{
-				$http.post(
-						'http://localhost:8080/ProjetoPAP/rest/projetorest/iniciar/'+projeto.idProjeto).success(
-						function(data) {
-							swal("Muito bem",data);
-						}).error(
-						function(data, status, header, config) {
-							swal("Ops","Não foi possivel iniciar o projeto, tente novamente.");
-					});
-			}		
+	$scope.StatusProjeto = function(projeto){
+		if(projeto.status=="Aberto"){
+			IniciarProjeto(projeto);
+		}else{
+			if(projeto.status == "Em andamento"){
+				ConcluirProjeto(projeto);
+			}
 		}
+	}
+		
+	var IniciarProjeto = function(projeto){
+
+		if($scope.usuariosDoProjeto.length < projeto.vagas){
+			swal({
+				  title: "Você tem certeza?",
+				  text: "O projeto tem apenas "+$scope.usuariosDoProjeto.length+" integrantes, de um total de "
+				  	+projeto.vagas+" vagas, deseja continuar?",
+				  type: "warning",
+				  showCancelButton: true,
+				  confirmButtonColor: "#DD6B55",
+				  confirmButtonText: "Sim, tenho certeza.",
+				  closeOnConfirm: false
+				},
+				function(){
+					console.log("projeto iniciado");
+					$http.post(
+							'http://localhost:8080/ProjetoPAP/rest/projetorest/iniciar/'+projeto.idProjeto).success(
+							function(data) {
+								swal("Muito bem",data,"success");
+								$scope.iniciaTela();
+							}).error(
+							function(data, status, header, config) {
+								swal("Ops","Não foi possivel iniciar o projeto, tente novamente.");
+						});
+				});
+			}
+		else{
+			$http.post(
+					'http://localhost:8080/ProjetoPAP/rest/projetorest/iniciar/'+projeto.idProjeto).success(
+					function(data) {
+						swal("Muito bem",data);
+					}).error(
+					function(data, status, header, config) {
+						swal("Ops","Não foi possivel iniciar o projeto, tente novamente.");
+				});
+		}		
+	}
 	
-	/**/
+	var ConcluirProjeto = function(projeto){
+		swal("Projeto concluido.");
+	}
+	
 	// Envia a informação de alteração de um elemento para o banco ... Via rest
 	$scope.SalvarAlteracao = function(projeto){
 		console.log("Salvar uma nova Alteração ...")
@@ -465,30 +479,24 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 		
 	};
 	
-	
-	
-
-	
 	// função para fechar o popUp de edição ... 
 	$scope.FecharPopUpEdicao = function(){
 	     $scope.istrue=false;
 	  };
-	// função que inicia a tela
-		$scope.iniciaTela = function() {
-			console.log("Iniciando a tela projetos");
-			$scope.BuscarInformacao();
-			$scope.BuscarInformacaoCompetencias();
-			$scope.BuscarInformacaoUsuarios();
-			// Validação para não carregar dados no cadastro de novo projetos
-			if($stateParams.idProjeto != null){
-				$scope.CarregarEdicao();
-				$rootScope.projeto_selecionado_id = $stateParams.idProjeto;	
-				
+	
+	$scope.modificarStatusProjeto = function(projeto){
+		if(projeto != null){
+			if(projeto.status == "Aberto"){	
+				return "Iniciar projeto";
 			}
-				
-		};
-		$scope.iniciaTela();
-		
+			else{
+				if(projeto.status == "Em andamento"){
+					return "Concluir projeto";
+				}
+			}
+		}
+	}	
+	
 	$scope.filtroTela = function(idOrganizador, usuariosDoProjetoo, aprovacaoUsuarioss){
 		if(idOrganizador == $scope.UsuarioLogado){
 			return false;
@@ -522,7 +530,20 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 	     
 	  };
 	  
-
+	// função que inicia a tela
+	$scope.iniciaTela = function() {
+		console.log("Iniciando a tela projetos");
+		$scope.BuscarInformacao();
+		$scope.BuscarInformacaoCompetencias();
+		$scope.BuscarInformacaoUsuarios();
+		$scope.modificarStatusProjeto();
+		// Validação para não carregar dados no cadastro de novo projetos
+		if($stateParams.idProjeto != null){
+			$scope.CarregarEdicao();
+			$rootScope.projeto_selecionado_id = $stateParams.idProjeto;			
+		}			
+	};
+	$scope.iniciaTela();
 	
 });
 
