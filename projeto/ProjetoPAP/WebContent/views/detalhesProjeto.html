@@ -143,6 +143,7 @@
             </table>
             </p>	
             </br>
+            <button class="btn btn-primary" ng-show="projeto.organizador.idUsuario == UsuarioLogado" ng-click="StatusProjeto(projeto)">{{modificarStatusProjeto(projeto)}}</button>
          </div>
          <!-- End comum -->
          <!-- aberto-->
@@ -160,15 +161,12 @@
                </tbody>
             </table>
             </p>	
-            <button class="btn btn-primary" ng-show="projeto.organizador.idUsuario == UsuarioLogado" ng-click="IniciarProjeto(projeto)">Iniciar Projeto</button>
-         	<button ng-show="filtroTela(projeto.organizador.idUsuario, usuariosDoProjeto, aprovacaoUsuarios)" 
-            	class="btn btn-primary" ng-click="SolicitaParticipacao(projeto)">Participar do projeto</button>
          </div>
-         <!-- fim aberto -->
+         <!-- fim aberto -->	
       </div>
    </div>
    <!-- em antamento -->
-   <div ng-controller="PageTarefaCtrl" ng-show="projeto.status == 'em andamento'">
+   <div ng-controller="PageTarefaCtrl" ng-show="projeto.status == 'Em andamento'">
       <br/><br/>
       <button ng-click="CriarTarefa()">+</button>
       <br/>
