@@ -2,13 +2,12 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <div ng-controller="ListarProjetosCtrl">
-
 		<div class="listarProjetos">
 			<div class="search">
-					<input ng-model="search" type="text" size="40" placeholder="search..." ng-change="BuscarInformacao()"/>
-					<i style="font-size: 18px; color: #131922" class="fa fa-search" aria-hidden="true"></i>
-					<a id="criarProjeto" ng-href="#/pageProjeto">+</a>
+				<input ng-model="search" type="text" size="40" placeholder="search..." ng-change="BuscarInformacao()"/>
+				<i class="fa fa-search" aria-hidden="true"></i>
 			</div>
+			<a id="criarProjeto" ng-href="#/pageProjeto"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
 			<div class="panelcriar panel-default" ng:repeat="projeto in meusProjetos | filter: search">
 				<div class="panel-body">
 					<div class="projetoInf">

@@ -49,13 +49,19 @@
       <div class="panelinf panel panel-default">
          <div class="panel-heading">Competência necessárias para o projeto</div>
          <div class="panel-body" ng-repeat="competenciaDoProjeto in competenciasDoProjeto">
-            {{competenciaDoProjeto.nomeCompetencia}}
+         	<span class="infoprojeto">
+         		<i class="fa fa-graduation-cap" aria-hidden="true"></i>
+            	{{competenciaDoProjeto.nomeCompetencia}}
+         	</span>
          </div>
       </div>
       <div class="panelinf panel panel-default">
          <div class="panel-heading">Integrantes do projeto</div>
          <div class="panel-body" ng-repeat="usuarioDoProjeto in usuariosDoProjeto">
-            {{usuarioDoProjeto.nomeUsuario}}
+         	<span class="infoprojeto">
+         		<i class="fa fa-user-circle" aria-hidden="true"></i>
+            	{{usuarioDoProjeto.nomeUsuario}}
+         	</span>
          </div>
       </div>
    </div>

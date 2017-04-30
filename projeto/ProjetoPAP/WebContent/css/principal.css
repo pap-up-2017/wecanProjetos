@@ -73,13 +73,12 @@ html, body
 	float: left;
 	clear: both;
 	width: 100%;
-	height: 130px;
+	height: 150px;
 	background-color: #121d27;
 	color: #fff;
 	font-size: 15px;
 	text-align: center;
-	padding-top: 20px;
-	padding-bottom: 20px;
+	padding: 20px;
 }
 .rodape p
 {
