@@ -19,12 +19,12 @@
 <!-- ------------------------- -->
 <!-- Divisões da página -->	
 	<body>
-		<header>
+		<header ng-controller="IndexCtrl">
 			<div class="menu_mluv_retratil">
 				<nav>
 					<ul id="menuPerfil">
 						<li><div ng-controller="loginCtrl"><a href="#" ng-click="logout()"><i style="font-size: 20px;" class="fa fa-sign-out" aria-hidden="true"></i> Sair</a></div></li>	
-						<li><a ui-sref="pageMeusProjetos" ui-sref-active="active"><i style="font-size: 20px;" class="fa fa-area-chart" aria-hidden="true"></i> Meus projetos</a></li>
+						<li><a ng-hide="tipoUsuarioFiltro()" ui-sref="pageMeusProjetos" ui-sref-active="active"><i ng-hide="tipoUsuarioFiltro()" style="font-size: 20px;" class="fa fa-area-chart" aria-hidden="true"></i> Meus projetos</a></li>
 						<li ng-controller="PerfilCtrl"><a ui-sref="perfil({idUsuario: {{UsuarioLogado}} })" ui-sref-active="active"><i style="font-size: 20px;" class="fa fa-user-circle" aria-hidden="true"></i> Perfil</a></li>
 					</ul>
 				</nav>
@@ -50,13 +50,29 @@
 				</div>
 				<a class="mostra-esconde-menu" href="javascript:void(0);">Perfil ▲</a>
 			</div>
-			<ul id="menu">	
-                <li><a href="#pageListaNotificacoes"><div class="button" ng-controller="PageNotificacaoCtrl"><i style="font-size: 20px;" class="fa fa-bell" aria-hidden="true"><span ng-hide="NotificacoesPendentes == 0" class="button__badge">{{NotificacoesPendentes}}</span></i></div> Notificações</a></li>
-				<li><a href="#"><i style="font-size: 20px;" class="fa fa-users" aria-hidden="true"></i> Fórum</a></li>
-				<li><a ui-sref="pageListaProjetos" ui-sref-active="active"><i style="font-size: 20px;" class="fa fa-area-chart" aria-hidden="true"></i> Projetos</a></li>
-				<li><a href="#"><i style="font-size: 20px;" class="fa fa-clipboard" aria-hidden="true"></i> Avaliações</a></li>
-				<li><a ui-sref="cadastrosAdmin" ui-sref-active="active"><i style="font-size: 20px;" class="fa fa-clipboard" aria-hidden="true"></i> Administrador</a></li>
-			</ul>
+			<div>
+				<ul id="menu">	
+                	<li><a ng-hide="tipoUsuarioFiltro()" href="#pageListaNotificacoes">
+                		<div ng-hide="tipoUsuarioFiltro()" class="button" ng-controller="PageNotificacaoCtrl">
+                		<i ng-hide="tipoUsuarioFiltro()" style="font-size: 20px;" class="fa fa-bell" aria-hidden="true">
+                		<span ng-hide="NotificacoesPendentes == 0" class="button__badge">{{NotificacoesPendentes}}</span>
+                		</i></div> Notificações</a>
+                	</li>
+					<!-- <li><a href="#">
+						<i style="font-size: 20px;" class="fa fa-users" aria-hidden="true"></i> Fórum</a>
+					</li> -->
+					<li><a ng-hide="tipoUsuarioFiltro()" ui-sref="pageListaProjetos" ui-sref-active="active">
+						<i ng-hide="tipoUsuarioFiltro()" style="font-size: 20px;" class="fa fa-area-chart" aria-hidden="true">
+						</i> Projetos</a>
+					</li>
+					<li><a ng-hide="tipoUsuarioFiltro()" href="#">
+						<i ng-hide="tipoUsuarioFiltro()" style="font-size: 20px;" class="fa fa-clipboard" aria-hidden="true">
+						</i> Avaliações</a></li>
+					<li><a ng-show="tipoUsuarioFiltro()" ui-sref="cadastrosAdmin" ui-sref-active="active">
+						<i ng-show="tipoUsuarioFiltro()" style="font-size: 20px;" class="fa fa-clipboard" aria-hidden="true"></i> Administrador</a>
+					</li>
+				</ul>
+			</div>
 		</header>
 		<br/><br/>
 		<div class="conteudo" ui-view></div>	
@@ -105,6 +121,7 @@
 		<script type="text/javascript" src="js/controllers/ExcluirUsuarioController.js"></script>
 		<script type="text/javascript" src="js/controllers/ListarProjetosController.js"></script>
 		<script type="text/javascript" src="js/controllers/NotificacaoController.js"></script>
+		<script type="text/javascript" src="js/controllers/IndexController.js"></script>
 </html>
 <!--         			<li class=""><a ui-sref="pageTarefa" ui-sref-active="active">Tarefas</a></li>
         				<li class=""><a ui-sref="pageCompetencia" ui-sref-active="active">Competencias</a></li>
