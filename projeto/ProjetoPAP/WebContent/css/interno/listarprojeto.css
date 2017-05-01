@@ -1,5 +1,32 @@
+body
+{
+	font-family: 'Raleway';
+}
+.identificacao
+{
+	margin-top: 10px;
+	margin-bottom: 0px;
+	border-top: 10px solid rgba(18, 29, 39, 1);
+	color: rgba(18, 29, 39, 1);
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+	background-color: #2c3b46;
+	padding: 5px;
+}
 @media screen and (min-width: 781px)
 {
+	#projeto
+	{
+		margin-top: -7px;
+		color: rgba(18, 29, 39, 1);
+		text-align: center;
+		font-size: 20px;
+		font-weight: bold;
+		background-color: #2c3b46;
+		padding: 5px;
+		border-top: 10px solid rgba(18, 29, 39, 1);
+	}
 	.search
 	{
 		padding-left: 30px;
@@ -50,6 +77,7 @@
 		height: 150px;
 		background: rgba(18, 29, 39, 1);
 		border-radius: 20px;
+		border-top: 10px solid #2c3b46;
 	}
 	.projetoInf .integrantes
 	{
@@ -60,7 +88,7 @@
 		border: 3px solid rgba(53, 255, 153, 1);
 		padding-top: 30px;
 		border-radius: 100px;
-		color: yellow;
+		color: #e6a557;
 	}
 	.projetoDesc
 	{
@@ -112,6 +140,17 @@
 }
 @media screen and (min-width: 481px) and (max-width: 780px)
 {
+	#projeto
+	{
+		margin-top: -105px;
+		color: rgba(18, 29, 39, 1);
+		text-align: center;
+		font-size: 20px;
+		font-weight: bold;
+		background-color: #2c3b46;
+		padding: 5px;
+		border-top: 10px solid rgba(18, 29, 39, 1);
+	}
 	.search
 	{
 		padding-left: 30px;
@@ -170,7 +209,7 @@
 		padding-top: 30px;
 		border-radius: 100px;
 		margin-left: 40%;
-		color: yellow;
+		color: #e6a557;
 	}
 	.projetoDesc
 	{
@@ -220,6 +259,17 @@
 }
 @media screen and (max-width: 480px)
 {
+	#projeto
+	{
+		margin-top: -105px;
+		color: rgba(18, 29, 39, 1);
+		text-align: center;
+		font-size: 20px;
+		font-weight: bold;
+		background-color: #2c3b46;
+		padding: 5px;
+		border-top: 10px solid rgba(18, 29, 39, 1);
+	}
 	.search
 	{
 		padding-left: 30px;
@@ -280,7 +330,7 @@
 		padding-top: 30px;
 		border-radius: 100px;
 		margin-left: 35%;
-		color: yellow;
+		color: #e6a557;
 	}
 	.projetoDesc
 	{
