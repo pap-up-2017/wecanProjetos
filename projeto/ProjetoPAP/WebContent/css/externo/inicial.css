@@ -2,22 +2,6 @@ body
 {
 	font-family: 'Raleway', sans-serif !important;
 }
-.rodape
-{
-	clear: both;
-	width: 100%;
-	height: 100px;
-	background-color: #121d27;
-	color: #fff;
-	font-size: 15px;
-	text-align: center;
-	padding-top: 20px;
-	padding-bottom: 20px;
-}
-.rodape p
-{
-	margin-top: 20px;
-}
 @media screen and (min-width: 1281px)
 {
 	.head
