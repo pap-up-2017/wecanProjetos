@@ -28,7 +28,7 @@
                      <button class="adicionar" ng-click="adicionaCompetencia()">Adicionar competência</button>
                      <br/><br/>
                      <label class="label label-default" for="cd">Participantes:</label>
-                     <select class="form-control" id="cd" ng-model="projeto.usuarios" ng-options="usuario.nomeUsuario for usuario in usuarios | filter: {idUsuario: '!'+UsuarioLogado}">
+                     <select class="form-control" id="cd" ng-model="projeto.usuarios" ng-options="usuario.usernameUsuario for usuario in usuarios | filter: {idUsuario: '!'+UsuarioLogado}">
                         <option value="">Selecione um participante</option>
                      </select>
                      <button class="adicionar" ng-click="adicionaUsuario()">Adicionar usuário</button>

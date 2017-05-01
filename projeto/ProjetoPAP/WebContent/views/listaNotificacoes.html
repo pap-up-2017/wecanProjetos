@@ -1,58 +1,18 @@
 
-
 <!-- Font Awesome is a great free icon font. -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"/>
+<link href="css/interno/notificacao.css" rel="stylesheet"/>
 
   
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <br/>
-<div ng-controller="PageNotificacaoCtrl">
-	{{ Resposta }}
-	<p class="form-group">
-		<input placeholder="Titulo" class="form-control" type="text" ng-model="notificacao.tituloNotificacao" required />
-		<input placeholder="Texto" class="form-control" type="text" ng-model="notificacao.textoNotificacao" required />
-		<input placeholder="Link de acesso" class="form-control" type="text" ng-model="notificacao.linkAcessoNotificacao" required />
-	</p class="form-group">
-	<button class="btn btn-success" ng-click="InserirNotificacao(notificacao)">Cadastrar</button>
-	<br/><br/>
-	<button class="btn btn-primary" ng-click="BuscarNotificacoes()">Buscar Notificações</button>
-	<br/><br/><br/><br/>
-
-	<div class="editpopup editpopup-{{istrue}} ">
-        <p>Titulo:<input type="text" ng-model="editedtituloNotificacao"></p>
-        <p>Texto:<input type="text" ng-model="editedtextoNotificacao"></p>
-        <p>Link de acesso:<input type="text" ng-model="editedlinkAcessoNotificacao"></p>
-        <button ng-click="SalvarAlteracao(editedidNotificacao, editedtituloNotificacao, editedtextoNotificacao, editedlinkAcessoNotificacao)">Salvar</button>
-        <button ng-click="FecharPopUpEdicao()">Cancelar</button>
-    	</div>	
-     	
-	<table class="table ">
-		<tr>
-			<td>ID</td>
-			<td>Titulo</td>
-			<td>Texto</td>
-			<td>Link de acesso</td>
-			<td>Usuário</td>
-			<td>Status</td>
-			
-			
-		</tr>
+<div class="notificacao" ng-controller="PageNotificacaoCtrl"> 	
+	<table>
 		<tr ng:repeat="notificacao in notificacoes | orderBy : idNotificacao : true">
-			<td>{{notificacao.idNotificacao}}</td>
 			<td><a ui-sref="{{notificacao.linkAcessoNotificacao}}" id="titulo">{{notificacao.tituloNotificacao}}</a></td>
-			<td>{{notificacao.textoNotificacao}}</td>
-			<td>{{notificacao.linkAcessoNotificacao}}</td>
-			<td>{{notificacao.usuario.nomeUsuario}}</td>   
-			<td>{{notificacao.statusNotificacao}}</td>
-			
-							
-			    
-			<td><button ng-click="CarregarEdicao(notificacao)" class="btn btn-primary">Alterar</button></td>
-			<td><button class="btn btn-primary" ng-click="ExcluirElemento(notificacao)">Excluir</button></td>
-			<td><button class="btn btn-primary" ng-click="AtualizaStatus(notificacao)">Atualiza Status</button></td>
-			
+			<td><span>{{notificacao.textoNotificacao}}</span></td>
+			<td><button class="btn btn-primary" ng-click="AtualizaStatus(notificacao)">Lida</button></td>
 		</tr>
 	</table>
-
 </div> 
