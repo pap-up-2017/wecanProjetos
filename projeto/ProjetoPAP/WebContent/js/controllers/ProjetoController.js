@@ -186,6 +186,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 				'http://localhost:8080/ProjetoPAP/rest/projetorest/concluir/'+projeto.idProjeto).success(
 				function(data) {
 					swal(data);
+					$scope.iniciaTela();
 				}).error(
 				function(data, status, header, config) {
 					swal("Ops","Não foi possivel concluir o projeto, tente novamente.");
