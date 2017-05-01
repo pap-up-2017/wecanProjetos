@@ -5,7 +5,9 @@ import java.util.List;
 
 import projeto.dao.FactoryDao;
 import projeto.dao.InterfaceProjetoDao;
+import projeto.dao.TarefaDao;
 import projeto.entity.Projeto;
+import projeto.entity.Tarefa;
 import projeto.entity.Usuario;
 import projeto.util.Datas;
 
@@ -44,6 +46,35 @@ public class ProjetoBusiness {
 		p.setStatus("Em andamento");
 		dao.alterar(p);
 		return "Projeto iniciado com sucesso."; 
+	}
+	
+	// Concluir projeto
+	public String concluir(int id){
+		boolean concluido = true;
+		InterfaceProjetoDao<Projeto> dao = FactoryDao.createProjetoDao();
+		TarefaDao daoT = FactoryDao.createTarefaDao();
+		Projeto p = dao.getObjById(id);
+		List<Tarefa> tarefas = daoT.listarPorProjeto(p.getIdProjeto());
+		// verifica se há tarefas
+		if(!(tarefas.size() > 0)){
+			concluido = false;
+			return "Seu projeto ainda não possui tarefas";
+		}
+		else{
+			// verifica se todas as tarefas foram concluídas
+			for(Tarefa t : tarefas){
+				if(!(t.getStatusTarefa().equals("Concluído"))){
+					concluido = false;
+					return "Todas as tarefas devem estar concluídas";
+				}
+			}
+		}
+		if(concluido){
+			p.setStatus("Concluído");
+			dao.alterar(p);
+			return "Projeto concluído com sucesso."; 
+		}
+		return null;
 	}
 
 	public List<Projeto> projetosPorUsuario(int id){

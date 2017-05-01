@@ -134,7 +134,7 @@ public class ProjetoRest {
 		AprovPartBusiness.recusar(AprovPart);
 	}
 	
-	// post recusar participação no projeto 
+	// iniciar projeto
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -142,6 +142,17 @@ public class ProjetoRest {
 	public String iniciarProjeto(@PathParam("id") int id) {
 		ProjetoBusiness pBus = new ProjetoBusiness();
 		String result = pBus.inciar(id);
+		return gson.toJson(result);
+	}
+	
+	// post recusar participação no projeto 
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/concluir/{id}")
+	public String concluirProjeto(@PathParam("id") int id) {
+		ProjetoBusiness pBus = new ProjetoBusiness();
+		String result = pBus.concluir(id);
 		return gson.toJson(result);
 	}
 	

@@ -182,7 +182,16 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 	}
 	
 	var ConcluirProjeto = function(projeto){
-		swal("Projeto concluido.");
+		$http.post(
+				'http://localhost:8080/ProjetoPAP/rest/projetorest/concluir/'+projeto.idProjeto).success(
+				function(data) {
+					swal(data);
+				}).error(
+				function(data, status, header, config) {
+					swal("Ops","Não foi possivel concluir o projeto, tente novamente.");
+			});
+
+
 	}
 	
 	// Envia a informação de alteração de um elemento para o banco ... Via rest
