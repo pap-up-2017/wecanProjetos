@@ -1,16 +1,16 @@
 body
 {
 	font-family: 'Raleway';
+	background-color: #fff;
 }
 .identificacao
 {
 	margin-top: 10px;
 	margin-bottom: 0px;
 	border-top: 5px solid rgba(18, 29, 39, 1);
-	color: rgba(18, 29, 39, 1);
+	color: #fff;
 	text-align: center;
 	font-size: 15px;
-	font-weight: bold;
 	background-color: #2c3b46;
 	padding: 5px;
 	margin-bottom: 10px;
@@ -19,15 +19,20 @@ body
 {
 	margin-bottom: 10px;
 }
+.projetoInf
+{
+	-webkit-box-shadow: 10px 10px 3px -4px rgba(0,0,0,0.28);
+	-moz-box-shadow: 10px 10px 3px -4px rgba(0,0,0,0.28);
+	box-shadow: 10px 10px 3px -4px rgba(0,0,0,0.28);
+}
 @media screen and (min-width: 781px)
 {
 	#projeto
 	{
 		margin-top: -7px;
-		color: rgba(18, 29, 39, 1);
+		color: #fff;
 		text-align: center;
 		font-size: 15px;
-		font-weight: bold;
 		background-color: #2c3b46;
 		padding: 5px;
 		border-top: 5px solid rgba(18, 29, 39, 1);
@@ -82,7 +87,7 @@ body
 		height: 200px;
 		background: rgba(18, 29, 39, 1);
 		border-radius: 20px;
-		border-top: 10px solid #2c3b46;
+		
 	}
 	.projetoInf .integrantes
 	{
@@ -92,6 +97,7 @@ body
 		text-align: center;
 		border: 3px solid rgba(53, 255, 153, 1);
 		padding-top: 30px;
+		margin-top: 30px;
 		border-radius: 100px;
 		color: #e6a557;
 	}
@@ -106,10 +112,10 @@ body
 	.projetoDesc #titulo
 	{
 		text-decoration: none;
-		font-size: 20px;
+		font-size: 30px;
 		color: rgba(53, 255, 153, 1);
 		margin-right: 30px;
-		margin-left: 10px;
+		margin-left: 20px;
 	}
 	.projetoDesc #titulo:hover
 	{
