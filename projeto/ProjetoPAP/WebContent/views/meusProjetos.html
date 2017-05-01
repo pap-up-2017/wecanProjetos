@@ -17,10 +17,9 @@
 						</div>
 						<div class="projetoDesc">
 							<a ui-sref="pageDetalhesProjeto({idProjeto:{{projeto.idProjeto}}})" id="titulo">{{projeto.nome}}</a>
-								<p><label>{{projeto.organizador.nomeUsuario}}</label><label>{{projeto.organizador.cursoUsuario.nomeCurso}}</label>
-								<label><a ui-sref="pageAlterarProjeto({idProjeto:{{projeto.idProjeto}}})" ng-show="projeto.organizador.idUsuario == UsuarioLogado">Alterar</a></label></p>
-							<p><div id="desc" >{{projeto.descricao}}</div>
-							</p>
+							<p><label>{{projeto.organizador.nomeUsuario}}</label><label>{{projeto.organizador.cursoUsuario.nomeCurso}}</label></p>
+							<p><div id="desc" >{{projeto.descricao}}</div></p>
+							<label style="color: #e6a557;">{{projeto.status}}</label>
 						</div>
 					</div>
 				</div>
