@@ -68,8 +68,8 @@
 				<div class="acaoEditar">
 					<button ng-click="SalvarAlteracao()" class="btnAcao btn btn-primary">Salvar Alterações</button>
 				</div>
-				<div class="acaoExcluir">
-					<a ui-sref="perfil" ui-sref-active="active" class="btnAcao btn btn-danger">Cancelar alterações</a>
+				<div class="acaoExcluir" ng-controller="PerfilCtrl">
+					<a ui-sref="perfil({idUsuario: {{UsuarioLogado}} })" ui-sref-active="active" class="btnAcao btn btn-danger">Cancelar alterações</a>
 				</div>
 			</div>
 		</div>	
