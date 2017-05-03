@@ -15,6 +15,7 @@ public class UsuarioLogadoBusiness {
 		
 		uLogged.setIdUsuarioLogado(u.getIdUsuario());
 		uLogged.setTipoUsuarioLogado(u.getTipoUsuario().getTipoUsuario());
+		uLogged.setUsernameUsuarioLogado(u.getUsernameUsuario());
 		uLogged.setDataCriacao(Datas.retornaDataAtual());
 		uLogged.setToken(criarToken());
 		InterfaceDao<UsuarioLogado> dao = FactoryDao.createUsuarioLogadoDao();

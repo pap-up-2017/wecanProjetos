@@ -21,6 +21,7 @@ public class UsuarioLogado {
 	private Date dataCriacao;
 	private String token;
 	private String tipoUsuarioLogado;
+	private String usernameUsuarioLogado;
 	
 	public int getId() {
 		return id;
@@ -52,5 +53,10 @@ public class UsuarioLogado {
 	public void setTipoUsuarioLogado(String tipoUsuarioLogado) {
 		this.tipoUsuarioLogado = tipoUsuarioLogado;
 	}
-
+	public String getUsernameUsuarioLogado() {
+		return usernameUsuarioLogado;
+	}
+	public void setUsernameUsuarioLogado(String usernameUsuarioLogado) {
+		this.usernameUsuarioLogado = usernameUsuarioLogado;
+	}
 }

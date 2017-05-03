@@ -1,6 +1,7 @@
 angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope, $http, $stateParams, $cookieStore, $state) {
 
 	$scope.UsuarioLogado = $cookieStore.get("session_user_id");
+	$scope.usernameUsuarioLogado = $cookieStore.get("session_username");
 	
 	// Busca informações de todos os projetos salvas no banco ... Via rest
 	$scope.BuscarInformacao = function() {
@@ -404,7 +405,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 					$scope.notificacao = {
 							type : "notificacao",
 							tituloNotificacao : 'Solicitação de participante' ,
-							textoNotificacao : 'o usuário '+ $scope.UsuarioLogado + ' solicitou participação no projeto '+ $scope.projeto.nome,
+							textoNotificacao : 'o usuário '+$scope.usernameUsuarioLogado+' solicitou participação no projeto '+ $scope.projeto.nome,
 							linkAcessoNotificacao : 'pageDetalhesProjeto({idProjeto:' + $scope.projeto.idProjeto +'})',
 							usuario : $scope.projeto.organizador.idUsuario }
 					

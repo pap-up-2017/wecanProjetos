@@ -17,7 +17,8 @@ angular.module("app").controller('loginCtrl', function($scope, $http, $cookies, 
 			$cookieStore.remove("session_user_id");
 			$cookieStore.remove("session_data_val");
 			$cookieStore.remove("session_token_val");
-			$cookieStore.remove("session_tipo_usuario");;
+			$cookieStore.remove("session_tipo_usuario");
+			$cookieStore.remove("session_username");
 			window.location.href = "http://localhost:8080/ProjetoPAP/home.html";
 		});
 	}
@@ -55,6 +56,7 @@ angular.module("app").controller('loginCtrl', function($scope, $http, $cookies, 
 		$cookieStore.put("session_data_val",data["dataCriacao"]);
 		$cookieStore.put("session_token_val",data["token"]);
 		$cookieStore.put("session_tipo_usuario",data["tipoUsuarioLogado"]);
+		$cookieStore.put("session_username",data["usernameUsuarioLogado"]);
 		if($cookieStore.get("session_user_id") == null){
 			return false;
 		}
