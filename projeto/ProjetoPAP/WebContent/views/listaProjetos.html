@@ -34,12 +34,12 @@
 		<div class="listarProjetos">
 		<div class="identificacao">Projetos geral</div>
 			<div class="search">
-				<input ng-model="search" type="text" size="40" placeholder="search..." ng-change="BuscarInformacao()"/>
+				<input ng-model="search2" type="text" size="40" placeholder="search..." ng-change="BuscarInformacao()"/>
 				<i class="fa fa-search" aria-hidden="true"></i>
 			</div>
 			<a id="criarProjeto" ng-href="#/pageProjeto"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
 			</div>
-			<div class="panelcriar panel-default" ng:repeat="projeto in projetos | filter: {status: 'Aberto'} | filter: search">
+			<div class="panelcriar panel-default" ng:repeat="projeto in projetos | filter: {status: 'Aberto'} | filter: search2">
 				<div class="panel-body">
 					<div class="projetoInf">
 						<div class="integrantes">
