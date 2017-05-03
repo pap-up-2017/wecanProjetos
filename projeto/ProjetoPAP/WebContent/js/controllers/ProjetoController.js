@@ -94,42 +94,42 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
     
 	// envia a informação de um novo cadastro de para o banco ... Via rest
 	$scope.SalvarCadastro = function(projeto) {
+		
+		if(projeto.nome != null){
+			if(projeto.descricao != null){
+				if(projeto.dataEntrega != null){
+					if(projeto.vagas != null){
+						if($scope.competenciasDoProjeto.length > 0){
+							var parameter = JSON.stringify({
+								type : "projeto",
+								nome : projeto.nome,
+								descricao : projeto.descricao,
+								organizador : projeto.organizador,
+								vagas : projeto.vagas,
+								dataEntrega : projeto.dataEntrega,
+								competencias : $scope.competenciasDoProjeto,
+								usuarios : $scope.usuariosDoProjeto,
+								organizador : {idUsuario : $scope.UsuarioLogado}
+							});
 
-		var parameter = JSON.stringify({
-			type : "projeto",
-			nome : projeto.nome,
-			descricao : projeto.descricao,
-			organizador : projeto.organizador,
-			vagas : projeto.vagas,
-			dataEntrega : projeto.dataEntrega,
-			competencias : $scope.competenciasDoProjeto,
-			usuarios : $scope.usuariosDoProjeto,
-			organizador : {idUsuario : $scope.UsuarioLogado}
-			
+							var config = { headers : {	'Content-Type' : 'application/json;charset=utf-8;'}}
 
-		});
-		
-		//console.log(parameter);
-		
-		
-		
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
+							$http.post(
+									'http://localhost:8080/ProjetoPAP/rest/projetorest/postcad',
+									parameter, config).success(
+									function(data, status, headers, config) {
+										$state.go("pageMeusProjetos");
+									}).error(
+									function(data, status, header, config) {
+										swal("Não foi possivel criar o projeto, tente novamente.");
+									});
+						}else{
+							swal("você deve inserir ao menos uma competencia em seu projeto.");
+						}
+					}
+				}
 			}
 		}
-
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/projetorest/postcad',
-				parameter, config).success(
-				function(data, status, headers, config) {
-					$state.go("pageMeusProjetos");
-				}).error(
-				function(data, status, header, config) {
-					swal("Não foi possivel criar o projeto, tente novamente.");
-				});
-		
-		$scope.BuscarInformacao();
 	};
 	
 		// inicia projeto
@@ -540,6 +540,32 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 	     
 	  };
 	  
+	$scope.ApagarCompetenciaDoprojetoACriar = function(competenciaDoProjeto){
+		for(var i=0; i<=$scope.competenciasDoProjeto.length; i++) {
+		    if($scope.competenciasDoProjeto[i].idCompetencia == competenciaDoProjeto.idCompetencia){
+		    	if(i == 0){
+		    		$scope.competenciasDoProjeto.shift();
+		    	}else{
+			    	$scope.competenciasDoProjeto.splice(i,i);
+		    	}
+		    	break;
+		    }
+		}
+	}
+	
+	$scope.ApagarUsuariosDoprojetoACriar = function(usuarioDoProjeto){
+		console.log($scope.usuariosDoProjeto.length);
+		for(var i=0; i<=$scope.usuariosDoProjeto.length; i++) {
+		    if($scope.usuariosDoProjeto[i].idUsuario == usuarioDoProjeto.idUsuario){
+		    	if(i == 0){
+		    		$scope.usuariosDoProjeto.shift();
+		    	}else{
+		    		$scope.usuariosDoProjeto.splice(i,i);
+		    	}
+		    	break;
+		    }
+		}
+	}
 	// função que inicia a tela
 	$scope.iniciaTela = function() {
 		console.log("Iniciando a tela projetos");

@@ -18,7 +18,12 @@ public class ProjetoBusiness {
 		InterfaceProjetoDao<Projeto> dao = FactoryDao.createProjetoDao();
 		if (p.getIdProjeto() < 1){
 			// Registro a quantidade de participantes mais o organizador
-			p.setParticipantes(p.getUsuarios().size()+1);
+			// se não houver integrantes 
+			if(p.getUsuarios() == null){
+				p.setParticipantes(1);
+			}else{
+				p.setParticipantes(p.getUsuarios().size()+1);
+			}
 			p.setDataCriacao(Datas.retornaDataAtual());
 			p.setStatus("Aberto");
 			id = dao.salvar(p);
@@ -42,7 +47,6 @@ public class ProjetoBusiness {
 		}catch(Exception ex){
 			return "projeto não encontrado";
 		}
-		
 		p.setStatus("Em andamento");
 		dao.alterar(p);
 		return "Projeto iniciado com sucesso."; 
