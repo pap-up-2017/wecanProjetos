@@ -10,9 +10,9 @@
 <div class="notificacao" ng-controller="PageNotificacaoCtrl"> 	
 	<table>
 		<tr ng:repeat="notificacao in notificacoes | orderBy : idNotificacao : true">
-			<td><a ui-sref="{{notificacao.linkAcessoNotificacao}}" id="titulo">{{notificacao.tituloNotificacao}}</a></td>
+			<td><a ng-click="AtualizaStatus(notificacao)" ui-sref="{{notificacao.linkAcessoNotificacao}}" id="titulo">{{notificacao.tituloNotificacao}}</a></td>
 			<td><span>{{notificacao.textoNotificacao}}</span></td>
-			<td><button class="btn btn-primary" ng-click="AtualizaStatus(notificacao)">Lida</button></td>
+			<td><button class="btn btn-primary" ng-click="AtualizaStatus(notificacao)">{{notificacao.statusNotificacao}}</button></td>
 		</tr>
 	</table>
 </div> 
