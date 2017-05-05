@@ -2,7 +2,6 @@ package projeto.entity;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,6 +30,8 @@ public class Tarefa {
 	private String statusTarefa;
 	@ManyToOne
 	private Projeto projetoTarefa;
+	@ManyToOne
+	private Usuario usuarioModificacao;
 	
 	public int getIdTarefa() {
 		return idTarefa;
@@ -73,6 +74,12 @@ public class Tarefa {
 	}
 	public void setProjetoTarefa(Projeto projetoTarefa) {
 		this.projetoTarefa = projetoTarefa;
+	}
+	public Usuario getUsuarioModificacao() {
+		return usuarioModificacao;
+	}
+	public void setUsuarioModificacao(Usuario usuarioModificacao) {
+		this.usuarioModificacao = usuarioModificacao;
 	}	
 
 }

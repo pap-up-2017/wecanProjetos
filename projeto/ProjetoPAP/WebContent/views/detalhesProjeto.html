@@ -196,6 +196,7 @@
 	               <div id="{{tarefa.idTarefa}}" style="background: white;" draggable="true"
 	                  ondragstart="angular.element(this).scope().drag(event)">{{tarefa.nomeTarefa}}  
 	                  <button style="float:right" ng-click="ExcluirElemento(tarefa)">-</button>
+	                  <button style="float:right" ng-click="DetalhesTarefa(tarefa)">+</button>
 	                  <button style="float:right" ng-click="CarregarEdicao(tarefa)">Alt</button>
 	               </div>
 	               <br>
@@ -211,6 +212,7 @@
 	               <div id="{{tarefa.idTarefa}}" style="background: white;" draggable="true"
 	                  ondragstart="angular.element(this).scope().drag(event)">{{tarefa.nomeTarefa}}  
 	                  <button style="float:right" ng-click="ExcluirElemento(tarefa)">-</button>
+	                  <button style="float:right" ng-click="DetalhesTarefa(tarefa)">+</button>
 	                  <button style="float:right" ng-click="CarregarEdicao(tarefa)">Alt</button>
 	               </div>
 	               <br>
@@ -225,8 +227,9 @@
 	            <div id="{{tarefa.idTarefa}}rep"ng:repeat="tarefa in tarefas | filter: {statusTarefa : 'Concluído'}">
 	               <div id="{{tarefa.idTarefa}}" style="background: white;" draggable="true"
 	                  ondragstart="angular.element(this).scope().drag(event)">{{tarefa.nomeTarefa}}  
-	                  <button style="float:right" ng-click="ExcluirElemento(tarefa)">-</button>
-	                  <button style="float:right" ng-click="CarregarEdicao(tarefa)">Alt</button>
+	                  <button style="float:right" ng-click="ExcluirElemento(tarefa)">-</button>        
+	                  <button style="float:right" ng-click="DetalhesTarefa(tarefa)">+</button>
+	                  <button style="float:right" ng-click="CarregarEdicao(tarefa)">Alt</button>     
 	               </div>
 	               <br>
 	            </div>
@@ -260,7 +263,7 @@
 	<div ng-show="projeto.status == 'Concluído'">
 		<h1>{{projeto.nome}}</h1>
 		<p>{{projeto.descricao}}</p>
-		<p>Criado em: {{ projeto.dataCriacao | date: 'dd/MM/yyyy - HH:mm:ss'}}<p/>
+		<p>Criado em: {{ projeto.dataCriacao | date: '	'}}<p/>
 		<p>Entrega em: {{ projeto.dataEntrega | date: 'dd/MM/yyyy'}}</p>
 		<p>Status: {{projeto.status}}</p>
 		<p>Vagas: {{projeto.vagas}}</p>

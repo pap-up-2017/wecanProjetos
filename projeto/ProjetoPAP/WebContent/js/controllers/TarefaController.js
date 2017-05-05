@@ -1,4 +1,6 @@
-angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stateParams) {
+angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stateParams, $cookieStore, $filter) {
+	
+	$scope.UsuarioLogado = $cookieStore.get("session_user_id");
 	
 	$scope.drag = function(ev) {
 		ev.dataTransfer.setData("text", ev.target.id);
@@ -88,7 +90,7 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 		}
 
 		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/tarefarest/postcad',
+				'http://localhost:8080/ProjetoPAP/rest/tarefarest/postcad/'+$scope.UsuarioLogado,
 				parameter, config).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Tarefa salva com sucesso!';
@@ -158,13 +160,7 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 			type : "tarefa",
 			idTarefa : editedidTarefa,
 			statusTarefa : editedStatusTarefa
-			//nomeTarefa : editednameTarefa,
-			//projetoTarefa : editedProjetoTarefa,
-			//descricaoTarefa : editeddescricaoTarefa,
-			//prazoEntrega: editedprazoEntrega
 		});
-		
-//		console.log(parameter);
 
 		var config = {
 			headers : {
@@ -173,23 +169,17 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 		}
 
 		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/tarefarest/postalt',
+				'http://localhost:8080/ProjetoPAP/rest/tarefarest/postalt/'+$scope.UsuarioLogado,
 				parameter, config).success(
 				function(data, status, headers, config) {
-					$scope.Resposta = data;
-					
-					
+					$scope.Resposta = data;	
+					$scope.BuscarTarefaProjeto();	
 				}).error(
 				function(data, status, header, config) {
 					$scope.Resposta = "Data: " + data + "<hr />status: "
 							+ status + "<hr />headers: " + header
-							+ "<hr />config: " + config;
-					
-				
+							+ "<hr />config: " + config;	
 				});
-		
-		//$scope.BuscarInformacao();
-		
 	};
 
 	
@@ -234,6 +224,20 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 	
 	$scope.CriarTarefa = function(){
 		$scope.createIstrue=true;
+	};
+	
+	$scope.DetalhesTarefa = function(tarefa){
+		var d = new Date();
+		swal({
+			  title: tarefa.nomeTarefa,
+			  text: tarefa.descricaoTarefa+"<br/>"+
+			  		"Criado em: "+ $filter('date')(tarefa.dataCriacao, 'dd/MM/yyyy - HH:mm:ss')+"<br/>"+
+			  		"Prazo: "+ $filter('date')(tarefa.prazoEntrega, 'dd/MM/yyyy')+"<br/>"+
+			  		"Status: "+tarefa.statusTarefa+"<br/>"+
+			  		"Responsavel pela ultima modificação: "+tarefa.usuarioModificacao.usernameUsuario
+				  ,
+			  html: true
+			});
 	};
 	
 	// carrega os dados do elemento selecionado para edição .. 
