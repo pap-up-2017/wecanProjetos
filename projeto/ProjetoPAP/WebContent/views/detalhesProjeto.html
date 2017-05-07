@@ -223,8 +223,8 @@
 	         <div class="panel-heading">
 	            <h3 class="panel-title">Concluído</h3>
 	         </div>
-	         <div id ="Concluído" class="panel-body" style="  height: 90%; width: 100%; float: left;">
-	            <div id="{{tarefa.idTarefa}}rep"ng:repeat="tarefa in tarefas | filter: {statusTarefa : 'Concluído'}">
+	         <div id ="Concluído" class="panel-body" style=" height: 90%; width: 100%; float: left;">
+	            <div  id="{{tarefa.idTarefa}}rep"ng:repeat="tarefa in tarefas | filter: {statusTarefa : 'Concluído'}">
 	               <div id="{{tarefa.idTarefa}}" style="background: white;" draggable="true"
 	                  ondragstart="angular.element(this).scope().drag(event)">{{tarefa.nomeTarefa}}  
 	                  <button style="float:right" ng-click="ExcluirElemento(tarefa)">-</button>        
@@ -259,6 +259,9 @@
 	   <!-- End Comum -->
 	</div>
 	<!-- FIM PROJETO ABERTO OU EM ANDAMENTO -->
+	
+	<!-- 	**** **** ****	-->
+			
 	<!-- PROJETO CONCLUIDO -->
 	<div ng-show="projeto.status == 'Concluído'">
 		<h1>{{projeto.nome}}</h1>

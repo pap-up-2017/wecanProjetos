@@ -1,4 +1,4 @@
-angular.module("app").controller('loginCtrl', function($scope, $http, $cookies, $cookieStore) {
+angular.module("app").controller('loginCtrl', function($scope, $http, $cookies, $cookieStore, $rootScope) {
 	
 	// envia informação para validar Login ... 
 	$scope.ValidarLogin = function() {
@@ -36,7 +36,7 @@ angular.module("app").controller('loginCtrl', function($scope, $http, $cookies, 
 			}
 		}
 		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/loginrest/login',
+				$rootScope.pattern_url+'rest/loginrest/login',
 				parameter, config).success(
 				function(data, status, headers, config) {
 					if(loginfactory(data)){

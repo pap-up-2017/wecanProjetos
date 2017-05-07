@@ -1,6 +1,10 @@
 angular.module('app', ['ngCookies'
                       ,'ui.router'])
-                      .config(route).run(autentication);
+                      .config(route).run(autentication).run(config);
+
+function config($rootScope){
+	$rootScope.pattern_url = 'http://localhost:8080/ProjetoPAP/';
+}
 
 function autentication($rootScope, $state, $location, $cookieStore){
     $rootScope.$on('$stateChangeStart',

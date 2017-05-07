@@ -1,0 +1,21 @@
+.logo img
+{
+	width: 70px;
+}
+.habilidade
+{
+	width: 100%;
+	padding: 10px;
+}
+.hab_info
+{
+	overflow-x: hidden;
+	overflow-y: auto;
+	height: 300px;
+}
+.label-info
+{
+	padding: 5px;
+	border-radius: 3px;
+	background-color: rgba(129,201,195,1) !important;
+}
