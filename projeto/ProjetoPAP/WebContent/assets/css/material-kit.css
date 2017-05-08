@@ -1868,7 +1868,7 @@ select.form-control[multiple], .form-group.is-focused select.form-control[multip
   font-size: 10px;
 }
 .label.label-default {
-  background-color: #999999;
+  background-color: #ccc;
 }
 
 .nav-pills > li > a {

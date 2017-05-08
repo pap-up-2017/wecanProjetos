@@ -1,0 +1,41 @@
+input[type=text] {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('../dash/img/search.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 10px 20px 10px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 50%;
+}
+.title
+{
+	color: #82c7c2 !important;
+}
+.projeto
+{
+	border-bottom: 2px solid #ccc;
+	padding: 10px;
+}
+.linkProjeto
+{
+	font-size: 25px;
+}
+.label-default
+{
+	background-color: #ccc;
+	margin-left: 5px;
+	font-size: 8px !important;
+}
+p
+{
+	color: #383838;
+}
