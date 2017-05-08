@@ -1,21 +1,55 @@
+.button {
+  display: inline-block; /* Inline elements with width and height. TL;DR they make the icon buttons stack from left-to-right instead of top-to-bottom */
+  position: relative; /* All 'absolute'ly positioned elements are relative to this one */
+  padding: 0px 0px; /* Add some padding so it looks nice */
+  font-family:'Raleway';
+}
+
+.button__badge {
+  background-color: #fa3e3e;
+  border-radius: 2px;
+  color: white;
+ 
+  padding: 1px 2px;
+  font-size: 10px;
+  
+  position: absolute; /* Position the badge within the relatively positioned button */
+  top: 0;
+  right: 0;
+  font-family:'Raleway';
+}
 .logo img
 {
 	width: 70px;
-}
-.habilidade
-{
-	width: 100%;
-	padding: 10px;
-}
-.hab_info
-{
-	overflow-x: hidden;
-	overflow-y: auto;
-	height: 300px;
 }
 .label-info
 {
 	padding: 5px;
 	border-radius: 3px;
 	background-color: rgba(129,201,195,1) !important;
+}
+.infoUser
+{
+	width: 100%;
+	height: auto;
+	text-align: center;
+	padding: 10px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.infoUser img
+{
+	border-radius: 100px;
+	width: 100px;
+}
+.title
+{
+	color: #82c8c3;
+}
+small
+{
+	color: #fff !important;
+}
+a
+{
+	cursor: pointer;
 }

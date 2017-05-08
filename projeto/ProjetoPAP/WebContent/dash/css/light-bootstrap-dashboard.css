@@ -402,14 +402,14 @@ body > .navbar-collapse.has-image:after {
   opacity: .77;
 }
 .sidebar[data-color="dark"]:after,
-body > .navbar-collapse[data-color="blue"]:after {
-  background: rgba(37,50,56,1);
-  background: -moz-linear-gradient(top, rgba(37,50,56,1) 0%, rgba(59,71,76,1) 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(37,50,56,1)), color-stoprgba(59,71,76,1));
-  background: -webkit-linear-gradient(top, rgba(37,50,56,1) 0%, rgba(59,71,76,1) 100%);
-  background: -o-linear-gradient(top, rgba(37,50,56,1) 0%, rgba(59,71,76,1) 100%);
-  background: -ms-linear-gradient(top, rgba(37,50,56,1) 0%, rgba(59,71,76,1) 100%);
-  background: linear-gradient(to bottom, rgba(37,50,56,1) 0%, rgba(59,71,76,1) 100%);
+body > .navbar-collapse[data-color="dark"]:after {
+  background: #253238;
+  background: -moz-linear-gradient(top, #253238 0%, #313c40 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #253238), color-stop(100%, #313c40));
+  background: -webkit-linear-gradient(top, #253238 0%, #313c40 100%);
+  background: -o-linear-gradient(top, #253238 0%, #313c40 100%);
+  background: -ms-linear-gradient(top, #253238 0%, #313c40 100%);
+  background: linear-gradient(to bottom, #253238 0%, #313c40 100%);
   background-size: 150% 150%;
 }
 .sidebar[data-color="blue"]:after,
@@ -1553,7 +1553,7 @@ body > .navbar-collapse[data-color="purple"]:after {
 .navbar-default .navbar-nav > li > a:not(.btn):focus {
   background-color: transparent;
   border-radius: 3px;
-  color: rgba(129,201,195,1);
+  color: #82c8c3;
   opacity: 1;
   filter: alpha(opacity=100);
 }
