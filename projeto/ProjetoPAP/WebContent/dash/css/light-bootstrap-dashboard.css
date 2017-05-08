@@ -64,8 +64,6 @@ a,
 .td-name,
 td,
 button.close {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
   font-family: "Roboto","Helvetica Neue",Arial,sans-serif;
   font-weight: 400;
 }
@@ -1011,17 +1009,20 @@ body > .navbar-collapse[data-color="purple"]:after {
   top: 50%;
   margin-top: -13px;
   z-index: 1033;
-  background-color: #FFFFFF;
+  background-color: #383838;
   display: block;
-  border-radius: 50%;
+  border-radius: 3px;;
   opacity: .4;
   line-height: 11px;
-  width: 25px;
+  width: 50px;
   height: 25px;
+  paddin: 5px;
   outline: 0 !important;
   text-align: center;
   padding: 3px;
   font-weight: 300;
+  color: #fff;
+  font-size: 15px;
 }
 .alert button.close:hover {
   opacity: .55;
@@ -1036,10 +1037,12 @@ body > .navbar-collapse[data-color="purple"]:after {
 }
 .alert.alert-with-icon {
   padding-left: 65px;
+  color: #383838;
 }
 
 .alert-info {
-  background-color: #63d8f1;
+  border: 2px solid #63d8f1;
+  background-color: #fff;
 }
 
 .alert-success {
