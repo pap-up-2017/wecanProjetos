@@ -1,0 +1,30 @@
+.title
+{
+	color: #82c7c2 !important;
+}
+.image
+{
+	background-color: #253238;
+}
+.habilidade
+{
+	width: 100%;
+	height:300px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+.progress .progress-bar, .progress .progress-bar.progress-bar-default {
+  background-color: #253238;
+}
+.progress.progress-line-primary {
+  background: rgba(37, 50, 56, 0.2);
+}
+.progress {
+  height: 4px;
+  border-radius: 0;
+  box-shadow: none;
+  background: #DDDDDD;
+}
+.progress .progress-bar {
+  box-shadow: none;
+}
