@@ -1,10 +1,19 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 
-<div ng-controller="DashBoardCtrl">
-	<h1>Bem vindo usuário {{UsuarioLogado}}</h1>
-	
-	<iframe src='http://localhost:4848/single/?appid=C%3A%5CUsers%5CEdu%5CDocuments%5CQlik%5CSense%5CApps%5CWe%20Can.qvf&sheet=sDsLqN&opt=currsel&select=clearall' style="overflow: hidden; height: 100%; width: 100%; position: absolute;" ></iframe>
-	
-</div> 
-	
+ <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header" ng-controller="DashBoardCtrl">
+                        <h4 class="title">
+                            Bem vindo, {{UsuarioLogado}}
+                        </h4>
+                    </div>
+                    <div class="content">
+						<iframe src='http://localhost:4848/single/?appid=C%3A%5CUsers%5CEdu%5CDocuments%5CQlik%5CSense%5CApps%5CWe%20Can.qvf&sheet=sDsLqN&opt=currsel&select=clearall' style="overflow: hidden; height: 100%; width: 100%; position: relative;" ></iframe>
+					</div> 
+				</div>
+			</div>
+		</div>
+</div>
