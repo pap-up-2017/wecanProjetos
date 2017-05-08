@@ -9,8 +9,8 @@
 			        <div class="alert alert-info alert-with-icon" data-notify="container">
                         	<span data-notify="icon" class="pe-7s-bell"></span>
                         	<span data-notify="message"><a ng-click="AtualizaStatus(notificacao)" ui-sref="{{notificacao.linkAcessoNotificacao}}" id="titulo">{{notificacao.tituloNotificacao}}</a></span><br/>
-                            <span data-notify="message">{{notificacao.textoNotificacao}}</span>
-                            <button data-notify="dismiss" class="close" ng-click="AtualizaStatus(notificacao)">{{notificacao.statusNotificacao}}</button>
+                            <span data-notify="message">{{notificacao.textoNotificacao}}</span><br/>
+                            <span data-notify="message"><button class="btn btn-danger btn-fill btn-sm" ng-click="AtualizaStatus(notificacao)">{{notificacao.statusNotificacao}}</button></span>
                     </div>
 			    </div>
 			</div>

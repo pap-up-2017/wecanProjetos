@@ -1014,7 +1014,7 @@ body > .navbar-collapse[data-color="purple"]:after {
   border-radius: 3px;;
   opacity: .4;
   line-height: 11px;
-  width: 50px;
+  width: auto;
   height: 25px;
   paddin: 5px;
   outline: 0 !important;

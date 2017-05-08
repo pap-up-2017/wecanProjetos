@@ -1,22 +1,20 @@
-.button {
+.noti {
   display: inline-block; /* Inline elements with width and height. TL;DR they make the icon buttons stack from left-to-right instead of top-to-bottom */
   position: relative; /* All 'absolute'ly positioned elements are relative to this one */
   padding: 0px 0px; /* Add some padding so it looks nice */
-  font-family:'Raleway';
 }
 
-.button__badge {
+.noti__badge {
   background-color: #fa3e3e;
   border-radius: 2px;
   color: white;
- 
-  padding: 1px 2px;
+
+  padding: 0px 4px;
   font-size: 10px;
   
   position: absolute; /* Position the badge within the relatively positioned button */
-  top: 0;
-  right: 0;
-  font-family:'Raleway';
+  top: -6px;
+  right: -6px;
 }
 .logo img
 {
