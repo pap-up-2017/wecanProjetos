@@ -22,10 +22,11 @@
 }
 .label-info
 {
-	padding: 5px;
+	padding: 3px;
 	border-radius: 3px;
 	background-color: rgba(129,201,195,1) !important;
 	color: #fff !important;
+	font-size: 10px !important;
 }
 .infoUser
 {

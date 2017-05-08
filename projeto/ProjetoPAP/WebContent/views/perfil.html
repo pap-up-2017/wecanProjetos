@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="css/perfil.css">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<div ng-controller="UsuarioCtrl">
+<div ng-controller="PerfilCtrl">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8">
@@ -16,85 +16,80 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>
+                                        <label class="label label-info">
                                             Tipo usuário
-                                        </label>
-                                        <select disabled ng-model="usuario.tipoUsuario" ng-selectedItem="usuario.tipoUsuario" class="form-control" ng-options="tipoUsuario.tipoUsuario for tipoUsuario in tipoUsuarios">
-											<option ng-show="!usuario.tipoUsuario" value="">{{usuario.tipoUsuario.tipoUsuario}}</option>
-										</select>
+                                        </label><br/>
+                                        <label>{{tipoUsuariod}}</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>
+                                        <label class="label label-info">
                                            Nome completo
-                                        </label>
-                                        <input disabled type="text" class="form-control" ng-model="usuario.nomeUsuario">
+                                        </label><br/>
+                                        <label>{{nomeUsuariod}}</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>
-                                            Username
-                                        </label>
-                                        <input disabled type="text" class="form-control" ng-model="usuario.usernameUsuario">
+                                        <label class="label label-info">
+                                           Username
+                                        </label><br/>
+                                        <label>{{usernameUsuariod}}</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>
-                                           	Email
-                                        </label>
-                                        <input disabled type="text" class="form-control" ng-model="usuario.emailUsuario">
+                                        <label class="label label-info">
+                                           Email
+                                        </label><br/>
+                                        <label>{{emailUsuariod}}</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>
-                                            Estado
-                                        </label>
-                                        <select disabled class="form-control" ng-change="BuscarInformacaoCidades()" ng-model="estadoSelecionado" ng-options="estado.nomeEstado disable when estado.nomeEstado == editedNomeEstadoSelecionadoOld for estado in estados">
-											<option ng-show="!estadoSelecionado" value="">{{usuario.cidadeUsuario.estadoCidade.nomeEstado}}</option>
-										</select>
+                                        <label class="label label-info">
+                                           Estado
+                                        </label><br/>
+                                        <label>{{estadoUsuariod}}</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>
-                                            Cidade
-                                        </label>
-                                       <select disabled ng-change="BuscarInformacaoInstituicoes()" class="form-control" ng-model="usuario.cidadeUsuario" ng-options="cidade.nomeCidade for cidade in cidades | filter: estadoSelecionado.nomeEstado">
-											<option ng-show="!usuario.cidadeUsuario" value="">{{usuario.cidadeUsuario.nomeCidade}}</option>
-										</select>
+                                        <label class="label label-info">
+                                           Cidade
+                                        </label><br/>
+                                        <label>{{cidadeUsuariod}}</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>
-                                            Instituição de ensino
-                                        </label>
-                                        <select disabled class="form-control" ng-model="usuario.instituicaoUsuario" ng-options="instituicaoEnsino.nomeInstituicao for instituicaoEnsino in instituicoes | filter: usuario.cidadeUsuario.nomeCidade">
-											<option ng-show="!usuario.instituicaoUsuario" value="">{{usuario.instituicaoUsuario.nomeInstituicao}}</option>
-										</select>
+                                        <label class="label label-info">
+                                           Instituição de ensino
+                                        </label><br/>
+                                        <label>{{instituicaoUsuariod}}</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>
-                                            Curso
-                                        </label>
-                                       <select disabled class="form-control" ng-model="usuario.cursoUsuario" ng-options="curso.nomeCurso for curso in cursos | filter: usuario.instituicaoUsuario.nomeInstituicao">
-											<option ng-show="!usuario.cursoUsuario" value="">{{usuario.cursoUsuario.nomeCurso}}</option>
-										</select>
+                                        <label class="label label-info">
+                                           Curso
+                                        </label><br/>
+                                        <label>{{cursoUsuariod}}</label>
                                     </div>
                                 </div>
                             </div>
+                            <div class="row" ng-controller="excluirUsuarioCtrl"> 
+                            	<div class="col-md-12">
+									<button ng-click="ExcluirElemento()" class="btn btn-danger pull-right" ng-show="idUsuairiod == UsuarioLogado">Excluir perfil</button>
+								</div>
+  						</div>
                         </form>
                     </div>
                 </div>
