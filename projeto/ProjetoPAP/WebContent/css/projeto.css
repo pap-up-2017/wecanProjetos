@@ -33,7 +33,9 @@ input[type=text]:focus {
 {
 	background-color: #ccc;
 	margin-left: 5px;
-	font-size: 8px !important;
+	font-size: 10px !important;
+	color: #808080!important;
+	font-weight: bold;
 }
 .desc
 {
