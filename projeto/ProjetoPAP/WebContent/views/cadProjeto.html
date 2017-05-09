@@ -1,8 +1,9 @@
+<meta charset="utf-8" />
 <link rel="stylesheet" href="css/criarProjeto.css">
 <div class="content" ng-controller="PageProjetoCtrl">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Criar projeto</h4>
@@ -10,19 +11,19 @@
                             <div class="content">
                                 <form>
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Título do projeto</label>
                                                 <input type="text" class="form-control" ng-model="projeto.nome" placeholder="Insira um título para o projeto..." required>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                         	<div class="form-group">
                                         		<label>Data de entrega</label>
                                         		<input type="date" class="form-control" placeholder="dd/mm/aaaa" ng-model="projeto.dataEntrega" required/>
                                         	</div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Vagas</label>
                                                 <input class="form-control" type="number" max="10" min="1" placeholder="" id="sn" pattern="[0-9]+$" ng-model="projeto.vagas" required>
@@ -39,23 +40,39 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-md-10">
                                             <div class="form-group">
                                                 <label>Participantes:</label>
 							                     <select class="form-control" ng-model="projeto.usuarios" ng-options="usuario.usernameUsuario for usuario in usuarios | filter: {idUsuario: '!'+UsuarioLogado}">
 							                        <option value="">Selecione um participante</option>
 							                     </select>
-							                     <button style="width: 100%" class="btn btn-info btn-sm btn-fill" ng-click="adicionaUsuario()">Adicionar usuário</button>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-md-2">
+                                        	<div class="form-group">
+                                        		<label>&nbsp;</label>
+                                        		<button style="width: 100%" class="btn btn-info btn-fill" ng-click="adicionaUsuario()">
+                                        			<i class="fa fa-plus" aria-hidden="true"></i>
+                                        		</button>
+                                        	</div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-10">
                                             <div class="form-group">
                                                 <label>Competências necessárias:</label>		
 							                     <select class="form-control" ng-model="projeto.competencias" ng-options="competencia.nomeCompetencia for competencia in competencias">
 							                        <option value="">Selecione uma competência...</option>
 							                     </select>
-							                     <button style="width: 100%" class="btn btn-info btn-sm btn-fill" ng-click="adicionaCompetencia()">Adicionar competência</button>
                                             </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                        	<div class="form-group">
+                                        		<label>&nbsp;</label>
+                                        		<button style="width: 100%" class="btn btn-info btn-fill" ng-click="adicionaCompetencia()">
+                                        			<i class="fa fa-plus" aria-hidden="true"></i>
+                                        		</button>
+                                        	</div>
                                         </div>
                                     </div>
                                    
@@ -80,26 +97,26 @@
                     		</div>
                     	</div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="card card-user">
                             <div class="panelinf panel panel-default">
-         <div class="panel-heading">Competência necessárias para o projeto</div>
-         <div class="panel-body" ng-repeat="competenciaDoProjeto in competenciasDoProjeto">
-         	<span class="infoprojeto">
-         		<i class="fa fa-graduation-cap" aria-hidden="true"></i>
-            	{{competenciaDoProjeto.nomeCompetencia}} <button class="adicionar" ng-click="ApagarCompetenciaDoprojetoACriar(competenciaDoProjeto)">Deletar</button>
-         	</span>
-         </div>
-      </div>
-      <div class="panelinf panel panel-default">
-         <div class="panel-heading">Integrantes do projeto</div>
-         <div class="panel-body" ng-repeat="usuarioDoProjeto in usuariosDoProjeto">
-         	<span class="infoprojeto">
-         		<i class="fa fa-user-circle" aria-hidden="true"></i>
-            	{{usuarioDoProjeto.nomeUsuario}} <button class="adicionar" ng-click="ApagarUsuariosDoprojetoACriar(usuarioDoProjeto)">Deletar</button>
-         	</span>
-         </div>
-      </div>
+						         <div class="panel-heading">Competência necessárias para o projeto</div>
+						         <div class="panel-body" ng-repeat="competenciaDoProjeto in competenciasDoProjeto">
+						         		<i class="fa fa-caret-right" aria-hidden="true"></i>
+						            	{{competenciaDoProjeto.nomeCompetencia}} 
+						            	<button ng-click="ApagarCompetenciaDoprojetoACriar(competenciaDoProjeto)" type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                    					<i class="fa fa-times"></i></button>
+						         </div>
+						      </div>
+						      <div class="panelinf panel panel-default">
+						         <div class="panel-heading">Integrantes do projeto</div>
+						         <div class="panel-body" ng-repeat="usuarioDoProjeto in usuariosDoProjeto">
+						         		<i class="fa fa-caret-right" aria-hidden="true"></i>
+						            	{{usuarioDoProjeto.nomeUsuario}} 
+						            	<button ng-click="ApagarUsuariosDoprojetoACriar(usuarioDoProjeto)" type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                    					<i class="fa fa-times"></i></button>
+						         </div>
+						      </div>
                         </div>
                     </div>
                     
