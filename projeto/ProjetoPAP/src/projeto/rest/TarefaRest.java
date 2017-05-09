@@ -52,13 +52,10 @@ public class TarefaRest {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/postalt/{id}")
-	public void alterarTarefa(@PathParam("id") int id,Tarefa tarefa) throws IllegalAccessException, InstantiationException {
+	public void alterarTarefa(@PathParam("id") int id,Tarefa tarefa) throws IllegalAccessException, InstantiationException{
 		TarefaBusiness bus = new TarefaBusiness();
 		if(id > 0){
-			bus.atualizaStatus(id, tarefa);
-		}
-		else{
-			bus.alterar(tarefa);
+			bus.alterar(id, tarefa);
 		}
 	}
 	

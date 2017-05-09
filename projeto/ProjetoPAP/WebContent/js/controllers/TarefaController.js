@@ -129,7 +129,7 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 		}
 
 		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/tarefarest/postalt',
+				'http://localhost:8080/ProjetoPAP/rest/tarefarest/postalt/'+$scope.UsuarioLogado,
 				parameter, config).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Tarefa alterada com sucesso!';

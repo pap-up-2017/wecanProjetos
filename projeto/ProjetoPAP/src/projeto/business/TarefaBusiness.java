@@ -28,7 +28,7 @@ public class TarefaBusiness {
 		}	
 	}
 	
-	public void atualizaStatus (int idUsuario, Tarefa tarefa) throws IllegalAccessException, InstantiationException{
+	public void alterar (int idUsuario, Tarefa tarefa) throws IllegalAccessException, InstantiationException{
 		System.out.println("Id do usuario modi");
 		TarefaDao dao = FactoryDao.createTarefaDao();
 		if (tarefa.getIdTarefa() > 0){
@@ -43,15 +43,8 @@ public class TarefaBusiness {
 				tFinal.setUsuarioModificacao(usuario);
 				dao.alterar(tFinal);
 			}catch(Exception ex){
-				System.out.println("Não foi possivel cadastrar");
+				System.out.println("Não foi possivel atualizar");
 			}	
-		}
-	}
-	
-	public void alterar (Tarefa tarefa){
-		TarefaDao dao = FactoryDao.createTarefaDao();
-		if (tarefa.getIdTarefa() > 0){
-			dao.alterar(tarefa);
 		}
 	}
 	
