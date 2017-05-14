@@ -1,3 +1,133 @@
+.card .card-header {
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+  margin: -20px 15px 0;
+  border-radius: 3px;
+  padding: 15px;
+  background-color: #999999;
+}
+.card .card-header .title {
+  color: #FFFFFF;
+}
+.card .card-header .category {
+  margin-bottom: 0;
+  color: rgba(255, 255, 255, 0.62);
+}
+.card .card-header.card-chart {
+  padding: 0;
+  min-height: 160px;
+}
+.card .card-header.card-chart + .content h4 {
+  margin-top: 0;
+}
+.card .card-header .ct-label {
+  color: rgba(255, 255, 255, 0.7);
+}
+.card .card-header .ct-grid {
+  stroke: rgba(255, 255, 255, 0.2);
+}
+.card .card-header .ct-series-a .ct-point,
+.card .card-header .ct-series-a .ct-line,
+.card .card-header .ct-series-a .ct-bar,
+.card .card-header .ct-series-a .ct-slice-donut {
+  stroke: rgba(255, 255, 255, 0.8);
+}
+.card .card-header .ct-series-a .ct-slice-pie,
+.card .card-header .ct-series-a .ct-area {
+  fill: rgba(255, 255, 255, 0.4);
+}
+
+.card [data-background-color="dark"] {
+  background: linear-gradient(60deg, #253238, #3b474c);
+  box-shadow: 0 12px 20px -10px rgba(156, 39, 176, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(156, 39, 176, 0.2);
+}
+.card [data-background-color="purple"] {
+  background: linear-gradient(60deg, #ab47bc, #8e24aa);
+  box-shadow: 0 12px 20px -10px rgba(156, 39, 176, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(156, 39, 176, 0.2);
+}
+.card [data-background-color="blue"] {
+  background: linear-gradient(60deg, #26c6da, #00acc1);
+  box-shadow: 0 12px 20px -10px rgba(0, 188, 212, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(0, 188, 212, 0.2);
+}
+.card [data-background-color="green"] {
+  background: linear-gradient(60deg, #66bb6a, #43a047);
+  box-shadow: 0 12px 20px -10px rgba(76, 175, 80, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(76, 175, 80, 0.2);
+}
+.card [data-background-color="orange"] {
+  background: linear-gradient(60deg, #ffa726, #fb8c00);
+  box-shadow: 0 12px 20px -10px rgba(255, 152, 0, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(255, 152, 0, 0.2);
+}
+.card [data-background-color="red"] {
+  background: linear-gradient(60deg, #ef5350, #e53935);
+  box-shadow: 0 12px 20px -10px rgba(244, 67, 54, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(244, 67, 54, 0.2);
+}
+.card [data-background-color] {
+  color: #FFFFFF;
+}
+.card [data-background-color] a {
+  color: #FFFFFF;
+}
+.card {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  margin: 25px 0;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+  border-radius: 3px;
+  color: rgba(0,0,0, 0.87);
+  background: #fff;
+}
+.card-content
+{
+	padding: 10px;
+}
+
+.progress {
+  height: 4px;
+  border-radius: 0;
+  box-shadow: none;
+  background: #DDDDDD;
+}
+.progress .progress-bar {
+  box-shadow: none;
+}
+.progress .progress-bar, .progress .progress-bar.progress-bar-default {
+  background-color: #9c27b0;
+}
+.progress .progress-bar.progress-bar-inverse {
+  background-color: #3f51b5;
+}
+.progress .progress-bar.progress-bar-primary {
+  background-color: #9c27b0;
+}
+.progress .progress-bar.progress-bar-success {
+  background-color: #4caf50;
+}
+.progress .progress-bar.progress-bar-info {
+  background-color: #03a9f4;
+}
+.progress .progress-bar.progress-bar-warning {
+  background-color: #fbc02d;
+}
+.progress .progress-bar.progress-bar-danger {
+  background-color: #f44336;
+}
+.progress.progress-line-primary {
+  background: rgba(156, 39, 176, 0.2);
+}
+.progress.progress-line-info {
+  background: rgba(3, 169, 244, 0.2);
+}
+.progress.progress-line-success {
+  background: rgba(76, 175, 80, 0.2);
+}
+.progress.progress-line-warning {
+  background: rgba(251, 192, 45, 0.2);
+}
+.progress.progress-line-danger {
+  background: rgba(244, 67, 54, 0.2);
+}
+
+
 .noti {
   display: inline-block; /* Inline elements with width and height. TL;DR they make the icon buttons stack from left-to-right instead of top-to-bottom */
   position: relative; /* All 'absolute'ly positioned elements are relative to this one */

@@ -1,19 +1,43 @@
+<link href="css/dashboard.css" rel="stylesheet"/>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-
- <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="header" ng-controller="DashBoardCtrl">
-                        <h4 class="title">
-                            Bem vindo, {{UsuarioLogado}}
-                        </h4>
-                    </div>
-                    <div class="content" style="height: 100vh !important">
-						<iframe src='http://localhost:4848/single/?appid=C%3A%5CUsers%5CEdu%5CDocuments%5CQlik%5CSense%5CApps%5CWe%20Can.qvf&sheet=sDsLqN&opt=currsel&select=clearall' style="overflow: hidden; height: 100%; width: 100%; position: relative;" ></iframe>
-					</div> 
-				</div>
-			</div>
-		</div>
+<div class="container-fluid">
+   <div class="row" ng-controller="DashBoardCtrl">
+      <div class="col-md-12">
+         <div class="card">
+            <div class="header">
+               <h4 class="title">
+                  Bem vindo, {{UsuarioLogado}}
+               </h4>
+            </div>
+            <br/>
+            <div class="col-md-6" ng:repeat="projeto in projetos | filter: {status: 'Em andamento'}">
+               <div class="card">
+                  <a ui-sref="pageDetalhesProjeto({idProjeto:{{projeto.idProjeto}}})">
+                     <div class="card-header" data-background-color="dark">
+                        <h4 class="title">{{projeto.nome}}</h4>
+                        <p class="category">Criado em: {{ projeto.dataCriacao | date: 'dd/MM/yyyy'}}</p>
+                     </div>
+                  </a>
+                  <div class="card-content table-responsive">
+                     Entrega: {{ projeto.dataEntrega | date: 'dd/MM/yyyy'}}<br/>
+                     <br/>
+                     Status
+                     <div class="progress" ng-change="gerarPorcentTarefas(projeto)">
+                        <div class="progress-bar progress-bar-danger" style="width: 34%">
+                           <span class="sr-only">10% Complete (danger)</span>
+                        </div>
+                        <div class="progress-bar progress-bar-warning" style="width: 33%">
+                           <span class="sr-only">20% Complete (warning)</span>
+                        </div>
+                        <div class="progress-bar progress-bar-success" style="width: 33%">
+                           <span class="sr-only">35% Complete (success)</span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>

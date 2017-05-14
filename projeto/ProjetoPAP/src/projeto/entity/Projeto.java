@@ -40,10 +40,6 @@ public class Projeto {
 	private Date dataEntrega;
 	private String status;
 	
-	//TODO desenvolver função para usuário se inscrever no projeto
-	
-	//TODO Desenvolver integração com Feed, acho que o feed será todo a parte desse código
-	
 	public int getIdProjeto() {
 		return idProjeto;
 	}
