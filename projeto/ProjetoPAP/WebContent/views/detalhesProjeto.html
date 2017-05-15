@@ -120,9 +120,9 @@
 											</h5>
 										</div>
 										<div id="Pendente" class="card-content table-responsive">
-											<div id="{{tarefa.idTarefa}}rep" ng:repeat="tarefa in tarefas | filter: {statusTarefa : 'Pendente'}">
-								               <div class="padding" id="{{tarefa.idTarefa}}" draggable="true" ondragstart="angular.element(this).scope().drag(event)">
-								                  <div class="backTarefa col-md-12">
+											<div id="{{tarefa.idTarefa}}rep" ng:repeat="tarefa in tarefas | filter: {statusTarefa : 'Pendente'}" draggable="false">
+								               <div class="padding" >
+								                  <div class="backTarefa col-md-12" id="{{tarefa.idTarefa}}" draggable="true" ondragstart="angular.element(this).scope().drag(event)">
 								                 	<h5 style="text-align: left;" class="text-primary">
 								                  		{{tarefa.nomeTarefa}}<br/>
 								                  		<small class="text-default">{{tarefa.descricaoTarefa}}</small>
@@ -157,8 +157,8 @@
 										</div>
 										<div id="Em andamento" class="card-content table-responsive">
 											<div id="{{tarefa.idTarefa}}rep"ng:repeat="tarefa in tarefas | filter: {statusTarefa : 'Em andamento'}">
-								               <div class="padding" id="{{tarefa.idTarefa}}" draggable="true" ondragstart="angular.element(this).scope().drag(event)">
-								                  <div class="backTarefa col-md-12">
+								               <div class="padding">
+								                  <div class="backTarefa col-md-12" id="{{tarefa.idTarefa}}" draggable="true" ondragstart="angular.element(this).scope().drag(event)">
 								                 	<h5 style="text-align: left;" class="text-primary">
 								                  		{{tarefa.nomeTarefa}}<br/>
 								                  		<small class="text-default">{{tarefa.descricaoTarefa}}</small>
@@ -193,8 +193,8 @@
 										</div>
 										<div id="Concluído" class="card-content table-responsive">
 											<div id="{{tarefa.idTarefa}}rep"ng:repeat="tarefa in tarefas | filter: {statusTarefa : 'Concluído'}">
-								               <div class="padding" id="{{tarefa.idTarefa}}" draggable="true" ondragstart="angular.element(this).scope().drag(event)">
-								                  <div class="backTarefa col-md-12">
+								               <div class="padding">
+								                  <div class="backTarefa col-md-12" id="{{tarefa.idTarefa}}" draggable="true" ondragstart="angular.element(this).scope().drag(event)">
 								                 	<h5 style="text-align: left;" class="text-primary">
 								                  		{{tarefa.nomeTarefa}}<br/>
 								                  		<small class="text-default">{{tarefa.descricaoTarefa}}</small>
