@@ -163,23 +163,29 @@
 	width: 100%;
 	height: auto;
 	text-align: center;
-	padding: 10px;
+	padding: 0px;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 .infoUser img
 {
-	border-radius: 100px;
+	border-radius: 8px !important;
 	width: 100px;
 }
 .title
 {
-	color: #82c8c3;
+	color: #81c9c3;
 }
 small
 {
-	color: #fff !important;
+	color: #f8f8f8 !important;
 }
 a
 {
 	cursor: pointer;
+}
+.logo
+{
+	width: 80px;
+	border:0px !important; 
+	margin-bottom: 10px;
 }
