@@ -80,5 +80,14 @@ public class TarefaDao {
 		em.close();
 		
 	}
+	
+	public List<Tarefa> listarPorStatusAndProjeto(String status, int id) {
+		// cria a instancia
+		EntityManager em = SingletonConection.getInstance();
+		// cria a Query para encontrar as tarefa
+		Query q = em.createQuery("from Tarefa where projetoTarefa_idProjeto = "+id+" AND statusTarefa = '"+status+"'");
+		// retorna os dados encontrados
+		return q.getResultList();
+	}
 
 }

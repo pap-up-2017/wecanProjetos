@@ -28,10 +28,31 @@ angular.module("app").controller('DashBoardCtrl', function($scope, $http, $cooki
 						});
 	};
 	
-	$scope.gerarPorcentTarefas = function(projeto){
-	
+	$scope.buscaCards = function(){
+		$http.post($rootScope.pattern_url+'rest/projetorest/cards/'+$scope.idUsuarioLogado)
+		.success(function(data) {
+			var cardsBanco = data["cardsDashBoard"];
+			var arrayBanco = [];
+			if(Array.isArray(cardsBanco)){
+				arrayBanco = cardsBanco; 
+			}
+			else{
+				arrayBanco.push(cardsBanco);
+			}
+			$scope.cardsProjetos = arrayBanco;
+			
+		}).error(
+				function(data, status, header, config) {
+					$scope.Resposta = "Data: " + data + "<hr />status: "
+							+ status + "<hr />headers: " + header
+							+ "<hr />config: " + config;
+				});
 	}
 	$scope.BuscarMeusProjetos();
+	$scope.buscaCards();
 	
+	$scope.functionThatReturnsStyle = function(valor) {
+		var style1 = "width: "+valor+"%";
+		}
 	
 });

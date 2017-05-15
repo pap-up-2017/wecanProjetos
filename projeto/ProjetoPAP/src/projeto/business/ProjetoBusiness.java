@@ -10,6 +10,7 @@ import projeto.entity.Projeto;
 import projeto.entity.Tarefa;
 import projeto.entity.Usuario;
 import projeto.util.Datas;
+import projeto.util.CardsDashBoard;
 
 public class ProjetoBusiness {
 	
@@ -99,4 +100,49 @@ public class ProjetoBusiness {
 		}
 		return projetosUsuario;
 	}
+	
+	public List<CardsDashBoard> gerarCardsProjeto(int idUsuario){
+		List<CardsDashBoard> cards = new ArrayList<CardsDashBoard>();
+		List<Projeto> projetosUsuario = this.projetosPorUsuario(idUsuario);
+		for(Projeto p : projetosUsuario){
+			if(p.getStatus().equals("Em andamento")){
+				CardsDashBoard c = new CardsDashBoard();
+				c.setIdProjeto(p.getIdProjeto());
+				c.setNomeProjeto(p.getNome());
+				c.setDataCriacao(p.getDataCriacao());
+				c.setDataEntrega(p.getDataEntrega());
+				
+				TarefaDao tDao = new TarefaDao();			
+				List<Tarefa> totalTarefas = tDao.listarPorProjeto(p.getIdProjeto());
+				c.setTotalTarefas(totalTarefas.size());
+				List<Tarefa> tarefasPendente = tDao.listarPorStatusAndProjeto("Pendente", p.getIdProjeto());
+				List<Tarefa> tarefasAndamento = tDao.listarPorStatusAndProjeto("Em andamento", p.getIdProjeto());
+				List<Tarefa> tarefasConcluido = tDao.listarPorStatusAndProjeto("Concluido", p.getIdProjeto());
+				
+				int numPendente = tarefasPendente.size();
+				int numAndamento = tarefasAndamento.size();
+				int numConcluido = tarefasConcluido.size();
+				
+				if(numPendente < 1){
+					c.setPorcentPendente(0);
+				}else{
+					c.setPorcentPendente((numPendente * 100)/ c.getTotalTarefas());
+				}
+				if(numAndamento < 1){
+					c.setPorcentAndamento(0);
+				}else{
+					c.setPorcentAndamento((numAndamento * 100)/ c.getTotalTarefas());
+				}
+				if(numConcluido < 1){
+					c.setPorcentConcluido(0);
+				}else{
+					c.setPorcentConcluido((numConcluido * 100)/ c.getTotalTarefas());
+				}
+				
+				cards.add(c);
+			}
+		}
+		return cards;
+	}
+	
 }

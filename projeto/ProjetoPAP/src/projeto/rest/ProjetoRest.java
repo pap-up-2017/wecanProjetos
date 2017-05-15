@@ -21,6 +21,7 @@ import projeto.dao.InterfaceProjetoDao;
 import projeto.entity.AprovacaoParticipante;
 import projeto.entity.Projeto;
 import projeto.entity.Usuario;
+import projeto.util.CardsDashBoard;
 import projeto.util.Datas;
 
 @Path("/projetorest")
@@ -163,6 +164,16 @@ public class ProjetoRest {
 	public List<Projeto> buscarPorUsuario(@PathParam("id") String id) {
 		ProjetoBusiness pBus = new ProjetoBusiness();
 		return pBus.projetosPorUsuario(Integer.parseInt(id));
+	}
+	
+	// get para puxar todos os meus projetos do banco..
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)	
+	@Path("/cards/{id}")
+	public List<CardsDashBoard> buscaCards(@PathParam("id") int id) {
+		ProjetoBusiness pBus = new ProjetoBusiness();
+		return pBus.gerarCardsProjeto(id);
 	}
 	
 }

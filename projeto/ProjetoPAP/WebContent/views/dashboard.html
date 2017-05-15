@@ -11,26 +11,27 @@
                </h4>
             </div>
             <br/>
-            <div class="col-md-6" ng:repeat="projeto in projetos | filter: {status: 'Em andamento'}">
+            <div class="col-md-6" ng:repeat="card in cardsProjetos">
                <div class="card">
-                  <a ui-sref="pageDetalhesProjeto({idProjeto:{{projeto.idProjeto}}})">
+                  <a ui-sref="pageDetalhesProjeto({idProjeto:{{card.idProjeto}}})">
                      <div class="card-header" data-background-color="dark">
-                        <h4 class="title">{{projeto.nome}}</h4>
-                        <p class="category">Criado em: {{ projeto.dataCriacao | date: 'dd/MM/yyyy'}}</p>
+                        <h4 class="title">{{card.nomeProjeto}}</h4>
+                        <p class="category">Criado em: {{ card.dataCriacao | date: 'dd/MM/yyyy'}}</p>
                      </div>
                   </a>
                   <div class="card-content table-responsive">
-                     Entrega: {{ projeto.dataEntrega | date: 'dd/MM/yyyy'}}<br/>
-                     <br/>
+                     Entrega: {{ card.dataEntrega | date: 'dd/MM/yyyy'}}<br/>
+                     Tarefas: {{card.totalTarefas}}<br/>
+					 <br/>
                      Status
-                     <div class="progress" ng-change="gerarPorcentTarefas(projeto)">
-                        <div class="progress-bar progress-bar-danger" style="width: 34%">
+                     <div class="progress">
+                        <div class="progress-bar progress-bar-danger" ng-style="{'width': card.porcentPendente+'%'}">
                            <span class="sr-only">10% Complete (danger)</span>
                         </div>
-                        <div class="progress-bar progress-bar-warning" style="width: 33%">
+                        <div class="progress-bar progress-bar-warning" ng-style="{'width': card.porcentAndamento+'%'}">
                            <span class="sr-only">20% Complete (warning)</span>
                         </div>
-                        <div class="progress-bar progress-bar-success" style="width: 33%">
+                        <div class="progress-bar progress-bar-success" ng-style="{'width': card.porcentConcluido+'%'}">
                            <span class="sr-only">35% Complete (success)</span>
                         </div>
                      </div>
