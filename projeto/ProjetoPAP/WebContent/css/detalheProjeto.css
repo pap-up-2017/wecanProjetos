@@ -56,7 +56,6 @@
 	min-height: 200px;
 	max-height: 500px;
 	overflow-y: auto;
-	overflow-x: hidden;
 }
  .createpopup{
    display: none;
@@ -68,15 +67,7 @@
    display: none;
    }   
    .editpopup{
-   width: 250px;
-   border: 1px solid black;
-   display: none;
-   position: absolute;
-   top: center;
-   left: center;
-   bottom: center;
-   right: center;
-   background-color:#c2c2d6;
+   display:none;
    }
    .editpopup-true{
    display: block;
