@@ -502,7 +502,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 			}
 			else{
 				if(projeto.status == "Em andamento"){
-					return "Concluir projeto";
+					return "Finalizar projeto";
 				}
 			}
 		}

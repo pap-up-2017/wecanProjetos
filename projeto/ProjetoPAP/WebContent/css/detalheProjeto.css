@@ -1,0 +1,111 @@
+.header
+{
+	background: linear-gradient(60deg, #253238, #253238);
+	border-radius: 4px;
+	text-align: center;
+  	box-shadow: 0 12px 20px -10px rgba(37, 50, 56, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(37, 50, 56, 0.2);
+}
+.p
+{
+	font-size: 15px !important;
+	font-weight: normal !important;
+	font-family: tahoma;
+}
+.text-default
+{
+	color: #253238 !important;
+	padding: 10px;
+}
+.text-primary, .text-warning, .text-info, .text-danger
+{
+	padding: 10px;
+}
+.label-primary, .label-default, .label-info, .label-success,.label-warning, .label-danger
+{
+	color: #fff !important;
+}
+.tarefa
+{
+	box-shadow: 0 12px 20px -10px rgba(37, 50, 56, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(37, 50, 56, 0.2);
+	padding: 10px;
+}
+.criarTarefa
+{
+	box-shadow: 0 12px 20px -10px rgba(37, 50, 56, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(37, 50, 56, 0.2);
+}
+.backTarefa
+{
+	border: 0px solid #3472f7;
+	border-radius: 8px;
+	padding: 10px !important;
+	box-shadow: 0 12px 20px -10px rgba(37, 50, 56, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(37, 50, 56, 0.2);
+	margin-top: 10px;
+	margin-bottom: 10px;s
+}
+.padding
+{
+	padding: 10px;
+}
+.col-md-6, .col-md-4, .col-md-12, .col-md-2
+{
+	padding: 10px;
+}
+.card-content
+{
+	padding: 10px;
+	min-height: 200px;
+	max-height: 500px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+ .createpopup{
+   display: none;
+   }
+   .createpopup-true{
+   display: block;
+   }
+   .createpopup-false{
+   display: none;
+   }   
+   .editpopup{
+   width: 250px;
+   border: 1px solid black;
+   display: none;
+   position: absolute;
+   top: center;
+   left: center;
+   bottom: center;
+   right: center;
+   background-color:#c2c2d6;
+   }
+   .editpopup-true{
+   display: block;
+   }
+   .editpopup-false{
+   display: none;
+   }
+   .panel-heading {
+   background-color: #11161c!important;
+   color: #fff!important;
+   border: 1px solid #ddd!important;}
+   .panel-info {
+   border-color: #ddd!important;
+   }
+   .organizador-true{
+   display: block;
+   }
+   .organizador-false{
+   display: none;
+   }
+   .participante-true{
+   display: block;
+   }
+   .participante-false{
+   display: none;
+   }
+   .avaliado-true{
+   display: block;
+   }
+   .avaliado-false{
+   display: none;
+   }

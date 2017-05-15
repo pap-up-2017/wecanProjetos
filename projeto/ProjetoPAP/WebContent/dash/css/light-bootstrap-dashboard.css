@@ -64,6 +64,8 @@ a,
 .td-name,
 td,
 button.close {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
   font-family: "Roboto","Helvetica Neue",Arial,sans-serif;
   font-weight: 400;
 }
@@ -397,18 +399,7 @@ body > .navbar-collapse:after {
 .sidebar[data-image]:after, .sidebar.has-image:after,
 body > .navbar-collapse[data-image]:after,
 body > .navbar-collapse.has-image:after {
-  opacity: .85;
-}
-.sidebar[data-color="dark"]:after,
-body > .navbar-collapse[data-color="dark"]:after {
-  background: #253238;
-  background: -moz-linear-gradient(top, #253238 0%, #253238 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #253238), color-stop(100%, #253238));
-  background: -webkit-linear-gradient(top, #253238 0%, #253238 100%);
-  background: -o-linear-gradient(top, #253238 0%, #253238 100%);
-  background: -ms-linear-gradient(top, #253238 0%, #253238 100%);
-  background: linear-gradient(to bottom, #253238 0%, #253238 100%);
-  background-size: 150% 150%;
+  opacity: .77;
 }
 .sidebar[data-color="blue"]:after,
 body > .navbar-collapse[data-color="blue"]:after {
@@ -620,13 +611,13 @@ body > .navbar-collapse[data-color="purple"]:after {
 }
 
 .btn-info {
-  border-color: #609793;
-  color: #609793;
+  border-color: #1DC7EA;
+  color: #1DC7EA;
 }
 .btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .open > .btn-info.dropdown-toggle {
   background-color: transparent;
-  color: #369d96;
-  border-color: #369d96;
+  color: #42d0ed;
+  border-color: #42d0ed;
 }
 .btn-info.disabled, .btn-info.disabled:hover, .btn-info.disabled:focus, .btn-info.disabled.focus, .btn-info.disabled:active, .btn-info.disabled.active, .btn-info:disabled, .btn-info:disabled:hover, .btn-info:disabled:focus, .btn-info:disabled.focus, .btn-info:disabled:active, .btn-info:disabled.active, .btn-info[disabled], .btn-info[disabled]:hover, .btn-info[disabled]:focus, .btn-info[disabled].focus, .btn-info[disabled]:active, .btn-info[disabled].active, fieldset[disabled] .btn-info, fieldset[disabled] .btn-info:hover, fieldset[disabled] .btn-info:focus, fieldset[disabled] .btn-info.focus, fieldset[disabled] .btn-info:active, fieldset[disabled] .btn-info.active {
   background-color: transparent;
@@ -634,12 +625,12 @@ body > .navbar-collapse[data-color="purple"]:after {
 }
 .btn-info.btn-fill {
   color: #FFFFFF;
-  background-color: #609793;
+  background-color: #1DC7EA;
   opacity: 1;
   filter: alpha(opacity=100);
 }
 .btn-info.btn-fill:hover, .btn-info.btn-fill:focus, .btn-info.btn-fill:active, .btn-info.btn-fill.active, .open > .btn-info.btn-fill.dropdown-toggle {
-  background-color: #369d96;
+  background-color: #42d0ed;
   color: #FFFFFF;
 }
 .btn-info.btn-fill .caret {
@@ -1009,20 +1000,17 @@ body > .navbar-collapse[data-color="purple"]:after {
   top: 50%;
   margin-top: -13px;
   z-index: 1033;
-  background-color: #383838;
+  background-color: #FFFFFF;
   display: block;
-  border-radius: 3px;;
+  border-radius: 50%;
   opacity: .4;
   line-height: 11px;
-  width: auto;
+  width: 25px;
   height: 25px;
-  paddin: 5px;
   outline: 0 !important;
   text-align: center;
   padding: 3px;
   font-weight: 300;
-  color: #fff;
-  font-size: 15px;
 }
 .alert button.close:hover {
   opacity: .55;
@@ -1037,12 +1025,10 @@ body > .navbar-collapse[data-color="purple"]:after {
 }
 .alert.alert-with-icon {
   padding-left: 65px;
-  color: #383838;
 }
 
 .alert-info {
-  border: 2px solid #63d8f1;
-  background-color: #fff;
+  background-color: #63d8f1;
 }
 
 .alert-success {
@@ -1556,7 +1542,7 @@ body > .navbar-collapse[data-color="purple"]:after {
 .navbar-default .navbar-nav > li > a:not(.btn):focus {
   background-color: transparent;
   border-radius: 3px;
-  color: #82c8c3;
+  color: #1DC7EA;
   opacity: 1;
   filter: alpha(opacity=100);
 }
@@ -1926,7 +1912,7 @@ body > .navbar-collapse[data-color="purple"]:after {
   width: 30px;
   height: 30px;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 50%;
   margin-right: 5px;
 }
 .card .description {
@@ -1993,7 +1979,7 @@ body > .navbar-collapse[data-color="purple"]:after {
 }
 
 .card-user .image {
-  height: 80px;
+  height: 110px;
 }
 .card-user .image-plain {
   height: 0;
@@ -2007,7 +1993,7 @@ body > .navbar-collapse[data-color="purple"]:after {
 .card-user .avatar {
   width: 124px;
   height: 124px;
-  border: 0px solid #FFFFFF;
+  border: 5px solid #FFFFFF;
   position: relative;
   margin-bottom: 15px;
 }
