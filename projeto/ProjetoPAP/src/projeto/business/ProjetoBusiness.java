@@ -119,9 +119,9 @@ public class ProjetoBusiness {
 				List<Tarefa> tarefasAndamento = tDao.listarPorStatusAndProjeto("Em andamento", p.getIdProjeto());
 				List<Tarefa> tarefasConcluido = tDao.listarPorStatusAndProjeto("Concluido", p.getIdProjeto());
 				
-				int numPendente = tarefasPendente.size();
-				int numAndamento = tarefasAndamento.size();
-				int numConcluido = tarefasConcluido.size();
+				float numPendente = tarefasPendente.size();
+				float numAndamento = tarefasAndamento.size();
+				float numConcluido = tarefasConcluido.size();
 				
 				if(numPendente < 1){
 					c.setPorcentPendente(0);
