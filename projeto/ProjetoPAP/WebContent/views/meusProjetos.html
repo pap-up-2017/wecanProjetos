@@ -5,7 +5,10 @@
 			<div class="col-md-12">
 				<div class="card">
 					<div class="header">
-						<h4 class="title">
+						<h4 class="label label-info">
+							Meus projetos
+						</h4>
+						<h4 class="text-default">
                         	SEUS PROJETOS EM ANDAMENTO
                         </h4><br/>
                         <a class="btn btn-info btn-fill" ng-href="#/pageProjeto"><i class="fa fa-plus-circle" aria-hidden="true"></i>Novo projeto</a>
@@ -15,9 +18,11 @@
 						</form><br/>
                     </div>
                     <div class="content">
-                    	<div class="row projeto" ng:repeat="projeto in projetosPorUsuario | filter: {status: 'em andamento'} | filter: search">
+                    	<div ng:repeat="projeto in projetosPorUsuario | filter: {status: 'em andamento'} | filter: search">
                         	<div class="col-md-12">
-                        		<a class="linkProjeto" ui-sref="pageDetalhesProjeto({idProjeto:{{projeto.idProjeto}}})">{{projeto.nome}}</a>
+                        	<a ui-sref="pageDetalhesProjeto({idProjeto:{{projeto.idProjeto}}})">
+                        		<div id="card" class="card">
+                        		<h4 style="font-weight:bold" class="text-info">{{projeto.nome}}</h4>
                             	<div class="form-group">
                                 	<h4 class="title">
                                 		<label class="label label-default">Integrantes:</label>
@@ -27,9 +32,11 @@
                                 		<label class="label label-default">Curso:</label>
 										<label>{{projeto.organizador.cursoUsuario.nomeCurso}}</label>
                                 	</h4>
-                                	<p class="desc">{{projeto.descricao}}</p>
+                                	<p class="description">{{projeto.descricao}}</p>
                                 	<label style="color: #fff" class="label label-warning">{{projeto.status}}</label>
                                 </div>
+                        	</div>
+                        	</a>
                         	</div>
                         </div>
                     </div>
@@ -51,9 +58,11 @@
 						</form><br/>
                     </div>
                     <div class="content">
-                    	<div class="row projeto" ng:repeat="projeto in meusProjetos | filter: {status: 'Aberto'} | filter: search">
+                    	<div ng:repeat="projeto in meusProjetos | filter: {status: 'Aberto'} | filter: search">
                         	<div class="col-md-12">
-                        		<a class="linkProjeto" ui-sref="pageDetalhesProjeto({idProjeto:{{projeto.idProjeto}}})">{{projeto.nome}}</a>
+                        		<a ui-sref="pageDetalhesProjeto({idProjeto:{{projeto.idProjeto}}})">
+                        		<div id="card" class="card">
+                        		<h4 style="font-weight:bold" class="text-info">{{projeto.nome}}</h4>
                             	<div class="form-group">
                                 	<h4 class="title">
                                 	    <label class="label label-default">Vagas:</label>
@@ -69,13 +78,16 @@
                                 	<label style="color: #fff" class="label label-primary">{{projeto.status}}</label>
                                 </div>
                         	</div>
+                        	</a>
+                        	</div>
+                    
                         </div>
                     </div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
+	</div>
 <!-- <link rel="stylesheet" href="css/interno/listarprojeto.css">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">

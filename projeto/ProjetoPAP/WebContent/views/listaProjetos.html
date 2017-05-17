@@ -5,9 +5,12 @@
 			<div class="col-md-12">
 				<div class="card">
 					<div class="header">
-						<h4 class="title">
-                        	PROJETOS
+						<h4 class="label label-info">
+                        	Grade de projetos
                         </h4><br/>
+                        <h4 class="text-default">
+                        	Projetos gerais
+                        </h4>
                         <a class="btn btn-info btn-fill" ng-href="#/pageProjeto"><i class="fa fa-plus-circle" aria-hidden="true"></i>Novo projeto</a><br/>
                         <form>
                         	<br/>
@@ -15,9 +18,11 @@
 						</form><br/>
                     </div>
                     <div class="content">
-                    	<div class="row projeto" ng:repeat="projeto in projetos | filter: {status: 'Aberto'} | filter: search2">
+                    	<div ng:repeat="projeto in projetos | filter: {status: 'Aberto'} | filter: search2">
                         	<div class="col-md-12">
-                        		<a class="linkProjeto" ui-sref="pageDetalhesProjeto({idProjeto:{{projeto.idProjeto}}})">{{projeto.nome}}</a>
+                        		<a ui-sref="pageDetalhesProjeto({idProjeto:{{projeto.idProjeto}}})">
+                            		<div id="card" class="card">
+                            			<h4 style="font-weight:bold" class="text-info">{{projeto.nome}}</h4>
                             	<div class="form-group">
                                 	<h4 class="title">
                                 	    <label class="label label-default">Vagas:</label>
@@ -33,6 +38,7 @@
                                 	<label style="color: #fff" class="label label-primary">{{projeto.status}}</label>
                                 </div>
                         	</div>
+                        	</a>
                         </div>
                     </div>
 				</div>
