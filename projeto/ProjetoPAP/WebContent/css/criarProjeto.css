@@ -1,22 +1,5 @@
-.title
+.card-content
 {
-	color: #82c7c2 !important;
-}
-.panelinf
-{
-	border: 0px;
-	width: 100%;
-	height: 280px;
-	border-radius: 4px !important;
-	overflow: auto;
-}
-.panel-heading
-{
-	background-color: #3b474c !important;
-	color: #fff!important;
-}
-.info
-{
-	width: 100%;
-	height: 300px;
+	max-height: 254px;
+	overflow-y: auto;
 }
