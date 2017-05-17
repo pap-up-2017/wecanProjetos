@@ -42,8 +42,18 @@
 {
 	 color: #606060 !important;
 }
-.card
+.card-content
 {
-	padding: 0px;
-	padding-bottom: 20px;
+	max-height: 254px;
+	overflow-y: auto;
+}
+.card {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  margin: 25px 0;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+  border-radius: 3px;
+  color: rgba(0,0,0, 0.87);
+  background: #fff;
 }

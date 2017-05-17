@@ -3,9 +3,8 @@
 <meta charset="utf-8">
 <div ng-controller="PerfilCtrl">
     <div class="container-fluid">
-        <div class="row">
         	<div class="col-md-8">
-                <div class="card card-user">
+                <div style="padding: 0px" class="card card-user">
                     <div class="image"></div>
                     <div class="content">
                         <div class="author">
@@ -25,7 +24,7 @@
                     </div>
                         <div style="padding: 10px;"class="row" ng-controller="excluirUsuarioCtrl"> 
                         		<div class="col-md-6">
-                        			<a style="width: 100%; margin-bottom: 10px;" class="btn btn-info btn-fill pull-right" ng-show="idUsuairiod == UsuarioLogado" ui-sref="altPerfil" ui-sref-active="active">
+                        			<a style="width: 100%" class="btn btn-info btn-fill pull-right" ng-show="idUsuairiod == UsuarioLogado" ui-sref="altPerfil" ui-sref-active="active">
                         				Editar perfil
                         			</a>
 								</div>
@@ -56,5 +55,3 @@
                         </div>
                         </div>
             </div>
-        </div>
-    </div>
