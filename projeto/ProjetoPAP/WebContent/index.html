@@ -25,24 +25,24 @@
 
 	<body>
 		<div class="wrapper">
-			<div class="sidebar" data-color="dark" data-image="dash/img/sidebar-4.jpg" ng-controller="IndexCtrl">
+			<div class="sidebar" data-color="white" data-image="dash/img/sidebar-4.jpg" ng-controller="IndexCtrl">
 
 			<!--
 
-				Tip 1: you can change the color of the sidebar using: data-color=" dark | blue | azure | green | orange | red | purple"
+				Tip 1: you can change the color of the sidebar using: data-color=" white | blue | azure | green | orange | red | purple"
 				Tip 2: you can also add an image using data-image tag
 
 			-->
 
 				<div class="sidebar-wrapper">
 					<ul class="nav">
-						<li ng-controller="PerfilCtrl">
+						<li style="background: #253238;" ng-controller="PerfilCtrl">
 							<div class="infoUser">
 								<div class="content">
 									<div class="author">
 										 <a ui-sref="perfil({idUsuario: {{UsuarioLogado}} })" ui-sref-active="active">
 											<img src="dash/img/faces/face-1.png" alt="..."/>
-											<h5 class="title">{{nomeUsuario}}<br/>
+											<h5 class="text-info">{{nomeUsuario}}<br/>
 												<small>{{cursoUsuario}}</small>
 											</h5>
 										</a>
