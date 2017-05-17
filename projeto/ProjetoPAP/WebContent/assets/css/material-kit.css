@@ -239,8 +239,8 @@ a .material-icons, a:hover .material-icons, a:focus .material-icons {
 .navbar .navbar-nav > li > a.btn.btn-primary.dropdown-toggle, .open >
 .navbar .navbar-nav > li > a.btn.btn-primary.dropdown-toggle:focus, .open >
 .navbar .navbar-nav > li > a.btn.btn-primary.dropdown-toggle:hover {
-  background-color: #85c6c3;
-  color: #383838;
+  background-color: #1dc7ea;
+  color: #ffffff;
 }
 .btn.btn-primary:focus, .btn.btn-primary:active, .btn.btn-primary:hover,
 .navbar .navbar-nav > li > a.btn.btn-primary:focus,
@@ -278,7 +278,7 @@ a .material-icons, a:hover .material-icons, a:focus .material-icons {
 .btn.btn-primary.btn-simple,
 .navbar .navbar-nav > li > a.btn.btn-primary.btn-simple {
   background-color: transparent;
-  color: #75b1ac;
+  color: #1dc7ea;
   box-shadow: none;
 }
 .btn.btn-primary.btn-simple:hover, .btn.btn-primary.btn-simple:focus, .btn.btn-primary.btn-simple:active,
@@ -286,7 +286,7 @@ a .material-icons, a:hover .material-icons, a:focus .material-icons {
 .navbar .navbar-nav > li > a.btn.btn-primary.btn-simple:focus,
 .navbar .navbar-nav > li > a.btn.btn-primary.btn-simple:active {
   background-color: transparent;
-  color: #75b1ac;
+  color: #1990a9;
 }
 .btn.btn-info,
 .navbar .navbar-nav > li > a.btn.btn-info {
@@ -2875,7 +2875,7 @@ h2.title {
   background-color: #FFFFFF;
 }
 .card .header-primary {
-  background: linear-gradient(60deg, #7bc9c3, #538b87);
+  background: linear-gradient(60deg, #1dc7ea, #1dc7ea);
 }
 .card .header-info {
   background: linear-gradient(60deg, #29b6f6, #0288d1);
@@ -3581,7 +3581,7 @@ h2.title {
   left: 0;
   top: 0;
   content: "";
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 .header-filter .container {
   z-index: 2;
@@ -3642,7 +3642,7 @@ h2.title {
   padding-top: 15px;
 }
 .index-page .header-filter:after {
-  background: rgba(37, 50, 56, 0.64);
+  background: rgba(37, 50, 56, 0.84);
   background: linear-gradient(45deg, rgba(37, 50, 56, 0.88) 0%, rgba(37, 50, 56, 0.45) 100%);
   background: -moz-linear-gradient(45deg, rgba(37, 50, 56, 0.88) 0%, rgba(37, 50, 56, 0.45) 100%);
   background: -webkit-linear-gradient(45deg, rgba(37, 50, 56, 0.88) 0%, rgba(37, 50, 56, 0.45) 100%);
@@ -3713,7 +3713,7 @@ h2.title {
   padding-top: 25px;
 }
 .signup-page .header-filter:after {
-  background: rgba(37, 50, 56, 0.64);
+  background: rgba(37, 50, 56, 0.84);
   background: linear-gradient(45deg, rgba(37, 50, 56, 0.88) 0%, rgba(37, 50, 56, 0.45) 100%);
   background: -moz-linear-gradient(45deg, rgba(37, 50, 56, 0.88) 0%, rgba(37, 50, 56, 0.45) 100%);
   background: -webkit-linear-gradient(45deg, rgba(37, 50, 56, 0.88) 0%, rgba(37, 50, 56, 0.45) 100%);

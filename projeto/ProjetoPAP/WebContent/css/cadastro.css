@@ -1,9 +1,14 @@
-﻿.logo img
+.logo img
 {
-	width: 70px;
+	width: 50px;
 }
 footer
 {
 	background-color: #253238;
 	color: #ffffff;
+}
+.active
+{
+	background-color: #1dc7ea;
+	border-radius: 4px;
 }

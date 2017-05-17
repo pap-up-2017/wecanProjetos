@@ -1,6 +1,6 @@
 .logo img
 {
-	width: 70px;
+	width: 50px;
 }
 .section {
   padding: 50px 0;
@@ -24,7 +24,7 @@
 .section i
 {
 	font-size: 100px;
-	color: #81c9c3;
+	color: #1dc7ea;
 }
 .col-md-6
 {
@@ -45,4 +45,9 @@ footer
 {
 	background-color: #253238;
 	color: #ffffff;
+}
+.active
+{
+	background-color: #1dc7ea;
+	border-radius: 4px;
 }

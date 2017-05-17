@@ -13,9 +13,9 @@ public class CardsDashBoard {
 	private Date dataCriacao;
 	private Date dataEntrega;
 	private int totalTarefas;
-	private int porcentPendente;
-	private int porcentAndamento;
-	private int porcentConcluido;
+	private float porcentPendente;
+	private float porcentAndamento;
+	private float porcentConcluido;
 	
 	public int getIdProjeto() {
 		return idProjeto;
@@ -47,22 +47,22 @@ public class CardsDashBoard {
 	public void setTotalTarefas(int totalTarefas) {
 		this.totalTarefas = totalTarefas;
 	}
-	public int getPorcentPendente() {
+	public float getPorcentPendente() {
 		return porcentPendente;
 	}
-	public void setPorcentPendente(int porcentPendente) {
+	public void setPorcentPendente(float porcentPendente) {
 		this.porcentPendente = porcentPendente;
 	}
-	public int getPorcentAndamento() {
+	public float getPorcentAndamento() {
 		return porcentAndamento;
 	}
-	public void setPorcentAndamento(int porcentAndamento) {
+	public void setPorcentAndamento(float porcentAndamento) {
 		this.porcentAndamento = porcentAndamento;
 	}
-	public int getPorcentConcluido() {
+	public float getPorcentConcluido() {
 		return porcentConcluido;
 	}
-	public void setPorcentConcluido(int porcentConcluido) {
+	public void setPorcentConcluido(float porcentConcluido) {
 		this.porcentConcluido = porcentConcluido;
 	} 
 
