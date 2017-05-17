@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -36,6 +37,7 @@ public class Projeto {
 	//Dono do projeto
 	@OneToOne
 	private Usuario organizador;
+	@Column(columnDefinition = "TEXT")
 	private String descricao;
 	private Date dataEntrega;
 	private String status;
