@@ -72,7 +72,6 @@ button.close {
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
   font-weight: 300;
-  margin: 30px 0 15px;
 }
 
 h1, .h1 {
@@ -302,13 +301,14 @@ input:focus {
   border-radius: 4px;
 }
 .sidebar .nav li:hover > a {
-  background: rgba(255, 255, 255, 0.13);
+  background: rgba(29, 199, 234, 1);
   opacity: 1;
+  
 }
 .sidebar .nav li.active > a {
   color: #FFFFFF;
   opacity: 1;
-  background: rgba(255, 255, 255, 0.23);
+  background: rgba(29, 199, 234, 1);
 }
 .sidebar .nav p {
   margin: 0;
@@ -399,7 +399,18 @@ body > .navbar-collapse:after {
 .sidebar[data-image]:after, .sidebar.has-image:after,
 body > .navbar-collapse[data-image]:after,
 body > .navbar-collapse.has-image:after {
-  opacity: .77;
+  opacity: .87;
+}
+.sidebar[data-color="white"]:after,
+body > .navbar-collapse[data-color="white"]:after {
+  background: #ffffff;
+  background: -moz-linear-gradient(top, #253238 0%, #253238 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #253238), color-stop(100%, #253238));
+  background: -webkit-linear-gradient(top, #253238 0%, #253238 100%);
+  background: -o-linear-gradient(top, #253238 0%, #253238 100%);
+  background: -ms-linear-gradient(top, #253238 0%, #253238 100%);
+  background: linear-gradient(to bottom, #253238 0%, #253238 100%);
+  background-size: 150% 150%;
 }
 .sidebar[data-color="blue"]:after,
 body > .navbar-collapse[data-color="blue"]:after {
@@ -967,7 +978,7 @@ body > .navbar-collapse[data-color="purple"]:after {
 .alert {
   border: 0;
   border-radius: 0;
-  color: #FFFFFF;
+  color: #757575;
   padding: 10px 15px;
   font-size: 14px;
 }
@@ -1839,16 +1850,15 @@ body > .navbar-collapse[data-color="purple"]:after {
 }
 .card .image {
   width: 100%;
-  overflow: hidden;
   height: 260px;
+  overflow: hidden;
   border-radius: 4px 4px 0 0;
   position: relative;
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
   transform-style: preserve-3d;
-}
-.card .image img {
-  width: 100%;
+  background-image: url('http://i67.tinypic.com/141jc75.png');
+  background-repeat: no-repeat;
 }
 .card .filter {
   position: absolute;
@@ -1912,8 +1922,9 @@ body > .navbar-collapse[data-color="purple"]:after {
   width: 30px;
   height: 30px;
   overflow: hidden;
-  border-radius: 50%;
+  border-radius: 8px;
   margin-right: 5px;
+  margin-top: 30px;
 }
 .card .description {
   font-size: 14px;
@@ -1979,7 +1990,7 @@ body > .navbar-collapse[data-color="purple"]:after {
 }
 
 .card-user .image {
-  height: 110px;
+  height: 50px;
 }
 .card-user .image-plain {
   height: 0;
@@ -1993,7 +2004,6 @@ body > .navbar-collapse[data-color="purple"]:after {
 .card-user .avatar {
   width: 124px;
   height: 124px;
-  border: 5px solid #FFFFFF;
   position: relative;
   margin-bottom: 15px;
 }

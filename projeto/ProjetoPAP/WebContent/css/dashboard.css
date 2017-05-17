@@ -1,3 +1,7 @@
+html, body
+{
+	font-family: 'Roboto';
+}
 .card .card-header {
   box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
   margin: -20px 15px 0;
@@ -75,12 +79,22 @@
   border-radius: 3px;
   color: rgba(0,0,0, 0.87);
   background: #fff;
+  padding: 15px;
 }
 .card-content
 {
 	padding: 10px;
 }
-
+#card:hover
+{
+	box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.22), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+#h4
+{
+	background: transparent;
+	padding: 10px;
+	border-bottom: 1px solid #dcdcdc;
+}
 .progress {
   height: 4px;
   border-radius: 0;
@@ -152,18 +166,14 @@
 }
 .label-info
 {
-	padding: 3px;
-	border-radius: 3px;
-	background-color: rgba(129,201,195,1) !important;
-	color: #fff !important;
-	font-size: 10px !important;
+	font-size: 15px !important;
 }
 .infoUser
 {
 	width: 100%;
 	height: auto;
 	text-align: center;
-	padding: 0px;
+	padding-top: 10px;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 .infoUser img
@@ -188,4 +198,8 @@ a
 	width: 60px;
 	border:0px !important; 
 	margin-bottom: 10px;
+}
+.nav
+{
+	margin-top: 0px !important;
 }
