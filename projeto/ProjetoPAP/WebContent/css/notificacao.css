@@ -1,4 +1,13 @@
-.btn-info
+.alert-default
 {
-	float: right;
+	border: 1px solid #1dc7ea;
+	border-radius: 8px;
+}
+#icon
+{
+	color: #1dc7ea;
+}
+#alert:hover
+{
+	box-shadow: 0 10px 30px -12px rgba(29, 199, 234, 0.22), 0 4px 25px 0px rgba(29, 199, 234, 0.12), 0 8px 10px -5px rgba(29, 199, 234, 0.2);
 }
