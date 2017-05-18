@@ -2,6 +2,7 @@ package projeto.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +25,7 @@ public class Tarefa {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int idTarefa;
 	private String nomeTarefa;
+	@Column(columnDefinition = "TEXT")
 	private String descricaoTarefa;
 	private Date dataCriacao;
 	private Date prazoEntrega;
