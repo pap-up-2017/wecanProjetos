@@ -2,519 +2,508 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <div class="container-fluid" ng-controller="PageProjetoCtrl">
-	<div class="row">
-	<div ng-hide="projeto.status == 'Concluído'">
-		{{ Resposta }}
-		<div class="col-md-12">
-			<div class="card">
-					<h2 id="h4" class="text-info">
-						{{projeto.nome}}
-					</h2>
-				<button class="btn btn-info btn-fill pull-right" ng-show="projeto.organizador.idUsuario == UsuarioLogado" ng-click="StatusProjeto(projeto)">{{modificarStatusProjeto(projeto)}}</button>
-	       				<button class="btn btn-info btn-fill pull-right" ng-show="filtroTela(projeto.organizador.idUsuario, usuariosDoProjeto, aprovacaoUsuarios)" ng-click="SolicitaParticipacao(projeto)">Participar do projeto</button>
-				<div class="col-md-12">
-					<h6 class="text-primary">Descrição do projeto</h6>
-	            	<p class="p text-default" style="word-wrap: break-word;">
-	            		{{projeto.descricao}}
-	            	</p>
-				</div>
-				<div class="col-md-6">
-					<div class="sombra card">
-					<h6 class="text-primary">Competências</h6>
-					<div id="card-content" class="card-content">
-					<div class="padding col-md-12" ng-repeat="competenciaDoProjeto in competenciasDoProjeto">
-						<label style="font-size:15px; text-transform: capitalize !important;" class="label label-primary">
-							<i class="fa fa-cog" aria-hidden="true"></i> {{ competenciaDoProjeto.nomeCompetencia }}
-						</label>
-					</div>
-					</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="sombra card">
-					<h6 class="text-primary">Integrantes</h6>
-					<div id="card-content"  class="card-content">
-					<div style="margin-bottom: 15px;" class="col-md-12" ng-repeat="usuarioDoProjeto in usuariosDoProjeto">
-						<a style="font-size:15px;" class="label label-primary" ui-sref="perfil({idUsuario: {{usuarioDoProjeto.idUsuario}} })" ui-sref-active="active">
-							<i class="fa fa-user" aria-hidden="true"></i> {{usuarioDoProjeto.nomeUsuario}}
-						</a>
-					</div>
-					</div>
-					</div>
-				</div>
-				<div id ="candidatos" class="col-md-12" ng-show="projeto.status == 'Aberto'">
-					<div class="sombra card">
-						<h6 class="text-primary">Candidatos</h6>
-						<div class="card-content">
-							<div style="border-radius: 8px; background:#1d62f1 " class="col-md-12" ng-repeat="aprovacaoUsuario in aprovacaoUsuarios">
-
-						<div class="padding col-md-2">
-							<a style="color: #fff !important; text-decoration: underline" class="text-primary" ui-sref="perfil({idUsuario: {{aprovacaoUsuario.idUsuario}} })" ui-sref-active="active">
-								<i class="fa fa-user" aria-hidden="true"></i> {{ aprovacaoUsuario.nomeUsuario }}
-							</a>
-						</div>
-						<div class="padding col-md-2">
-							<a style="color: #fff !important" class="text-info">{{ aprovacaoUsuario.status }}</a>
-						</div>
-						<div class="padding col-md-4">
-							<a style="color: #fff !important" class="text-info">{{ aprovacaoUsuario.dataCriacao }}</a>
-						</div>
-						<div class="padding col-md-2">
-							<button ng-show="projeto.organizador.idUsuario == UsuarioLogado" class="btn btn-primary btn-sm btn-fill botao avaliado-{{ aprovacaoUsuario.status == 'Aguardando Aprovação' ? 'true' : 'false' }} " ng-click="AceitarParticipante(aprovacaoUsuario) ">
-								<i class="fa fa-check" aria-hidden="true"></i> Aceitar
-							</button>
-						</div>
-						<div class="padding col-md-2">
-							<button ng-show="projeto.organizador.idUsuario == UsuarioLogado" class="btn btn-danger btn-sm btn-fill botao avaliado-{{ aprovacaoUsuario.status == 'Aguardando Aprovação' ? 'true' : 'false' }} " ng-click="RecusarParticipante(aprovacaoUsuario) ">
-								<i class="fa fa-times" aria-hidden="true"></i> Recusar
-							</button>
-						</div>
-					</div>
-						</div>
-					</div>
-					
-					
-				</div>
-				
-			</div>
-		</div>
-		<div class="col-md-12" ng-controller="PageTarefaCtrl" ng-show="projeto.status == 'Em andamento'">
-				<div class="card">
-					<div class="card-header" data-background-color="dark">
-						<h5 class="title">
-							Tarefas do projeto
-						</h5>
-					</div>
-					<div style="padding: 20px;" class="col-md-12">
-						<button class="btn btn-info btn-fill pull-left" ng-click="CriarTarefa()">
-							<i class="fa fa-plus" aria-hidden="true"></i> Nova tarefa
-						</button>
-					</div>
-					<div class="col-md-12">
-						<div class="createpopup createpopup-{{createIstrue}} ">
-							<div class="criarTarefa col-md-6">
-								<a class="text-info">Título:</a>
-						        <input placeholder="Insira o título da tarefa..." class="form-control" type="text" ng-model="tarefa.nomeTarefa" required/>
-						        <br/>
-						        <a class="text-info">Descrição:</a>
-						        <textarea cols="20" rows="4" maxlength="500" placeholder="Descreva sobre o seu projeto (No máximo 500 caracteres)." placeholder="Insira a descrição da tarefa..." class="form-control" type="text" ng-model="tarefa.descricaoTarefa" required></textarea>
-						        <br/>
-						        <a class="text-info">Data de entrega:</a>
-						        <input placeholder="Prazo de entrega" class="form-control" type="date" ng-model="tarefa.prazoEntrega" required/>
-						        <br/>
-						        <button class="btn btn-info btn-fill btn-sm" ng-click="SalvarCadastro(tarefa)">Concluir</button>
-						        <button class="btn btn-danger btn-fill btn-sm" ng-click="FecharPopUpCriacao()">Cancelar</button>
-						    </div>
-						</div>
-						<div id="edit" class="editpopup editpopup-{{editIstrue}} ">
-							<div class="criarTarefa col-md-6">
-						         <a class="text-info">Título:</a>
-						         <input class="form-control" type="text" ng-model="editednameTarefa"/>
-						         <br/>
-						         <a class="text-info">Descrição:</a>
-						         <textarea cols="20" rows="4" maxlength="500" placeholder="Descreva sobre o seu projeto (No máximo 500 caracteres)." class="form-control" type="text" ng-model="editeddescricaoTarefa"></textarea>
-						         <br/>
-						         <a class="text-info">Data de entrega:</a>
-						         <input class="form-control" type="date" ng-model="editedprazoEntrega"/>
-						         <br/>
-						         <button class="btn btn-info btn-fill btn-sm" ng-click="SalvarAlteracao(editedidTarefa, editednameTarefa, editedProjetoTarefa, editeddescricaoTarefa, editedprazoEntrega)">Salvar</button>
-						         <button class="btn btn-danger btn-fill btn-sm" ng-click="FecharPopUpEdicao()">Cancelar</button>
-							</div>
-						</div>
-					</div>
-						<div class="col-md-12" ondrop="angular.element(this).scope().drop(event)" ondragover="angular.element(this).scope().allowDrop(event)">
-								<div class="col-md-4">
-									<div class="card">
-										<div class="card-header" data-background-color="red">
-											<h5 class="title">
-												Não iniciado
-											</h5>
-										</div>
-										<div style="padding-top: 60px; padding-bottom: 40px; height: 400px; overflow-y: auto;" id="Pendente" class="card-content">
-											<div id="{{tarefa.idTarefa}}rep" ng:repeat="tarefa in tarefas | filter: {statusTarefa : 'Pendente'}" draggable="false">
-								                  <div class="backTarefa col-md-12" id="{{tarefa.idTarefa}}" draggable="true" ondragstart="angular.element(this).scope().drag(event)">
-								                 	<h5 style="text-align: left; word-wrap: break-word;" class="text-primary">
-								                  		{{tarefa.nomeTarefa}}<br/>
-								                  		<small style="word-wrap: break-word;" class="text-default">{{tarefa.descricaoTarefa}}</small>
-								                  	</h5>
-								                  	<div class="col-md-2">
-									                  	<button class="btn btn-default btn-fill btn-xs" ng-click="CarregarEdicao(tarefa)">
-									                  		<i class="fa fa-pencil" aria-hidden="true"></i>
-									                  	</button>
-									               	</div>
-									               	<div class="col-md-2">
-									                  	<button class="btn btn-primary btn-fill btn-xs" ng-click="DetalhesTarefa(tarefa)">
-									                  		<i class="fa fa-eye" aria-hidden="true"></i>
-									                  	</button>
-									                </div>
-									                <div class="col-md-2">
-									                  	<button class="btn btn-danger btn-fill btn-xs" ng-click="ExcluirElemento(tarefa)">
-									                  		<i class="fa fa-times" aria-hidden="true"></i>
-									                  	</button>
-								                  </div>
-								        	 	</div>
-								        	</div>
-								        </div>
-								</div>
-							</div>
-							<div class="col-md-4">
-									<div class="card">
-										<div class="card-header" data-background-color="orange">
-											<h5 class="title">
-												Em andamento
-											</h5>
-										</div>
-										<div style="padding-top: 60px; padding-bottom: 40px; height: 400px; overflow-y: auto;" id="Em andamento" class="card-content">
-											<div id="{{tarefa.idTarefa}}rep"ng:repeat="tarefa in tarefas | filter: {statusTarefa : 'Em andamento'}">
-								                  <div class="backTarefa col-md-12" id="{{tarefa.idTarefa}}" draggable="true" ondragstart="angular.element(this).scope().drag(event)">
-								                 	<h5 style="text-align: left; word-wrap: break-word;" class="text-primary">
-								                  		{{tarefa.nomeTarefa}}<br/>
-								                  		<small style="word-wrap: break-word;" class="text-default">{{tarefa.descricaoTarefa}}</small>
-								                  	</h5>
-								                  	<div class="col-md-2">
-									                  	<button class="btn btn-default btn-fill btn-xs" ng-click="CarregarEdicao(tarefa)">
-									                  		<i class="fa fa-pencil" aria-hidden="true"></i>
-									                  	</button>
-									               	</div>
-									               	<div class="col-md-2">
-									                  	<button class="btn btn-primary btn-fill btn-xs" ng-click="DetalhesTarefa(tarefa)">
-									                  		<i class="fa fa-eye" aria-hidden="true"></i>
-									                  	</button>
-									                </div>
-									                <div class="col-md-2">
-									                  	<button class="btn btn-danger btn-fill btn-xs" ng-click="ExcluirElemento(tarefa)">
-									                  		<i class="fa fa-times" aria-hidden="true"></i>
-									                  	</button>
-									                </div>
-								        	 	</div>
-								        	</div>
-								        </div>
-									</div>									
-							</div>
-							<div class="col-md-4">
-									<div class="card">
-										<div class="card-header" data-background-color="green">
-											<h5 class="title">
-												Concluído
-											</h5>
-										</div>
-										<div style="padding-top: 60px; padding-bottom: 40px; height: 400px; overflow-y: auto;" id="Concluído" class="card-content">
-											<div id="{{tarefa.idTarefa}}rep"ng:repeat="tarefa in tarefas | filter: {statusTarefa : 'Concluído'}">
-								                  <div class="backTarefa col-md-12" id="{{tarefa.idTarefa}}" draggable="true" ondragstart="angular.element(this).scope().drag(event)">
-								                 	<h5 style="word-wrap: break-word; text-align: left;" class="text-primary">
-								                  		{{tarefa.nomeTarefa}}<br/>
-								                  		<small  style="word-wrap: break-word" class="text-default">{{tarefa.descricaoTarefa}}</small>
-								                  	</h5>
-								                  	<div class="col-md-2">
-									                  	<button class="btn btn-default btn-fill btn-xs" ng-click="CarregarEdicao(tarefa)">
-									                  		<i class="fa fa-pencil" aria-hidden="true"></i>
-									                  	</button>
-									               	</div>
-									               	<div class="col-md-2">
-									                  	<button class="btn btn-primary btn-fill btn-xs" ng-click="DetalhesTarefa(tarefa)">
-									                  		<i class="fa fa-eye" aria-hidden="true"></i>
-									                  	</button>
-									                </div>
-									                <div class="col-md-2">
-									                  	<button class="btn btn-danger btn-fill btn-xs" ng-click="ExcluirElemento(tarefa)">
-									                  		<i class="fa fa-times" aria-hidden="true"></i>
-									                  	</button>
-									                </div>
-								                  </div>
-								        	 	</div>
-										</div>
-									</div>
-							</div>		
-						</div>
-					</div>
-					
-			</div>
-			<div class="col-md-12" ng-controller="FeedCtrl">
-			<div class="card">
-						   			<h2 class="text-info">{{feed.tituloFeed}}<br/>
-						   				<small style="color:#383838 !important">{{feed.textoFeed}}</small>
-						   			</h2>
-		
-						   		<hr/>	
-						   		<div style="border-bottom: 1px solid #dcdcdc; padding: 10px;" class="col-md-12">
-						   			<p><textarea class="form-control" cols="20" rows="6" maxlength="500" placeholder="Comente aqui (No máximo 500 caracteres)." id="dp" ng-model="comentarioFeed" required></textarea></p>
-						   			<button style="float:right" class="btn btn-primary btn-fill" ng-click="salvarPost(feed, comentarioFeed)">Comentar</button>
-						   		</div>
-						   	<div style="margin-top: 20px;" class="col-md-12">
-						   		<div id="sombra" ng:repeat="resposta in respostasFeed | orderBy : idResposta : true">
-						   			<a class="text-info" style="font-size: 20px; text-decoration: underline" ui-sref="perfil({idUsuario: {{resposta.usuarioResposta.idUsuario}} })" ui-sref-active="active"><i class="fa fa-user" aria-hidden="true"></i> {{resposta.usuarioResposta.usernameUsuario}}</a>
-						   			<label>{{ resposta.dataResposta | date: 'dd/MM/yyyy - HH:mm'}}</label><br/>
-						   			<label class="text-default" style="word-wrap: break-word;">{{resposta.textoResposta}}</label>
-						   		</div>
-						   		</div>
-						   </div>
-						   </div>
-		</div>
-						   
-						   </div>
-						   	<div class="col-md-12" ng-show="projeto.status == 'Concluído'">
-						   	<div class="card">
-								<h2 id="h4" class="text-info">
-									{{projeto.nome}}<br/>
-									<small style="color: #383838 !important; font-size: 15px;">
-										Projeto iniciado por: <a class="category" style="text-decoration: underline" ui-sref="perfil({idUsuario: projeto.organizador.idUsuario })" ui-sref-active="active">
-											{{projeto.organizador.nomeUsuario}}
-										</a>
-									</small>
-								</h2>
-								<div class="col-md-12">
-									<h6 class="text-primary">Descrição do projeto</h6>
-					            	<p class="p text-default" style="word-wrap: break-word;">
-					            		{{projeto.descricao}}
-					            	</p>
-								</div>
-								<div class="col-md-3"><label class="text-primary">Criado em: </label><label>{{ projeto.dataCriacao | date: 'dd/MM/yyyy'}}</label></div>
-								<div class="col-md-3"><label class="text-primary">Entrega em: </label><label>{{ projeto.dataEntrega | date: 'dd/MM/yyyy'}}</label></div>
-								<div class="col-md-3"><label class="text-primary">Status: </label><label>{{projeto.status}}</label></div>
-								<div class="col-md-3"><label class="text-primary">Participantes: </label><label>{{projeto.participantes}}</label></div>
-								<div class="col-md-6">
-					<div class="sombra card">
-					<h6 class="text-primary">Competências</h6>
-					<div id="card-content" class="card-content">
-					<div class="padding col-md-12" ng-repeat="competenciaDoProjeto in competenciasDoProjeto">
-						<label style="font-size:15px;" class="label label-primary">
-							<i class="fa fa-cog" aria-hidden="true"></i> {{ competenciaDoProjeto.nomeCompetencia }}
-						</label>
-					</div>
-					</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="sombra card">
-					<h6 class="text-primary">Integrantes</h6>
-					<div id="card-content"  class="card-content">
-					<div style="margin-bottom: 15px;" class="col-md-12" ng-repeat="usuarioDoProjeto in usuariosDoProjeto">
-						<a style="font-size:15px;" class="label label-primary" ui-sref="perfil({idUsuario: {{usuarioDoProjeto.idUsuario}} })" ui-sref-active="active">
-							<i class="fa fa-user" aria-hidden="true"></i> {{usuarioDoProjeto.nomeUsuario}}
-						</a>
-					</div>
-					</div>
-					</div>
-				</div>
-	    <hr/>
-	    <div class="col-md-12" ng-controller="PageTarefaCtrl">
-	    	<div class="card">
-	    	<h2 class="text-info">Tarefas concluídas</h2>
-	    	<hr/>
-	    	<div class="success col-md-6" ng-repeat="tarefa in tarefas">
-	    		<h4 class="text-success" style="text-transform: uppercase">{{tarefa.nomeTarefa}}<br/>
-	    			<small style="word-wrap: break-word; text-transform: capitalize">{{tarefa.descricaoTarefa}}</small>
-	    		</h4>
-	    		<p class="text-success">Status: {{tarefa.statusTarefa}}</p>	    	
-	    		<div class="footer">
-                                    <hr>
-                                    <div class="stats">
-                                        <p class="category">Criada em: {{ tarefa.dataCriacao | date: 'dd/MM/yyyy - HH:mm'}}</p>
-                                        <p class="category">Entrega: {{ tarefa.prazoEntrega | date: 'dd/MM/yyyy - HH:mm'}}</p>
-                                    </div>
-                                </div>
-	    	</div>
-	    </div>
-	    </div>
-	</div>
-	</div>
-	<!-- FIM PROJETO CONCLUIDO 
-</div>-->
-						  
-	</div>
-	
+   <div class="row">
+      <div ng-hide="projeto.status == 'Concluído'">
+         {{ Resposta }}
+         <div class="col-md-12">
+            <div class="card">
+               <h2 id="h4" class="text-info">
+                  {{projeto.nome}}
+               </h2>
+               <button class="btn btn-info btn-fill pull-right" ng-show="projeto.organizador.idUsuario == UsuarioLogado" ng-click="StatusProjeto(projeto)">{{modificarStatusProjeto(projeto)}}</button>
+               <button class="btn btn-info btn-fill pull-right" ng-show="filtroTela(projeto.organizador.idUsuario, usuariosDoProjeto, aprovacaoUsuarios)" ng-click="SolicitaParticipacao(projeto)">Participar do projeto</button>
+               <div class="col-md-12">
+                  <h6 class="text-primary">Descrição do projeto</h6>
+                  <p class="p text-default" style="word-wrap: break-word;">
+                     {{projeto.descricao}}
+                  </p>
+               </div>
+               <div class="col-md-6">
+                  <div class="sombra card">
+                     <h6 class="text-primary">Competências</h6>
+                     <div id="card-content" class="card-content">
+                        <div class="padding col-md-12" ng-repeat="competenciaDoProjeto in competenciasDoProjeto">
+                           <label style="font-size:15px; text-transform: capitalize !important;" class="label label-primary">
+                           <i class="fa fa-cog" aria-hidden="true"></i> {{ competenciaDoProjeto.nomeCompetencia }}
+                           </label>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <div class="sombra card">
+                     <h6 class="text-primary">Integrantes</h6>
+                     <div id="card-content"  class="card-content">
+                        <div style="margin-bottom: 15px;" class="col-md-12" ng-repeat="usuarioDoProjeto in usuariosDoProjeto">
+                           <a style="font-size:15px;" class="label label-primary" ui-sref="perfil({idUsuario: {{usuarioDoProjeto.idUsuario}} })" ui-sref-active="active">
+                           <i class="fa fa-user" aria-hidden="true"></i> {{usuarioDoProjeto.nomeUsuario}}
+                           </a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div id ="candidatos" class="col-md-12" ng-show="projeto.status == 'Aberto'">
+                  <div class="sombra card">
+                     <h6 class="text-primary">Candidatos</h6>
+                     <div class="card-content">
+                        <div style="border-radius: 8px; background:#1d62f1 " class="col-md-12" ng-repeat="aprovacaoUsuario in aprovacaoUsuarios">
+                           <div class="padding col-md-2">
+                              <a style="color: #fff !important; text-decoration: underline" class="text-primary" ui-sref="perfil({idUsuario: {{aprovacaoUsuario.idUsuario}} })" ui-sref-active="active">
+                              <i class="fa fa-user" aria-hidden="true"></i> {{ aprovacaoUsuario.nomeUsuario }}
+                              </a>
+                           </div>
+                           <div class="padding col-md-2">
+                              <a style="color: #fff !important" class="text-info">{{ aprovacaoUsuario.status }}</a>
+                           </div>
+                           <div class="padding col-md-4">
+                              <a style="color: #fff !important" class="text-info">{{ aprovacaoUsuario.dataCriacao }}</a>
+                           </div>
+                           <div class="padding col-md-2">
+                              <button ng-show="projeto.organizador.idUsuario == UsuarioLogado" class="btn btn-primary btn-sm btn-fill botao avaliado-{{ aprovacaoUsuario.status == 'Aguardando Aprovação' ? 'true' : 'false' }} " ng-click="AceitarParticipante(aprovacaoUsuario) ">
+                              <i class="fa fa-check" aria-hidden="true"></i> Aceitar
+                              </button>
+                           </div>
+                           <div class="padding col-md-2">
+                              <button ng-show="projeto.organizador.idUsuario == UsuarioLogado" class="btn btn-danger btn-sm btn-fill botao avaliado-{{ aprovacaoUsuario.status == 'Aguardando Aprovação' ? 'true' : 'false' }} " ng-click="RecusarParticipante(aprovacaoUsuario) ">
+                              <i class="fa fa-times" aria-hidden="true"></i> Recusar
+                              </button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-md-12" ng-controller="PageTarefaCtrl" ng-show="projeto.status == 'Em andamento'">
+            <div class="card">
+               <div class="card-header" data-background-color="dark">
+                  <h5 class="title">
+                     Tarefas do projeto
+                  </h5>
+               </div>
+               <div style="padding: 20px;" class="col-md-12">
+                  <button class="btn btn-info btn-fill pull-left" ng-click="CriarTarefa()">
+                  <i class="fa fa-plus" aria-hidden="true"></i> Nova tarefa
+                  </button>
+               </div>
+               <div class="col-md-12">
+                  <div class="createpopup createpopup-{{createIstrue}} ">
+                     <div class="criarTarefa col-md-6">
+                        <a class="text-info">Título:</a>
+                        <input placeholder="Insira o título da tarefa..." class="form-control" type="text" ng-model="tarefa.nomeTarefa" required/>
+                        <br/>
+                        <a class="text-info">Descrição:</a>
+                        <textarea cols="20" rows="4" maxlength="500" placeholder="Descreva sobre o seu projeto (No máximo 500 caracteres)." placeholder="Insira a descrição da tarefa..." class="form-control" type="text" ng-model="tarefa.descricaoTarefa" required></textarea>
+                        <br/>
+                        <a class="text-info">Data de entrega:</a>
+                        <input placeholder="Prazo de entrega" class="form-control" type="date" ng-model="tarefa.prazoEntrega" required/>
+                        <br/>
+                        <button class="btn btn-info btn-fill btn-sm" ng-click="SalvarCadastro(tarefa)">Concluir</button>
+                        <button class="btn btn-danger btn-fill btn-sm" ng-click="FecharPopUpCriacao()">Cancelar</button>
+                     </div>
+                  </div>
+                  <div id="edit" class="editpopup editpopup-{{editIstrue}} ">
+                     <div class="criarTarefa col-md-6">
+                        <a class="text-info">Título:</a>
+                        <input class="form-control" type="text" ng-model="editednameTarefa"/>
+                        <br/>
+                        <a class="text-info">Descrição:</a>
+                        <textarea cols="20" rows="4" maxlength="500" placeholder="Descreva sobre o seu projeto (No máximo 500 caracteres)." class="form-control" type="text" ng-model="editeddescricaoTarefa"></textarea>
+                        <br/>
+                        <a class="text-info">Data de entrega:</a>
+                        <input class="form-control" type="date" ng-model="editedprazoEntrega"/>
+                        <br/>
+                        <button class="btn btn-info btn-fill btn-sm" ng-click="SalvarAlteracao(editedidTarefa, editednameTarefa, editedProjetoTarefa, editeddescricaoTarefa, editedprazoEntrega)">Salvar</button>
+                        <button class="btn btn-danger btn-fill btn-sm" ng-click="FecharPopUpEdicao()">Cancelar</button>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12" ondrop="angular.element(this).scope().drop(event)" ondragover="angular.element(this).scope().allowDrop(event)">
+                  <div class="col-md-4">
+                     <div class="card">
+                        <div class="card-header" data-background-color="red">
+                           <h5 class="title">
+                              Não iniciado
+                           </h5>
+                        </div>
+                        <div style="padding-top: 60px; padding-bottom: 40px; height: 400px; overflow-y: auto;" id="Pendente" class="card-content">
+                           <div id="{{tarefa.idTarefa}}rep" ng:repeat="tarefa in tarefas | filter: {statusTarefa : 'Pendente'}" draggable="false">
+                              <div class="backTarefa col-md-12" id="{{tarefa.idTarefa}}" draggable="true" ondragstart="angular.element(this).scope().drag(event)">
+                                 <h5 style="text-align: left; word-wrap: break-word;" class="text-primary">
+                                    {{tarefa.nomeTarefa}}<br/>
+                                    <small style="word-wrap: break-word;" class="text-default">{{tarefa.descricaoTarefa}}</small>
+                                 </h5>
+                                 <div class="col-md-2">
+                                    <button class="btn btn-default btn-fill btn-xs" ng-click="CarregarEdicao(tarefa)">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    </button>
+                                 </div>
+                                 <div class="col-md-2">
+                                    <button class="btn btn-primary btn-fill btn-xs" ng-click="DetalhesTarefa(tarefa)">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                    </button>
+                                 </div>
+                                 <div class="col-md-2">
+                                    <button class="btn btn-danger btn-fill btn-xs" ng-click="ExcluirElemento(tarefa)">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                    </button>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-4">
+                     <div class="card">
+                        <div class="card-header" data-background-color="orange">
+                           <h5 class="title">
+                              Em andamento
+                           </h5>
+                        </div>
+                        <div style="padding-top: 60px; padding-bottom: 40px; height: 400px; overflow-y: auto;" id="Em andamento" class="card-content">
+                           <div id="{{tarefa.idTarefa}}rep"ng:repeat="tarefa in tarefas | filter: {statusTarefa : 'Em andamento'}">
+                              <div class="backTarefa col-md-12" id="{{tarefa.idTarefa}}" draggable="true" ondragstart="angular.element(this).scope().drag(event)">
+                                 <h5 style="text-align: left; word-wrap: break-word;" class="text-primary">
+                                    {{tarefa.nomeTarefa}}<br/>
+                                    <small style="word-wrap: break-word;" class="text-default">{{tarefa.descricaoTarefa}}</small>
+                                 </h5>
+                                 <div class="col-md-2">
+                                    <button class="btn btn-default btn-fill btn-xs" ng-click="CarregarEdicao(tarefa)">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    </button>
+                                 </div>
+                                 <div class="col-md-2">
+                                    <button class="btn btn-primary btn-fill btn-xs" ng-click="DetalhesTarefa(tarefa)">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                    </button>
+                                 </div>
+                                 <div class="col-md-2">
+                                    <button class="btn btn-danger btn-fill btn-xs" ng-click="ExcluirElemento(tarefa)">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                    </button>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-4">
+                     <div class="card">
+                        <div class="card-header" data-background-color="green">
+                           <h5 class="title">
+                              Concluído
+                           </h5>
+                        </div>
+                        <div style="padding-top: 60px; padding-bottom: 40px; height: 400px; overflow-y: auto;" id="Concluído" class="card-content">
+                           <div id="{{tarefa.idTarefa}}rep"ng:repeat="tarefa in tarefas | filter: {statusTarefa : 'Concluído'}">
+                              <div class="backTarefa col-md-12" id="{{tarefa.idTarefa}}" draggable="true" ondragstart="angular.element(this).scope().drag(event)">
+                                 <h5 style="word-wrap: break-word; text-align: left;" class="text-primary">
+                                    {{tarefa.nomeTarefa}}<br/>
+                                    <small  style="word-wrap: break-word" class="text-default">{{tarefa.descricaoTarefa}}</small>
+                                 </h5>
+                                 <div class="col-md-2">
+                                    <button class="btn btn-default btn-fill btn-xs" ng-click="CarregarEdicao(tarefa)">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    </button>
+                                 </div>
+                                 <div class="col-md-2">
+                                    <button class="btn btn-primary btn-fill btn-xs" ng-click="DetalhesTarefa(tarefa)">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                    </button>
+                                 </div>
+                                 <div class="col-md-2">
+                                    <button class="btn btn-danger btn-fill btn-xs" ng-click="ExcluirElemento(tarefa)">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                    </button>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-md-12" ng-controller="FeedCtrl">
+            <div class="card">
+               <h2 class="text-info">{{feed.tituloFeed}}<br/>
+                  <small style="color:#383838 !important">{{feed.textoFeed}}</small>
+               </h2>
+               <hr/>
+               <div style="border-bottom: 1px solid #dcdcdc; padding: 10px;" class="col-md-12">
+                  <p><textarea class="form-control" cols="20" rows="6" maxlength="500" placeholder="Comente aqui (No máximo 500 caracteres)." id="dp" ng-model="comentarioFeed" required></textarea></p>
+                  <button style="float:right" class="btn btn-primary btn-fill" ng-click="salvarPost(feed, comentarioFeed)">Comentar</button>
+               </div>
+               <div style="margin-top: 20px;" class="col-md-12">
+                  <div id="sombra" ng:repeat="resposta in respostasFeed | orderBy : idResposta : true">
+                     <a class="text-info" style="font-size: 20px; text-decoration: underline" ui-sref="perfil({idUsuario: {{resposta.usuarioResposta.idUsuario}} })" ui-sref-active="active"><i class="fa fa-user" aria-hidden="true"></i> {{resposta.usuarioResposta.usernameUsuario}}</a>
+                     <label>{{ resposta.dataResposta | date: 'dd/MM/yyyy - HH:mm'}}</label><br/>
+                     <label class="text-default" style="word-wrap: break-word;">{{resposta.textoResposta}}</label>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="col-md-12" ng-show="projeto.status == 'Concluído'">
+      <div class="card">
+         <h2 id="h4" class="text-info">
+            {{projeto.nome}}<br/>
+            <small style="color: #383838 !important; font-size: 15px;">
+            Projeto iniciado por: <a class="category" style="text-decoration: underline" ui-sref="perfil({idUsuario: projeto.organizador.idUsuario })" ui-sref-active="active">
+            {{projeto.organizador.nomeUsuario}}
+            </a>
+            </small>
+         </h2>
+         <div class="col-md-12">
+            <h6 class="text-primary">Descrição do projeto</h6>
+            <p class="p text-default" style="word-wrap: break-word;">
+               {{projeto.descricao}}
+            </p>
+         </div>
+         <div class="col-md-3"><label class="text-primary">Criado em: </label><label>{{ projeto.dataCriacao | date: 'dd/MM/yyyy'}}</label></div>
+         <div class="col-md-3"><label class="text-primary">Entrega em: </label><label>{{ projeto.dataEntrega | date: 'dd/MM/yyyy'}}</label></div>
+         <div class="col-md-3"><label class="text-primary">Status: </label><label>{{projeto.status}}</label></div>
+         <div class="col-md-3"><label class="text-primary">Participantes: </label><label>{{projeto.participantes}}</label></div>
+         <div class="col-md-6">
+            <div class="sombra card">
+               <h6 class="text-primary">Competências</h6>
+               <div id="card-content" class="card-content">
+                  <div class="padding col-md-12" ng-repeat="competenciaDoProjeto in competenciasDoProjeto">
+                     <label style="font-size:15px;" class="label label-primary">
+                     <i class="fa fa-cog" aria-hidden="true"></i> {{ competenciaDoProjeto.nomeCompetencia }}
+                     </label>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-md-6">
+            <div class="sombra card">
+               <h6 class="text-primary">Integrantes</h6>
+               <div id="card-content"  class="card-content">
+                  <div style="margin-bottom: 15px;" class="col-md-12" ng-repeat="usuarioDoProjeto in usuariosDoProjeto">
+                     <a style="font-size:15px;" class="label label-primary" ui-sref="perfil({idUsuario: {{usuarioDoProjeto.idUsuario}} })" ui-sref-active="active">
+                     <i class="fa fa-user" aria-hidden="true"></i> {{usuarioDoProjeto.nomeUsuario}}
+                     </a>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <hr/>
+         <div class="col-md-12" ng-controller="PageTarefaCtrl">
+            <div class="card">
+               <h2 class="text-info">Tarefas concluídas</h2>
+               <hr/>
+               <div class="success col-md-6" ng-repeat="tarefa in tarefas">
+                  <h4 class="text-success" style="text-transform: uppercase">{{tarefa.nomeTarefa}}<br/>
+                     <small style="word-wrap: break-word; text-transform: capitalize">{{tarefa.descricaoTarefa}}</small>
+                  </h4>
+                  <p class="text-success">Status: {{tarefa.statusTarefa}}</p>
+                  <div class="footer">
+                     <hr>
+                     <div class="stats">
+                        <p class="category">Criada em: {{ tarefa.dataCriacao | date: 'dd/MM/yyyy - HH:mm'}}</p>
+                        <p class="category">Entrega: {{ tarefa.prazoEntrega | date: 'dd/MM/yyyy - HH:mm'}}</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
 <!-- <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<div class="panel-body" ng-controller="PageProjetoCtrl"	>
-	<!-- PROJETO ABERTO OU EM ANDAMENTO 
-	<div ng-hide="projeto.status == 'Concluído'">
-		{{ Resposta }}
-	   <div class="headerLogo">
-	      <div>
-	         <!-- Comum 
-	         <div>
-	            <p class="form-group">
-	            <div>
-	               <h2 class="topName">{{projeto.nome}}</h2>
-	            </div>
-	            <h3 class="mainTitle">Descrição do projeto</h3>
-	            <div style="display: block;">{{projeto.descricao}}</div>
-	            <h3 class="mainTitle">Competências necessárias</h3>
-	            <table class="table-bordered" width="100%" style="background-color:#f2f2f2">
-	               <tbody>
-	                  <tr ng-repeat="competenciaDoProjeto in competenciasDoProjeto">
-	                     <td>{{ competenciaDoProjeto.nomeCompetencia }}</td>
-	                  </tr>
-	               </tbody>
-	            </table>
-	            </br>
-	            <h3 class="mainTitle">Integrantes</h3>
-	            <table class="table-bordered" width="100%" style="background-color:#f2f2f2">
-	               <tbody>
-	                  <tr ng-repeat="usuarioDoProjeto in usuariosDoProjeto">
-	                     <td><a ui-sref="perfil({idUsuario: {{usuarioDoProjeto.idUsuario}} })" ui-sref-active="active">{{usuarioDoProjeto.nomeUsuario}}</a></td>
-	                  </tr>
-	               </tbody>
-	            </table>
-	            </p>	
-	            </br>
-	            <button class="btn btn-primary" ng-show="projeto.organizador.idUsuario == UsuarioLogado" ng-click="StatusProjeto(projeto)">{{modificarStatusProjeto(projeto)}}</button>
-	         	<button ng-show="filtroTela(projeto.organizador.idUsuario, usuariosDoProjeto, aprovacaoUsuarios)" 
-             		class="btn btn-primary" ng-click="SolicitaParticipacao(projeto)">Participar do projeto</button>
-	         </div>
-	         <!-- End comum 
-	         <!-- aberto
-	         <div ng-show="projeto.status == 'Aberto'">
-	            <h3 class="mainTitle">Candidatos</h3>
-	            <table class="table-bordered" width="100%" style="background-color:#f2f2f2">
-	               <tbody>
-	                  <tr ng-repeat="aprovacaoUsuario in aprovacaoUsuarios">
-	                     <td><a ui-sref="perfil({idUsuario: {{aprovacaoUsuario.idUsuario}} })" ui-sref-active="active">{{ aprovacaoUsuario.nomeUsuario }}</a></td>
-	                     <td>{{ aprovacaoUsuario.dataCriacao }}</td>
-	                     <td>{{ aprovacaoUsuario.status }}</td>
-	                     <td><button ng-show="projeto.organizador.idUsuario == UsuarioLogado" class="btn btn-primary botao avaliado-{{ aprovacaoUsuario.status == 'Aguardando Aprovação' ? 'true' : 'false' }} " ng-click="AceitarParticipante(aprovacaoUsuario) "  >Aceitar</button></td>
-	                     <td><button ng-show="projeto.organizador.idUsuario == UsuarioLogado" class="btn btn-primary botao avaliado-{{ aprovacaoUsuario.status == 'Aguardando Aprovação' ? 'true' : 'false' }} " ng-click="RecusarParticipante(aprovacaoUsuario) " >Recusar</button></td>
-	                  </tr>
-	               </tbody>
-	            </table>
-	            </p>	
-	         </div>
-	         <!-- fim aberto	
-	      </div>
-	   </div>
-	   <!-- em antamento 
-	   <div ng-controller="PageTarefaCtrl" ng-show="projeto.status == 'Em andamento'">
-	      <br/><br/>
-	      <button ng-click="CriarTarefa()">+</button>
-	      <br/>
-	      <div class="createpopup createpopup-{{createIstrue}} ">
-	         <p class="form-group">
-	            <input placeholder="Nome" class="form-control" type="text" ng-model="tarefa.nomeTarefa" required />
-	            <input placeholder="Descrição" class="form-control" type="text" ng-model="tarefa.descricaoTarefa" required />
-	            <input placeholder="Prazo de entrega" class="form-control" type="date" ng-model="tarefa.prazoEntrega" required />
-	            </p class="form-group">
-	            <button ng-click="SalvarCadastro(tarefa)">Cadastrar</button>
-	            <button ng-click="FecharPopUpCriacao()">Cancelar</button>
-	      </div>
-	      <div class="editpopup editpopup-{{editIstrue}} ">
-	         <p>Nome:<input type="text" ng-model="editednameTarefa"></p>
-	         <p>Descrição:<input type="text" ng-model="editeddescricaoTarefa"></p>
-	         <p>Prazo de entrega:<input type="date" ng-model="editedprazoEntrega"></p>
-	         <button ng-click="SalvarAlteracao(editedidTarefa, editednameTarefa, editedProjetoTarefa, editeddescricaoTarefa, editedprazoEntrega)">Salvar</button>
-	         <button ng-click="FecharPopUpEdicao()">Cancelar</button>
-	      </div>
-	      <div class="panel panel-info" style="height: 300px; width: 33%; float: left;" ondrop="angular.element(this).scope().drop(event)" ondragover="angular.element(this).scope().allowDrop(event)">
-	         <div class="panel-heading">
-	            <h3 class="panel-title">Pendente</h3>
-	         </div>
-	         <div id ="Pendente" class="panel-body" style="  height: 90%; width: 100%; float: left;">
-	            <div id="{{tarefa.idTarefa}}rep"ng:repeat="tarefa in tarefas | filter: {statusTarefa : 'Pendente'}">
-	               <div id="{{tarefa.idTarefa}}" style="background: white;" draggable="true"
-	                  ondragstart="angular.element(this).scope().drag(event)">{{tarefa.nomeTarefa}}  
-	                  <button style="float:right" ng-click="ExcluirElemento(tarefa)">-</button>
-	                  <button style="float:right" ng-click="DetalhesTarefa(tarefa)">+</button>
-	                  <button style="float:right" ng-click="CarregarEdicao(tarefa)">Alt</button>
-	               </div>
-	               <br>
-	            </div>
-	         </div>
-	      </div>
-	      <div class="panel panel-info" style="height: 300px; width: 33%; float: left;" ondrop="angular.element(this).scope().drop(event)" ondragover="angular.element(this).scope().allowDrop(event)">
-	         <div class="panel-heading">
-	            <h3 class="panel-title">Em andamento</h3>
-	         </div>
-	         <div id ="Em andamento" class="panel-body" style="  height: 90%; width: 100%; float: left;">
-	            <div id="{{tarefa.idTarefa}}rep"ng:repeat="tarefa in tarefas | filter: {statusTarefa : 'Em andamento'}">
-	               <div id="{{tarefa.idTarefa}}" style="background: white;" draggable="true"
-	                  ondragstart="angular.element(this).scope().drag(event)">{{tarefa.nomeTarefa}}  
-	                  <button style="float:right" ng-click="ExcluirElemento(tarefa)">-</button>
-	                  <button style="float:right" ng-click="DetalhesTarefa(tarefa)">+</button>
-	                  <button style="float:right" ng-click="CarregarEdicao(tarefa)">Alt</button>
-	               </div>
-	               <br>
-	            </div>
-	         </div>
-	      </div>
-	      <div class="panel panel-info" style="height: 300px; width: 33%; float: left;" ondrop="angular.element(this).scope().drop(event)" ondragover="angular.element(this).scope().allowDrop(event)">
-	         <div class="panel-heading">
-	            <h3 class="panel-title">Concluído</h3>
-	         </div>
-	         <div id ="Concluído" class="panel-body" style=" height: 90%; width: 100%; float: left;">
-	            <div  id="{{tarefa.idTarefa}}rep"ng:repeat="tarefa in tarefas | filter: {statusTarefa : 'Concluído'}">
-	               <div id="{{tarefa.idTarefa}}" style="background: white;" draggable="true"
-	                  ondragstart="angular.element(this).scope().drag(event)">{{tarefa.nomeTarefa}}  
-	                  <button style="float:right" ng-click="ExcluirElemento(tarefa)">-</button>        
-	                  <button style="float:right" ng-click="DetalhesTarefa(tarefa)">+</button>
-	                  <button style="float:right" ng-click="CarregarEdicao(tarefa)">Alt</button>     
-	               </div>
-	               <br>
-	            </div>
-	         </div>
-	      </div>
-	   </div>
-	   <!-- end em andamento  
-	   <br/>
-	   <!-- Comum 
-	   <div ng-controller="FeedCtrl">
-	   		<div>
-	   			<h2>{{feed.tituloFeed}}</h2>
-	   			<p>{{feed.textoFeed}}</p>
-	   		</div>
-	   		<hr/>	
-	   		<div>
-	   			<p><textarea class="form-control" cols="20" rows="6" maxlength="500" placeholder="Comente aqui (No máximo 500 caracteres)." id="dp" ng-model="comentarioFeed" required></textarea></p>
-	   			<button style="float:left" class="btn btn-primary" ng-click="salvarPost(feed, comentarioFeed)">Comentar</button>
-	   		</div>
-	   		<hr/>	
-	   		<div ng:repeat="resposta in respostasFeed | orderBy : idResposta : true">
-	   			<p><a ui-sref="perfil({idUsuario: {{resposta.usuarioResposta.idUsuario}} })" ui-sref-active="active">{{resposta.usuarioResposta.usernameUsuario}}</a> | {{ resposta.dataResposta | date: 'dd/MM/yyyy - HH:mm:ss'}}</p>
-	   			<p>{{resposta.textoResposta}}</p>
-	   			<hr/>	
-	   		</div>
-	   </div>
-	   <!-- End Comum 
-	</div>
-	<!-- FIM PROJETO ABERTO OU EM ANDAMENTO 
-	
-	<!-- 	**** **** ****
-			
-	<!-- PROJETO CONCLUIDO 
-	<div ng-show="projeto.status == 'Concluído'">
-		<h1>{{projeto.nome}}</h1>
-		<p>{{projeto.descricao}}</p>
-		<p>Criado em: {{ projeto.dataCriacao | date: '	'}}<p/>
-		<p>Entrega em: {{ projeto.dataEntrega | date: 'dd/MM/yyyy'}}</p>
-		<p>Status: {{projeto.status}}</p>
-		<p>Vagas: {{projeto.vagas}}</p>
-		<p>Participantes: {{projeto.participantes}}</p>
-		<p>Competências: 
-			<div ng-repeat="competenciaDoProjeto in competenciasDoProjeto">
-				<p>- {{competenciaDoProjeto.nomeCompetencia}}</p>
-			</div>
-		</p>
-		<p>Organizador: 
-			<p>
-			<a ui-sref="perfil({idUsuario: projeto.organizador.idUsuario })" ui-sref-active="active">{{projeto.organizador.nomeUsuario}}</a></p>
-		</p>
-		<p>Integrantes: 
-			<table>
-			 	<tr ng-repeat="usuarioDoProjeto in usuariosDoProjeto">
-	        		<td><a ui-sref="perfil({idUsuario: {{usuarioDoProjeto.idUsuario}} })" ui-sref-active="active">{{usuarioDoProjeto.nomeUsuario}}</a></td>
-	        	</tr>
-			</table>
-	    </p>
-	    <hr/>
-	    <div ng-controller="PageTarefaCtrl">
-	    	<h2>Tarefas</h2>
-	    	<div ng-repeat="tarefa in tarefas">
-	    		<p>nome: {{tarefa.nomeTarefa}}</p>
-	    		<p>Descrição: {{tarefa.descricaoTarefa}}</p>
-	    		<p>Criada em: {{ tarefa.dataCriacao | date: 'dd/MM/yyyy - HH:mm:ss'}}</p>
-	    		<p>Entrega: {{ tarefa.prazoEntrega | date: 'dd/MM/yyyy - HH:mm:ss'}}</p>
-	    		<p>Status: {{tarefa.statusTarefa}}</p>
-				<hr/>	    	
-	    	</div>
-	    </div>
-	</div>
-	<!-- FIM PROJETO CONCLUIDO 
-</div>-->
+   <meta charset="utf-8">
+   <div class="panel-body" ng-controller="PageProjetoCtrl"	>
+   	<!-- PROJETO ABERTO OU EM ANDAMENTO 
+   	<div ng-hide="projeto.status == 'Concluído'">
+   		{{ Resposta }}
+   	   <div class="headerLogo">
+   	      <div>
+   	         <!-- Comum 
+   	         <div>
+   	            <p class="form-group">
+   	            <div>
+   	               <h2 class="topName">{{projeto.nome}}</h2>
+   	            </div>
+   	            <h3 class="mainTitle">Descrição do projeto</h3>
+   	            <div style="display: block;">{{projeto.descricao}}</div>
+   	            <h3 class="mainTitle">Competências necessárias</h3>
+   	            <table class="table-bordered" width="100%" style="background-color:#f2f2f2">
+   	               <tbody>
+   	                  <tr ng-repeat="competenciaDoProjeto in competenciasDoProjeto">
+   	                     <td>{{ competenciaDoProjeto.nomeCompetencia }}</td>
+   	                  </tr>
+   	               </tbody>
+   	            </table>
+   	            </br>
+   	            <h3 class="mainTitle">Integrantes</h3>
+   	            <table class="table-bordered" width="100%" style="background-color:#f2f2f2">
+   	               <tbody>
+   	                  <tr ng-repeat="usuarioDoProjeto in usuariosDoProjeto">
+   	                     <td><a ui-sref="perfil({idUsuario: {{usuarioDoProjeto.idUsuario}} })" ui-sref-active="active">{{usuarioDoProjeto.nomeUsuario}}</a></td>
+   	                  </tr>
+   	               </tbody>
+   	            </table>
+   	            </p>	
+   	            </br>
+   	            <button class="btn btn-primary" ng-show="projeto.organizador.idUsuario == UsuarioLogado" ng-click="StatusProjeto(projeto)">{{modificarStatusProjeto(projeto)}}</button>
+   	         	<button ng-show="filtroTela(projeto.organizador.idUsuario, usuariosDoProjeto, aprovacaoUsuarios)" 
+                		class="btn btn-primary" ng-click="SolicitaParticipacao(projeto)">Participar do projeto</button>
+   	         </div>
+   	         <!-- End comum 
+   	         <!-- aberto
+   	         <div ng-show="projeto.status == 'Aberto'">
+   	            <h3 class="mainTitle">Candidatos</h3>
+   	            <table class="table-bordered" width="100%" style="background-color:#f2f2f2">
+   	               <tbody>
+   	                  <tr ng-repeat="aprovacaoUsuario in aprovacaoUsuarios">
+   	                     <td><a ui-sref="perfil({idUsuario: {{aprovacaoUsuario.idUsuario}} })" ui-sref-active="active">{{ aprovacaoUsuario.nomeUsuario }}</a></td>
+   	                     <td>{{ aprovacaoUsuario.dataCriacao }}</td>
+   	                     <td>{{ aprovacaoUsuario.status }}</td>
+   	                     <td><button ng-show="projeto.organizador.idUsuario == UsuarioLogado" class="btn btn-primary botao avaliado-{{ aprovacaoUsuario.status == 'Aguardando Aprovação' ? 'true' : 'false' }} " ng-click="AceitarParticipante(aprovacaoUsuario) "  >Aceitar</button></td>
+   	                     <td><button ng-show="projeto.organizador.idUsuario == UsuarioLogado" class="btn btn-primary botao avaliado-{{ aprovacaoUsuario.status == 'Aguardando Aprovação' ? 'true' : 'false' }} " ng-click="RecusarParticipante(aprovacaoUsuario) " >Recusar</button></td>
+   	                  </tr>
+   	               </tbody>
+   	            </table>
+   	            </p>	
+   	         </div>
+   	         <!-- fim aberto	
+   	      </div>
+   	   </div>
+   	   <!-- em antamento 
+   	   <div ng-controller="PageTarefaCtrl" ng-show="projeto.status == 'Em andamento'">
+   	      <br/><br/>
+   	      <button ng-click="CriarTarefa()">+</button>
+   	      <br/>
+   	      <div class="createpopup createpopup-{{createIstrue}} ">
+   	         <p class="form-group">
+   	            <input placeholder="Nome" class="form-control" type="text" ng-model="tarefa.nomeTarefa" required />
+   	            <input placeholder="Descrição" class="form-control" type="text" ng-model="tarefa.descricaoTarefa" required />
+   	            <input placeholder="Prazo de entrega" class="form-control" type="date" ng-model="tarefa.prazoEntrega" required />
+   	            </p class="form-group">
+   	            <button ng-click="SalvarCadastro(tarefa)">Cadastrar</button>
+   	            <button ng-click="FecharPopUpCriacao()">Cancelar</button>
+   	      </div>
+   	      <div class="editpopup editpopup-{{editIstrue}} ">
+   	         <p>Nome:<input type="text" ng-model="editednameTarefa"></p>
+   	         <p>Descrição:<input type="text" ng-model="editeddescricaoTarefa"></p>
+   	         <p>Prazo de entrega:<input type="date" ng-model="editedprazoEntrega"></p>
+   	         <button ng-click="SalvarAlteracao(editedidTarefa, editednameTarefa, editedProjetoTarefa, editeddescricaoTarefa, editedprazoEntrega)">Salvar</button>
+   	         <button ng-click="FecharPopUpEdicao()">Cancelar</button>
+   	      </div>
+   	      <div class="panel panel-info" style="height: 300px; width: 33%; float: left;" ondrop="angular.element(this).scope().drop(event)" ondragover="angular.element(this).scope().allowDrop(event)">
+   	         <div class="panel-heading">
+   	            <h3 class="panel-title">Pendente</h3>
+   	         </div>
+   	         <div id ="Pendente" class="panel-body" style="  height: 90%; width: 100%; float: left;">
+   	            <div id="{{tarefa.idTarefa}}rep"ng:repeat="tarefa in tarefas | filter: {statusTarefa : 'Pendente'}">
+   	               <div id="{{tarefa.idTarefa}}" style="background: white;" draggable="true"
+   	                  ondragstart="angular.element(this).scope().drag(event)">{{tarefa.nomeTarefa}}  
+   	                  <button style="float:right" ng-click="ExcluirElemento(tarefa)">-</button>
+   	                  <button style="float:right" ng-click="DetalhesTarefa(tarefa)">+</button>
+   	                  <button style="float:right" ng-click="CarregarEdicao(tarefa)">Alt</button>
+   	               </div>
+   	               <br>
+   	            </div>
+   	         </div>
+   	      </div>
+   	      <div class="panel panel-info" style="height: 300px; width: 33%; float: left;" ondrop="angular.element(this).scope().drop(event)" ondragover="angular.element(this).scope().allowDrop(event)">
+   	         <div class="panel-heading">
+   	            <h3 class="panel-title">Em andamento</h3>
+   	         </div>
+   	         <div id ="Em andamento" class="panel-body" style="  height: 90%; width: 100%; float: left;">
+   	            <div id="{{tarefa.idTarefa}}rep"ng:repeat="tarefa in tarefas | filter: {statusTarefa : 'Em andamento'}">
+   	               <div id="{{tarefa.idTarefa}}" style="background: white;" draggable="true"
+   	                  ondragstart="angular.element(this).scope().drag(event)">{{tarefa.nomeTarefa}}  
+   	                  <button style="float:right" ng-click="ExcluirElemento(tarefa)">-</button>
+   	                  <button style="float:right" ng-click="DetalhesTarefa(tarefa)">+</button>
+   	                  <button style="float:right" ng-click="CarregarEdicao(tarefa)">Alt</button>
+   	               </div>
+   	               <br>
+   	            </div>
+   	         </div>
+   	      </div>
+   	      <div class="panel panel-info" style="height: 300px; width: 33%; float: left;" ondrop="angular.element(this).scope().drop(event)" ondragover="angular.element(this).scope().allowDrop(event)">
+   	         <div class="panel-heading">
+   	            <h3 class="panel-title">Concluído</h3>
+   	         </div>
+   	         <div id ="Concluído" class="panel-body" style=" height: 90%; width: 100%; float: left;">
+   	            <div  id="{{tarefa.idTarefa}}rep"ng:repeat="tarefa in tarefas | filter: {statusTarefa : 'Concluído'}">
+   	               <div id="{{tarefa.idTarefa}}" style="background: white;" draggable="true"
+   	                  ondragstart="angular.element(this).scope().drag(event)">{{tarefa.nomeTarefa}}  
+   	                  <button style="float:right" ng-click="ExcluirElemento(tarefa)">-</button>        
+   	                  <button style="float:right" ng-click="DetalhesTarefa(tarefa)">+</button>
+   	                  <button style="float:right" ng-click="CarregarEdicao(tarefa)">Alt</button>     
+   	               </div>
+   	               <br>
+   	            </div>
+   	         </div>
+   	      </div>
+   	   </div>
+   	   <!-- end em andamento  
+   	   <br/>
+   	   <!-- Comum 
+   	   <div ng-controller="FeedCtrl">
+   	   		<div>
+   	   			<h2>{{feed.tituloFeed}}</h2>
+   	   			<p>{{feed.textoFeed}}</p>
+   	   		</div>
+   	   		<hr/>	
+   	   		<div>
+   	   			<p><textarea class="form-control" cols="20" rows="6" maxlength="500" placeholder="Comente aqui (No máximo 500 caracteres)." id="dp" ng-model="comentarioFeed" required></textarea></p>
+   	   			<button style="float:left" class="btn btn-primary" ng-click="salvarPost(feed, comentarioFeed)">Comentar</button>
+   	   		</div>
+   	   		<hr/>	
+   	   		<div ng:repeat="resposta in respostasFeed | orderBy : idResposta : true">
+   	   			<p><a ui-sref="perfil({idUsuario: {{resposta.usuarioResposta.idUsuario}} })" ui-sref-active="active">{{resposta.usuarioResposta.usernameUsuario}}</a> | {{ resposta.dataResposta | date: 'dd/MM/yyyy - HH:mm:ss'}}</p>
+   	   			<p>{{resposta.textoResposta}}</p>
+   	   			<hr/>	
+   	   		</div>
+   	   </div>
+   	   <!-- End Comum 
+   	</div>
+   	<!-- FIM PROJETO ABERTO OU EM ANDAMENTO 
+   	
+   	<!-- 	**** **** ****
+   			
+   	<!-- PROJETO CONCLUIDO 
+   	<div ng-show="projeto.status == 'Concluído'">
+   		<h1>{{projeto.nome}}</h1>
+   		<p>{{projeto.descricao}}</p>
+   		<p>Criado em: {{ projeto.dataCriacao | date: '	'}}<p/>
+   		<p>Entrega em: {{ projeto.dataEntrega | date: 'dd/MM/yyyy'}}</p>
+   		<p>Status: {{projeto.status}}</p>
+   		<p>Vagas: {{projeto.vagas}}</p>
+   		<p>Participantes: {{projeto.participantes}}</p>
+   		<p>Competências: 
+   			<div ng-repeat="competenciaDoProjeto in competenciasDoProjeto">
+   				<p>- {{competenciaDoProjeto.nomeCompetencia}}</p>
+   			</div>
+   		</p>
+   		<p>Organizador: 
+   			<p>
+   			<a ui-sref="perfil({idUsuario: projeto.organizador.idUsuario })" ui-sref-active="active">{{projeto.organizador.nomeUsuario}}</a></p>
+   		</p>
+   		<p>Integrantes: 
+   			<table>
+   			 	<tr ng-repeat="usuarioDoProjeto in usuariosDoProjeto">
+   	        		<td><a ui-sref="perfil({idUsuario: {{usuarioDoProjeto.idUsuario}} })" ui-sref-active="active">{{usuarioDoProjeto.nomeUsuario}}</a></td>
+   	        	</tr>
+   			</table>
+   	    </p>
+   	    <hr/>
+   	    <div ng-controller="PageTarefaCtrl">
+   	    	<h2>Tarefas</h2>
+   	    	<div ng-repeat="tarefa in tarefas">
+   	    		<p>nome: {{tarefa.nomeTarefa}}</p>
+   	    		<p>Descrição: {{tarefa.descricaoTarefa}}</p>
+   	    		<p>Criada em: {{ tarefa.dataCriacao | date: 'dd/MM/yyyy - HH:mm:ss'}}</p>
+   	    		<p>Entrega: {{ tarefa.prazoEntrega | date: 'dd/MM/yyyy - HH:mm:ss'}}</p>
+   	    		<p>Status: {{tarefa.statusTarefa}}</p>
+   				<hr/>	    	
+   	    	</div>
+   	    </div>
+   	</div>
+   	<!-- FIM PROJETO CONCLUIDO 
+   </div>-->

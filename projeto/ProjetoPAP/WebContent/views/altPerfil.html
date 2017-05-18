@@ -2,203 +2,203 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <div class="container-fluid" ng-controller="UsuarioCtrl">
-    <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="header">
-                        <h4 class="label label-info">
-                            Editar perfil
-                        </h4>
-                    </div>
-                    <br/>
-                            <div class="col-md-12">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>
-                                            Tipo usuário
-                                        </label>
-                                        <select ng-model="usuario.tipoUsuario" ng-selectedItem="usuario.tipoUsuario" class="form-control" ng-options="tipoUsuario.tipoUsuario for tipoUsuario in tipoUsuarios">
-											<option ng-show="!usuario.tipoUsuario" value="">{{usuario.tipoUsuario.tipoUsuario}}</option>
-										</select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>
-                                           Nome completo
-                                        </label>
-                                        <input type="text" class="form-control" ng-model="usuario.nomeUsuario">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>
-                                            Username
-                                        </label>
-                                        <input type="text" class="form-control" ng-model="usuario.usernameUsuario">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>
-                                           	Email
-                                        </label>
-                                        <input type="text" class="form-control" ng-model="usuario.emailUsuario">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>
-                                            Estado
-                                        </label>
-                                        <select class="form-control" ng-change="BuscarInformacaoCidades()" ng-model="estadoSelecionado" ng-options="estado.nomeEstado disable when estado.nomeEstado == editedNomeEstadoSelecionadoOld for estado in estados">
-											<option ng-show="!estadoSelecionado" value="">{{usuario.cidadeUsuario.estadoCidade.nomeEstado}}</option>
-										</select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>
-                                            Cidade
-                                        </label>
-                                       <select ng-change="BuscarInformacaoInstituicoes()" class="form-control" ng-model="usuario.cidadeUsuario" ng-options="cidade.nomeCidade for cidade in cidades | filter: estadoSelecionado.nomeEstado">
-											<option ng-show="!usuario.cidadeUsuario" value="">{{usuario.cidadeUsuario.nomeCidade}}</option>
-										</select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>
-                                            Instituição de ensino
-                                        </label>
-                                        <select class="form-control" ng-model="usuario.instituicaoUsuario" ng-options="instituicaoEnsino.nomeInstituicao for instituicaoEnsino in instituicoes | filter: usuario.cidadeUsuario.nomeCidade">
-											<option ng-show="!usuario.instituicaoUsuario" value="">{{usuario.instituicaoUsuario.nomeInstituicao}}</option>
-										</select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>
-                                            Curso
-                                        </label>
-                                       <select class="form-control" ng-model="usuario.cursoUsuario" ng-options="curso.nomeCurso for curso in cursos | filter: usuario.instituicaoUsuario.nomeInstituicao">
-											<option ng-show="!usuario.cursoUsuario" value="">{{usuario.cursoUsuario.nomeCurso}}</option>
-										</select>
-                                    </div>
-                                </div>
-                           	</div>
-                           	<div class="col-md-12">
-                           		<div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>
-                                        	Senha antiga
-                                        </label>
-										<input type="password" class="form-control" placeholder="Senha do usuário" ng-model="senhaUsuarioOld"/>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                    	<label>
-                                    		Nova senha
-                                    	</label>
-										<input type="password" class="form-control" placeholder="Nova senha do usuário" ng-model="senhaUsuarioNew"/>
-                            		</div>
-                            	</div>
-                           	</div>
-                           	<div class="col-md-12">
-                           		<div class="col-md-6">
-                           			<div class="form-group">
-                           				<button style="width: 100%" ng-click="SalvarAlteracao()" class="btn btn-info btn-fill">Salvar Alterações</button>
-                           			</div>
-                           		</div>
-                           		<div class="col-md-6" ng-controller="PerfilCtrl">
-                           			<div class="form-group">
-                           				<a style="width: 100%" ui-sref="perfil({idUsuario: {{UsuarioLogado}} })" ui-sref-active="active" class="btn btn-fill btn-danger">Cancelar alterações</a>
-                           			</div>
-                           		</div>
-							</div>
-                </div>
+   <div class="row">
+      <div class="col-md-12">
+         <div class="card">
+            <div class="header">
+               <h4 class="label label-info">
+                  Editar perfil
+               </h4>
             </div>
-        </div>
-        </div>
+            <br/>
+            <div class="col-md-12">
+               <div class="col-md-6">
+                  <div class="form-group">
+                     <label>
+                     Tipo usuário
+                     </label>
+                     <select ng-model="usuario.tipoUsuario" ng-selectedItem="usuario.tipoUsuario" class="form-control" ng-options="tipoUsuario.tipoUsuario for tipoUsuario in tipoUsuarios">
+                        <option ng-show="!usuario.tipoUsuario" value="">{{usuario.tipoUsuario.tipoUsuario}}</option>
+                     </select>
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <div class="form-group">
+                     <label>
+                     Nome completo
+                     </label>
+                     <input type="text" class="form-control" ng-model="usuario.nomeUsuario">
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-12">
+               <div class="col-md-6">
+                  <div class="form-group">
+                     <label>
+                     Username
+                     </label>
+                     <input type="text" class="form-control" ng-model="usuario.usernameUsuario">
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <div class="form-group">
+                     <label>
+                     Email
+                     </label>
+                     <input type="text" class="form-control" ng-model="usuario.emailUsuario">
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-12">
+               <div class="col-md-6">
+                  <div class="form-group">
+                     <label>
+                     Estado
+                     </label>
+                     <select class="form-control" ng-change="BuscarInformacaoCidades()" ng-model="estadoSelecionado" ng-options="estado.nomeEstado disable when estado.nomeEstado == editedNomeEstadoSelecionadoOld for estado in estados">
+                        <option ng-show="!estadoSelecionado" value="">{{usuario.cidadeUsuario.estadoCidade.nomeEstado}}</option>
+                     </select>
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <div class="form-group">
+                     <label>
+                     Cidade
+                     </label>
+                     <select ng-change="BuscarInformacaoInstituicoes()" class="form-control" ng-model="usuario.cidadeUsuario" ng-options="cidade.nomeCidade for cidade in cidades | filter: estadoSelecionado.nomeEstado">
+                        <option ng-show="!usuario.cidadeUsuario" value="">{{usuario.cidadeUsuario.nomeCidade}}</option>
+                     </select>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-12">
+               <div class="col-md-6">
+                  <div class="form-group">
+                     <label>
+                     Instituição de ensino
+                     </label>
+                     <select class="form-control" ng-model="usuario.instituicaoUsuario" ng-options="instituicaoEnsino.nomeInstituicao for instituicaoEnsino in instituicoes | filter: usuario.cidadeUsuario.nomeCidade">
+                        <option ng-show="!usuario.instituicaoUsuario" value="">{{usuario.instituicaoUsuario.nomeInstituicao}}</option>
+                     </select>
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <div class="form-group">
+                     <label>
+                     Curso
+                     </label>
+                     <select class="form-control" ng-model="usuario.cursoUsuario" ng-options="curso.nomeCurso for curso in cursos | filter: usuario.instituicaoUsuario.nomeInstituicao">
+                        <option ng-show="!usuario.cursoUsuario" value="">{{usuario.cursoUsuario.nomeCurso}}</option>
+                     </select>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-12">
+               <div class="col-md-6">
+                  <div class="form-group">
+                     <label>
+                     Senha antiga
+                     </label>
+                     <input type="password" class="form-control" placeholder="Senha do usuário" ng-model="senhaUsuarioOld"/>
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <div class="form-group">
+                     <label>
+                     Nova senha
+                     </label>
+                     <input type="password" class="form-control" placeholder="Nova senha do usuário" ng-model="senhaUsuarioNew"/>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-12">
+               <div class="col-md-6">
+                  <div class="form-group">
+                     <button style="width: 100%" ng-click="SalvarAlteracao()" class="btn btn-info btn-fill">Salvar Alterações</button>
+                  </div>
+               </div>
+               <div class="col-md-6" ng-controller="PerfilCtrl">
+                  <div class="form-group">
+                     <a style="width: 100%" ui-sref="perfil({idUsuario: {{UsuarioLogado}} })" ui-sref-active="active" class="btn btn-fill btn-danger">Cancelar alterações</a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
 <!-- <link rel="stylesheet" href="css/interno/perfil.css">
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<div class="perfil" ng-controller="UsuarioCtrl">
-			<div class="hab">
-				<label class="label">Habilidades</label><br/>
-				<label><p>Nome da habilidade</p></label><br/>
-				<div class="progress">
-					  <div class="progress-bar" role="progressbar" aria-valuenow="VALOR DA HABILIDADE" aria-valuemin="0" aria-valuemax="100">
-						0%
-					  </div>
-				</div>
-			</div>
-			<div class="info">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<div class="campos">
-							<div class="img">
-								<img src="http://lastpage.in/blogAsset/img/avatar-na.png"/>
-							</div>
-							<form>
-								<div class="campos_perfil01">
-									<label class="label label-default" for="tu">Tipo de usuário:</label>
-									<select ng-model="usuario.tipoUsuario" ng-selectedItem="usuario.tipoUsuario" class="form-control" id="tu" class="form-control" ng-options="tipoUsuario.tipoUsuario for tipoUsuario in tipoUsuarios">
-										<option ng-show="!usuario.tipoUsuario" value="">{{usuario.tipoUsuario.tipoUsuario}}</option>
-									</select>
-									<br/>
-									<label class="label label-default" for="nc">Nome completo</label><br/>
-									<input class="form-control" id="nc" placeholder="Nome do usuário" ng-model="usuario.nomeUsuario"/>
-									<br/>
-									<label class="label label-default" for="us">Username</label><br/>
-									<input class="form-control" id="us" placeholder="Username do usuário" ng-model="usuario.usernameUsuario"/>
-									<br/>
-									<label class="label label-default" for="em">Email</label><br/>
-									<input class="form-control" id="em" placeholder="Email do usuário" ng-model="usuario.emailUsuario"/>
-									<br/>
-									<label class="label label-default" for="sn">Senha antiga</label><br/>
-									<input class="form-control" id="sn" placeholder="Senha do usuário" ng-model="senhaUsuarioOld"/>
-									<label class="label label-default" for="sn">Nova senha</label><br/>
-									<input class="form-control" id="sn" placeholder="Nova senha do usuário" ng-model="senhaUsuarioNew"/>
-								</div>
-								<div class="campos_perfil02">
-									<label class="label label-default" for="es">Estado:</label>
-									<select class="form-control" id="es" ng-change="BuscarInformacaoCidades()" class="form-control" ng-model="estadoSelecionado" ng-options="estado.nomeEstado disable when estado.nomeEstado == editedNomeEstadoSelecionadoOld for estado in estados ">
-										<option ng-show="!estadoSelecionado" value="">{{usuario.cidadeUsuario.estadoCidade.nomeEstado}}</option>
-									</select>
-									<br/>
-									<label class="label label-default" for="cd">Cidade:</label>
-										<select ng-change="BuscarInformacaoInstituicoes()" class="form-control" id="cd" class="form-control" ng-model="usuario.cidadeUsuario" ng-options="cidade.nomeCidade for cidade in cidades | filter: estadoSelecionado.nomeEstado">
-											<option ng-show="!usuario.cidadeUsuario" value="">{{usuario.cidadeUsuario.nomeCidade}}</option>
-										</select>
-										<br/>
-									<label class="label label-default" for="ie">Instituição de ensino:</label>
-										<select class="form-control" id="ie" class="form-control" ng-model="usuario.instituicaoUsuario" ng-options="instituicaoEnsino.nomeInstituicao for instituicaoEnsino in instituicoes | filter: usuario.cidadeUsuario.nomeCidade">
-											<option ng-show="!usuario.instituicaoUsuario" value="">{{usuario.instituicaoUsuario.nomeInstituicao}}</option>
-										</select>
-									<br/>
-									<label class="label label-default" for="cs">Curso:</label>
-										<select class="form-control" id="cs"class="form-control" ng-model="usuario.cursoUsuario" ng-options="curso.nomeCurso for curso in cursos | filter: usuario.instituicaoUsuario.nomeInstituicao">
-											<option ng-show="!usuario.cursoUsuario" value="">{{usuario.cursoUsuario.nomeCurso}}</option>
-										</select>
-									<br/>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-				<div class="acaoEditar">
-					<button ng-click="SalvarAlteracao()" class="btnAcao btn btn-primary">Salvar Alterações</button>
-				</div>
-				<div class="acaoExcluir" ng-controller="PerfilCtrl">
-					<a ui-sref="perfil({idUsuario: {{UsuarioLogado}} })" ui-sref-active="active" class="btnAcao btn btn-danger">Cancelar alterações</a>
-				</div>
-			</div>
-		</div>	-->
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <meta charset="utf-8">
+   <div class="perfil" ng-controller="UsuarioCtrl">
+   			<div class="hab">
+   				<label class="label">Habilidades</label><br/>
+   				<label><p>Nome da habilidade</p></label><br/>
+   				<div class="progress">
+   					  <div class="progress-bar" role="progressbar" aria-valuenow="VALOR DA HABILIDADE" aria-valuemin="0" aria-valuemax="100">
+   						0%
+   					  </div>
+   				</div>
+   			</div>
+   			<div class="info">
+   				<div class="panel panel-default">
+   					<div class="panel-body">
+   						<div class="campos">
+   							<div class="img">
+   								<img src="http://lastpage.in/blogAsset/img/avatar-na.png"/>
+   							</div>
+   							<form>
+   								<div class="campos_perfil01">
+   									<label class="label label-default" for="tu">Tipo de usuário:</label>
+   									<select ng-model="usuario.tipoUsuario" ng-selectedItem="usuario.tipoUsuario" class="form-control" id="tu" class="form-control" ng-options="tipoUsuario.tipoUsuario for tipoUsuario in tipoUsuarios">
+   										<option ng-show="!usuario.tipoUsuario" value="">{{usuario.tipoUsuario.tipoUsuario}}</option>
+   									</select>
+   									<br/>
+   									<label class="label label-default" for="nc">Nome completo</label><br/>
+   									<input class="form-control" id="nc" placeholder="Nome do usuário" ng-model="usuario.nomeUsuario"/>
+   									<br/>
+   									<label class="label label-default" for="us">Username</label><br/>
+   									<input class="form-control" id="us" placeholder="Username do usuário" ng-model="usuario.usernameUsuario"/>
+   									<br/>
+   									<label class="label label-default" for="em">Email</label><br/>
+   									<input class="form-control" id="em" placeholder="Email do usuário" ng-model="usuario.emailUsuario"/>
+   									<br/>
+   									<label class="label label-default" for="sn">Senha antiga</label><br/>
+   									<input class="form-control" id="sn" placeholder="Senha do usuário" ng-model="senhaUsuarioOld"/>
+   									<label class="label label-default" for="sn">Nova senha</label><br/>
+   									<input class="form-control" id="sn" placeholder="Nova senha do usuário" ng-model="senhaUsuarioNew"/>
+   								</div>
+   								<div class="campos_perfil02">
+   									<label class="label label-default" for="es">Estado:</label>
+   									<select class="form-control" id="es" ng-change="BuscarInformacaoCidades()" class="form-control" ng-model="estadoSelecionado" ng-options="estado.nomeEstado disable when estado.nomeEstado == editedNomeEstadoSelecionadoOld for estado in estados ">
+   										<option ng-show="!estadoSelecionado" value="">{{usuario.cidadeUsuario.estadoCidade.nomeEstado}}</option>
+   									</select>
+   									<br/>
+   									<label class="label label-default" for="cd">Cidade:</label>
+   										<select ng-change="BuscarInformacaoInstituicoes()" class="form-control" id="cd" class="form-control" ng-model="usuario.cidadeUsuario" ng-options="cidade.nomeCidade for cidade in cidades | filter: estadoSelecionado.nomeEstado">
+   											<option ng-show="!usuario.cidadeUsuario" value="">{{usuario.cidadeUsuario.nomeCidade}}</option>
+   										</select>
+   										<br/>
+   									<label class="label label-default" for="ie">Instituição de ensino:</label>
+   										<select class="form-control" id="ie" class="form-control" ng-model="usuario.instituicaoUsuario" ng-options="instituicaoEnsino.nomeInstituicao for instituicaoEnsino in instituicoes | filter: usuario.cidadeUsuario.nomeCidade">
+   											<option ng-show="!usuario.instituicaoUsuario" value="">{{usuario.instituicaoUsuario.nomeInstituicao}}</option>
+   										</select>
+   									<br/>
+   									<label class="label label-default" for="cs">Curso:</label>
+   										<select class="form-control" id="cs"class="form-control" ng-model="usuario.cursoUsuario" ng-options="curso.nomeCurso for curso in cursos | filter: usuario.instituicaoUsuario.nomeInstituicao">
+   											<option ng-show="!usuario.cursoUsuario" value="">{{usuario.cursoUsuario.nomeCurso}}</option>
+   										</select>
+   									<br/>
+   								</div>
+   							</form>
+   						</div>
+   					</div>
+   				</div>
+   				<div class="acaoEditar">
+   					<button ng-click="SalvarAlteracao()" class="btnAcao btn btn-primary">Salvar Alterações</button>
+   				</div>
+   				<div class="acaoExcluir" ng-controller="PerfilCtrl">
+   					<a ui-sref="perfil({idUsuario: {{UsuarioLogado}} })" ui-sref-active="active" class="btnAcao btn btn-danger">Cancelar alterações</a>
+   				</div>
+   			</div>
+   		</div>	-->

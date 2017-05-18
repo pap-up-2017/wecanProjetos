@@ -1,109 +1,111 @@
 <link rel="stylesheet" href="css/projeto.css">
 <div ng-controller="ListarProjetosCtrl">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="card">
-					<div class="header">
-						<h4 class="label label-info">
-                        	Grade de projetos
-                        </h4><br/>
-                        <h4 class="text-default">
-                        	PROJETOS GERAL
-                        </h4>
-                        <a class="btn btn-info btn-fill" ng-href="#/pageProjeto"><i class="fa fa-plus-circle" aria-hidden="true"></i>Novo projeto</a><br/>
-                        <form>
-                        	<br/>
-						  <input ng-model="search2" ng-change="BuscarInformacao()" type="text" name="search" placeholder="Search..">
-						</form><br/>
-                    </div>
-                    <div class="content">
-                    	<div ng:repeat="projeto in projetos | filter: {status: 'Aberto'} | filter: search2">
-                        	<div class="col-md-12">
-                        		<a ui-sref="pageDetalhesProjeto({idProjeto:{{projeto.idProjeto}}})">
-                            		<div id="card" class="card">
-                            			<h4 style="font-weight:bold" class="text-info">{{projeto.nome}}</h4>
-                            	<div class="form-group">
-                                	<h4 class="title">
-                                	    <label class="label label-default">Vagas:</label>
-                                		<label>{{projeto.vagas}}</label>
-                                		<label class="label label-default">Integrantes:</label>
-                                		<label>{{projeto.participantes}}</label>
-                                		<label class="label label-default">Autor:</label>
-                                		<label> {{projeto.organizador.usernameUsuario}}</label>
-                                		<label class="label label-default">Curso:</label>
-										<label>{{projeto.organizador.cursoUsuario.nomeCurso}}</label>
-                                	</h4>
-                                	<p class="desc" style="word-wrap: break-word">{{projeto.descricao}}</p>
-                                	<label style="color: #fff" class="label label-primary">{{projeto.status}}</label>
-                                </div>
-                        	</div>
-                        	</a>
+<div class="container-fluid">
+   <div class="row">
+      <div class="col-md-12">
+         <div class="card">
+            <div class="header">
+               <h4 class="label label-info">
+                  Grade de projetos
+               </h4>
+               <br/>
+               <h4 class="text-default">
+                  PROJETOS GERAL
+               </h4>
+               <a class="btn btn-info btn-fill" ng-href="#/pageProjeto"><i class="fa fa-plus-circle" aria-hidden="true"></i>Novo projeto</a><br/>
+               <form>
+                  <br/>
+                  <input ng-model="search2" ng-change="BuscarInformacao()" type="text" name="search" placeholder="Search..">
+               </form>
+               <br/>
+            </div>
+            <div class="content">
+               <div ng:repeat="projeto in projetos | filter: {status: 'Aberto'} | filter: search2">
+                  <div class="col-md-12">
+                     <a ui-sref="pageDetalhesProjeto({idProjeto:{{projeto.idProjeto}}})">
+                        <div id="card" class="card">
+                           <h4 style="font-weight:bold" class="text-info">{{projeto.nome}}</h4>
+                           <div class="form-group">
+                              <h4 class="title">
+                                 <label class="label label-default">Vagas:</label>
+                                 <label>{{projeto.vagas}}</label>
+                                 <label class="label label-default">Integrantes:</label>
+                                 <label>{{projeto.participantes}}</label>
+                                 <label class="label label-default">Autor:</label>
+                                 <label> {{projeto.organizador.usernameUsuario}}</label>
+                                 <label class="label label-default">Curso:</label>
+                                 <label>{{projeto.organizador.cursoUsuario.nomeCurso}}</label>
+                              </h4>
+                              <p class="desc" style="word-wrap: break-word">{{projeto.descricao}}</p>
+                              <label style="color: #fff" class="label label-primary">{{projeto.status}}</label>
+                           </div>
                         </div>
-                    </div>
-				</div>
-			</div>
-		</div>
-	</div>
+                     </a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>
 <!--  <link rel="stylesheet" href="css/interno/listarprojeto.css">
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<div ng-controller="ListarProjetosCtrl">
-	<div>
-		<div class="listarProjetos">
-		<div id="projeto">Seus projetos em andamento</div>
-			<div class="search">
-				<input ng-model="search" type="text" size="40" placeholder="search..." ng-change="BuscarInformacao()"/>
-				<i class="fa fa-search" aria-hidden="true"></i>
-			</div>
-			<a id="criarProjeto" ng-href="#/pageProjeto"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
-			<div class="panelcriar panel-default" ng:repeat="projeto in projetosPorUsuario | filter: {status: 'em andamento'} | filter: search">
-				<div class="panel-body">
-					<div class="projetoInf">
-						<div class="integrantes">
-							<label>{{projeto.participantes}}</label>
-							<p>Integrantes</p>
-						</div>
-						<div class="projetoDesc">
-							<a ui-sref="pageDetalhesProjeto({idProjeto:{{projeto.idProjeto}}})" id="titulo">{{projeto.nome}}</a>
-								<p><label>{{projeto.organizador.usernameUsuario}}</label>
-								<label>{{projeto.organizador.cursoUsuario.nomeCurso}}</label></p>
-							<p><div id="desc" >{{projeto.descricao}}</div></p>
-							<label style="color: #e6a557;">{{projeto.status}}</label>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- projetos geral 
-	<div>
-		<div class="listarProjetos">
-		<div class="identificacao">Projetos geral</div>
-			<div class="search">
-				<input ng-model="search2" type="text" size="40" placeholder="search..." ng-change="BuscarInformacao()"/>
-				<i class="fa fa-search" aria-hidden="true"></i>
-			</div>
-			<a id="criarProjeto" ng-href="#/pageProjeto"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
-			</div>
-			<div class="panelcriar panel-default" ng:repeat="projeto in projetos | filter: {status: 'Aberto'} | filter: search2">
-				<div class="panel-body">
-					<div class="projetoInf">
-						<div class="integrantes">
-							<label>{{projeto.participantes}}</label>
-							<p>Integrantes</p>
-						</div>
-						<div class="projetoDesc">
-							<a ui-sref="pageDetalhesProjeto({idProjeto:{{projeto.idProjeto}}})" id="titulo">{{projeto.nome}}</a>
-								<p><label>{{projeto.organizador.usernameUsuario}}</label>
-								<label>{{projeto.organizador.cursoUsuario.nomeCurso}}</label>
-							<p><div id="desc" >{{projeto.descricao}}</div>
-							<label style="color: #e6a557;">{{projeto.status}}</label>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>-->
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <meta charset="utf-8">
+   <div ng-controller="ListarProjetosCtrl">
+   	<div>
+   		<div class="listarProjetos">
+   		<div id="projeto">Seus projetos em andamento</div>
+   			<div class="search">
+   				<input ng-model="search" type="text" size="40" placeholder="search..." ng-change="BuscarInformacao()"/>
+   				<i class="fa fa-search" aria-hidden="true"></i>
+   			</div>
+   			<a id="criarProjeto" ng-href="#/pageProjeto"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+   			<div class="panelcriar panel-default" ng:repeat="projeto in projetosPorUsuario | filter: {status: 'em andamento'} | filter: search">
+   				<div class="panel-body">
+   					<div class="projetoInf">
+   						<div class="integrantes">
+   							<label>{{projeto.participantes}}</label>
+   							<p>Integrantes</p>
+   						</div>
+   						<div class="projetoDesc">
+   							<a ui-sref="pageDetalhesProjeto({idProjeto:{{projeto.idProjeto}}})" id="titulo">{{projeto.nome}}</a>
+   								<p><label>{{projeto.organizador.usernameUsuario}}</label>
+   								<label>{{projeto.organizador.cursoUsuario.nomeCurso}}</label></p>
+   							<p><div id="desc" >{{projeto.descricao}}</div></p>
+   							<label style="color: #e6a557;">{{projeto.status}}</label>
+   						</div>
+   					</div>
+   				</div>
+   			</div>
+   		</div>
+   	</div>
+   	<!-- projetos geral 
+   	<div>
+   		<div class="listarProjetos">
+   		<div class="identificacao">Projetos geral</div>
+   			<div class="search">
+   				<input ng-model="search2" type="text" size="40" placeholder="search..." ng-change="BuscarInformacao()"/>
+   				<i class="fa fa-search" aria-hidden="true"></i>
+   			</div>
+   			<a id="criarProjeto" ng-href="#/pageProjeto"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+   			</div>
+   			<div class="panelcriar panel-default" ng:repeat="projeto in projetos | filter: {status: 'Aberto'} | filter: search2">
+   				<div class="panel-body">
+   					<div class="projetoInf">
+   						<div class="integrantes">
+   							<label>{{projeto.participantes}}</label>
+   							<p>Integrantes</p>
+   						</div>
+   						<div class="projetoDesc">
+   							<a ui-sref="pageDetalhesProjeto({idProjeto:{{projeto.idProjeto}}})" id="titulo">{{projeto.nome}}</a>
+   								<p><label>{{projeto.organizador.usernameUsuario}}</label>
+   								<label>{{projeto.organizador.cursoUsuario.nomeCurso}}</label>
+   							<p><div id="desc" >{{projeto.descricao}}</div>
+   							<label style="color: #e6a557;">{{projeto.status}}</label>
+   						</div>
+   					</div>
+   				</div>
+   			</div>
+   		</div>
+   	</div>
+   </div>-->

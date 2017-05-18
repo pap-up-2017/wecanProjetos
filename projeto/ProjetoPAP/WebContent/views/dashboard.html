@@ -3,52 +3,52 @@
 <meta charset="utf-8">
 <div class="container-fluid">
    <div ng-controller="DashBoardCtrl">
-   <div class="row">
-      <div class="col-md-12">
-         <div class="card">
-            <div class="header">
-               <h4 class="label label-info">
-                  Dashboard
-               </h4>
-            </div>
-            <br/>
-            <div class="col-md-6" ng:repeat="card in cardsProjetos">
-               <a ui-sref="pageDetalhesProjeto({idProjeto:{{card.idProjeto}}})" rel="tooltip" title="Visualizar tarefas">
-               <div id="card" class="card">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="card">
+               <div class="header">
+                  <h4 class="label label-info">
+                     Dashboard
+                  </h4>
+               </div>
+               <br/>
+               <div class="col-md-6" ng:repeat="card in cardsProjetos">
+                  <a ui-sref="pageDetalhesProjeto({idProjeto:{{card.idProjeto}}})" rel="tooltip" title="Visualizar tarefas">
+                     <div id="card" class="card">
                         <h3 id="h4" class="text-primary">{{card.nomeProjeto}}</h3>
-                  <div class="card-content">
-                     <label class="text-info">Entrega: {{ card.dataEntrega | date: 'dd/MM/yyyy'}}</label><br/>
-                     Tarefas: {{card.totalTarefas}}<br/>
-					 <br/>
-                     Status
-                     <div class="progress">
-                        <div class="progress-bar progress-bar-danger" ng-style="{'width': card.porcentPendente+'%'}">
-                           <span class="sr-only">10% Complete (danger)</span>
-                        </div>
-                        <div class="progress-bar progress-bar-warning" ng-style="{'width': card.porcentAndamento+'%'}">
-                           <span class="sr-only">20% Complete (warning)</span>
-                        </div>
-                        <div class="progress-bar progress-bar-info" ng-style="{'width': card.porcentConcluido+'%'}">
-                           <span class="sr-only">35% Complete (success)</span>
+                        <div class="card-content">
+                           <label class="text-info">Entrega: {{ card.dataEntrega | date: 'dd/MM/yyyy'}}</label><br/>
+                           Tarefas: {{card.totalTarefas}}<br/>
+                           <br/>
+                           Status
+                           <div class="progress">
+                              <div class="progress-bar progress-bar-danger" ng-style="{'width': card.porcentPendente+'%'}">
+                                 <span class="sr-only">10% Complete (danger)</span>
+                              </div>
+                              <div class="progress-bar progress-bar-warning" ng-style="{'width': card.porcentAndamento+'%'}">
+                                 <span class="sr-only">20% Complete (warning)</span>
+                              </div>
+                              <div class="progress-bar progress-bar-info" ng-style="{'width': card.porcentConcluido+'%'}">
+                                 <span class="sr-only">35% Complete (success)</span>
+                              </div>
+                           </div>
+                           <div class="footer">
+                              <div class="legend">
+                                 <i class="fa fa-circle text-danger"></i> Não iniciado
+                                 <i class="fa fa-circle text-warning"></i> Em andamento
+                                 <i class="fa fa-circle text-info"></i> Concluído
+                              </div>
+                              <hr>
+                              <div class="stats">
+                                 <p class="category">Criado em: {{ card.dataCriacao | date: 'dd/MM/yyyy'}}</p>
+                              </div>
+                           </div>
                         </div>
                      </div>
-                     <div class="footer">
-                                    <div class="legend">
-                                    	<i class="fa fa-circle text-danger"></i> Não iniciado
-                                    	<i class="fa fa-circle text-warning"></i> Em andamento
-                                        <i class="fa fa-circle text-info"></i> Concluído
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <p class="category">Criado em: {{ card.dataCriacao | date: 'dd/MM/yyyy'}}</p>
-                                    </div>
-                                </div>
-                  </div>
+                  </a>
                </div>
-               </a>
             </div>
          </div>
       </div>
-   </div>
    </div>
 </div>

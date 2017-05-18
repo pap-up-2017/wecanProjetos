@@ -1,128 +1,122 @@
 <style type="text/css">
-  .listv{
-     margin-bottom: 30px;
-  }
-  .editpopup{
-     width: 250px;
-     height: 250px;
-     border: 1px solid black;
-     display: none;
-     position: absolute;
-     top: center;
-     left: center;
-     bottom: center;
-     right: center;
-
-     background-color:gray;
-  }
-  .editpopup-true{
-     display: block;
-  }
-  .editpopup-false{
-     display: none;
-  }
-  
-  	.campos_projeto
-	{
-		width: 50%;
-		height: auto;
-		float: left;
-		padding: 20px;
-	}
-	.tabelas_projeto
-	{
-		width: 50%;
-		height: auto;
-		float: left;
-		padding: 20px;
-		padding-top: 20px;
-	}
-	
-	.headerLogo
-	{
-		background-attachment: fixed;
-		background-image: url(img/wallpaper02.png);
-		background-repeat: no-repeat;
-		background-position: center;
-		padding-top: 0px;
-	}
-  
-  </style>
-
+   .listv{
+   margin-bottom: 30px;
+   }
+   .editpopup{
+   width: 250px;
+   height: 250px;
+   border: 1px solid black;
+   display: none;
+   position: absolute;
+   top: center;
+   left: center;
+   bottom: center;
+   right: center;
+   background-color:gray;
+   }
+   .editpopup-true{
+   display: block;
+   }
+   .editpopup-false{
+   display: none;
+   }
+   .campos_projeto
+   {
+   width: 50%;
+   height: auto;
+   float: left;
+   padding: 20px;
+   }
+   .tabelas_projeto
+   {
+   width: 50%;
+   height: auto;
+   float: left;
+   padding: 20px;
+   padding-top: 20px;
+   }
+   .headerLogo
+   {
+   background-attachment: fixed;
+   background-image: url(img/wallpaper02.png);
+   background-repeat: no-repeat;
+   background-position: center;
+   padding-top: 0px;
+   }
+</style>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-
 <br/>
 <div class="panel-body" ng-controller="PageProjetoCtrl"	>
-		{{ Resposta }}
-	<div class="headerLogo">	
-		<div class="campos_projeto">
-			<p class="form-group">
-				<label class="label label-default" for="nc">Titulo do projeto:</label>
-				<input placeholder="Nome" class="form-control" type="text" ng-model="projeto.nome" required />
-				<label class="label label-default" for="nc">Descrição do projeto:</label>
-				<textarea placeholder="Descrição" class="form-control" style="resize:none" rows="4" type="text" ng-model="projeto.descricao" required></textarea>
-				<label class="label label-default" for="nc">Data da entrega:</label>		
-				<!--<input class="form-control" type="date" ng-model="projeto.dataEntrega" required /> -->
-				<!-- <select class="form-control" ng-model="projeto.organizador" ng-options="usuario.nomeUsuario for usuario in usuarios">
-						<option value="">Selecione o organizador do projeto...</option>					
-					 </select>
-				 -->
-				<label class="label label-default" for="nc">Vagas:</label>		
-				<input placeholder="Vagas" class="form-control" type="text" ng-model="projeto.vagas" required />
-				<label class="label label-default" for="nc">Competências necessárias:</label>		
-				<select class="form-control" ng-model="projeto.competencias" ng-options="competencia.nomeCompetencia for competencia in competencias">
-					<option value="">Selecione uma competência...</option>
-				</select>
-				<button class="btn btn-default btnAcao" ng-click="adicionaCompetencia()">Adicionar competência</button>
-				</br>
-			  <label class="label label-default" for="nc">Participantes:</label>
-				<select class="form-control" ng-model="projeto.usuarios" ng-options="usuario.nomeUsuario for usuario in usuarios">
-					<option value="">Selecione um usuário...</option>
-				</select>
-				<button class="btn btn-default btnAcao" ng-click="adicionaUsuario()">Adicionar usuário</button>
-		</p class="form-group">	
-	    </div>
-	    <div class="tabelas_projeto">
-	    	<button class="btn btn-success" ng-click="SalvarAlteracao(projeto)">Salvar projeto</button>
-	    	<a class="btn btn-success" ng-href="#/pageListaProjetos">Cancelar</a>
-	    	</br></br>		    	
-			    <table class="table-bordered" width="100%" style="background-color:#f2f2f2">
-			      <thead>
-			        <tr>
-			          <th>Competências necessárias no projeto</th>
-			        </tr>
-			      </thead>
-			      <tbody>
-			        <tr ng-repeat="competenciaDoProjeto in competenciasDoProjeto">
-			          <td>{{ competenciaDoProjeto.nomeCompetencia }}</td>
-			        </tr>
-			      </tbody>
-				</table>
-			    </br>
-			    <table class="table-bordered" width="100%" style="background-color:#f2f2f2">
-			      <thead>
-			        <tr>
-			          <th>Equipe do projeto</th>
-			        </tr>
-			      </thead>
-			      <tbody>
-			        <tr ng-repeat="usuarioDoProjeto in usuariosDoProjeto">
-			          <td>{{ usuarioDoProjeto.nomeUsuario }}</td>
-			        </tr>
-			      </tbody>
-				</table>
-			</div>
-		</div>
+   {{ Resposta }}
+   <div class="headerLogo">
+      <div class="campos_projeto">
+         <p class="form-group">
+            <label class="label label-default" for="nc">Titulo do projeto:</label>
+            <input placeholder="Nome" class="form-control" type="text" ng-model="projeto.nome" required />
+            <label class="label label-default" for="nc">Descrição do projeto:</label>
+            <textarea placeholder="Descrição" class="form-control" style="resize:none" rows="4" type="text" ng-model="projeto.descricao" required></textarea>
+            <label class="label label-default" for="nc">Data da entrega:</label>		
+            <!--<input class="form-control" type="date" ng-model="projeto.dataEntrega" required /> -->
+            <!-- <select class="form-control" ng-model="projeto.organizador" ng-options="usuario.nomeUsuario for usuario in usuarios">
+               <option value="">Selecione o organizador do projeto...</option>					
+               </select>
+               -->
+            <label class="label label-default" for="nc">Vagas:</label>		
+            <input placeholder="Vagas" class="form-control" type="text" ng-model="projeto.vagas" required />
+            <label class="label label-default" for="nc">Competências necessárias:</label>		
+            <select class="form-control" ng-model="projeto.competencias" ng-options="competencia.nomeCompetencia for competencia in competencias">
+               <option value="">Selecione uma competência...</option>
+            </select>
+            <button class="btn btn-default btnAcao" ng-click="adicionaCompetencia()">Adicionar competência</button>
+            </br>
+            <label class="label label-default" for="nc">Participantes:</label>
+            <select class="form-control" ng-model="projeto.usuarios" ng-options="usuario.nomeUsuario for usuario in usuarios">
+               <option value="">Selecione um usuário...</option>
+            </select>
+            <button class="btn btn-default btnAcao" ng-click="adicionaUsuario()">Adicionar usuário</button>
+            </p class="form-group">	
+      </div>
+      <div class="tabelas_projeto">
+         <button class="btn btn-success" ng-click="SalvarAlteracao(projeto)">Salvar projeto</button>
+         <a class="btn btn-success" ng-href="#/pageListaProjetos">Cancelar</a>
+         </br></br>		    	
+         <table class="table-bordered" width="100%" style="background-color:#f2f2f2">
+            <thead>
+               <tr>
+                  <th>Competências necessárias no projeto</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr ng-repeat="competenciaDoProjeto in competenciasDoProjeto">
+                  <td>{{ competenciaDoProjeto.nomeCompetencia }}</td>
+               </tr>
+            </tbody>
+         </table>
+         </br>
+         <table class="table-bordered" width="100%" style="background-color:#f2f2f2">
+            <thead>
+               <tr>
+                  <th>Equipe do projeto</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr ng-repeat="usuarioDoProjeto in usuariosDoProjeto">
+                  <td>{{ usuarioDoProjeto.nomeUsuario }}</td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+   </div>
 </div>
 <br/><br/>
 <div ng-controller="PageProjetoCtrl">
-		<div class="editpopup editpopup-{{istrue}} ">
-	        <p>edit Id:<input type="text" ng-model="editedidProjeto"></p>
-	        <p>edit Projeto:<input type="text" ng-model="editednome"></p>
-	        <p>edit Descrição:<input type="text" ng-model="editeddescricao"></p>
-	        <p>edit Data:<input type="date" ng-model="editeddataEntrega"></p>
-	        <button ng-click="SalvarAlteracao(editedidProjeto, editednome, editeddescricao,editeddataEntrega)">Salvar</button>
-	        <button ng-click="FecharPopUpEdicao()">Cancelar</button>
-     	</div>		
-</div> 
+   <div class="editpopup editpopup-{{istrue}} ">
+      <p>edit Id:<input type="text" ng-model="editedidProjeto"></p>
+      <p>edit Projeto:<input type="text" ng-model="editednome"></p>
+      <p>edit Descrição:<input type="text" ng-model="editeddescricao"></p>
+      <p>edit Data:<input type="date" ng-model="editeddataEntrega"></p>
+      <button ng-click="SalvarAlteracao(editedidProjeto, editednome, editeddescricao,editeddataEntrega)">Salvar</button>
+      <button ng-click="FecharPopUpEdicao()">Cancelar</button>
+   </div>
+</div>

@@ -1,42 +1,41 @@
 <link rel="stylesheet" href="css/notificacao.css">
 <div class="container-fluid">
-	<div class="card">
-		<div class="header">
-            <h4 class="label label-info">Notificações</h4>
-        </div>
-		<div class="content" ng-controller="PageNotificacaoCtrl">
-			<div class="row">
-				<div class="col-md-12" ng:repeat="notificacao in notificacoes | orderBy : idNotificacao : true">
-					<a ng-click="AtualizaStatus(notificacao)" ui-sref="{{notificacao.linkAcessoNotificacao}}" id="titulo">
-			        <div id="alert" class="alert alert-default alert-with-icon" data-notify="container">
-                        	<span id="icon" data-notify="icon" class="pe-7s-bell"></span>
-                        	<span data-notify="message">{{notificacao.tituloNotificacao}}</span><br/>
-                            <span data-notify="message">{{notificacao.textoNotificacao}}</span><br/>
-                            <span data-notify="message"><button disabled class="btn btn-danger btn-fill btn-xs" ng-click="AtualizaStatus(notificacao)">{{notificacao.statusNotificacao}}</button></span>
-                    </div>
-                    </a>
-			    </div>
-			</div>
-		</div>
-	</div>
+   <div class="card">
+      <div class="header">
+         <h4 class="label label-info">Notificações</h4>
+      </div>
+      <div class="content" ng-controller="PageNotificacaoCtrl">
+         <div class="row">
+            <div class="col-md-12" ng:repeat="notificacao in notificacoes | orderBy : idNotificacao : true">
+               <a ng-click="AtualizaStatus(notificacao)" ui-sref="{{notificacao.linkAcessoNotificacao}}" id="titulo">
+                  <div id="alert" class="alert alert-default alert-with-icon" data-notify="container">
+                     <span id="icon" data-notify="icon" class="pe-7s-bell"></span>
+                     <span data-notify="message">{{notificacao.tituloNotificacao}}</span><br/>
+                     <span data-notify="message">{{notificacao.textoNotificacao}}</span><br/>
+                     <span data-notify="message"><button disabled class="btn btn-danger btn-fill btn-xs" ng-click="AtualizaStatus(notificacao)">{{notificacao.statusNotificacao}}</button></span>
+                  </div>
+               </a>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>
-
 <!-- 
-<!-- Font Awesome is a great free icon font. 
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"/>
-<link href="css/interno/notificacao.css" rel="stylesheet"/>
-
-  
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<br/>
-<div class="notificacao" ng-controller="PageNotificacaoCtrl"> 	
-	<table>
-		<tr ng:repeat="notificacao in notificacoes | orderBy : idNotificacao : true">
-			<td><a ng-click="AtualizaStatus(notificacao)" ui-sref="{{notificacao.linkAcessoNotificacao}}" id="titulo">{{notificacao.tituloNotificacao}}</a></td>
-			<td><span>{{notificacao.textoNotificacao}}</span></td>
-			<td><button class="btn btn-primary" ng-click="AtualizaStatus(notificacao)">{{notificacao.statusNotificacao}}</button></td>
-		</tr>
-	</table>
-</div> 
--->
+   <!-- Font Awesome is a great free icon font. 
+   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"/>
+   <link href="css/interno/notificacao.css" rel="stylesheet"/>
+   
+     
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <meta charset="utf-8">
+   <br/>
+   <div class="notificacao" ng-controller="PageNotificacaoCtrl"> 	
+   	<table>
+   		<tr ng:repeat="notificacao in notificacoes | orderBy : idNotificacao : true">
+   			<td><a ng-click="AtualizaStatus(notificacao)" ui-sref="{{notificacao.linkAcessoNotificacao}}" id="titulo">{{notificacao.tituloNotificacao}}</a></td>
+   			<td><span>{{notificacao.textoNotificacao}}</span></td>
+   			<td><button class="btn btn-primary" ng-click="AtualizaStatus(notificacao)">{{notificacao.statusNotificacao}}</button></td>
+   		</tr>
+   	</table>
+   </div> 
+   -->
