@@ -1,9 +1,9 @@
-angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieStore, $state, $stateParams) {
+angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieStore, $state, $stateParams, $rootScope) {
 	
 	$scope.UsuarioLogado = $cookieStore.get("session_user_id");
 	
 	// Busca informação para preenchimento do perfil
-	$scope.BuscarInformacao = function() {
+	$rootScope.BuscarPerfilUsuario = function() {
 		$http.post('http://localhost:8080/ProjetoPAP/rest/usuariorest/busca/'+$scope.UsuarioLogado)
 				.success(function(data) {
 					$scope.nomeUsuario = data["nomeUsuario"];
@@ -11,7 +11,7 @@ angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieSt
 					$scope.emailUsuario = data["emailUsuario"];
 					$scope.tipoUsuario = (data["tipoUsuario"]["tipoUsuario"]);
 					$scope.cursoUsuario = (data["cursoUsuario"]["nomeCurso"]);
-					$scope.instituicaoUsuario = (data["instituicaoUsuario"]["nomeInstituicao"]);	
+					$scope.instituicaoUsuario = (data["instituicaoUsuario"]["nomeInstituicao"]);
 				});
 	};
 	
@@ -27,7 +27,7 @@ angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieSt
 					$scope.estadoUsuariod = (data["cidadeUsuario"]["estadoCidade"]["nomeEstado"]);
 					$scope.cidadeUsuariod = (data["cidadeUsuario"]["nomeCidade"]);
 					$scope.cursoUsuariod = (data["cursoUsuario"]["nomeCurso"]);
-					$scope.instituicaoUsuariod = (data["instituicaoUsuario"]["nomeInstituicao"]);	
+					$scope.instituicaoUsuariod = (data["instituicaoUsuario"]["nomeInstituicao"]);
 				});
 	};
 
@@ -38,8 +38,7 @@ angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieSt
 		if($stateParams.idUsuario != null){
 			$scope.detalharUsuario();
 		}
-		$scope.BuscarInformacao();
-		
+		$rootScope.BuscarPerfilUsuario();
 	};
 	
 	$scope.iniciaTela();

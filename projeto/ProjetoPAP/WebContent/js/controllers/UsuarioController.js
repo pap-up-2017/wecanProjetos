@@ -1,4 +1,4 @@
-angular.module("app").controller('UsuarioCtrl', function($scope, $http, $cookieStore, $state) {
+angular.module("app").controller('UsuarioCtrl', function($scope, $http, $cookieStore, $state, $rootScope) {
 		
 	//Busca Tipos usuarios
 	$scope.BuscarInformacaoTipoUsuarios = function() {
@@ -149,10 +149,9 @@ angular.module("app").controller('UsuarioCtrl', function($scope, $http, $cookieS
 						swal("Este username já está em uso. Por favor, escolha outro.");
 					}
 					else{
-						$state.go("perfil");
-					}
-					
-					});
+						$state.go("perfil", { "idUsuario": $cookieStore.get("session_user_id")});
+					}	
+		});
 	};
 	
 	// função que inicia a tela

@@ -4,6 +4,16 @@ angular.module('app', ['ngCookies'
 
 function config($rootScope){
 	$rootScope.pattern_url = 'http://localhost:8080/ProjetoPAP/';
+	
+	$rootScope.popUpNotificacao = function(text, type){
+    	$.notify({
+        	icon: 'pe-7s-gift',
+        	message: text
+        },{
+            type: type,
+            timer: 4000
+        });
+	}
 }
 
 function autentication($rootScope, $state, $location, $cookieStore){
