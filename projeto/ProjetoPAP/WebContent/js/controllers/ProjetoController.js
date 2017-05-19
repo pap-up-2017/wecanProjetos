@@ -186,7 +186,8 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 			$http.post(
 					'http://localhost:8080/ProjetoPAP/rest/projetorest/iniciar/'+projeto.idProjeto).success(
 					function(data) {
-						swal("Muito bem",data);
+						swal("Muito bem",data,"success");
+						$scope.iniciaTela();
 					}).error(
 					function(data, status, header, config) {
 						swal("Ops","Não foi possivel iniciar o projeto, tente novamente.");
@@ -200,6 +201,28 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 				function(data) {
 					swal(data);
 					$scope.iniciaTela();
+					
+					$http.get('http://localhost:8080/ProjetoPAP/rest/tarefarest/proj/'+$stateParams.idProjeto)
+					.success(function(data) {
+						if(data != null){
+							var tarefasBanco = data["tarefa"];
+							var arrayBanco = [];
+							if(Array.isArray(tarefasBanco)){
+								arrayBanco = tarefasBanco; 
+							}
+							else{
+								arrayBanco.push(tarefasBanco);
+							}
+							$rootScope.tarefas = arrayBanco;
+						}
+					}).error(
+							function(data, status, header, config) {
+								$scope.Resposta = "Data: " + data + "<hr />status: "
+										+ status + "<hr />headers: " + header
+										+ "<hr />config: " + config;
+							});
+					
+					
 				}).error(
 				function(data, status, header, config) {
 					swal("Ops","Não foi possivel concluir o projeto, tente novamente.");

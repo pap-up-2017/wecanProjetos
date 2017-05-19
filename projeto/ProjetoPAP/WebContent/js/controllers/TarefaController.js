@@ -1,4 +1,4 @@
-angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stateParams, $cookieStore, $filter) {
+angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stateParams, $cookieStore, $filter, $rootScope ) {
 	
 	$scope.UsuarioLogado = $cookieStore.get("session_user_id");
 	
@@ -54,7 +54,7 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 						else{
 							arrayBanco.push(tarefasBanco);
 						}
-						$scope.tarefas = arrayBanco;
+						$rootScope.tarefas = arrayBanco;
 					}
 				}).error(
 						function(data, status, header, config) {
@@ -264,7 +264,7 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 	
 	// função que inicia a tela
 	$scope.iniciaTela = function() {
-		console.log("Iniciando a tela");
+		console.log("Iniciando a tela de tarefas");
 		
 		$scope.BuscarTarefaProjeto();
 		//$scope.BuscarInformacaoProjetos();
