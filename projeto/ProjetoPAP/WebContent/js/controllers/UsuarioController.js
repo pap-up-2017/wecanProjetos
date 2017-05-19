@@ -85,42 +85,52 @@ angular.module("app").controller('UsuarioCtrl', function($scope, $http, $cookieS
 		.success(function(data) {
 			$scope.usuario = data;	
 			$scope.estadoSelecionado = $scope.usuario.cidadeUsuario.estadoCidade;
+			$scope.trocarSenha = false;
 		});
 	};
 	
+	$scope.habilitarTrocarSenha = function(){
+		$scope.trocarSenha = !$scope.trocarSenha;
+	}
 	
 	// Envia a informação de alteração de um elemento para o banco ... Via rest
 	$scope.SalvarAlteracao = function(){
-		
-		var trocaSenha = false;
-		
-		if($scope.senhaUsuarioNew != null){
-			console.log("new "+$scope.senhaUsuarioNew);
-			if($scope.senhaUsuarioOld != null){
-				console.log("Old "+$scope.senhaUsuarioOld);
+		if($scope.trocarSenha){
+			console.log("Old "+$scope.senhaUsuarioOld);
+			if($scope.senhaUsuarioOld != null && typeof $scope.senhaUsuarioOld != 'undefined' && $scope.senhaUsuarioOld != ""){
 				$http.post( 'http://localhost:8080/ProjetoPAP/rest/usuariorest/cripSenha/'+$scope.senhaUsuarioOld)
 				.success( function(data, status, headers, config) {
 					console.log("Old crip "+ data);
-					if($scope.usuario.senhaUsuario == data){
-						$http.post( 'http://localhost:8080/ProjetoPAP/rest/usuariorest/cripSenha/'+$scope.senhaUsuarioNew)
-						.success( function(data, status, headers, config) {
-							console.log("new crip "+ data);
-							$scope.usuario.senhaUsuario = data;
-							trocaSenha = true;
-							console.log("nova senha banco: "+ $scope.usuario.senhaUsuario); 
-						});
+					if($scope.usuario.senhaUsuario == data ){
+						if($scope.senhaUsuarioNew != null && typeof $scope.senhaUsuarioNew != 'undefined' && $scope.senhaUsuarioNew != ""){
+							$http.post( 'http://localhost:8080/ProjetoPAP/rest/usuariorest/cripSenha/'+$scope.senhaUsuarioNew)
+							.success( function(data, status, headers, config) {
+								console.log("new crip "+ data);
+								$scope.usuario.senhaUsuario = data;
+								trocaSenha = true;
+								console.log("nova senha banco: "+ $scope.usuario.senhaUsuario); 
+								enviaAlteracoesBanco();
+							});
+						}
+						else{
+							$rootScope.popUpNotificacao("Você deve digitar a nova senha.","danger");	
+						}
 					}
 					else{
-						swal("Senha antiga incorreta.");
-					}
-					
-				});
+						$rootScope.popUpNotificacao("Senha antiga incorreta.","danger");	
+					}	
+				});	
 			}
 			else{
-				swal("Você deve digitar sua senha antiga.");
+				$rootScope.popUpNotificacao("Você deve digitar a senha antiga.","danger");	
 			}
 		}
-		
+		else{
+			enviaAlteracoesBanco();
+		}
+	}
+	
+	var enviaAlteracoesBanco = function(){
 		$scope.senhaUsuarioNew = null;
 		$scope.senhaUsuarioOld = null;
 		var parameter = JSON.stringify({
@@ -152,8 +162,8 @@ angular.module("app").controller('UsuarioCtrl', function($scope, $http, $cookieS
 						$state.go("perfil", { "idUsuario": $cookieStore.get("session_user_id")});
 					}	
 		});
-	};
-	
+	}	
+
 	// função que inicia a tela
 	$scope.iniciaTela = function() {
 		console.log("Iniciando a tela");
