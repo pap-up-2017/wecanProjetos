@@ -95,41 +95,53 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
     
 	// envia a informação de um novo cadastro de para o banco ... Via rest
 	$scope.SalvarCadastro = function(projeto) {
-		
-		if(projeto.nome != null){
-			if(projeto.descricao != null){
-				if(projeto.dataEntrega != null){
-					if(projeto.vagas != null){
-						if($scope.competenciasDoProjeto.length > 0){
-							var parameter = JSON.stringify({
-								type : "projeto",
-								nome : projeto.nome,
-								descricao : projeto.descricao,
-								organizador : projeto.organizador,
-								vagas : projeto.vagas,
-								dataEntrega : projeto.dataEntrega,
-								competencias : $scope.competenciasDoProjeto,
-								usuarios : $scope.usuariosDoProjeto,
-								organizador : {idUsuario : $scope.UsuarioLogado}
-							});
-
-							var config = { headers : {	'Content-Type' : 'application/json;charset=utf-8;'}}
-
-							$http.post(
-									'http://localhost:8080/ProjetoPAP/rest/projetorest/postcad',
-									parameter, config).success(
-									function(data, status, headers, config) {
-										$state.go("pageMeusProjetos");
-									}).error(
-									function(data, status, header, config) {
-										swal("Não foi possivel criar o projeto, tente novamente.");
-									});
+		console.log(projeto);
+		if (typeof projeto != 'undefined'){
+			if(projeto.nome != null){
+				if(projeto.descricao != null){
+					if(projeto.dataEntrega != null){
+						if(projeto.vagas != null){
+							if($scope.competenciasDoProjeto.length > 0){
+								var parameter = JSON.stringify({
+									type : "projeto",
+									nome : projeto.nome,
+									descricao : projeto.descricao,
+									organizador : projeto.organizador,
+									vagas : projeto.vagas,
+									dataEntrega : projeto.dataEntrega,
+									competencias : $scope.competenciasDoProjeto,
+									usuarios : $scope.usuariosDoProjeto,
+									organizador : {idUsuario : $scope.UsuarioLogado}
+								});
+	
+								var config = { headers : {	'Content-Type' : 'application/json;charset=utf-8;'}}
+	
+								$http.post(
+										'http://localhost:8080/ProjetoPAP/rest/projetorest/postcad',
+										parameter, config).success(
+										function(data, status, headers, config) {
+											$state.go("pageMeusProjetos");
+										}).error(
+										function(data, status, header, config) {
+											swal("Não foi possivel criar o projeto, tente novamente.");
+										});
+							}else{
+								swal("você deve inserir ao menos uma competencia em seu projeto.");
+							}
 						}else{
-							swal("você deve inserir ao menos uma competencia em seu projeto.");
+							swal("Preencha as quantidade de vagas do projeto.")
 						}
+					}else{
+						swal("Preencha a data de entrega do projeto.")
 					}
+				}else{
+					swal("Preencha a descrição do projeto.")
 				}
+			}else{
+				swal("Preencha o nome do projeto.");
 			}
+		}else{
+			swal("Preencha os dados do projeto.");
 		}
 	};
 	
