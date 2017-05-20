@@ -2,20 +2,6 @@ angular.module('app', ['ngCookies'
                       ,'ui.router'])
                       .config(route).run(autentication).run(config);
 
-function config($rootScope){
-	$rootScope.pattern_url = 'http://localhost:8080/ProjetoPAP/';
-	
-	$rootScope.popUpNotificacao = function(text, type){
-    	$.notify({
-        	icon: 'pe-7s-gift',
-        	message: text
-        },{
-            type: type,
-            timer: 4000
-        });
-	}
-}
-
 function autentication($rootScope, $state, $location, $cookieStore){
     $rootScope.$on('$stateChangeStart',
     	    function(event, toState, toParams, fromState, fromParams){
@@ -145,7 +131,11 @@ function route($stateProvider, $urlRouterProvider, $locationProvider){
 			  templateUrl: 'views/listaNotificacoes.html'
 			}
 	
-	
+	var listaAvaliacoes = {
+			  name: 'pageListaAvaliacoes',
+			  url: '/pageListaAvaliacoes',
+			  templateUrl: 'views/listaAvaliacoes.html'
+			}
 	  $urlRouterProvider.otherwise('/');
 	  
 	  $stateProvider.state(home);
@@ -168,4 +158,19 @@ function route($stateProvider, $urlRouterProvider, $locationProvider){
 	  $stateProvider.state(perfil);
 	  $stateProvider.state(altPerfil);
 	  $stateProvider.state(listaNotificacoes);
+	  $stateProvider.state(listaAvaliacoes);
+}
+
+function config($rootScope){
+	$rootScope.pattern_url = 'http://localhost:8080/ProjetoPAP/';
+	
+	$rootScope.popUpNotificacao = function(text, type){
+    	$.notify({
+        	icon: 'pe-7s-gift',
+        	message: text
+        },{
+            type: type,
+            timer: 4000
+        });
+	}
 }
