@@ -230,11 +230,11 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 		var d = new Date();
 		swal({
 			  title: tarefa.nomeTarefa,
-			  text: tarefa.descricaoTarefa+"<br/>"+
+			  text: '<p style="word-wrap: break-word;">' + tarefa.descricaoTarefa+"<br/>"+
 			  		"Criado em: "+ $filter('date')(tarefa.dataCriacao, 'dd/MM/yyyy - HH:mm:ss')+"<br/>"+
 			  		"Prazo: "+ $filter('date')(tarefa.prazoEntrega, 'dd/MM/yyyy')+"<br/>"+
 			  		"Status: "+tarefa.statusTarefa+"<br/>"+
-			  		"Responsavel pela ultima modificação: "+tarefa.usuarioModificacao.usernameUsuario
+			  		"Responsavel pela ultima modificação: "+tarefa.usuarioModificacao.usernameUsuario+ '</p>'
 				  ,
 			  html: true
 			});
