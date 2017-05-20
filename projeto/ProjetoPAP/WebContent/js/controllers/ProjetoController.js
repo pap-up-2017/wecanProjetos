@@ -561,6 +561,23 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 		}
 		return true;
 	}
+	
+	$scope.filtroBloqueioProjetoEmAndamento = function(usuariosDoProjetoo, idOrganizadorr, statuss){
+		if(statuss == "Em andamento"){
+			if(idOrganizadorr == $scope.UsuarioLogado){
+				return true;
+			}
+			for (i = 0; i < usuariosDoProjetoo.length; i++) {
+			   if(usuariosDoProjetoo[i].idUsuario == $scope.UsuarioLogado){
+				   return true;
+			   }
+			}
+			return false;
+		}
+		else{	
+			return true;
+		}
+	}
 		
 	// função para fechar o popUp de edição ... 
 	$scope.DateDbConvert = function(data){
@@ -604,7 +621,6 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 	}
 	// função que inicia a tela
 	$scope.iniciaTela = function() {
-		console.log("Iniciando a tela projetos");
 		$scope.BuscarInformacao();
 		$scope.BuscarInformacaoCompetencias();
 		$scope.BuscarInformacaoUsuarios();
@@ -615,6 +631,8 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 			$rootScope.projeto_selecionado_id = $stateParams.idProjeto;			
 		}			
 	};
+	
+	
 	$scope.iniciaTela();
 	
 });
