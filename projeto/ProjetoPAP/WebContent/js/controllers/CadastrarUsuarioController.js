@@ -1,4 +1,4 @@
-angular.module("app").controller('CadastrarUsuarioCtrl', function($scope, $http) {
+angular.module("app").controller('CadastrarUsuarioCtrl', function($scope, $http, $rootScope) {
 		
 	//Busca informações do Tipos de usuarios
 	$scope.BuscarInformacaoTipoUsuarios = function() {
@@ -107,39 +107,83 @@ angular.module("app").controller('CadastrarUsuarioCtrl', function($scope, $http)
 	
 	// envia a informação de um novo cadastro de para o banco ... Via rest
 	$scope.SalvarCadastro = function(usuario) {
-		var parameter = JSON.stringify({
-			type : "usuario",
-			nomeUsuario : usuario.nomeUsuario,
-			usernameUsuario : usuario.usernameUsuario,
-			emailUsuario : usuario.emailUsuario,
-			senhaUsuario : usuario.senhaUsuario,
-			tipoUsuario : usuario.tipoUsuario,
-			cidadeUsuario : usuario.cidadeUsuario,
-			instituicaoUsuario : usuario.instituicaoUsuario,
-			cursoUsuario : usuario.cursoUsuario
-		});
+		console.log(usuario);
+		if (typeof usuario != 'undefined'){
+			if(usuario.tipoUsuario != null){
+				if(usuario.nomeUsuario != null){
+					if(usuario.usernameUsuario != null){
+						if(usuario.emailUsuario != null){
+							if(usuario.senhaUsuario != null){
+								if(usuario.cidadeUsuario != null){
+									if(usuario.instituicaoUsuario != null){
+										if(usuario.cursoUsuario != null){
+											var parameter = JSON.stringify({
+												type : "usuario",
+												nomeUsuario : usuario.nomeUsuario,
+												usernameUsuario : usuario.usernameUsuario,
+												emailUsuario : usuario.emailUsuario,
+												senhaUsuario : usuario.senhaUsuario,
+												tipoUsuario : usuario.tipoUsuario,
+												cidadeUsuario : usuario.cidadeUsuario,
+												instituicaoUsuario : usuario.instituicaoUsuario,
+												cursoUsuario : usuario.cursoUsuario
+											});
 
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
+											var config = {
+												headers : {
+													'Content-Type' : 'application/json;charset=utf-8;'
+												}
+											}
 
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/usuariorest/postcad',
-				parameter, config).success(
-				function(data, status, headers, config) {
-					if(data=="Username duplicado"){
-						console.log(data);
-						swal("Este username já está em uso. Por favor, escolha outro.");
+											$http.post(
+													'http://localhost:8080/ProjetoPAP/rest/usuariorest/postcad',
+													parameter, config).success(
+													function(data, status, headers, config) {
+														if(data=="Username duplicado"){
+															console.log(data);
+															swal("Este username já está em uso. Por favor, escolha outro.");
+														}
+														else{
+															window.location.href = "http://localhost:8080/ProjetoPAP/home.html";
+														}	
+											});
+										}
+										else{
+											swal("Preencha o seu curso.");
+										}
+									}
+									else{
+										swal("Preencha a sua instituição de ensino.");
+									}
+								}
+								else{
+									swal("Preencha a sua cidade.");
+								}
+							}
+							else{
+								swal("Você deve digitar uma senha.");
+							}
+						}
+						else{
+							swal("Preencha o seu email.");
+						}
 					}
 					else{
-						window.location.href = "http://localhost:8080/ProjetoPAP/home.html";
+						swal("Preencha o seu username.");
 					}
-					
-				});
-	};
-	
+				}
+				else{
+					swal("Preencha o seu nome.");
+				}
+			}
+			else{
+				swal("Preencha um tipo de usuário");
+			}
+		}
+		else{
+			swal("Preencha as informações do usuario");
+		}
+	}
 
 	// função que inicia a tela
 	$scope.iniciaTela = function() {
