@@ -165,7 +165,7 @@ angular.module("app").controller('CadastrarUsuarioCtrl', function($scope, $http,
 							}
 						}
 						else{
-							swal("Preencha o seu email.");
+							swal("Preencha corretamente o seu email.");
 						}
 					}
 					else{
