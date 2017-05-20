@@ -107,10 +107,12 @@ angular.module("app").controller('CadastrarUsuarioCtrl', function($scope, $http,
 	
 	// envia a informação de um novo cadastro de para o banco ... Via rest
 	$scope.SalvarCadastro = function(usuario) {
-		console.log(usuario);
+		//console.log(usuario);
+		var valNome = /(?=^.{2,60}$)^[A-Z][a-z]+(?:[ ](?:da|das|do|dos|de|e|[A-Z][a-z]+))*$/;
+		//console.log(valNome.test(usuario.nomeUsuario));
 		if (typeof usuario != 'undefined'){
 			if(usuario.tipoUsuario != null){
-				if(usuario.nomeUsuario != null){
+				if(usuario.nomeUsuario != null && valNome.test(usuario.nomeUsuario)){
 					if(usuario.usernameUsuario != null){
 						if(usuario.emailUsuario != null){
 							if(usuario.senhaUsuario != null){
@@ -173,7 +175,7 @@ angular.module("app").controller('CadastrarUsuarioCtrl', function($scope, $http,
 					}
 				}
 				else{
-					swal("Preencha o seu nome.");
+					swal("Preencha o seu nome completo.");
 				}
 			}
 			else{
