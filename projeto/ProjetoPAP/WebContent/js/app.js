@@ -136,8 +136,14 @@ function route($stateProvider, $urlRouterProvider, $locationProvider){
 			  url: '/pageListaAvaliacoes',
 			  templateUrl: 'views/listaAvaliacoes.html'
 			}
+	
+	var listaProjetosConcluidos = {
+			name: 'pageListaProjetosConcluidos',
+			url: '/ListaProjetosConcluidos',
+			templateUrl: 'views/listaProjetosConcluidos.html'
+	}
+	
 	  $urlRouterProvider.otherwise('/');
-	  
 	  $stateProvider.state(home);
 	  $stateProvider.state(estado);
 	  $stateProvider.state(cidade);
@@ -159,6 +165,7 @@ function route($stateProvider, $urlRouterProvider, $locationProvider){
 	  $stateProvider.state(altPerfil);
 	  $stateProvider.state(listaNotificacoes);
 	  $stateProvider.state(listaAvaliacoes);
+	  $stateProvider.state(listaProjetosConcluidos);
 }
 
 function config($rootScope){

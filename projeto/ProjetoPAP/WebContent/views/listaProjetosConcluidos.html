@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="css/projeto.css">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<div ng-controller="ListarProjetosCtrl">
+<div class="container-fluid">
+   <div class="row">
+      <div class="col-md-12">
+         <div class="card">
+            <div class="header">
+               <h4 class="label label-info">
+                  Projetos concluídos
+               </h4>
+               <br/>
+               <h4 class="text-default">
+                  Projetos concluídos
+               </h4>
+               <a class="btn btn-info btn-fill" ng-href="#/pageProjeto"><i class="fa fa-plus-circle" aria-hidden="true"></i>Novo projeto</a><br/>
+               <form>
+                  <br/>
+                  <input ng-model="search" ng-change="BuscarInformacao()" type="text" name="search" placeholder="Search..">
+               </form>
+               <br/>
+            </div>
+            <div class="content">
+               <div ng:repeat="projeto in projetos | filter: {status: 'Concluído'} | filter: search">
+                  <div class="col-md-12">
+                     <a ui-sref="pageDetalhesProjeto({idProjeto:{{projeto.idProjeto}}})">
+                        <div id="card" class="card">
+                           <h4 style="font-weight:bold" class="text-info">{{projeto.nome}}</h4>
+                           <div class="form-group">
+                              <h4 class="title">
+                                 <label class="label label-default">Vagas:</label>
+                                 <label>{{projeto.vagas}}</label>
+                                 <label class="label label-default">Integrantes:</label>
+                                 <label>{{projeto.participantes}}</label>
+                                 <label class="label label-default">Autor:</label>
+                                 <label> {{projeto.organizador.usernameUsuario}}</label>
+                                 <label class="label label-default">Curso:</label>
+                                 <label>{{projeto.organizador.cursoUsuario.nomeCurso}}</label>
+                              </h4>
+                              <p class="desc" style="word-wrap: break-word">{{projeto.descricao}}</p>
+                              <label style="color: #fff" class="label label-primary">{{projeto.status}}</label>
+                           </div>
+                        </div>
+                     </a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+</div>

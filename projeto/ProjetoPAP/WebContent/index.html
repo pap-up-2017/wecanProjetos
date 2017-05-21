@@ -91,6 +91,12 @@
                            </a>
                         </li>
                         <li>
+                           <a ng-hide="tipoUsuarioFiltro()" ui-sref="pageListaProjetosConcluidos" ui-sref-active="active">
+                           <i ng-hide="tipoUsuarioFiltro()" class="fa fa-area-chart" aria-hidden="true"></i>
+                           Projetos concluídos
+                           </a>
+                        </li>
+                        <li>
                            <a ng-show="tipoUsuarioFiltro()" ui-sref="cadastrosAdmin" ui-sref-active="active">
                            <i ng-show="tipoUsuarioFiltro()" class="fa fa-clipboard" aria-hidden="true"></i> 
                            Administrador
