@@ -46,6 +46,7 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 		$http.get('http://localhost:8080/ProjetoPAP/rest/tarefarest/proj/'+$stateParams.idProjeto)
 				.success(function(data) {
 					if(data != null){
+						$rootScope.tarefas = null;
 						var tarefasBanco = data["tarefa"];
 						var arrayBanco = [];
 						if(Array.isArray(tarefasBanco)){
@@ -58,9 +59,7 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 					}
 				}).error(
 						function(data, status, header, config) {
-							$scope.Resposta = "Data: " + data + "<hr />status: "
-									+ status + "<hr />headers: " + header
-									+ "<hr />config: " + config;
+							$rootScope.tarefas = null;
 						});
 	};
 	
@@ -216,10 +215,8 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 					$scope.Resposta = "Data: " + data + "<hr />status: "
 							+ status + "<hr />headers: " + header
 							+ "<hr />config: " + config;
-				});
-		
-		//$scope.BuscarInformacao();
-		
+				});	
+		$scope.BuscarTarefaProjeto();
 	};
 	
 	$scope.CriarTarefa = function(){
@@ -271,7 +268,6 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 	};
 	$scope.iniciaTela();
 	
-	/*
 	// Busca informações de todos as tarefas salvas no banco ... Via rest
 	$scope.BuscarInformacao = function() {
 		console.log("função BuscarInformacao..");
@@ -319,7 +315,6 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 						});
 
 	};
-	*/
 
 	
 });

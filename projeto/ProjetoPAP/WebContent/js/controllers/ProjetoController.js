@@ -7,7 +7,6 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 	$scope.BuscarInformacao = function() {
 		console.log("função BuscarInformacao dos projetos..");
 		
-
 		$http.get('http://localhost:8080/ProjetoPAP/rest/projetorest')
 				.success(function(data) {
 					$scope.projetos = data["projeto"];
@@ -91,8 +90,6 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
         	                            nomeUsuario : $scope.projeto.usuarios.nomeUsuario});
     };
 
-    
-    
 	// envia a informação de um novo cadastro de para o banco ... Via rest
 	$scope.SalvarCadastro = function(projeto) {
 		console.log(projeto);
@@ -145,7 +142,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 		}
 	};
 	
-		// inicia projeto
+	// inicia projeto
 	$scope.StatusProjeto = function(projeto){
 		if(projeto.status=="Aberto"){
 			IniciarProjeto(projeto);
@@ -201,34 +198,34 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 				function(data) {
 					swal(data);
 					$scope.iniciaTela();
-					
-					$http.get('http://localhost:8080/ProjetoPAP/rest/tarefarest/proj/'+$stateParams.idProjeto)
-					.success(function(data) {
-						if(data != null){
-							var tarefasBanco = data["tarefa"];
-							var arrayBanco = [];
-							if(Array.isArray(tarefasBanco)){
-								arrayBanco = tarefasBanco; 
-							}
-							else{
-								arrayBanco.push(tarefasBanco);
-							}
-							$rootScope.tarefas = arrayBanco;
-						}
-					}).error(
-							function(data, status, header, config) {
-								$scope.Resposta = "Data: " + data + "<hr />status: "
-										+ status + "<hr />headers: " + header
-										+ "<hr />config: " + config;
-							});
-					
-					
+					carregaTarefas(projeto.idProjeto);
 				}).error(
 				function(data, status, header, config) {
 					swal("Ops","Não foi possivel concluir o projeto, tente novamente.");
 			});
 
 
+	}
+	
+	var carregaTarefas = function(idprojeto){
+		$http.get('http://localhost:8080/ProjetoPAP/rest/tarefarest/proj/'+idprojeto)
+		.success(function(data) {
+			$rootScope.tarefas = null;
+			if(data != null){
+				var tarefasBanco = data["tarefa"];
+				var arrayBanco = [];
+				if(Array.isArray(tarefasBanco)){
+					arrayBanco = tarefasBanco; 
+				}
+				else{
+					arrayBanco.push(tarefasBanco);
+				}
+				$rootScope.tarefas = arrayBanco;
+			}
+		}).error(
+				function(data, status, header, config) {
+					$rootScope.tarefas = null;
+				});
 	}
 	
 	// Envia a informação de alteração de um elemento para o banco ... Via rest
@@ -253,7 +250,6 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 		
 		console.log(parameter);
 		
-
 		var config = {
 			headers : {
 				'Content-Type' : 'application/json;charset=utf-8;'
@@ -289,12 +285,15 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 		$http.get('http://localhost:8080/ProjetoPAP/rest/projetorest/'+$stateParams.idProjeto)
 		.success(function(data) {
 			$scope.projeto = data;
+			carregaTarefas($scope.projeto.idProjeto);
 			// Validação para seber se é organizador do projeto
 			if($scope.UsuarioLogado == $scope.projeto.organizador.idUsuario ){
 				$scope.istrueorganizador=false;
 			}else{
 				$scope.istrueorganizador=true;
 			}
+			
+			carregaTarefas($scope.projeto.idProjeto);
 			
 			//Iniciar a lista usuários do projeto com dados do banco.
 			
@@ -376,9 +375,6 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 							+ status + "<hr />headers: " + header
 							+ "<hr />config: " + config;
 				});
-		
-		
-		
 	};
 	
 	// carrega os dados do elemento selecionado para exclusão .. 
