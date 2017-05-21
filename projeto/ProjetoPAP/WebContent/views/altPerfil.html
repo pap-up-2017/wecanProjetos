@@ -17,7 +17,7 @@
                      <label>
                      Tipo usuário
                      </label>
-                     <select ng-model="usuario.tipoUsuario" ng-selectedItem="usuario.tipoUsuario" class="form-control" ng-options="tipoUsuario.tipoUsuario for tipoUsuario in tipoUsuarios">
+                     <select ng-model="usuario.tipoUsuario" ng-selectedItem="usuario.tipoUsuario" class="form-control" ng-options="tipoUsuario.tipoUsuario for tipoUsuario in tipoUsuarios | filter: { tipoUsuario : '!Administrador'}">
                         <option ng-show="!usuario.tipoUsuario" value="">{{usuario.tipoUsuario.tipoUsuario}}</option>
                      </select>
                   </div>
@@ -77,7 +77,7 @@
                      <label>
                      Instituição de ensino
                      </label>
-                     <select class="form-control" ng-model="usuario.instituicaoUsuario" ng-options="instituicaoEnsino.nomeInstituicao for instituicaoEnsino in instituicoes | filter: usuario.cidadeUsuario.nomeCidade">
+                     <select class="form-control" ng-change="BuscarInformacaoCursos()" ng-model="usuario.instituicaoUsuario" ng-options="instituicaoEnsino.nomeInstituicao for instituicaoEnsino in instituicoes | filter: usuario.cidadeUsuario.nomeCidade">
                         <option ng-show="!usuario.instituicaoUsuario" value="">{{usuario.instituicaoUsuario.nomeInstituicao}}</option>
                      </select>
                   </div>
