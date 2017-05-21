@@ -9,7 +9,8 @@
             <div class="col-md-12">
                <div class="card">
                   <h2 id="h4" class="text-info">
-                     {{projeto.nome}}
+                     {{projeto.nome}}<br/>
+                     <small style="color: #383838 !important">Entrega: {{ projeto.dataEntrega | date: 'dd/MM/yyyy'}}</small>
                   </h2>
                   <button class="btn btn-info btn-fill pull-right" ng-show="projeto.organizador.idUsuario == UsuarioLogado" ng-click="StatusProjeto(projeto)">{{modificarStatusProjeto(projeto)}}</button>
                   <button class="btn btn-info btn-fill pull-right" ng-show="filtroTela(projeto.organizador.idUsuario, usuariosDoProjeto, aprovacaoUsuarios)" ng-click="SolicitaParticipacao(projeto)">Participar do projeto</button>
@@ -62,7 +63,7 @@
                                  <a style="color: #fff !important" class="text-info">{{ aprovacaoUsuario.status }}</a>
                               </div>
                               <div class="padding col-md-4">
-                                 <a style="color: #fff !important" class="text-info">{{ aprovacaoUsuario.dataCriacao }}</a>
+                                 <a style="color: #fff !important" class="text-info">{{ aprovacaoUsuario.dataCriacao | date: 'dd/MM/yyyy - HH:mm'}}</a>
                               </div>
                               <div class="padding col-md-2">
                                  <button ng-show="projeto.organizador.idUsuario == UsuarioLogado" class="btn btn-primary btn-sm btn-fill botao avaliado-{{ aprovacaoUsuario.status == 'Aguardando Aprovação' ? 'true' : 'false' }} " ng-click="AceitarParticipante(aprovacaoUsuario) ">
@@ -305,7 +306,7 @@
                <div class="card">
                   <h2 class="text-info">Tarefas concluídas</h2>
                   <hr/>
-                  <div class="success col-md-6" ng-repeat="tarefa in tarefas">
+                  <div style="border:2px solid white" class="success col-md-6" ng-repeat="tarefa in tarefas">
                      <h4 class="text-success" style="text-transform: uppercase">{{tarefa.nomeTarefa}}<br/>
                         <small style="word-wrap: break-word; text-transform: capitalize">{{tarefa.descricaoTarefa}}</small>
                      </h4>
