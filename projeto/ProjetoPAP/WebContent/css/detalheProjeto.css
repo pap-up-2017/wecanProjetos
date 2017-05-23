@@ -123,7 +123,10 @@
 }
 .success
 {
-	background-color: #253238;
 	border-radius: 4px;
 	padding: 10px;
+	border-top: 3px solid #253238;
+	border-bottom: 3px solid #253238;
+	border-right: 3px solid #fff;
+	border-left: 3px solid #fff;
 }
