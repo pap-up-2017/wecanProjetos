@@ -1854,11 +1854,8 @@ body > .navbar-collapse[data-color="purple"]:after {
   overflow: hidden;
   border-radius: 4px 4px 0 0;
   position: relative;
-  -webkit-transform-style: preserve-3d;
-  -moz-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  background-image: url('http://i67.tinypic.com/141jc75.png');
-  background-repeat: no-repeat;
+  background-image: url('http://facecoverz.com/static/img/uploads/o_facecoverz.com-1397038898171.jpg');
+  background-position: center;
 }
 .card .filter {
   position: absolute;
@@ -1925,6 +1922,7 @@ body > .navbar-collapse[data-color="purple"]:after {
   border-radius: 8px;
   margin-right: 5px;
   margin-top: 30px;
+  z-index: 5;
 }
 .card .description {
   font-size: 14px;
@@ -1990,7 +1988,7 @@ body > .navbar-collapse[data-color="purple"]:after {
 }
 
 .card-user .image {
-  height: 50px;
+  height: 80px;
 }
 .card-user .image-plain {
   height: 0;

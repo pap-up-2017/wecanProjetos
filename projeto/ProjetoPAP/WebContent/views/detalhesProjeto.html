@@ -15,14 +15,14 @@
                   <button class="btn btn-info btn-fill pull-right" ng-show="projeto.organizador.idUsuario == UsuarioLogado" ng-click="StatusProjeto(projeto)">{{modificarStatusProjeto(projeto)}}</button>
                   <button class="btn btn-info btn-fill pull-right" ng-show="filtroTela(projeto.organizador.idUsuario, usuariosDoProjeto, aprovacaoUsuarios)" ng-click="SolicitaParticipacao(projeto)">Participar do projeto</button>
                   <div class="col-md-12">
-                     <h6 class="text-primary">Descrição do projeto</h6>
-                     <p class="p text-default" style="word-wrap: break-word;">
+                     <label class="label label-primary">Descrição do projeto</label>
+                     <p style="font-size: 15px" class="description" style="font-size: 15px; word-wrap: break-word;">
                         {{projeto.descricao}}
                      </p>
                   </div>
                   <div class="col-md-6">
                      <div class="sombra card">
-                        <h6 class="text-primary">Competências</h6>
+                        <h6 style="color: #253238 !important" class="text-primary">Competências</h6>
                         <div id="card-content" class="card-content">
                            <div class="padding col-md-12" ng-repeat="competenciaDoProjeto in competenciasDoProjeto">
                               <label style="font-size:15px; text-transform: capitalize !important;" class="label label-primary">
@@ -34,7 +34,7 @@
                   </div>
                   <div class="col-md-6">
                      <div class="sombra card">
-                        <h6 class="text-primary">Integrantes</h6>
+                        <h6 style="color: #253238 !important" class="text-primary">Integrantes</h6>
                         <div id="card-content"  class="card-content">
                            <div class="padding col-md-12">
                               <a style="font-size:15px;" class="label label-primary" ui-sref="perfil({idUsuario: projeto.organizador.idUsuario })" ui-sref-active="active">
@@ -51,10 +51,10 @@
                   </div>
                   <div id ="candidatos" class="col-md-12" ng-show="projeto.status == 'Aberto'">
                      <div class="sombra card">
-                        <h6 class="text-primary">Candidatos</h6>
-                        <div class="card-content">
-                           <div style="border-radius: 8px; background:#1d62f1 " class="col-md-12" ng-repeat="aprovacaoUsuario in aprovacaoUsuarios">
-                              <div class="padding col-md-2">
+                        <h6 style="color: #253238 !important" class="text-primary">Candidatos</h6>
+                        <div id="card-content" class="card-content">
+                           <div class="padding col-md-12" ng-repeat="aprovacaoUsuario in aprovacaoUsuarios">
+                              <div class="col-md-2">
                                  <a style="color: #fff !important; text-decoration: underline" class="text-primary" ui-sref="perfil({idUsuario: {{aprovacaoUsuario.idUsuario}} })" ui-sref-active="active">
                                  <i class="fa fa-user" aria-hidden="true"></i> {{ aprovacaoUsuario.nomeUsuario }}
                                  </a>
@@ -191,7 +191,7 @@
                      </div>
                      <div class="col-md-4">
                         <div class="card">
-                           <div class="card-header" data-background-color="green">
+                           <div class="card-header" data-background-color="blue">
                               <h5 class="title">
                                  Concluído
                               </h5>

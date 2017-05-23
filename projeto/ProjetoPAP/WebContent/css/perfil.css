@@ -57,3 +57,31 @@
   color: rgba(0,0,0, 0.87);
   background: #fff;
 }
+.container-fluid .image-filter:after {
+  background: rgba(37, 50, 56, 0.84);
+  background: linear-gradient(45deg, rgba(37, 50, 56, 0.88) 0%, rgba(37, 50, 56, 0.45) 100%);
+  background: -moz-linear-gradient(45deg, rgba(37, 50, 56, 0.88) 0%, rgba(37, 50, 56, 0.45) 100%);
+  background: -webkit-linear-gradient(45deg, rgba(37, 50, 56, 0.88) 0%, rgba(37, 50, 56, 0.45) 100%);
+}
+.image-filter {
+  position: relative;
+}
+.image-filter:after {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: block;
+  left: 0;
+  top: 0;
+  content: "";
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.image-filter {
+  z-index: 2;
+  position: relative;
+}
+.hab
+{
+	border-top: 10px solid rgba(37, 50, 56, 1);
+}
