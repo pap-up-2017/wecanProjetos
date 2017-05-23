@@ -251,22 +251,22 @@
          <div class="card">
             <h2 id="h4" class="text-info">
                {{projeto.nome}}<br/>
-               <small style="color: #383838 !important; font-size: 15px;">
-               Projeto iniciado por: <a class="category" style="text-decoration: underline" ui-sref="perfil({idUsuario: projeto.organizador.idUsuario })" ui-sref-active="active">
+               <small class="text-primary" style="font-size: 15px;">
+               Projeto iniciado por: <a class="description" style="text-decoration: underline" ui-sref="perfil({idUsuario: projeto.organizador.idUsuario })" ui-sref-active="active">
                {{projeto.organizador.nomeUsuario}}
                </a>
                </small>
             </h2>
             <div class="col-md-12">
-               <h6 class="text-primary">Descrição do projeto</h6>
-               <p class="p text-default" style="word-wrap: break-word;">
+               <label class="label label-primary">Descrição do projeto</label>
+               <p class="description" style="word-wrap: break-word;">
                   {{projeto.descricao}}
                </p>
             </div>
-            <div class="col-md-3"><label class="text-primary">Criado em: </label><label>{{ projeto.dataCriacao | date: 'dd/MM/yyyy'}}</label></div>
-            <div class="col-md-3"><label class="text-primary">Entrega em: </label><label>{{ projeto.dataEntrega | date: 'dd/MM/yyyy'}}</label></div>
-            <div class="col-md-3"><label class="text-primary">Status: </label><label>{{projeto.status}}</label></div>
-            <div class="col-md-3"><label class="text-primary">Participantes: </label><label>{{projeto.participantes}}</label></div>
+            <div class="col-md-3"><label class="text-primary">Criado em: </label><label class="description">{{ projeto.dataCriacao | date: 'dd/MM/yyyy'}}</label></div>
+            <div class="col-md-3"><label class="text-primary">Entrega em: </label><label class="description">{{ projeto.dataEntrega | date: 'dd/MM/yyyy'}}</label></div>
+            <div class="col-md-3"><label class="text-primary">Status: </label><label class="description">{{projeto.status}}</label></div>
+            <div class="col-md-3"><label class="text-primary">Participantes: </label><label class="description">{{projeto.participantes}}</label></div>
             <div class="col-md-6">
                <div class="sombra card">
                   <h6 class="text-primary">Competências</h6>
@@ -283,12 +283,12 @@
                <div class="sombra card">
                   <h6 class="text-primary">Integrantes</h6>
                   <div id="card-content"  class="card-content">
-                     <div style="margin-bottom: 15px;" class="col-md-12">
+                     <div class="padding col-md-12">
                         <a style="font-size:15px;" class="label label-primary" ui-sref="perfil({idUsuario: projeto.organizador.idUsuario} )" ui-sref-active="active">
                         <i class="fa fa-user" aria-hidden="true"></i> {{projeto.organizador.nomeUsuario}}
                         </a>
                      </div>
-                     <div ng-repeat="usuarioDoProjeto in usuariosDoProjeto" style="margin-bottom: 15px;" class="col-md-12">
+                     <div ng-repeat="usuarioDoProjeto in usuariosDoProjeto" class="padding col-md-12">
                         <a style="font-size:15px;" class="label label-primary" ui-sref="perfil({idUsuario: {{usuarioDoProjeto.idUsuario}} })" ui-sref-active="active">
                         <i class="fa fa-user" aria-hidden="true"></i> {{usuarioDoProjeto.nomeUsuario}}
                         </a>
@@ -298,7 +298,7 @@
             </div>
             <hr/>
             <div class="col-md-12" ng-controller="PageTarefaCtrl">
-               <div class="card">
+               <div "class="card">
                   <h2 class="text-info">Tarefas concluídas</h2>
                   <hr/>
                   <div class="success col-md-6" ng-repeat="tarefa in tarefas">
