@@ -36,7 +36,7 @@
                      <div class="sombra card">
                         <h6 class="text-primary">Integrantes</h6>
                         <div id="card-content"  class="card-content">
-                           <div style="margin-bottom: 15px;" class="col-md-12">
+                           <div class="padding col-md-12">
                               <a style="font-size:15px;" class="label label-primary" ui-sref="perfil({idUsuario: projeto.organizador.idUsuario })" ui-sref-active="active">
                               <i class="fa fa-user" aria-hidden="true"></i> {{projeto.organizador.nomeUsuario}}
                               </a>
@@ -125,7 +125,7 @@
                         </div>
                      </div>
                   </div>
-                  <div class="col-md-12" ondrop="angular.element(this).scope().drop(event)" ondragover="angular.element(this).scope().allowDrop(event)">
+                  <div class="row" ondrop="angular.element(this).scope().drop(event)" ondragover="angular.element(this).scope().allowDrop(event)">
                      <div class="col-md-4">
                         <div class="card">
                            <div class="card-header" data-background-color="red">
