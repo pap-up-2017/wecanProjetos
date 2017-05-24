@@ -2,7 +2,7 @@ angular.module("app").controller('CadastrarUsuarioCtrl', function($scope, $http,
 		
 	//Busca informações do Tipos de usuarios
 	$scope.BuscarInformacaoTipoUsuarios = function() {
-		$http.get('http://localhost:8080/ProjetoPAP/rest/tipousuariorest')
+		$http.get($rootScope.pattern_url+'rest/tipousuariorest')
 				.success(function(data) {
 					var tipousuariosBanco = data["tipoUsuario"];
 					var arrayBanco = [];
@@ -23,7 +23,7 @@ angular.module("app").controller('CadastrarUsuarioCtrl', function($scope, $http,
 	
 	//Busca informações do estados
 	$scope.BuscarInformacaoEstados = function() {
-		$http.get('http://localhost:8080/ProjetoPAP/rest/estadorest')
+		$http.get($rootScope.pattern_url+'rest/estadorest')
 				.success(function(data) {
 					var estadosBanco = data["estado"];
 					var arrayBanco = [];
@@ -44,7 +44,7 @@ angular.module("app").controller('CadastrarUsuarioCtrl', function($scope, $http,
 	
 	//Busca informações de cidades
 	$scope.BuscarInformacaoCidades = function() {
-		$http.get('http://localhost:8080/ProjetoPAP/rest/cidaderest')
+		$http.get($rootScope.pattern_url+'rest/cidaderest')
 				.success(function(data) {
 					var cidadesBanco = data["cidade"];
 					var arrayBanco = [];
@@ -65,7 +65,7 @@ angular.module("app").controller('CadastrarUsuarioCtrl', function($scope, $http,
 	
 	//Busca informações de instituicoes de Ensino
 	$scope.BuscarInformacaoInstituicoes = function() {
-		$http.get('http://localhost:8080/ProjetoPAP/rest/instituicaorest')
+		$http.get($rootScope.pattern_url+'rest/instituicaorest')
 				.success(function(data) {
 					var instituicoesBanco = data["instituicaoEnsino"];
 					var arrayBanco = [];
@@ -86,7 +86,7 @@ angular.module("app").controller('CadastrarUsuarioCtrl', function($scope, $http,
 	
 	//Busca informações de cursos
 	$scope.BuscarInformacaoCursos = function() {
-		$http.get('http://localhost:8080/ProjetoPAP/rest/cursorest')
+		$http.get($rootScope.pattern_url+'rest/cursorest')
 				.success(function(data) {
 					var cursosBanco = data["curso"];
 					var arrayBanco = [];
@@ -137,8 +137,7 @@ angular.module("app").controller('CadastrarUsuarioCtrl', function($scope, $http,
 												}
 											}
 
-											$http.post(
-													'http://localhost:8080/ProjetoPAP/rest/usuariorest/postcad',
+											$http.post($rootScope.pattern_url+'rest/usuariorest/postcad',
 													parameter, config).success(
 													function(data, status, headers, config) {
 														if(data=="Username duplicado"){
@@ -146,7 +145,7 @@ angular.module("app").controller('CadastrarUsuarioCtrl', function($scope, $http,
 															swal("Este username já está em uso. Por favor, escolha outro.");
 														}
 														else{
-															window.location.href = "http://localhost:8080/ProjetoPAP/home.html";
+															window.location.href = $rootScope.pattern_url+"home.html";
 														}	
 											});
 										}

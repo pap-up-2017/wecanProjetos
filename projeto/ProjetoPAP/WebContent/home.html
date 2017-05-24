@@ -44,8 +44,8 @@
                         <i class="material-icons">account_box</i> Login
                         </a>
                      </li>
-                     <li class="active">
-                        <a href="http://localhost:8080/ProjetoPAP/register.html">
+                     <li class="active" ng-controller="HomePageCtrl">
+                        <a ng-click="carregarPaginaRegister()" href="">
                         <i class="material-icons">person_add</i> Cadastre-se
                         </a>
                      </li>
@@ -198,6 +198,7 @@
       <!-- javaScript controllers Angular -->
       <script type="text/javascript" src="js/app.js"></script>
       <script src="js/controllers/loginController.js"></script>
+      <script src="js/controllers/homepageController.js"></script>
       <!-- Sweet Alert -->
       <script src="js/sweetalert.min.js"></script>
       <script type="text/javascript">

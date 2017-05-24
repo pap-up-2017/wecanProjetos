@@ -1,4 +1,4 @@
-angular.module("app").controller('loginCtrl', function($scope, $http, $cookies, $cookieStore, $rootScope) {
+angular.module("app").controller('loginCtrl', function($scope, $http, $cookieStore, $rootScope) {
 	
 	// envia informação para validar Login ... 
 	$scope.ValidarLogin = function() {
@@ -10,7 +10,7 @@ angular.module("app").controller('loginCtrl', function($scope, $http, $cookies, 
 	
 	postDestroySession = function(){
 		
-		$http.post('http://localhost:8080/ProjetoPAP/rest/loginrest/logout/'+$cookieStore.get("session_id"))
+		$http.post($rootScope.pattern_url+'rest/loginrest/logout/'+$cookieStore.get("session_id"))
 		.success(function(data){
 			console.log(data);
 			$cookieStore.remove("session_id");
@@ -19,7 +19,7 @@ angular.module("app").controller('loginCtrl', function($scope, $http, $cookies, 
 			$cookieStore.remove("session_token_val");
 			$cookieStore.remove("session_tipo_usuario");
 			$cookieStore.remove("session_username");
-			window.location.href = "http://localhost:8080/ProjetoPAP/home.html";
+			window.location.href = $rootScope.pattern_url+"home.html";
 		});
 	}
 	
@@ -35,15 +35,13 @@ angular.module("app").controller('loginCtrl', function($scope, $http, $cookies, 
 				'Content-Type' : 'application/json;charset=utf-8;'
 			}
 		}
-		$http.post(
-				$rootScope.pattern_url+'rest/loginrest/login',
+		$http.post($rootScope.pattern_url+'rest/loginrest/login',
 				parameter, config).success(
 				function(data, status, headers, config) {
 					if(loginfactory(data)){
-						window.location.href = "http://localhost:8080/ProjetoPAP/index.html";
+						window.location.href = $rootScope.pattern_url+"index.html";
 					}
 					else{
-						console.log("login incorreto");
 						swal("Login incorreto.");
 					}
 				}).error(

@@ -32,8 +32,8 @@
             </div>
             <div class="collapse navbar-collapse" id="navigation-index">
                <ul class="nav navbar-nav navbar-right">
-                  <li class="active">
-                     <a href="http://localhost:8080/ProjetoPAP/home.html">
+                  <li ng-controller="HomePageCtrl"class="active">
+                     <a ng-click="carregarPaginaHome()" href="">
                      <i class="material-icons">home</i> Home
                      </a>
                   </li>
@@ -157,6 +157,7 @@
       <!-- javaScript controllers Angular -->
       <script type="text/javascript" src="js/app.js"></script>
       <script type="text/javascript" src="js/controllers/CadastrarUsuarioController.js"></script>
+      <script src="js/controllers/homepageController.js"></script>
       <script type="text/javascript">
          $().ready(function(){
          	// the body of this function is in assets/material-kit.js
