@@ -131,14 +131,8 @@ angular.module("app").controller('CadastrarUsuarioCtrl', function($scope, $http,
 												cursoUsuario : usuario.cursoUsuario
 											});
 
-											var config = {
-												headers : {
-													'Content-Type' : 'application/json;charset=utf-8;'
-												}
-											}
-
 											$http.post($rootScope.pattern_url+'rest/usuariorest/postcad',
-													parameter, config).success(
+													parameter, $rootScope.GetPostconfig).success(
 													function(data, status, headers, config) {
 														if(data=="Username duplicado"){
 															console.log(data);
@@ -190,9 +184,6 @@ angular.module("app").controller('CadastrarUsuarioCtrl', function($scope, $http,
 	$scope.iniciaTela = function() {
 		$scope.BuscarInformacaoTipoUsuarios();
 		$scope.BuscarInformacaoEstados();
-		$scope.BuscarInformacaoCidades();
-		$scope.BuscarInformacaoInstituicoes();
-		$scope.BuscarInformacaoCursos();
 	};
 	$scope.iniciaTela();
 });
