@@ -1,11 +1,9 @@
-angular.module("app").controller('PageEstadoCtrl', function($scope, 
-		$http) {
+angular.module("app").controller('PageEstadoCtrl', function($scope,$http, $rootScope) {
 	
 	// Busca informações de todos os estados salvos no banco ... Via rest
 	$scope.BuscarInformacao = function() {
-		console.log("função BuscarInformacao();");
 
-		$http.get('http://localhost:8080/ProjetoPAP/rest/estadorest')
+		$http.get($rootScope.pattern_url+'rest/estadorest')
 				.success(function(data) {
 					var estadosBanco = data["estado"];
 					var arrayBanco = [];
@@ -27,7 +25,6 @@ angular.module("app").controller('PageEstadoCtrl', function($scope,
 	
 	// envia a informação de um novo cadastro de para o banco ... Via rest
 	$scope.SalvarCadastro = function() {
-		console.log("Salvar um novo cadastro ...")
 
 		var parameter = JSON.stringify({
 			type : "estado",
@@ -35,19 +32,11 @@ angular.module("app").controller('PageEstadoCtrl', function($scope,
 			siglaEstado : $scope.siglaEstado
 		});
 
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
-
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/estadorest/postcad',
-				parameter, config).success(
+		$http.post($rootScope.pattern_url+'rest/estadorest/postcad',
+				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Estado Salvo com Sucesso!';
-					
-					
+
 				}).error(
 				function(data, status, header, config) {
 					$scope.Resposta = "Data: " + data + "<hr />status: "
@@ -60,7 +49,6 @@ angular.module("app").controller('PageEstadoCtrl', function($scope,
 	
 	// Envia a informação de alteração de um elemento para o banco ... Via rest
 	$scope.SalvarAlteracao = function(editedid, editedname, editedsigla){
-		console.log("Salvar uma nova Alteração ...")
 		
 		var parameter = JSON.stringify({
 			type : "estado",
@@ -68,29 +56,17 @@ angular.module("app").controller('PageEstadoCtrl', function($scope,
 			nomeEstado : editedname,
 			siglaEstado : editedsigla
 		});
-		
-		console.log(parameter);
 
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
-
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/estadorest/postalt',
-				parameter, config).success(
+		$http.post($rootScope.pattern_url+'rest/estadorest/postalt',
+				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Estado Salvo com Sucesso!';
-					
-					
+
 				}).error(
 				function(data, status, header, config) {
 					$scope.Resposta = "Data: " + data + "<hr />status: "
 							+ status + "<hr />headers: " + header
 							+ "<hr />config: " + config;
-					
-				
 				});
 		
 		$scope.BuscarInformacao();
@@ -104,13 +80,11 @@ angular.module("app").controller('PageEstadoCtrl', function($scope,
 	    $scope.editedid = estado.idEstado;
 	    $scope.editedname = estado.nomeEstado;
 	    $scope.editedsigla = estado.siglaEstado;
-	    console.log(estado);
 	};
 	
 	// carrega os dados do elemento selecionado para exclusão .. 
 	$scope.ExcluirElemento = function(estado){
-		console.log("Excluir um elemento ...")
-
+		
 		var parameter = JSON.stringify({
 			type : "estado",
 			idEstado : estado.idEstado,
@@ -118,15 +92,8 @@ angular.module("app").controller('PageEstadoCtrl', function($scope,
 			siglaEstado : estado.siglaEstado
 		});
 
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
-
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/estadorest/postdel',
-				parameter, config).success(
+		$http.post($rootScope.pattern_url+'rest/estadorest/postdel',
+				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Estado excluido com Sucesso!';
 					
