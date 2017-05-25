@@ -1,10 +1,9 @@
-angular.module("app").controller('PageCompetenciaCtrl', function($scope, $http) {
+angular.module("app").controller('PageCompetenciaCtrl', function($scope, $http, $rootScope) {
 	
 	// Busca informações de todas as competencias salvas no banco ... Via rest
 	$scope.BuscarInformacao = function() {
-		console.log("função BuscarInformacao..");
 
-		$http.get('http://localhost:8080/ProjetoPAP/rest/competenciarest')
+		$http.get($rootScope.pattern_url+'rest/competenciarest')
 				.success(function(data) {
 					var competenciasBanco = data["competencia"];
 					var arrayBanco = [];
@@ -26,22 +25,14 @@ angular.module("app").controller('PageCompetenciaCtrl', function($scope, $http) 
 
 	// envia a informação de um novo cadastro de para o banco ... Via rest
 	$scope.SalvarCadastro = function(competencia) {
-		console.log("Salvar um novo cadastro ...")
 
 		var parameter = JSON.stringify({
 			type : "competencia",
 			nomeCompetencia : competencia.nomeCompetencia
 		});
-		
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
 
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/competenciarest/postcad',
-				parameter, config).success(
+		$http.post($rootScope.pattern_url+'rest/competenciarest/postcad',
+				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Competência salva com sucesso!';
 					
@@ -58,27 +49,15 @@ angular.module("app").controller('PageCompetenciaCtrl', function($scope, $http) 
 	
 	// Envia a informação de alteração de um elemento para o banco ... Via rest
 	$scope.SalvarAlteracao = function(editedidCompetencia, editednomeCompetencia){
-		console.log("Salvar uma nova Alteração ...")
-		console.log(editedidCompetencia)
 		
 		var parameter = JSON.stringify({
 			type : "competencia",
 			idCompetencia : editedidCompetencia,
 			nomeCompetencia : editednomeCompetencia	
 		});
-		
-		console.log(parameter);
-		
 
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
-
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/competenciarest/postalt',
-				parameter, config).success(
+		$http.post($rootScope.pattern_url+'rest/competenciarest/postalt',
+				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Competência alterada com sucesso!';
 					$scope.BuscarInformacao();
@@ -99,28 +78,19 @@ angular.module("app").controller('PageCompetenciaCtrl', function($scope, $http) 
 		$scope.istrue=true;
 	    $scope.editedidCompetencia = competencia.idCompetencia;
 	    $scope.editednomeCompetencia = competencia.nomeCompetencia;
-	    console.log(competencia);
 	};
 	
 	// carrega os dados do elemento selecionado para exclusão .. 
 	$scope.ExcluirElemento = function(competencia){
-		console.log("Excluir um elemento ...")
 
 		var parameter = JSON.stringify({
 			type : "competencia",
 			idCompetencia : competencia.idCompetencia,
 			nomeCompetencia : competencia.nomeCompetencia
 		});
-		
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
 
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/competenciarest/postdel',
-				parameter, config).success(
+		$http.post($rootScope.pattern_url+'rest/competenciarest/postdel',
+				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Competencia excluida com sucesso!';
 					
@@ -142,7 +112,6 @@ angular.module("app").controller('PageCompetenciaCtrl', function($scope, $http) 
 	  };
 	// função que inicia a tela
 		$scope.iniciaTela = function() {
-			console.log("Iniciando a tela");
 			
 			$scope.BuscarInformacao();
 		};
