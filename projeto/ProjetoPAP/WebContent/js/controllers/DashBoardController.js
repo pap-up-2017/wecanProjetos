@@ -5,11 +5,9 @@ angular.module("app").controller('DashBoardCtrl', function($scope, $http, $cooki
 
 	// Busca projetos do usuario 
 	$scope.BuscarMeusProjetos = function() {
-		console.log("função BuscarMeusProjetos..");
 
 		$http.get($rootScope.pattern_url+'rest/projetorest/buscaPorUsuario/'+$scope.idUsuarioLogado)
 				.success(function(data) {
-					//console.log(data["projeto"]);
 					var projetosBanco = data["projeto"];
 					var arrayBanco = [];
 					if(Array.isArray(projetosBanco)){
