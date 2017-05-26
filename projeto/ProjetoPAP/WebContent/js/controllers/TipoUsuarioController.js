@@ -1,11 +1,9 @@
-angular.module("app").controller('PageTipoUsuarioCtrl', function($scope, 
-		$http) {
+angular.module("app").controller('PageTipoUsuarioCtrl', function($scope, $http, $rootScope) {
 	
 	// Busca informações no banco .. via rest
 	$scope.BuscarInformacao = function() {
-		console.log("função BuscarInformacao();");
 
-		$http.get('http://localhost:8080/ProjetoPAP/rest/tipousuariorest')
+		$http.get($rootScope.pattern_url+'rest/tipousuariorest')
 				.success(function(data) {
 					var tipousuariosBanco = data["tipoUsuario"];
 					var arrayBanco = [];
@@ -27,22 +25,14 @@ angular.module("app").controller('PageTipoUsuarioCtrl', function($scope,
 	
 	// envia a informação de um novo cadastro no banco ... Via rest
 	$scope.SalvarCadastro = function(tipoUsuario) {
-		console.log("Salvar um novo cadastro ...")
 
 		var parameter = JSON.stringify({
 			type : "tipoUsuario",
 			tipoUsuario : tipoUsuario.tipoUsuario
 		});
 
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
-
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/tipousuariorest/postcad',
-				parameter, config).success(
+		$http.post($rootScope.pattern_url+'rest/tipousuariorest/postcad',
+				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Tipo de Usuario Salvo com Sucesso!';
 					
@@ -59,25 +49,15 @@ angular.module("app").controller('PageTipoUsuarioCtrl', function($scope,
 	
 	// Envia a informação de alteração de um elemento para o banco ... Via rest
 	$scope.SalvarAlteracao = function(editedidTipoUsuario, editedTipoUsuario){
-		console.log("Salvar uma nova Alteração ...")
 		
 		var parameter = JSON.stringify({
 			type : "tipoUsuario",
 			idTipoUsuario : editedidTipoUsuario,
 			tipoUsuario : editedTipoUsuario,
 		});
-		
-		console.log(parameter);
 
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
-
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/tipousuariorest/postalt',
-				parameter, config).success(
+		$http.post($rootScope.pattern_url+'rest/tipousuariorest/postalt',
+				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'TipoUsuario salvo com Sucesso!';
 					
@@ -101,12 +81,10 @@ angular.module("app").controller('PageTipoUsuarioCtrl', function($scope,
 	    $scope.oldValue = tipoUsuario.idTipoUsuario; // save the old id
 	    $scope.editedidTipoUsuario = tipoUsuario.idTipoUsuario;
 	    $scope.editedTipoUsuario = tipoUsuario.tipoUsuario;
-	    console.log(tipoUsuario);
 	};
 	
 	// carrega os dados do elemento selecionado para exclusão .. 
 	$scope.ExcluirElemento = function(tipoUsuario){
-		console.log("Excluir um elemento ...")
 
 		var parameter = JSON.stringify({
 			type : "tipoUsuario",
@@ -114,15 +92,8 @@ angular.module("app").controller('PageTipoUsuarioCtrl', function($scope,
 			tipoUsuario : tipoUsuario.tipoUsuario,
 		});
 
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
-
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/tipousuariorest/postdel',
-				parameter, config).success(
+		$http.post($rootScope.pattern_url+'rest/tipousuariorest/postdel',
+				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'TipoUsuario excluido com Sucesso!';
 					
