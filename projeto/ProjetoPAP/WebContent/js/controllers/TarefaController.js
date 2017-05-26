@@ -5,7 +5,6 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 	$scope.drag = function(ev) {
 		ev.dataTransfer.setData("text", ev.target.id);
 		ev.dataTransfer.setData("valida", true);
-		//console.log('Teste');
 	};
 	
 	$scope.allowDrop = function (ev) {
@@ -41,9 +40,7 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 	
 	// Busca informações de um projeto especifico ... Via rest
 	$scope.BuscarTarefaProjeto = function() {
-		console.log("função tarefas do projeto atual..");
-
-		$http.get('http://localhost:8080/ProjetoPAP/rest/tarefarest/proj/'+$stateParams.idProjeto)
+		$http.get($rootScope.pattern_url+'rest/tarefarest/proj/'+$stateParams.idProjeto)
 				.success(function(data) {
 					if(data != null){
 						$rootScope.tarefas = null;
@@ -66,7 +63,6 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 	
 	// envia a informação de um novo cadastro de para o banco ... Via rest
 	$scope.SalvarCadastro = function(tarefa) {
-		console.log("Salvar um novo cadastro ...")
 
 		var parameter = JSON.stringify({
 			type : "tarefa",
@@ -82,15 +78,8 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 		tarefa.descricaoTarefa = '';
 		tarefa.prazoEntrega = '';
 
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
-
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/tarefarest/postcad/'+$scope.UsuarioLogado,
-				parameter, config).success(
+		$http.post($rootScope.pattern_url+'rest/tarefarest/postcad/'+$scope.UsuarioLogado,
+				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Tarefa salva com sucesso!';
 					$scope.BuscarTarefaProjeto();
@@ -108,7 +97,6 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 	
 	// Envia a informação de alteração de um elemento para o banco ... Via rest
 	$scope.SalvarAlteracao = function(editedidTarefa, editednameTarefa, editedProjetoTarefa, editeddescricaoTarefa, editedprazoEntrega ){
-		console.log("Salvar uma nova Alteração ...")
 		
 		var parameter = JSON.stringify({
 			type : "tarefa",
@@ -118,18 +106,9 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 			descricaoTarefa : editeddescricaoTarefa,
 			prazoEntrega: editedprazoEntrega
 		});
-		
-		console.log(parameter);
 
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
-
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/tarefarest/postalt/'+$scope.UsuarioLogado,
-				parameter, config).success(
+		$http.post($rootScope.pattern_url+'rest/tarefarest/postalt/'+$scope.UsuarioLogado,
+				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Tarefa alterada com sucesso!';
 					$scope.BuscarTarefaProjeto();
@@ -153,7 +132,6 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 	
 	// Atualiza status da tarefa
 	$scope.AtualizaStatus = function(editedidTarefa, editedStatusTarefa ){
-		console.log("Atualiza Status ...")
 		
 		var parameter = JSON.stringify({
 			type : "tarefa",
@@ -161,15 +139,8 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 			statusTarefa : editedStatusTarefa
 		});
 
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
-
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/tarefarest/postalt/'+$scope.UsuarioLogado,
-				parameter, config).success(
+		$http.post($rootScope.pattern_url+'rest/tarefarest/postalt/'+$scope.UsuarioLogado,
+				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = data;	
 					$scope.BuscarTarefaProjeto();	
@@ -186,7 +157,6 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 	
 	// carrega os dados do elemento selecionado para exclusão .. 
 	$scope.ExcluirElemento = function(tarefa){
-		console.log("Excluir um elemento ...")
 
 		var parameter = JSON.stringify({
 			type : "tarefa",
@@ -196,16 +166,9 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 			descricaoTarefa : tarefa.descricaoTarefa,
 			prazoEntrega: tarefa.prazoEntrega
 		});
-		
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
 
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/tarefarest/postdel',
-				parameter, config).success(
+		$http.post($rootScope.pattern_url+'rest/tarefarest/postdel',
+				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Tarefa excluida com Sucesso!';
 					$scope.BuscarTarefaProjeto();
@@ -246,7 +209,6 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 	    $scope.editedProjetoTarefaOld = tarefa.projetoTarefa;
 	    $scope.editeddescricaoTarefa = tarefa.descricaoTarefa;
 	    $scope.editedprazoEntrega = new Date(tarefa.prazoEntrega);
-	    //console.log(tarefa);
 	};
 	
 	// função para fechar o popUp de edição ... 
@@ -261,7 +223,6 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 	
 	// função que inicia a tela
 	$scope.iniciaTela = function() {
-		console.log("Iniciando a tela de tarefas");
 		
 		$scope.BuscarTarefaProjeto();
 		//$scope.BuscarInformacaoProjetos();
@@ -270,9 +231,8 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 	
 	// Busca informações de todos as tarefas salvas no banco ... Via rest
 	$scope.BuscarInformacao = function() {
-		console.log("função BuscarInformacao..");
 
-		$http.get('http://localhost:8080/ProjetoPAP/rest/tarefarest')
+		$http.get($rootScope.pattern_url+'rest/tarefarest')
 				.success(function(data) {
 					var tarefasBanco = data["tarefa"];
 					var arrayBanco = [];
@@ -294,9 +254,8 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 	// Busca informações de todos os projetos salvos no banco ... Via rest
 	// para carregar o comboBox..
 	$scope.BuscarInformacaoProjetos = function() {
-		console.log("função buscar informações de projetos");
 
-		$http.get('http://localhost:8080/ProjetoPAP/rest/projetorest')
+		$http.get($rootScope.pattern_url+'rest/projetorest')
 				.success(function(data) {
 					var projetosBanco = data["projeto"];
 					var arrayBanco = [];
