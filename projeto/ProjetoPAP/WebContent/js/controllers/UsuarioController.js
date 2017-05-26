@@ -2,7 +2,7 @@ angular.module("app").controller('UsuarioCtrl', function($scope, $http, $cookieS
 		
 	//Busca Tipos usuarios
 	$scope.BuscarInformacaoTipoUsuarios = function() {
-		$http.get('http://localhost:8080/ProjetoPAP/rest/tipousuariorest')
+		$http.get($rootScope.pattern_url+'rest/tipousuariorest')
 				.success(function(data) {
 					var tipousuariosBanco = data["tipoUsuario"];
 					var arrayBanco = [];
@@ -18,7 +18,7 @@ angular.module("app").controller('UsuarioCtrl', function($scope, $http, $cookieS
 	
 	//Busca estados
 	$scope.BuscarInformacaoEstados = function() {
-		$http.get('http://localhost:8080/ProjetoPAP/rest/estadorest')
+		$http.get($rootScope.pattern_url+'rest/estadorest')
 				.success(function(data) {
 					var estadosBanco = data["estado"];
 					var arrayBanco = [];
@@ -34,7 +34,7 @@ angular.module("app").controller('UsuarioCtrl', function($scope, $http, $cookieS
 	
 	//Busca cidades
 	$scope.BuscarInformacaoCidades = function() {
-		$http.get('http://localhost:8080/ProjetoPAP/rest/cidaderest')
+		$http.get($rootScope.pattern_url+'rest/cidaderest')
 				.success(function(data) {
 					var cidadesBanco = data["cidade"];
 					var arrayBanco = [];
@@ -50,7 +50,7 @@ angular.module("app").controller('UsuarioCtrl', function($scope, $http, $cookieS
 	
 	//Busca instituições
 	$scope.BuscarInformacaoInstituicoes = function() {
-		$http.get('http://localhost:8080/ProjetoPAP/rest/instituicaorest')
+		$http.get($rootScope.pattern_url+'rest/instituicaorest')
 				.success(function(data) {
 					var instituicoesBanco = data["instituicaoEnsino"];
 					var arrayBanco = [];
@@ -66,7 +66,7 @@ angular.module("app").controller('UsuarioCtrl', function($scope, $http, $cookieS
 	
 	//Busca cursos
 	$scope.BuscarInformacaoCursos = function() {
-		$http.get('http://localhost:8080/ProjetoPAP/rest/cursorest')
+		$http.get($rootScope.pattern_url+'rest/cursorest')
 				.success(function(data) {
 					var cursosBanco = data["curso"];
 					var arrayBanco = [];
@@ -81,7 +81,7 @@ angular.module("app").controller('UsuarioCtrl', function($scope, $http, $cookieS
 	};
 	
 	$scope.carregaEdição = function(){
-		$http.post('http://localhost:8080/ProjetoPAP/rest/usuariorest/busca/'+$cookieStore.get("session_user_id"))
+		$http.post($rootScope.pattern_url+'rest/usuariorest/busca/'+$cookieStore.get("session_user_id"))
 		.success(function(data) {
 			$scope.usuario = data;	
 			$scope.estadoSelecionado = $scope.usuario.cidadeUsuario.estadoCidade;
@@ -96,19 +96,15 @@ angular.module("app").controller('UsuarioCtrl', function($scope, $http, $cookieS
 	// Envia a informação de alteração de um elemento para o banco ... Via rest
 	$scope.SalvarAlteracao = function(){
 		if($scope.trocarSenha){
-			console.log("Old "+$scope.senhaUsuarioOld);
 			if($scope.senhaUsuarioOld != null && typeof $scope.senhaUsuarioOld != 'undefined' && $scope.senhaUsuarioOld != ""){
-				$http.post( 'http://localhost:8080/ProjetoPAP/rest/usuariorest/cripSenha/'+$scope.senhaUsuarioOld)
+				$http.post($rootScope.pattern_url+'rest/usuariorest/cripSenha/'+$scope.senhaUsuarioOld)
 				.success( function(data, status, headers, config) {
-					console.log("Old crip "+ data);
 					if($scope.usuario.senhaUsuario == data ){
 						if($scope.senhaUsuarioNew != null && typeof $scope.senhaUsuarioNew != 'undefined' && $scope.senhaUsuarioNew != ""){
-							$http.post( 'http://localhost:8080/ProjetoPAP/rest/usuariorest/cripSenha/'+$scope.senhaUsuarioNew)
+							$http.post($rootScope.pattern_url+'rest/usuariorest/cripSenha/'+$scope.senhaUsuarioNew)
 							.success( function(data, status, headers, config) {
-								console.log("new crip "+ data);
 								$scope.usuario.senhaUsuario = data;
-								trocaSenha = true;
-								console.log("nova senha banco: "+ $scope.usuario.senhaUsuario); 
+								trocaSenha = true; 
 								enviaAlteracoesBanco();
 							});
 						}
@@ -146,16 +142,10 @@ angular.module("app").controller('UsuarioCtrl', function($scope, $http, $cookieS
 			cursoUsuario : $scope.usuario.cursoUsuario
 		});	
 		
-		console.log(parameter);
-		var config = {headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'}}
-
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/usuariorest/postalt',
-				parameter, config).success(
+		$http.post($rootScope.pattern_url+'rest/usuariorest/postalt',
+				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					if(data=="Username duplicado"){
-						console.log(data);
 						swal("Este username já está em uso. Por favor, escolha outro.");
 					}
 					else{
@@ -166,7 +156,6 @@ angular.module("app").controller('UsuarioCtrl', function($scope, $http, $cookieS
 
 	// função que inicia a tela
 	$scope.iniciaTela = function() {
-		console.log("Iniciando a tela");
 		$scope.BuscarInformacaoTipoUsuarios();
 		$scope.BuscarInformacaoEstados();
 		$scope.BuscarInformacaoCidades();
