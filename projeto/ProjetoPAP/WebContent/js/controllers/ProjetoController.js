@@ -1,16 +1,14 @@
-angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope, $http, $stateParams, $cookieStore, $state) {
+angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope, $http, $stateParams, $cookieStore, $state, $rootScope) {
 
 	$scope.UsuarioLogado = $cookieStore.get("session_user_id");
 	$scope.usernameUsuarioLogado = $cookieStore.get("session_username");
 	
 	// Busca informações de todos os projetos salvas no banco ... Via rest
 	$scope.BuscarInformacao = function() {
-		console.log("função BuscarInformacao dos projetos..");
 		
-		$http.get('http://localhost:8080/ProjetoPAP/rest/projetorest')
+		$http.get($rootScope.pattern_url+'rest/projetorest')
 				.success(function(data) {
 					$scope.projetos = data["projeto"];
-					//console.log($scope.projetos);
 				}).error(
 						function(data, status, header, config) {
 							$scope.Resposta = "Data: " + data + "<hr />status: "
@@ -22,9 +20,8 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 	// Busca informações de todos as competências salvas no banco ... Via rest
 	// para carregar o comboBox..
 	$scope.BuscarInformacaoCompetencias = function() {
-		console.log("função buscar informações de competências");
 
-		$http.get('http://localhost:8080/ProjetoPAP/rest/competenciarest')
+		$http.get($rootScope.pattern_url+'rest/competenciarest')
 				.success(function(data) {
 					var competenciasBanco = data["competencia"];
 					var arrayBanco = [];
@@ -51,8 +48,6 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
    $scope.adicionaCompetencia = function () {
         $scope.competenciasDoProjeto.push({ idCompetencia : $scope.projeto.competencias.idCompetencia,
         	                                nomeCompetencia : $scope.projeto.competencias.nomeCompetencia});
-        //console.log($scope.competenciasDoProjeto);
-        //console.log($scope.projeto.competencias.nomeCompetencia);
         
     };
 	
@@ -60,9 +55,8 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 	// Busca informações de todos os usuários salvas no banco ... Via rest
 	// para carregar o comboBox..
 	$scope.BuscarInformacaoUsuarios = function() {
-		console.log("função buscar informações de usuários");
 
-		$http.get('http://localhost:8080/ProjetoPAP/rest/usuariorest')
+		$http.get($rootScope.pattern_url+'rest/usuariorest')
 				.success(function(data) {
 					var usuariosBanco = data["usuario"];
 					var arrayBanco = [];
@@ -92,7 +86,6 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 
 	// envia a informação de um novo cadastro de para o banco ... Via rest
 	$scope.SalvarCadastro = function(projeto) {
-		console.log(projeto);
 		if (typeof projeto != 'undefined'){
 			if(projeto.nome != null){
 				if(projeto.descricao != null){
@@ -111,11 +104,8 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 									organizador : {idUsuario : $scope.UsuarioLogado}
 								});
 	
-								var config = { headers : {	'Content-Type' : 'application/json;charset=utf-8;'}}
-	
-								$http.post(
-										'http://localhost:8080/ProjetoPAP/rest/projetorest/postcad',
-										parameter, config).success(
+								$http.post($rootScope.pattern_url+'rest/projetorest/postcad',
+										parameter, $rootScope.GetPostconfig).success(
 										function(data, status, headers, config) {
 											$state.go("pageMeusProjetos");
 										}).error(
@@ -167,9 +157,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 				  closeOnConfirm: false
 				},
 				function(){
-					console.log("projeto iniciado");
-					$http.post(
-							'http://localhost:8080/ProjetoPAP/rest/projetorest/iniciar/'+projeto.idProjeto).success(
+					$http.post($rootScope.pattern_url+'rest/projetorest/iniciar/'+projeto.idProjeto).success(
 							function(data) {
 								swal("Muito bem",data,"success");
 								$scope.iniciaTela();
@@ -180,8 +168,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 				});
 			}
 		else{
-			$http.post(
-					'http://localhost:8080/ProjetoPAP/rest/projetorest/iniciar/'+projeto.idProjeto).success(
+			$http.post($rootScope.pattern_url+'rest/projetorest/iniciar/'+projeto.idProjeto).success(
 					function(data) {
 						swal("Muito bem",data,"success");
 						$scope.iniciaTela();
@@ -193,8 +180,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 	}
 	
 	var ConcluirProjeto = function(projeto){
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/projetorest/concluir/'+projeto.idProjeto).success(
+		$http.post($rootScope.pattern_url+'rest/projetorest/concluir/'+projeto.idProjeto).success(
 				function(data) {
 					swal(data);
 					$scope.iniciaTela();
@@ -208,7 +194,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 	}
 	
 	var carregaTarefas = function(idprojeto){
-		$http.get('http://localhost:8080/ProjetoPAP/rest/tarefarest/proj/'+idprojeto)
+		$http.get($rootScope.pattern_url+'rest/tarefarest/proj/'+idprojeto)
 		.success(function(data) {
 			$rootScope.tarefas = null;
 			if(data != null){
@@ -230,8 +216,6 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 	
 	// Envia a informação de alteração de um elemento para o banco ... Via rest
 	$scope.SalvarAlteracao = function(projeto){
-		console.log("Salvar uma nova Alteração ...")
-		console.log(projeto)
 		
 		var parameter = JSON.stringify({
 			type : "projeto",
@@ -247,18 +231,9 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 			status : projeto.status
 			
 		});
-		
-		console.log(parameter);
-		
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
 
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/projetorest/postalt',
-				parameter, config).success(
+		$http.post($rootScope.pattern_url+'rest/projetorest/postalt',
+				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Projeto alterado com sucesso!';
 					$scope.BuscarInformacao();
@@ -281,8 +256,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 	
 	// carrega os dados do elemento selecionado para edição .. 
 	$scope.CarregarEdicao = function(){
-		console.log("carregando edição");
-		$http.get('http://localhost:8080/ProjetoPAP/rest/projetorest/'+$stateParams.idProjeto)
+		$http.get($rootScope.pattern_url+'rest/projetorest/'+$stateParams.idProjeto)
 		.success(function(data) {
 			$scope.projeto = data;
 			carregaTarefas($scope.projeto.idProjeto);
@@ -335,9 +309,8 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 					}
 			   	}
 			}
-			
-	//		console.log($scope.projeto.idProjeto)
-			$http.get('http://localhost:8080/ProjetoPAP/rest/projetorest/GetAprov/'+$scope.projeto.idProjeto)
+
+			$http.get($rootScope.pattern_url+'rest/projetorest/GetAprov/'+$scope.projeto.idProjeto)
 			.success(function(data) {
 				//$scope.aprovacaoUsuarios = data["aprovacaoParticipante"];
 			    // Validação para exibir um elemento, array de elementos para não exibir
@@ -379,7 +352,6 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 	
 	// carrega os dados do elemento selecionado para exclusão .. 
 	$scope.ExcluirElemento = function(projeto){
-		console.log("Excluir um elemento ...")
 
 		var parameter = JSON.stringify({
 			type : "projeto",
@@ -389,16 +361,9 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 			dataentrega : projeto.dataentrega
 			
 		});
-		
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
 
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/projetorest/postdel',
-				parameter, config).success(
+		$http.post($rootScope.pattern_url+'rest/projetorest/postdel',
+				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Projeto excluido com sucesso!';
 
@@ -416,21 +381,11 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 	
 	// Solicita participação no projeto
 	$scope.SolicitaParticipacao = function(projeto){
-		console.log("Solicita para entrar no projetos ...")
-		console.log($scope.UsuarioLogado+'/'+$stateParams.idProjeto);
-		
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
 
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/projetorest/solAprov/'+$scope.UsuarioLogado+'/'+$stateParams.idProjeto,
-				null, config).success(
+		$http.post($rootScope.pattern_url+'rest/projetorest/solAprov/'+$scope.UsuarioLogado+'/'+$stateParams.idProjeto,
+				null, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Soliciação realizada com sucesso!';
-					console.log('antes da notificação');
 					
 					// Gera notificação de participante
 					$scope.notificacao = {
@@ -455,17 +410,9 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 	
 	// Aceitar participante no projeto
 	$scope.AceitarParticipante = function(aprovacaoUsuario){
-		console.log("Dono do projeto aceita participante ...")
-		console.log(aprovacaoUsuario.id)
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
 		
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/projetorest/Aceitar/'+aprovacaoUsuario.id,
-				null, config).success(
+		$http.post($rootScope.pattern_url+'rest/projetorest/Aceitar/'+aprovacaoUsuario.id,
+				null, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Aprovação realizada com sucesso!';
 					// Gera notificação de aprovação
@@ -489,17 +436,9 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 	
 	// Recusar participante no projeto
 	$scope.RecusarParticipante = function(aprovacaoUsuario){
-		console.log("Dono do projeto recusa participante ...")
-		//console.log(aprovacaoUsuario.id)
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
 		
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/projetorest/Recusar/'+aprovacaoUsuario.id,
-				null, config).success(
+		$http.post($rootScope.pattern_url+'rest/projetorest/Recusar/'+aprovacaoUsuario.id,
+				null, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Recusa realizada com sucesso!';
 					// Gera notificação de recusa
@@ -603,7 +542,6 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 	}
 	
 	$scope.ApagarUsuariosDoprojetoACriar = function(usuarioDoProjeto){
-		console.log($scope.usuariosDoProjeto.length);
 		for(var i=0; i<=$scope.usuariosDoProjeto.length; i++) {
 		    if($scope.usuariosDoProjeto[i].idUsuario == usuarioDoProjeto.idUsuario){
 		    	if(i == 0){
@@ -627,9 +565,5 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 			$rootScope.projeto_selecionado_id = $stateParams.idProjeto;			
 		}			
 	};
-	
-	
 	$scope.iniciaTela();
-	
 });
-
