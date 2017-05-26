@@ -1,15 +1,12 @@
-angular.module("app").controller('PageMeusProjetosCtrl', function($scope, $http, $cookieStore) {
+angular.module("app").controller('PageMeusProjetosCtrl', function($scope, $http, $cookieStore, $rootScope) {
 	
 	$scope.UsuarioLogado = $cookieStore.get("session_user_id");
 	
-	
 	// Busca informações de todos os projetos salvas no banco ... Via rest
 	$scope.BuscarMeusProjetos = function(idUsuario) {
-		console.log("função BuscarMeusProjetos..");
 
-		$http.get('http://localhost:8080/ProjetoPAP/rest/projetorest/user/'+$scope.UsuarioLogado)
+		$http.get($rootScope.pattern_url+'rest/projetorest/user/'+$scope.UsuarioLogado)
 				.success(function(data) {
-					//console.log(data["projeto"]);
 					var projetosBanco = data["projeto"];
 					var arrayBanco = [];
 					if(Array.isArray(projetosBanco)){
@@ -30,7 +27,6 @@ angular.module("app").controller('PageMeusProjetosCtrl', function($scope, $http,
 	
 	// carrega os dados do elemento selecionado para exclusão .. 
 	$scope.ExcluirElemento = function(projeto){
-		console.log("Excluir um elemento ...")
 
 		var parameter = JSON.stringify({
 			type : "projeto",
@@ -40,16 +36,9 @@ angular.module("app").controller('PageMeusProjetosCtrl', function($scope, $http,
 			dataentrega : projeto.dataentrega
 			
 		});
-		
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
 
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/projetorest/postdel',
-				parameter, config).success(
+		$http.post($rootScope.pattern_url+'rest/projetorest/postdel',
+				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Projeto excluido com sucesso!';
 					
@@ -67,7 +56,6 @@ angular.module("app").controller('PageMeusProjetosCtrl', function($scope, $http,
 	
 	// função que inicia a tela
 		$scope.iniciaTela = function() {
-			console.log("Iniciando a tela de meu projetos");
 			$scope.BuscarMeusProjetos();
 		};
 		$scope.iniciaTela();
