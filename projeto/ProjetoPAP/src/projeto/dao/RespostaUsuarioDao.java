@@ -4,7 +4,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import projeto.entity.Atividade;
+import projeto.entity.Avaliacao;
 import projeto.entity.RespostaAtividade;
 import projeto.entity.RespostaUsuario;
 

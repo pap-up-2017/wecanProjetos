@@ -11,15 +11,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 //tag para o hibernate
 @Entity
-public class Atividade {
+public class Avaliacao {
 	
 	// tag para indicar o id da classe
 	@Id
 	// geração de ids
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int idAtividade;
+	private int idAvaliacao;
 	
-	private String nomeAtividade;
+	private String nomeAvaliacao;
 	
 	@OneToOne	
 	private Usuario professor;
@@ -27,20 +27,20 @@ public class Atividade {
 	@OneToOne	
 	private Disciplina disciplina;
 
-	public int getIdAtividade() {
-		return idAtividade;
+	public int getIdAvaliacao() {
+		return idAvaliacao;
 	}
 
-	public void setIdAtividade(int idAtividade) {
-		this.idAtividade = idAtividade;
+	public void setIdAvaliacao(int idAvaliacao) {
+		this.idAvaliacao = idAvaliacao;
 	}
 
-	public String getNomeAtividade() {
-		return nomeAtividade;
+	public String getNomeAvaliacao() {
+		return nomeAvaliacao;
 	}
 
-	public void setNomeAtividade(String nomeAtividade) {
-		this.nomeAtividade = nomeAtividade;
+	public void setNomeAvaliacao(String nomeAvaliacao) {
+		this.nomeAvaliacao = nomeAvaliacao;
 	}
 
 	public Usuario getProfessor() {
@@ -58,6 +58,7 @@ public class Atividade {
 	public void setDisciplina(Disciplina disciplina) {
 		this.disciplina = disciplina;
 	}
+
 	
 
 	

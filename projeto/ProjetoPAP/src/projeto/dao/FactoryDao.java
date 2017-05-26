@@ -91,8 +91,8 @@ public class FactoryDao {
 		return new NotificacaoDao();
 	}
 
-	public static AtividadeDao createAtividadeDao() {
-		return new AtividadeDao();
+	public static AvaliacaoDao createAvaliacaoDao() {
+		return new AvaliacaoDao();
 	}
 
 	public static ExercicioDao createExercicioDao() {

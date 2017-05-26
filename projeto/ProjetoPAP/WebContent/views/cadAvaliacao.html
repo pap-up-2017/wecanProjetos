@@ -1,0 +1,66 @@
+<style type="text/css">
+   .listv{
+   margin-bottom: 30px;
+   }
+   .editpopup{
+   width: 250px;
+   height: 250px;
+   border: 1px solid black;
+   display: none;
+   position: absolute;
+   top: center;
+   left: center;
+   bottom: center;
+   right: center;
+   background-color:gray;
+   }
+   .editpopup-true{
+   display: block;
+   }
+   .editpopup-false{
+   display: none;
+   }
+</style>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<br/><br/><br/><br/>
+<div ng-controller="PageAvaliacaoCtrl"	>
+   {{ Resposta }}
+   <p class="form-group">
+      <input placeholder="Nome" class="form-control" type="text" ng-model="avaliacao.nomeAvaliacao" required />
+      <select class="form-control" ng-model="avaliacao.disciplina" ng-options="disciplina.nomeDisciplina for disciplina in disciplinas">
+      	<option value="">Selecione uma disciplina...</option>
+      </select>
+      
+       <select class="form-control" ng-model="avaliacao.professor" ng-options="usuario.usernameUsuario for usuario in usuarios">
+          <option value="">Selecione um professor...</option>
+       </select>
+      
+      </p class="form-group">
+      <button class="btn btn-success" ng-click="SalvarCadastro(avaliacao)">Cadastrar</button>
+
+	<br/><br/>
+   <button class="btn btn-primary" ng-click="BuscarInformacaoAvaliacao()">Buscar Avaliações</button>
+   <div class="editpopup editpopup-{{istrue}} ">
+      <p>edit Id:<input type="text" ng-model="editedidAvaliacao"></p>
+      <p>edit Avaliacao:<input type="text" ng-model="editednomeAvaliacao"></p>
+      <button ng-click="SalvarAlteracao(editedidAvaliacao, editednomeAvaliacao)">Salvar</button>
+      <button ng-click="FecharPopUpEdicao()">Cancelar</button>
+   </div>
+	<br/><br/>
+
+   <table class="table ">
+      <tr>
+         <td>ID</td>
+         <td>NOME</td>
+      </tr>
+      <tr ng:repeat="avaliacao in avaliacoes">
+         <td>{{avaliacao.idAvaliacao}}</td>
+         <td>{{avaliacao.nomeAvaliacao}}</td>
+         <td>{{avaliacao.disciplina.nomeDisciplina}}</td>
+         <td>{{avaliacao.professor.nomeUsuario}}</td>
+         <td><button ng-click="CarregarEdicao(avaliacao)" class="btn btn-primary">Alterar</button></td>
+         <td><button class="btn btn-primary" ng-click="ExcluirElemento(avaliacao)">Excluir</button></td>
+      </tr>
+   </table>
+</div>

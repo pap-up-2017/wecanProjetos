@@ -3,10 +3,10 @@ package projeto.test;
 import java.util.List;
 import org.junit.Test;
 
-import projeto.dao.AtividadeDao;
+import projeto.dao.AvaliacaoDao;
 import projeto.dao.FactoryDao;
 import projeto.dao.RespostaUsuarioDao;
-import projeto.entity.Atividade;
+import projeto.entity.Avaliacao;
 import projeto.entity.RespostaAtividade;
 import projeto.entity.RespostaUsuario;
 
