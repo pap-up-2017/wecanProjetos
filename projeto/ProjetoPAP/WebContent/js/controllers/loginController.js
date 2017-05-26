@@ -12,7 +12,6 @@ angular.module("app").controller('loginCtrl', function($scope, $http, $cookieSto
 		
 		$http.post($rootScope.pattern_url+'rest/loginrest/logout/'+$cookieStore.get("session_id"))
 		.success(function(data){
-			console.log(data);
 			$cookieStore.remove("session_id");
 			$cookieStore.remove("session_user_id");
 			$cookieStore.remove("session_data_val");
@@ -30,13 +29,8 @@ angular.module("app").controller('loginCtrl', function($scope, $http, $cookieSto
 			senhaUsername : $scope.senhaUsername
 		});
 
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
 		$http.post($rootScope.pattern_url+'rest/loginrest/login',
-				parameter, config).success(
+				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					if(loginfactory(data)){
 						window.location.href = $rootScope.pattern_url+"index.html";

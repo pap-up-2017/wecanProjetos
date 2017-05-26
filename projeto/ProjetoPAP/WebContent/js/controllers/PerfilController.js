@@ -4,7 +4,7 @@ angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieSt
 	
 	// Busca informação para preenchimento do perfil
 	$rootScope.BuscarPerfilUsuario = function() {
-		$http.post('http://localhost:8080/ProjetoPAP/rest/usuariorest/busca/'+$scope.UsuarioLogado)
+		$http.post($rootScope.pattern_url+'rest/usuariorest/busca/'+$scope.UsuarioLogado)
 				.success(function(data) {
 					$scope.nomeUsuario = data["nomeUsuario"];
 					$scope.usernameUsuario = data["usernameUsuario"];
@@ -17,7 +17,7 @@ angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieSt
 	
 	// Busca informação para preenchimento do perfil
 	$scope.detalharUsuario = function() {
-		$http.post('http://localhost:8080/ProjetoPAP/rest/usuariorest/busca/'+$stateParams.idUsuario)
+		$http.post($rootScope.pattern_url+'rest/usuariorest/busca/'+$stateParams.idUsuario)
 				.success(function(data) {
 					$scope.idUsuairiod = data["idUsuario"];
 					$scope.nomeUsuariod = data["nomeUsuario"];
@@ -33,7 +33,6 @@ angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieSt
 
 	// função que inicia a tela
 	$scope.iniciaTela = function() {
-		console.log("Iniciando a tela");
 		
 		if($stateParams.idUsuario != null){
 			$scope.detalharUsuario();

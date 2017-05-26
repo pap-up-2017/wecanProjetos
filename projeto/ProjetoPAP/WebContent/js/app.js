@@ -135,6 +135,11 @@ function route($stateProvider, $urlRouterProvider, $locationProvider){
 function config($rootScope){
 	$rootScope.pattern_url = 'http://localhost:8080/ProjetoPAP/';
 	
+	$rootScope.GetPostconfig = { headers : {
+				'Content-Type' : 'application/json;charset=utf-8;'
+			}
+		}
+	
 	$rootScope.popUpNotificacao = function(text, type){
     	$.notify({
         	icon: 'pe-7s-gift',

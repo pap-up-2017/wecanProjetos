@@ -5,8 +5,7 @@ angular.module("app").controller('PageNotificacaoCtrl', function($scope, $http, 
 	
 	// Busca informações salvas no banco... via rest
 	$scope.BuscarNotificacoes = function() {
-		console.log("função BuscarNotificações..");
-		$http.get('http://localhost:8080/ProjetoPAP/rest/notificacaorest/user/'+ $scope.UsuarioLogado)
+		$http.get($rootScope.pattern_url+'rest/notificacaorest/user/'+ $scope.UsuarioLogado)
 				.success(function(data) {
 					$rootScope.NotificacoesPendentes = 0;
 					if(data != null){
@@ -22,7 +21,6 @@ angular.module("app").controller('PageNotificacaoCtrl', function($scope, $http, 
 						}
 						else{
 							arrayBanco.push(notificacoesBanco);
-							console.log(arrayBanco);
 							if(arrayBanco[0].statusNotificacao != 'Lida'){
 								$rootScope.NotificacoesPendentes++;
 							}
@@ -41,7 +39,6 @@ angular.module("app").controller('PageNotificacaoCtrl', function($scope, $http, 
 	
 	// envia a informação de um novo cadastro no banco .. via rest .. 
 	$rootScope.InserirNotificacao = function(notificacao) {
-		console.log("Salvar um novo cadastro de notificacao ...")
 
 		var parameter = JSON.stringify({
 			type : "notificacao",
@@ -51,15 +48,8 @@ angular.module("app").controller('PageNotificacaoCtrl', function($scope, $http, 
 			usuario : { idUsuario: notificacao.usuario} 
 		});
 
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
-
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/notificacaorest/postcad',
-				parameter, config).success(
+		$http.post($rootScope.pattern_url+'rest/notificacaorest/postcad',
+				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Notificação salva com sucesso!';
 					
@@ -76,7 +66,6 @@ angular.module("app").controller('PageNotificacaoCtrl', function($scope, $http, 
 	
 	// Envia a informação de alteração de um elemento para o banco ... Via rest
 	$scope.SalvarAlteracao = function(editedidNotificacao, editedtituloNotificacao, editedtextoNotificacao, editedlinkAcessoNotificacao){
-		console.log("Salvar uma alteração de notificação...")
 		
 		var parameter = JSON.stringify({
 			type : "notificacao",
@@ -85,18 +74,9 @@ angular.module("app").controller('PageNotificacaoCtrl', function($scope, $http, 
 			textoNotificacao : editedtextoNotificacao,
 			linkAcessoNotificacao : editedlinkAcessoNotificacao
 		});
-		
-		//console.log(parameter);
 
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
-
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/notificacaorest/postalt',
-				parameter, config).success(
+		$http.post($rootScope.pattern_url+'rest/notificacaorest/postalt',
+				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Notificação salva com sucesso!';
 					$scope.FecharPopUpEdicao();
@@ -117,7 +97,6 @@ angular.module("app").controller('PageNotificacaoCtrl', function($scope, $http, 
 	
 	// Atualiza status da tarefa
 	$scope.AtualizaStatus = function(notificacao ){
-		console.log("Atualiza status notificação...")
 		
 		var parameter = JSON.stringify({
 			type : "tarefa",
@@ -128,18 +107,9 @@ angular.module("app").controller('PageNotificacaoCtrl', function($scope, $http, 
 			//descricaoTarefa : editeddescricaoTarefa,
 			//prazoEntrega: editedprazoEntrega
 		});
-		
-//		console.log(parameter);
 
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
-
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/notificacaorest/postalt',
-				parameter, config).success(
+		$http.post($rootScope.pattern_url+'rest/notificacaorest/postalt',
+				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					
 					$scope.BuscarNotificacoes();
@@ -159,22 +129,14 @@ angular.module("app").controller('PageNotificacaoCtrl', function($scope, $http, 
 	
 	// carrega os dados do elemento selecionado para exclusão .. 
 	$scope.ExcluirElemento = function(notificacao){
-		console.log("Excluir uma notificação ...")
 
 		var parameter = JSON.stringify({
 			type : "notificacao",
 			idNotificacao : notificacao.idNotificacao
 		});
 		
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
-
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/notificacaorest/postdel',
-				parameter, config).success(
+		$http.post($rootScope.pattern_url+'rest/notificacaorest/postdel',
+				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Notificação excluída com sucesso!';
 					
@@ -197,7 +159,6 @@ angular.module("app").controller('PageNotificacaoCtrl', function($scope, $http, 
 	    $scope.editedtituloNotificacao = notificacao.tituloNotificacao;
 	    $scope.editedtextoNotificacao = notificacao.textoNotificacao;
 	    $scope.editedlinkAcessoNotificacao = notificacao.linkAcessoNotificacao;
-	    //console.log(notificacao);
 	};
 	
 	// função para fechar o popUp de edição ... 
@@ -207,7 +168,6 @@ angular.module("app").controller('PageNotificacaoCtrl', function($scope, $http, 
 	
 	// função que inicia a tela
 	$scope.iniciaTela = function() {
-		console.log("Iniciando a tela");
 		
 		$scope.BuscarNotificacoes();
 		

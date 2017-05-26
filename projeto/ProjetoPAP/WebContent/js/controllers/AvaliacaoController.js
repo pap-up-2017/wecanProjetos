@@ -1,10 +1,10 @@
-angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http) {
+angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $rootScope) {
 	
 	// Busca informações de todas as avaliacoes salvas no banco ... Via rest
 	$scope.BuscarInformacaoAvaliacao = function() {
 		console.log("função BuscarInformacao Avaliação...");
 
-		$http.get('http://localhost:8080/ProjetoPAP/rest/avaliacaorest')
+		$http.get($rootScope.pattern_url+'rest/avaliacaorest')
 				.success(function(data) {
 					var avaliacoesBanco = data["avaliacao"];
 					var arrayBanco = [];
@@ -44,7 +44,7 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http) {
 		}
 
 		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/avaliacaorest/postcad',
+				$rootScope.pattern_url+'rest/avaliacaorest/postcad',
 				parameter, config).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Avaliacao salva com sucesso!';
@@ -79,7 +79,7 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http) {
 		}
 
 		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/avaliacaorest/postalt',
+				$rootScope.pattern_url+'rest/avaliacaorest/postalt',
 				parameter, config).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Avaliacao alterada com sucesso!';
@@ -121,7 +121,7 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http) {
 		}
 
 		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/avaliacaorest/postdel',
+				$rootScope.pattern_url+'rest/avaliacaorest/postdel',
 				parameter, config).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Avaliacao excluida com sucesso!';
@@ -142,7 +142,7 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http) {
 	$scope.BuscarInformacaoDisciplina = function() {
 		console.log("função BuscarInformacao..");
 
-		$http.get('http://localhost:8080/ProjetoPAP/rest/disciplinarest')
+		$http.get($rootScope.pattern_url+'rest/disciplinarest')
 				.success(function(data) {
 					$scope.disciplinas = data["disciplina"];
 				}).error(
@@ -158,7 +158,7 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http) {
 	$scope.BuscarInformacaoUsuarios = function() {
 		console.log("função buscar informações de usuários");
 
-		$http.get('http://localhost:8080/ProjetoPAP/rest/usuariorest')
+		$http.get($rootScope.pattern_url+'rest/usuariorest')
 				.success(function(data) {
 					var usuariosBanco = data["usuario"];
 					console.log(usuariosBanco);

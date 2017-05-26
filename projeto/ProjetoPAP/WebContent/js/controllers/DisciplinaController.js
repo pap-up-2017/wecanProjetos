@@ -1,10 +1,9 @@
-angular.module("app").controller('PageDisciplinaCtrl', function($scope, $http) {
+angular.module("app").controller('PageDisciplinaCtrl', function($scope, $http, $rootScope) {
 	
 	// Busca informações de todas as disciplinas salvas no banco ... Via rest
 	$scope.BuscarInformacao = function() {
-		console.log("função BuscarInformacao..");
 
-		$http.get('http://localhost:8080/ProjetoPAP/rest/disciplinarest')
+		$http.get($rootScope.pattern_url+'rest/disciplinarest')
 				.success(function(data) {
 					$scope.disciplinas = data["disciplina"];
 				}).error(
@@ -18,22 +17,14 @@ angular.module("app").controller('PageDisciplinaCtrl', function($scope, $http) {
 
 	// envia a informação de um novo cadastro de para o banco ... Via rest
 	$scope.SalvarCadastro = function(disciplina) {
-		console.log("Salvar um novo cadastro ...")
 
 		var parameter = JSON.stringify({
 			type : "disciplina",
 			nomeDisciplina : disciplina.nomeDisciplina
 		});
-		
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
 
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/disciplinarest/postcad',
-				parameter, config).success(
+		$http.post($rootScope.pattern_url+'rest/disciplinarest/postcad',
+				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Disciplina salva com sucesso!';
 					
@@ -50,27 +41,15 @@ angular.module("app").controller('PageDisciplinaCtrl', function($scope, $http) {
 	
 	// Envia a informação de alteração de um elemento para o banco ... Via rest
 	$scope.SalvarAlteracao = function(editedidDisciplina, editednomeDisciplina){
-		console.log("Salvar uma nova Alteração ...")
-		console.log(editedidDisciplina)
 		
 		var parameter = JSON.stringify({
 			type : "disciplina",
 			idDisciplina : editedidDisciplina,
 			nomeDisciplina : editednomeDisciplina	
 		});
-		
-		console.log(parameter);
-		
 
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
-
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/disciplinarest/postalt',
-				parameter, config).success(
+		$http.post($rootScope.pattern_url+'rest/disciplinarest/postalt',
+				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Competência alterada com sucesso!';
 					$scope.BuscarInformacao();
@@ -91,12 +70,10 @@ angular.module("app").controller('PageDisciplinaCtrl', function($scope, $http) {
 		$scope.istrue=true;
 	    $scope.editedidDisciplina = disciplina.idDisciplina;
 	    $scope.editednomeDisciplina = disciplina.nomeDisciplina;
-	    console.log(disciplina);
 	};
 	
 	// carrega os dados do elemento selecionado para exclusão .. 
 	$scope.ExcluirElemento = function(disciplina){
-		console.log("Excluir um elemento ...")
 
 		var parameter = JSON.stringify({
 			type : "disciplina",
@@ -104,15 +81,8 @@ angular.module("app").controller('PageDisciplinaCtrl', function($scope, $http) {
 			nomeDisciplina : disciplina.nomeDisciplina
 		});
 		
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
-
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/disciplinarest/postdel',
-				parameter, config).success(
+		$http.post($rootScope.pattern_url+'rest/disciplinarest/postdel',
+				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Disciplina excluida com sucesso!';
 					
@@ -134,7 +104,6 @@ angular.module("app").controller('PageDisciplinaCtrl', function($scope, $http) {
 	  };
 	// função que inicia a tela
 		$scope.iniciaTela = function() {
-			console.log("Iniciando a tela");
 			
 			$scope.BuscarInformacao();
 		};

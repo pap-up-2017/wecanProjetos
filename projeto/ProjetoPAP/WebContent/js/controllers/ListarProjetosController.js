@@ -1,11 +1,11 @@
-angular.module("app").controller('ListarProjetosCtrl', function($scope, $http, $stateParams, $cookieStore) {
+angular.module("app").controller('ListarProjetosCtrl', function($scope, $http, $stateParams, $cookieStore, $rootScope) {
 	
 	$scope.UsuarioLogado = $cookieStore.get("session_user_id");
 	
 	// Busca projetos geral
 	$scope.BuscarInformacao = function() {
 
-		$http.get('http://localhost:8080/ProjetoPAP/rest/projetorest')
+		$http.get($rootScope.pattern_url+'rest/projetorest')
 				.success(function(data) {
 					var projetosBanco = data["projeto"];
 					var arrayBanco = [];
@@ -24,7 +24,7 @@ angular.module("app").controller('ListarProjetosCtrl', function($scope, $http, $
 	
 	// Busca projetos geral
 	$scope.BuscarProjetosUsuario = function() {
-		$http.get('http://localhost:8080/ProjetoPAP/rest/projetorest/buscaPorUsuario/'+$scope.UsuarioLogado)
+		$http.get($rootScope.pattern_url+'rest/projetorest/buscaPorUsuario/'+$scope.UsuarioLogado)
 				.success(function(data) {
 					if(data != null){
 						var projetosBanco = data["projeto"];
@@ -45,7 +45,7 @@ angular.module("app").controller('ListarProjetosCtrl', function($scope, $http, $
 		
 	// Busca projetos do usuário
 	$scope.BuscarMeusProjetos = function() {
-		$http.get('http://localhost:8080/ProjetoPAP/rest/projetorest/user/'+$scope.UsuarioLogado)
+		$http.get($rootScope.pattern_url+'rest/projetorest/user/'+$scope.UsuarioLogado)
 				.success(function(data) {
 					if(data != null){
 						var projetosBanco = data["projeto"];

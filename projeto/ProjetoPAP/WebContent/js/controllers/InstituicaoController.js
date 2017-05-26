@@ -1,10 +1,9 @@
-angular.module("app").controller('PageInstituicaoCtrl', function($scope, $http) {
+angular.module("app").controller('PageInstituicaoCtrl', function($scope, $http, $rootScope) {
 	
 	// Busca informações de todos os cidades salvas no banco ... Via rest
 	$scope.BuscarInformacao = function() {
-		console.log("função BuscarInformacao..");
-
-		$http.get('http://localhost:8080/ProjetoPAP/rest/instituicaorest')
+		
+		$http.get($rootScope.pattern_url+'rest/instituicaorest')
 				.success(function(data) {
 					var instituicoesBanco = data["instituicaoEnsino"];
 					var arrayBanco = [];
@@ -26,9 +25,8 @@ angular.module("app").controller('PageInstituicaoCtrl', function($scope, $http) 
 	// Busca informações de todos os estados salvos no banco ... Via rest
 	// para carregar o comboBox..
 	$scope.BuscarInformacaoEstados = function() {
-		console.log("função buscar informações de estados");
 
-		$http.get('http://localhost:8080/ProjetoPAP/rest/estadorest')
+		$http.get($rootScope.pattern_url+'rest/estadorest')
 				.success(function(data) {
 					var estadosBanco = data["estado"];
 					var arrayBanco = [];
@@ -51,9 +49,8 @@ angular.module("app").controller('PageInstituicaoCtrl', function($scope, $http) 
 	// Busca informações de todos os cidades salvas no banco ... Via rest
 	// para carregar o comboBox..
 	$scope.BuscarInformacaoCidades = function() {
-		console.log("função BuscarInformacao cidades ...");
 
-		$http.get('http://localhost:8080/ProjetoPAP/rest/cidaderest')
+		$http.get($rootScope.pattern_url+'rest/cidaderest')
 				.success(function(data) {
 					var cidadesBanco = data["cidade"];
 					var arrayBanco = [];
@@ -70,29 +67,19 @@ angular.module("app").controller('PageInstituicaoCtrl', function($scope, $http) 
 									+ status + "<hr />headers: " + header
 									+ "<hr />config: " + config;
 						});
-
-		console.log($scope.cidades);
 	};
 	
 	// envia a informação de um novo cadastro de para o banco ... Via rest
 	$scope.SalvarCadastro = function(instituicao) {
-		console.log("Salvar um novo cadastro ...")
 
 		var parameter = JSON.stringify({
 			type : "instituicaoEnsino",
 			nomeInstituicao : instituicao.nomeInstituicao,
 			cidadeInstituicao : instituicao.cidadeInstituicao
 		});
-
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
-
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/instituicaorest/postcad',
-				parameter, config).success(
+		
+		$http.post($rootScope.pattern_url+'rest/instituicaorest/postcad',
+				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Instituicao Salva com Sucesso!';
 					
@@ -109,7 +96,7 @@ angular.module("app").controller('PageInstituicaoCtrl', function($scope, $http) 
 	
 	// Envia a informação de alteração de um elemento para o banco ... Via rest
 	$scope.SalvarAlteracao = function(editedidInstituicao, editednameInstituicao, editedCidadeInstituicao){
-		console.log("Salvar uma nova Alteração ...")
+
 		// TODO arrumar carregamento automatico do dropDownlist..
 		var parameter = JSON.stringify({
 			type : "instituicaoEnsino",
@@ -117,18 +104,9 @@ angular.module("app").controller('PageInstituicaoCtrl', function($scope, $http) 
 			nomeInstituicao : editednameInstituicao,
 			cidadeInstituicao : editedCidadeInstituicao
 		});
-		
-		console.log(parameter);
 
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
-
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/instituicaorest/postalt',
-				parameter, config).success(
+		$http.post($rootScope.pattern_url+'rest/instituicaorest/postalt',
+				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Instituicao Salva com Sucesso!';
 					
@@ -148,7 +126,6 @@ angular.module("app").controller('PageInstituicaoCtrl', function($scope, $http) 
 	
 	// carrega os dados do elemento selecionado para exclusão .. 
 	$scope.ExcluirElemento = function(instituicao){
-		console.log("Excluir um elemento ...")
 
 		var parameter = JSON.stringify({
 			type : "instituicaoEnsino",
@@ -156,16 +133,9 @@ angular.module("app").controller('PageInstituicaoCtrl', function($scope, $http) 
 			nomeInstituicao : instituicao.nomeInstituicao,
 			cidadeInstituicao : instituicao.cidadeInstituicao
 		});
-		
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
 
-		$http.post(
-				'http://localhost:8080/ProjetoPAP/rest/instituicaorest/postdel',
-				parameter, config).success(
+		$http.post($rootScope.pattern_url+'rest/instituicaorest/postdel',
+				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Instituicao excluido com Sucesso!';
 					
@@ -188,7 +158,6 @@ angular.module("app").controller('PageInstituicaoCtrl', function($scope, $http) 
 	    $scope.editedidInstituicao = instituicao.idInstituicao;
 	    $scope.editednameInstituicao = instituicao.nomeInstituicao;
 	    $scope.editedCidadeInstituicao = instituicao.cidadeInstituicao;
-	    console.log(instituicao);
 	};
 	
 	// função para fechar o popUp de edição ... 
@@ -198,7 +167,6 @@ angular.module("app").controller('PageInstituicaoCtrl', function($scope, $http) 
 	
 	// função que inicia a tela
 	$scope.iniciaTela = function() {
-		console.log("Iniciando a tela");
 		
 		$scope.BuscarInformacao();
 		$scope.BuscarInformacaoEstados();

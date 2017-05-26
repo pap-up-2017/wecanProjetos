@@ -1,7 +1,7 @@
 angular.module("app").controller('FeedCtrl', function($scope, $http, $cookieStore, $rootScope) {
 		
 	$scope.buscarFeedProjeto = function(){
-		$http.post('http://localhost:8080/ProjetoPAP/rest/feedrest/buscaFeedProjeto/'+$rootScope.projeto_selecionado_id)
+		$http.post($rootScope.pattern_url+'rest/feedrest/buscaFeedProjeto/'+$rootScope.projeto_selecionado_id)
 		.success(function(data) {
 			if(data != null){
 				$scope.feed = data;
@@ -12,7 +12,7 @@ angular.module("app").controller('FeedCtrl', function($scope, $http, $cookieStor
 	} 
 	
 	$scope.buscarRespostas = function(idFeed){
-		$http.post('http://localhost:8080/ProjetoPAP/rest/feedrest/getresposta/'+$scope.idFeed)
+		$http.post($rootScope.pattern_url+'rest/feedrest/getresposta/'+$scope.idFeed)
 		.success(function(data) {
 			if(data != null){
 				var respostaBanco = data["resposta"];
@@ -36,11 +36,8 @@ angular.module("app").controller('FeedCtrl', function($scope, $http, $cookieStor
 			feedResposta : feed
 		});
 		
-		var config = { headers : {'Content-Type' : 'application/json;charset=utf-8;'}}
-
-			$http.post(
-					'http://localhost:8080/ProjetoPAP/rest/feedrest/postcadresposta/'+$cookieStore.get("session_user_id"),
-					parameter, config).success(
+		$http.post($rootScope.pattern_url+'rest/feedrest/postcadresposta/'+$cookieStore.get("session_user_id"),
+					parameter, $rootScope.GetPostconfig).success(
 					function(data, status, headers, config) {
 						console.log("Salvo com sucesso!");		
 						$scope.buscarRespostas();
