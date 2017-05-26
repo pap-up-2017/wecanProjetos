@@ -1,8 +1,7 @@
-angular.module("app").controller('excluirUsuarioCtrl', function($scope, $http, $cookieStore) {
+angular.module("app").controller('excluirUsuarioCtrl', function($scope, $http, $cookieStore, $rootScope) {
 
 	// carrega os dados do elemento selecionado para exclusão .. 
 	$scope.ExcluirElemento = function(){
-		console.log("Excluir um elemento ...")
 		
 		swal({
 			  title: "Você tem certeza?",
@@ -14,8 +13,7 @@ angular.module("app").controller('excluirUsuarioCtrl', function($scope, $http, $
 			  closeOnConfirm: false
 			},
 			function(){
-				$http.post(
-						'http://localhost:8080/ProjetoPAP/rest/usuariorest/postdel/'+ $cookieStore.get("session_user_id"))
+				$http.post($rootScope.pattern_url+'rest/usuariorest/postdel/'+ $cookieStore.get("session_user_id"))
 						.success(function(data, status, headers, config) {
 							console.log(data);
 						}).error(
@@ -30,7 +28,7 @@ angular.module("app").controller('excluirUsuarioCtrl', function($scope, $http, $
 				$cookieStore.remove("session_data_val");
 				$cookieStore.remove("session_token_val");
 				$cookieStore.remove("session_tipo_usuario");;
-				window.location.href = "http://localhost:8080/ProjetoPAP/home.html";
+				window.location.href = $rootScope.pattern_url+"home.html";
 			});
 	};
 	
