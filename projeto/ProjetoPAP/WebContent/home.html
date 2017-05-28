@@ -58,10 +58,10 @@
                <div class="container">
                   <div class="row">
                      <div class="col-md-8 col-md-offset-2">
-                        <div class="brand">
+                        <div class="brand" ng-controller="HomePageCtrl">
                            <h1>WECAN</h1>
                            <h3><b>Plataforma</b> ágil na criação de projetos universitários.</h3>
-                           <a href="http://localhost:8080/ProjetoPAP/register.html" class="btn btn-primary btn-lg">Crie sua conta</a>
+                           <a ng-click="carregarPaginaRegister()" href="" class="btn btn-primary btn-lg">Crie sua conta</a>
                         </div>
                      </div>
                   </div>
@@ -125,14 +125,14 @@
       <div class="section" id="section">
          <div class="container">
             <div class="col-md-12">
-               <div class="info-icon">
+               <div class="info-icon" ng-controller="HomePageCtrl">
                   <div class="icon text-danger">
                      <i class="pe-7s-note2"></i>
                   </div>
                   <img src="http://i64.tinypic.com/k450l.png"/>
                   <h3>Encontre pessoas qualificadas para a sua equipe.</h3>
                   <p class="description">A Wecan te ajuda a encontrar membros interessados e dedicados, chegando no seu resultado final com qualidade.</p>
-                  <a href="http://localhost:8080/ProjetoPAP/register.html" class="btn btn-primary btn-lg">Crie sua conta</a>
+                  <a ng-click="carregarPaginaRegister()" href="" class="btn btn-primary btn-lg">Crie sua conta</a>
                </div>
             </div>
          </div>
