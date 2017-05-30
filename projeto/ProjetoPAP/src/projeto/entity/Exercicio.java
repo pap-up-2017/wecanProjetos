@@ -24,7 +24,7 @@ public class Exercicio {
 	private String descricaoExercicio;
 	
 	@OneToOne	
-	private Avaliacao atividade;
+	private Avaliacao avaliacao;
 
 	public int getIdExercicio() {
 		return idExercicio;
@@ -50,12 +50,12 @@ public class Exercicio {
 		this.descricaoExercicio = descricaoExercicio;
 	}
 
-	public Avaliacao getAtividade() {
-		return atividade;
+	public Avaliacao getAvaliacao() {
+		return avaliacao;
 	}
 
-	public void setAtividade(Avaliacao atividade) {
-		this.atividade = atividade;
+	public void setAvaliacao(Avaliacao avaliacao) {
+		this.avaliacao = avaliacao;
 	}
 
 }
