@@ -57,7 +57,7 @@ materialKit = {
     },
 
     checkScrollForTransparentNavbar: debounce(function() {
-            if($(document).scrollTop() > 260 ) {
+            if($(document).scrollTop() > 160 ) {
                 if(transparent) {
                     transparent = false;
                     $('.navbar-color-on-scroll').removeClass('navbar-transparent');
@@ -69,27 +69,6 @@ materialKit = {
                 }
             }
     }, 17),
-
-    initSliders: function(){
-        // Sliders for demo purpose
-        $('#sliderRegular').noUiSlider({
-            start: 40,
-            connect: "lower",
-            range: {
-                min: 0,
-                max: 100
-            }
-        });
-
-        $('#sliderDouble').noUiSlider({
-            start: [20, 60] ,
-            connect: true,
-            range: {
-                min: 0,
-                max: 100
-            }
-        });
-    }
 }
 
 
