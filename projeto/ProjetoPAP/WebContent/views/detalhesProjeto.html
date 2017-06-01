@@ -12,8 +12,11 @@
                      {{projeto.nome}}<br/>
                      <small style="color: #383838 !important">Entrega: {{ projeto.dataEntrega | date: 'dd/MM/yyyy'}}</small>
                   </h2>
-                  <button class="btn btn-info btn-fill pull-right" ng-show="projeto.organizador.idUsuario == UsuarioLogado" ng-click="StatusProjeto(projeto)">{{modificarStatusProjeto(projeto)}}</button>
-                  <button class="btn btn-info btn-fill pull-right" ng-show="filtroTela(projeto.organizador.idUsuario, usuariosDoProjeto, aprovacaoUsuarios)" ng-click="SolicitaParticipacao(projeto)">Participar do projeto</button>
+                  <div class="col-md-12">
+                     <button class="btn btn-info btn-fill" ng-show="projeto.organizador.idUsuario == UsuarioLogado" ng-click="StatusProjeto(projeto)">{{modificarStatusProjeto(projeto)}}</button>
+                     <button class="btn btn-info btn-fill" ng-show="filtroTela(projeto.organizador.idUsuario, usuariosDoProjeto, aprovacaoUsuarios)" ng-click="SolicitaParticipacao(projeto)">Participar do projeto</button>
+                  </div>
+                  <br/>
                   <div class="col-md-12">
                      <label class="label label-primary">Descrição do projeto</label>
                      <p style="font-size: 15px" class="description" style="font-size: 15px; word-wrap: break-word;">
@@ -233,85 +236,89 @@
                   </h2>
                   <hr/>
                   <div style="border-bottom: 1px solid #dcdcdc; padding: 10px;" class="col-md-12">
-                     <p><textarea class="form-control" cols="20" rows="6" maxlength="500" placeholder="Comente aqui (No máximo 500 caracteres)." id="dp" ng-model="comentarioFeed" required></textarea></p>
-                     <button style="float:right" class="btn btn-primary btn-fill" ng-click="salvarPost(feed, comentarioFeed)">Comentar</button>
-                  </div>
-                  <div style="margin-top: 20px;" class="col-md-12">
-                     <div id="sombra" ng:repeat="resposta in respostasFeed | orderBy : idResposta : true">
-                        <a class="text-info" style="font-size: 20px; text-decoration: underline" ui-sref="perfil({idUsuario: {{resposta.usuarioResposta.idUsuario}} })" ui-sref-active="active"><i class="fa fa-user" aria-hidden="true"></i> {{resposta.usuarioResposta.usernameUsuario}}</a>
-                        <label>{{ resposta.dataResposta | date: 'dd/MM/yyyy - HH:mm'}}</label><br/>
-                        <label class="text-default" style="word-wrap: break-word;">{{resposta.textoResposta}}</label>
+                     <div class="col-md-12">
+                        <textarea class="form-control" cols="20" rows="6" maxlength="500" placeholder="Comente aqui (No máximo 500 caracteres)." id="dp" ng-model="comentarioFeed" required></textarea>
+                     </div>
+                     <div class="col-md-12"> 
+                        <button class="btn btn-primary btn-fill" ng-click="salvarPost(feed, comentarioFeed)">Comentar</button>
                      </div>
                   </div>
+               </div>
+            </div>
+            <div style="margin-top: 20px;" class="col-md-12">
+               <div id="sombra" ng:repeat="resposta in respostasFeed | orderBy : idResposta : true">
+                  <a class="text-info" style="font-size: 20px; text-decoration: underline" ui-sref="perfil({idUsuario: {{resposta.usuarioResposta.idUsuario}} })" ui-sref-active="active"><i class="fa fa-user" aria-hidden="true"></i> {{resposta.usuarioResposta.usernameUsuario}}</a>
+                  <label>{{ resposta.dataResposta | date: 'dd/MM/yyyy - HH:mm'}}</label><br/>
+                  <label class="text-default" style="word-wrap: break-word;">{{resposta.textoResposta}}</label>
                </div>
             </div>
          </div>
       </div>
-      <div class="col-md-12" ng-show="projeto.status == 'Concluído'">
-         <div class="card">
-            <h2 id="h4" class="text-info">
-               {{projeto.nome}}<br/>
-               <small class="text-primary" style="font-size: 15px;">
-               Projeto iniciado por: <a class="description" style="text-decoration: underline" ui-sref="perfil({idUsuario: projeto.organizador.idUsuario })" ui-sref-active="active">
-               {{projeto.organizador.nomeUsuario}}
-               </a>
-               </small>
-            </h2>
-            <div class="col-md-12">
-               <label class="label label-primary">Descrição do projeto</label>
-               <p class="description" style="word-wrap: break-word;">
-                  {{projeto.descricao}}
-               </p>
-            </div>
-            <div class="col-md-3"><label class="text-primary">Criado em: </label><label class="description">{{ projeto.dataCriacao | date: 'dd/MM/yyyy'}}</label></div>
-            <div class="col-md-3"><label class="text-primary">Entrega em: </label><label class="description">{{ projeto.dataEntrega | date: 'dd/MM/yyyy'}}</label></div>
-            <div class="col-md-3"><label class="text-primary">Status: </label><label class="description">{{projeto.status}}</label></div>
-            <div class="col-md-3"><label class="text-primary">Participantes: </label><label class="description">{{projeto.participantes}}</label></div>
-            <div class="col-md-6">
-               <div class="sombra card">
-                  <h6 class="text-primary">Competências</h6>
-                  <div id="card-content" class="card-content">
-                     <div class="padding col-md-12" ng-repeat="competenciaDoProjeto in competenciasDoProjeto">
-                        <label style="font-size:15px;" class="label label-primary">
-                        <i class="fa fa-cog" aria-hidden="true"></i> {{ competenciaDoProjeto.nomeCompetencia }}
-                        </label>
-                     </div>
+   </div>
+   <div class="col-md-12" ng-show="projeto.status == 'Concluído'">
+      <div class="card">
+         <h2 id="h4" class="text-info">
+            {{projeto.nome}}<br/>
+            <small class="text-primary" style="font-size: 15px;">
+            Projeto iniciado por: <a class="description" style="text-decoration: underline" ui-sref="perfil({idUsuario: projeto.organizador.idUsuario })" ui-sref-active="active">
+            {{projeto.organizador.nomeUsuario}}
+            </a>
+            </small>
+         </h2>
+         <div class="col-md-12">
+            <label class="label label-primary">Descrição do projeto</label>
+            <p class="description" style="word-wrap: break-word;">
+               {{projeto.descricao}}
+            </p>
+         </div>
+         <div class="col-md-3"><label class="text-primary">Criado em: </label><label class="description">{{ projeto.dataCriacao | date: 'dd/MM/yyyy'}}</label></div>
+         <div class="col-md-3"><label class="text-primary">Entrega em: </label><label class="description">{{ projeto.dataEntrega | date: 'dd/MM/yyyy'}}</label></div>
+         <div class="col-md-3"><label class="text-primary">Status: </label><label class="description">{{projeto.status}}</label></div>
+         <div class="col-md-3"><label class="text-primary">Participantes: </label><label class="description">{{projeto.participantes}}</label></div>
+         <div class="col-md-6">
+            <div class="sombra card">
+               <h6 class="text-primary">Competências</h6>
+               <div id="card-content" class="card-content">
+                  <div class="padding col-md-12" ng-repeat="competenciaDoProjeto in competenciasDoProjeto">
+                     <label style="font-size:15px;" class="label label-primary">
+                     <i class="fa fa-cog" aria-hidden="true"></i> {{ competenciaDoProjeto.nomeCompetencia }}
+                     </label>
                   </div>
                </div>
             </div>
-            <div class="col-md-6">
-               <div class="sombra card">
-                  <h6 class="text-primary">Integrantes</h6>
-                  <div id="card-content"  class="card-content">
-                     <div class="padding col-md-12">
-                        <a style="font-size:15px;" class="label label-primary" ui-sref="perfil({idUsuario: projeto.organizador.idUsuario} )" ui-sref-active="active">
-                        <i class="fa fa-user" aria-hidden="true"></i> {{projeto.organizador.nomeUsuario}}
-                        </a>
-                     </div>
-                     <div ng-repeat="usuarioDoProjeto in usuariosDoProjeto" class="padding col-md-12">
-                        <a style="font-size:15px;" class="label label-primary" ui-sref="perfil({idUsuario: {{usuarioDoProjeto.idUsuario}} })" ui-sref-active="active">
-                        <i class="fa fa-user" aria-hidden="true"></i> {{usuarioDoProjeto.nomeUsuario}}
-                        </a>
-                     </div>
+         </div>
+         <div class="col-md-6">
+            <div class="sombra card">
+               <h6 class="text-primary">Integrantes</h6>
+               <div id="card-content"  class="card-content">
+                  <div class="padding col-md-12">
+                     <a style="font-size:15px;" class="label label-primary" ui-sref="perfil({idUsuario: projeto.organizador.idUsuario} )" ui-sref-active="active">
+                     <i class="fa fa-user" aria-hidden="true"></i> {{projeto.organizador.nomeUsuario}}
+                     </a>
+                  </div>
+                  <div ng-repeat="usuarioDoProjeto in usuariosDoProjeto" class="padding col-md-12">
+                     <a style="font-size:15px;" class="label label-primary" ui-sref="perfil({idUsuario: {{usuarioDoProjeto.idUsuario}} })" ui-sref-active="active">
+                     <i class="fa fa-user" aria-hidden="true"></i> {{usuarioDoProjeto.nomeUsuario}}
+                     </a>
                   </div>
                </div>
             </div>
-            <hr/>
-            <div class="col-md-12" ng-controller="PageTarefaCtrl">
-               <div "class="card">
-                  <h2 class="text-info">Tarefas concluídas</h2>
-                  <hr/>
-                  <div class="success col-md-6" ng-repeat="tarefa in tarefas">
-                     <h4 class="text-primary" style="text-transform: uppercase">{{tarefa.nomeTarefa}}<br/>
-                        <small class="text-default" style="word-wrap: break-word;">{{tarefa.descricaoTarefa}}</small>
-                     </h4>
-                     <p class="text-primary">Status: {{tarefa.statusTarefa}}</p>
-                     <div class="footer">
-                        <hr>
-                        <div class="stats">
-                           <p class="category">Criada em: {{ tarefa.dataCriacao | date: 'dd/MM/yyyy - HH:mm'}}</p>
-                           <p class="category">Entrega: {{ tarefa.prazoEntrega | date: 'dd/MM/yyyy - HH:mm'}}</p>
-                        </div>
+         </div>
+         <hr/>
+         <div class="col-md-12" ng-controller="PageTarefaCtrl">
+            <div class="card">
+               <h2 class="text-info">Tarefas concluídas</h2>
+               <hr/>
+               <div class="success col-md-6" ng-repeat="tarefa in tarefas">
+                  <h4 class="text-primary" style="text-transform: uppercase">{{tarefa.nomeTarefa}}<br/>
+                     <small class="text-default" style="word-wrap: break-word;">{{tarefa.descricaoTarefa}}</small>
+                  </h4>
+                  <p class="text-primary">Status: {{tarefa.statusTarefa}}</p>
+                  <div class="footer">
+                     <hr>
+                     <div class="stats">
+                        <p class="category">Criada em: {{ tarefa.dataCriacao | date: 'dd/MM/yyyy - HH:mm'}}</p>
+                        <p class="category">Entrega: {{ tarefa.prazoEntrega | date: 'dd/MM/yyyy - HH:mm'}}</p>
                      </div>
                   </div>
                </div>
@@ -320,6 +327,6 @@
       </div>
    </div>
    <div class="container-fluid" ng-hide="filtroBloqueioProjetoEmAndamento(usuariosDoProjeto, projeto.organizador.idUsuario, projeto.status)">
-      <h2>Você não tem acesso a esse projeto.</h2>
+	  <h2>Você não tem acesso a esse projeto.</h2>
    </div>
 </div>
