@@ -101,6 +101,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 									dataEntrega : projeto.dataEntrega,
 									competencias : $scope.competenciasDoProjeto,
 									usuarios : $scope.usuariosDoProjeto,
+									tipoProjeto : $scope.tipoProjeto,
 									organizador : {idUsuario : $scope.UsuarioLogado}
 								});
 	
@@ -553,12 +554,24 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 		    }
 		}
 	}
+	$scope.habilitarTCC = function(){
+		console.log($scope.projetoDeTCC);
+		if($scope.projetoDeTCC){
+			$scope.tipoProjeto = "TCC"
+			console.log($scope.tipoProjeto);
+		}
+		else{
+			$scope.tipoProjeto = "Comum"
+			console.log($scope.tipoProjeto);
+		}
+	}
 	// função que inicia a tela
 	$scope.iniciaTela = function() {
 		$scope.BuscarInformacao();
 		$scope.BuscarInformacaoCompetencias();
 		$scope.BuscarInformacaoUsuarios();
 		$scope.modificarStatusProjeto();
+		$scope.tipoProjeto = "Comum";
 		// Validação para não carregar dados no cadastro de novo projetos
 		if($stateParams.idProjeto != null){
 			$scope.CarregarEdicao();

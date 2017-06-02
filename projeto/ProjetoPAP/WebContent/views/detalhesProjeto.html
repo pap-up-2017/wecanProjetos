@@ -10,13 +10,13 @@
                <div class="card">
                   <h2 id="h4" class="text-info">
                      {{projeto.nome}}<br/>
-                     <small style="color: #383838 !important">Entrega: {{ projeto.dataEntrega | date: 'dd/MM/yyyy'}}</small>
-                  </h2>
+                     <small style="color: #383838 !important">Entrega: {{ projeto.dataEntrega | date: 'dd/MM/yyyy'}} - {{projeto.tipoProjeto}}</small>
+                  </h2>	
                   <div class="col-md-12">
                      <button class="btn btn-info btn-fill" ng-show="projeto.organizador.idUsuario == UsuarioLogado" ng-click="StatusProjeto(projeto)">{{modificarStatusProjeto(projeto)}}</button>
                      <button class="btn btn-info btn-fill" ng-show="filtroTela(projeto.organizador.idUsuario, usuariosDoProjeto, aprovacaoUsuarios)" ng-click="SolicitaParticipacao(projeto)">Participar do projeto</button>
                   </div>
-                  <br/>
+                  <br/><br/><br/>
                   <div class="col-md-12">
                      <label class="label label-primary">Descrição do projeto</label>
                      <p style="font-size: 15px" class="description" style="font-size: 15px; word-wrap: break-word;">

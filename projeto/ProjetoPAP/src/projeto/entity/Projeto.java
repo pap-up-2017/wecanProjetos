@@ -33,7 +33,7 @@ public class Projeto {
 	private List<Competencia> competencias;
 	@ManyToMany
 	private List<Usuario> usuarios;
-	
+	private String tipoProjeto;
 	//Dono do projeto
 	@OneToOne
 	private Usuario organizador;
@@ -106,8 +106,6 @@ public class Projeto {
 	    } catch (ParseException e) {
 	        e.printStackTrace();
 	    }
-		
-		
 	}
 	
 	public void setDataEntrega(Date dataEntrega) {
@@ -126,6 +124,12 @@ public class Projeto {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public String getTipoProjeto() {
+		return tipoProjeto;
+	}
+	public void setTipoProjeto(String tipoProjeto) {
+		this.tipoProjeto = tipoProjeto;
 	}
 
 	

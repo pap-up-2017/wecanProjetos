@@ -86,6 +86,12 @@
                               </button>
                         </div>
                      </div>
+                     <div class="row">
+                        <div class="col-md-12">
+                              <label>Este Projeto é de TCC:</label>
+                               <input type="checkbox" ng-change="habilitarTCC()" ng-model="projetoDeTCC">
+                        </div>
+                     </div>
                   </form>
                   <div style="margin-top: 40px;" class="col-md-6">
                         <button style="width: 100%" class="btn btn-info btn-fill" ng-click="SalvarCadastro(projeto)">Criar projeto</button>
