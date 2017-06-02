@@ -7,7 +7,7 @@ import projeto.dao.AvaliacaoDao;
 import projeto.dao.FactoryDao;
 import projeto.dao.RespostaUsuarioDao;
 import projeto.entity.Avaliacao;
-import projeto.entity.RespostaAtividade;
+import projeto.entity.RespostaAvaliacao;
 import projeto.entity.RespostaUsuario;
 
 
@@ -17,9 +17,9 @@ public class TestRespostaUsuario {
 	public void cadastrarRespostaUsuario(){
 		RespostaUsuario ru = new RespostaUsuario();
 		
-		RespostaAtividade ra = new RespostaAtividade();
-		ra.setIdRespostaAtividade(1);
-		ru.setRespostaAtividade(ra);
+		RespostaAvaliacao ra = new RespostaAvaliacao();
+		ra.setIdRespostaAvaliacao(1);
+		ru.setRespostaAvaliacao(ra);
 		RespostaUsuarioDao daoRespostaUsuario = FactoryDao.createRespostaUsuarioDao();
 		daoRespostaUsuario.salvar(ru);
 	}
@@ -36,9 +36,9 @@ public class TestRespostaUsuario {
 	public void alterarRespostaUsuario(){
 		RespostaUsuarioDao daoRespostaUsuario = FactoryDao.createRespostaUsuarioDao();
 		RespostaUsuario ru = daoRespostaUsuario.getObjById(2);	
-		RespostaAtividade ra = new RespostaAtividade();
-		ra.setIdRespostaAtividade(2);
-		ru.setRespostaAtividade(ra);
+		RespostaAvaliacao ra = new RespostaAvaliacao();
+		ra.setIdRespostaAvaliacao(2);
+		ru.setRespostaAvaliacao(ra);
 		daoRespostaUsuario.alterar(ru);
 	}
 	

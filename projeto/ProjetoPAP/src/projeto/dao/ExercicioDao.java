@@ -32,11 +32,11 @@ public class ExercicioDao {
 		return q.getResultList();
 	}
 	
-	public List<Exercicio> listarPorAtividade(int id) {
+	public List<Exercicio> listarPorAvaliacao(int id) {
 		// cria a instancia
 		EntityManager em = SingletonConection.getInstance();
 		// cria a Query para encontrar as exercicio
-		Query q = em.createQuery("from Exercicio where atividade_idAtividade = "+ id);
+		Query q = em.createQuery("from Exercicio where avaliacao_idAvaliacao = "+ id);
 		// retorna os dados encontrados
 		return q.getResultList();
 	}
@@ -73,7 +73,7 @@ public class ExercicioDao {
 		em.getTransaction().begin();
 		// cria uma query para para exclusão do objeto no banco..
 		em.createQuery("DELETE FROM Exercicio WHERE idExercicio=" + e.getIdExercicio()).executeUpdate();
-		// envia os dados do atividade
+		// envia os dados do exercicio
 		em.getTransaction().commit();
 		// fecha a instancia
 		em.close();

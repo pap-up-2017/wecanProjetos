@@ -7,7 +7,8 @@ function autentication($rootScope, $state, $location, $cookieStore){
     	    function(event, toState, toParams, fromState, fromParams){
     			// verifica se não há usuarios, e se não tiver ele retorna para a home
     	       if($cookieStore.get("session_user_id") == null){
-    	    	    window.location.href = "http://localhost:8080/ProjetoPAP/home.html";
+    	    	    //window.location.href = "http://wecanprojetos.com.br/home.html";
+    	    	    window.location.href = $rootScope.pattern_url+"home.html";
     	        	//window.location.href = "http://env-6524972.jelasticlw.com.br/home.html";
     	        }
     	    });
@@ -135,7 +136,7 @@ function route($stateProvider, $urlRouterProvider, $locationProvider){
 
 function config($rootScope){
 	$rootScope.pattern_url = 'http://localhost:8080/ProjetoPAP/';
-	//$rootScope.pattern_url = 'http://env-6524972.jelasticlw.com.br/';
+	//$rootScope.pattern_url = 'http://wecanprojetos.com.br/';
 	
 	$rootScope.GetPostconfig = { headers : {
 				'Content-Type' : 'application/json;charset=utf-8;'

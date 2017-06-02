@@ -91,7 +91,9 @@
    <table class="table ">
       <tr>
          <td>ID</td>
-         <td>NOME</td>
+         <td>Título</td>
+         <td>Descrição</td>
+         <td>Avaliação</td>
       </tr>
       <tr ng:repeat="exercicio in exercicios">
          <td>{{exercicio.idExercicio}}</td>
@@ -102,4 +104,49 @@
          <td><button class="btn btn-primary" ng-click="ExcluirExercicio(exercicio)">Excluir</button></td>
       </tr>
    </table>
+   
+     <h2>Cadastro de Respostas</h2>
+
+   {{ RespostaResposta }}
+   <p class="form-group">
+   	  <input placeholder="Resposta" class="form-control" type="text" ng-model="respostaAvaliacao.textoRespostaAvaliacao" required />
+       <select class="form-control" ng-model="respostaAvaliacao.statusRespostaAvaliacao">
+      	<option value="">Selecione uma opção...</option>
+      	<option value="Correta">Correta</option>
+      	<option value="Incorreta">Incorreta</option>
+      </select>
+      <select class="form-control" ng-model="respostaAvaliacao.exercicio" ng-options="exercicio.tituloExercicio for exercicio in exercicios">
+      	<option value="">Selecione um exercício...</option>
+      </select>     
+      </p class="form-group">
+      <button class="btn btn-success" ng-click="SalvarCadastroRespostaAvaliacao(respostaAvaliacao)">Cadastrar</button>
+
+	<br/><br/>
+   <button class="btn btn-primary" ng-click="BuscarInformacaoRespostaAvaliacao()">Buscar respostas</button>
+   <div class="editpopup editpopup-{{istrueRespostaAvaliacao}} ">
+      <p>edit Id:<input type="text" ng-model="editedidRespostaAvaliacao"></p>
+      <p>edit Resposta:<input type="text" ng-model="editedtextoRespostaAvaliacao"></p>
+      <p>edit Status:<input type="text" ng-model="editedstatusRespostaAvaliacao"></p>
+      <button ng-click="SalvarAlteracaoRespostaAvaliacao(editedidRespostaAvaliacao, editedtextoRespostaAvaliacao, editedstatusRespostaAvaliacao)">Salvar</button>
+      <button ng-click="FecharPopUpEdicaoRespostaAvaliacao()">Cancelar</button>
+   </div>
+	<br/><br/>
+
+   <table class="table ">
+      <tr>
+         <td>ID</td>
+         <td>Resposta</td>
+         <td>Status</td>
+         <td>Exercício</td>
+      </tr>
+      <tr ng:repeat="respostaAvaliacao in respostaAvaliacoes">
+         <td>{{respostaAvaliacao.idRespostaAvaliacao}}</td>
+         <td>{{respostaAvaliacao.textoRespostaAvaliacao}}</td>
+         <td>{{respostaAvaliacao.statusRespostaAvaliacao}}</td>
+         <td>{{respostaAvaliacao.exercicio.tituloExercicio}}</td>
+         <td><button ng-click="CarregarEdicaoRespostaAvaliacao(respostaAvaliacao)" class="btn btn-primary">Alterar</button></td>
+         <td><button class="btn btn-primary" ng-click="ExcluirRespostaAvaliacao(respostaAvaliacao)">Excluir</button></td>
+      </tr>
+   </table>
 </div>
+

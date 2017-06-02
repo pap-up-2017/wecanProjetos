@@ -5,7 +5,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import projeto.entity.Avaliacao;
-import projeto.entity.RespostaAtividade;
+import projeto.entity.RespostaAvaliacao;
 import projeto.entity.RespostaUsuario;
 
 public class RespostaUsuarioDao {
@@ -38,8 +38,8 @@ public class RespostaUsuarioDao {
 	public List<RespostaUsuario> listarPorResposta(int id) {
 		// cria a instancia
 		EntityManager em = SingletonConection.getInstance();
-		// cria a Query para encontrar as respostaAtividade
-		Query q = em.createQuery("from RespostaUsuario where respostaAtividade_idRespostaAtividade = "+ id);
+		// cria a Query para encontrar as respostaAvaliacao
+		Query q = em.createQuery("from RespostaUsuario where respostaAvaliacao_idRespostaAvaliacao = "+ id);
 		// retorna os dados encontrados
 		return q.getResultList();
 	}
@@ -49,7 +49,7 @@ public class RespostaUsuarioDao {
 	public RespostaUsuario getObjById(int id) {
 		// cria a instancia
 		EntityManager em = SingletonConection.getInstance();
-		// cria a Query para encontra a atividade de acordo com o id
+		// cria a Query para encontra a avaliacao de acordo com o id
 		Query q = em.createQuery("from RespostaUsuario where idRespostaUsuario = " + id);
 		return (RespostaUsuario) q.getSingleResult();
 	}
@@ -75,7 +75,7 @@ public class RespostaUsuarioDao {
 		// inicia a instancia
 		em.getTransaction().begin();
 		// cria uma query para para exclusão do objeto no banco..
-		em.createQuery("DELETE FROM RespostaUsuario WHERE respostaAtividade_idRespostaAtividade=" + ru.getIdRespostaUsuario()).executeUpdate();
+		em.createQuery("DELETE FROM RespostaUsuario WHERE respostaAvaliacao_idRespostaAvaliacao=" + ru.getIdRespostaUsuario()).executeUpdate();
 		// envia os dados do respostaUsuario
 		em.getTransaction().commit();
 		// fecha a instancia

@@ -25,7 +25,7 @@ public class RespostaUsuario {
 	private Usuario usuario;
 	
 	@OneToOne	
-	private RespostaAtividade respostaAtividade;
+	private RespostaAvaliacao respostaAvaliacao;
 
 	private Date dataResposta;
 
@@ -45,12 +45,12 @@ public class RespostaUsuario {
 		this.usuario = usuario;
 	}
 
-	public RespostaAtividade getRespostaAtividade() {
-		return respostaAtividade;
+	public RespostaAvaliacao getRespostaAvaliacao() {
+		return respostaAvaliacao;
 	}
 
-	public void setRespostaAtividade(RespostaAtividade respostaAtividade) {
-		this.respostaAtividade = respostaAtividade;
+	public void setRespostaAvaliacao(RespostaAvaliacao respostaAvaliacao) {
+		this.respostaAvaliacao = respostaAvaliacao;
 	}
 
 	public Date getDataResposta() {

@@ -9,7 +9,7 @@ import projeto.entity.Feed;
 import projeto.entity.InstituicaoEnsino;
 import projeto.entity.Projeto;
 import projeto.entity.Resposta;
-import projeto.entity.RespostaAtividade;
+import projeto.entity.RespostaAvaliacao;
 import projeto.entity.TipoUsuario;
 import projeto.entity.Usuario;
 import projeto.entity.UsuarioLogado;
@@ -99,8 +99,8 @@ public class FactoryDao {
 		return new ExercicioDao();
 	}
 
-	public static RespostaAtividadeDao createRespostaAtividadeDao() {
-		return new RespostaAtividadeDao();
+	public static RespostaAvaliacaoDao createRespostaAvaliacaoDao() {
+		return new RespostaAvaliacaoDao();
 	}
 
 	public static RespostaUsuarioDao createRespostaUsuarioDao() {

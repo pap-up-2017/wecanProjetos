@@ -3,21 +3,19 @@ package projeto.dao;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import projeto.entity.RespostaAvaliacao;
 
-import projeto.entity.Avaliacao;
-import projeto.entity.RespostaAtividade;
-
-public class RespostaAtividadeDao {
+public class RespostaAvaliacaoDao {
 
 
-	public void salvar(RespostaAtividade ra) {
+	public void salvar(RespostaAvaliacao ra) {
 		// cria a instancia
 		EntityManager em = SingletonConection.getInstance();
 		// inicia a instancia
 		em.getTransaction().begin();
-		// persiste os dados da respostaAtividade
+		// persiste os dados da respostaAvaliacao
 		em.persist(ra);
-		// envia os dados da respostaAtividade
+		// envia os dados da respostaAvaliacao
 		em.getTransaction().commit();
 		// fecha a instancia
 		em.close();
@@ -25,57 +23,57 @@ public class RespostaAtividadeDao {
 	}
 
 
-	public List<RespostaAtividade> listar() {
+	public List<RespostaAvaliacao> listar() {
 		// cria a instancia
 		EntityManager em = SingletonConection.getInstance();
 		// cria a Query para encontrar as tarefa
-		Query q = em.createQuery("from RespostaAtividade");
+		Query q = em.createQuery("from RespostaAvaliacao");
 		// retorna os dados encontrados
 		return q.getResultList();
 	}
 	
-	public List<RespostaAtividade> listarPorExercicio(int id) {
+	public List<RespostaAvaliacao> listarPorExercicio(int id) {
 		// cria a instancia
 		EntityManager em = SingletonConection.getInstance();
-		// cria a Query para encontrar as respostaAtividade
-		Query q = em.createQuery("from RespostaAtividade where exercicio_idexercicio = "+ id);
+		// cria a Query para encontrar as respostaAvaliacao
+		Query q = em.createQuery("from RespostaAvaliacao where exercicio_idexercicio = "+ id);
 		// retorna os dados encontrados
 		return q.getResultList();
 	}
 
 
 
-	public RespostaAtividade getObjById(int id) {
+	public RespostaAvaliacao getObjById(int id) {
 		// cria a instancia
 		EntityManager em = SingletonConection.getInstance();
-		// cria a Query para encontra a atividade de acordo com o id
-		Query q = em.createQuery("from RespostaAtividade where idRespostaAtividade = " + id);
-		return (RespostaAtividade) q.getSingleResult();
+		// cria a Query para encontra a avaliacao de acordo com o id
+		Query q = em.createQuery("from RespostaAvaliacao where idRespostaAvaliacao = " + id);
+		return (RespostaAvaliacao) q.getSingleResult();
 	}
 
 
-	public void alterar(RespostaAtividade ra) {
+	public void alterar(RespostaAvaliacao ra) {
 		// cria a instancia
 		EntityManager em = SingletonConection.getInstance();
 		// inicia a instancia
 		em.getTransaction().begin();
-		// da um merge nos dados da respostaAtividade
+		// da um merge nos dados da respostaAvaliacao
 		em.merge(ra);
-		// envia os dados da respostaAtividade	
+		// envia os dados da respostaAvaliacao	
 		em.getTransaction().commit();
 		// fecha a instancia
 		em.close();
 	}
 
 
-	public void excluir(RespostaAtividade ra) {
+	public void excluir(RespostaAvaliacao ra) {
 		// cria a instancia
 		EntityManager em = SingletonConection.getInstance();
 		// inicia a instancia
 		em.getTransaction().begin();
 		// cria uma query para para exclusão do objeto no banco..
-		em.createQuery("DELETE FROM RespostaAtividade WHERE idRespostaAtividade=" + ra.getIdRespostaAtividade()).executeUpdate();
-		// envia os dados do respostaAtividade
+		em.createQuery("DELETE FROM RespostaAvaliacao WHERE idRespostaAvaliacao=" + ra.getIdRespostaAvaliacao()).executeUpdate();
+		// envia os dados do respostaAvaliacao
 		em.getTransaction().commit();
 		// fecha a instancia
 		em.close();

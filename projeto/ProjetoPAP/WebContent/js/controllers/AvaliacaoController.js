@@ -330,6 +330,155 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 			
 		};
 		
+		//*********** Respostas de Avaliações ***************//
+		
+		  // Busca informações de todas as respostas de avaliacoes salvas no banco ... Via rest
+			$scope.BuscarInformacaoRespostaAvaliacao = function() {
+				console.log("função BuscarInformacao Resposta Avaliação...");
+
+				$http.get($rootScope.pattern_url+'rest/respostaavaliacaorest')
+						.success(function(data) {
+							var respostaAvaliacoesBanco = data["respostaAvaliacao"];
+							var arrayBancoRespostaAvaliacoes = [];
+							if(Array.isArray(respostaAvaliacoesBanco)){
+								arrayBancoRespostaAvaliacoes = respostaAvaliacoesBanco; 
+							}
+							else{
+								arrayBancoRespostaAvaliacoes.push(respostaAvaliacoesBanco);
+							}
+							$scope.respostaAvaliacoes = arrayBancoRespostaAvaliacoes;
+							
+						}).error(
+								function(data, status, header, config) {
+									$scope.Resposta = "Data: " + data + "<hr />status: "
+											+ status + "<hr />headers: " + header
+											+ "<hr />config: " + config;
+								});
+				
+			};	  
+		  
+			// envia a informação de um novo cadastro de para o banco ... Via rest
+			$scope.SalvarCadastroRespostaAvaliacao = function(respostaavaliacao) {
+				console.log("Salvar um novo cadastro de resposta avaliacao...")
+
+				var parameter = JSON.stringify({
+					type : "respostaavaliacao",
+					textoRespostaAvaliacao : respostaavaliacao.textoRespostaAvaliacao,
+					statusRespostaAvaliacao : respostaavaliacao.statusRespostaAvaliacao,
+					exercicio : respostaavaliacao.exercicio
+				});
+				
+				var config = {
+					headers : {
+						'Content-Type' : 'application/json;charset=utf-8;'
+					}
+				}
+
+				$http.post(
+						$rootScope.pattern_url+'rest/respostaavaliacaorest/postcad',
+						parameter, config).success(
+						function(data, status, headers, config) {
+							$scope.RespostaResposta = 'Resposta salva com sucesso!';
+							$scope.BuscarInformacaoRespostaAvaliacao();						
+							
+						}).error(
+						function(data, status, header, config) {
+							$scope.Resposta = "Data: " + data + "<hr />status: "
+									+ status + "<hr />headers: " + header
+									+ "<hr />config: " + config;
+						});
+			};
+			
+			// Envia a informação de alteração de um elemento para o banco ... Via rest
+			$scope.SalvarAlteracaoRespostaAvaliacao = function(editedidRespostaAvaliacao, editedtextoRespostaAvaliacao, editedstatusRespostaAvaliacao, editedRespostaAvaliacaoExercicio){
+				console.log("Salvar uma nova Alteração de resposta exercício ...")
+				
+				var parameter = JSON.stringify({
+						type : "respostaavaliacao",
+					idRespostaAvaliacao : editedidRespostaAvaliacao,
+					textoRespostaAvaliacao : editedtextoRespostaAvaliacao,
+					statusRespostaAvaliacao : editedstatusRespostaAvaliacao,
+					exercicio : editedRespostaAvaliacaoExercicio
+				});
+				
+				
+
+				var config = {
+					headers : {
+						'Content-Type' : 'application/json;charset=utf-8;'
+					}
+				}
+
+				$http.post(
+						$rootScope.pattern_url+'rest/respostaavaliacaorest/postalt',
+						parameter, config).success(
+						function(data, status, headers, config) {
+							$scope.RespostaResposta = 'Resposta Avaliacao alterado com sucesso!';
+							$scope.BuscarInformacaoRespostaAvaliacao();
+							$scope.FecharPopUpEdicaoRespostaAvaliacao();
+							
+							
+						}).error(
+						function(data, status, header, config) {
+							$scope.Resposta = "Data: " + data + "<hr />status: "
+									+ status + "<hr />headers: " + header
+									+ "<hr />config: " + config;
+						});
+						
+			};
+			
+			// carrega os dados do elemento selecionado para edição .. 
+			$scope.CarregarEdicaoRespostaAvaliacao = function(respostaAvaliacao){
+				console.log(respostaAvaliacao.exercicio);
+				$scope.istrueRespostaAvaliacao=true;
+			    $scope.editedidRespostaAvaliacao = respostaAvaliacao.idRespostaAvaliacao;
+			    $scope.editedtextoRespostaAvaliacao = respostaAvaliacao.textoRespostaAvaliacao;
+			    $scope.editedstatusRespostaAvaliacao = respostaAvaliacao.statusRespostaAvaliacao;
+			    $scope.editedRespostaAvaliacaoExercicio = respostaAvaliacao.exercicio;
+
+			};
+
+			// função para fechar o popUp de edição ... 
+			$scope.FecharPopUpEdicaoRespostaAvaliacao = function(){
+			     $scope.istrueRespostaAvaliacao=false;
+			  };
+
+			
+			// carrega os dados do elemento selecionado para exclusão .. 
+			$scope.ExcluirRespostaAvaliacao = function(respostaAvaliacao){
+				console.log("Excluir um elemento ...")
+
+				var parameter = JSON.stringify({
+					type : "respostaavaliacao",
+					idRespostaAvaliacao : respostaAvaliacao.idRespostaAvaliacao,
+					textoRespostaAvaliacao : respostaAvaliacao.textoRespostaAvaliacao
+				});
+				
+				var config = {
+					headers : {
+						'Content-Type' : 'application/json;charset=utf-8;'
+					}
+				}
+
+				$http.post(
+						$rootScope.pattern_url+'rest/respostaavaliacaorest/postdel',
+						parameter, config).success(
+						function(data, status, headers, config) {
+							$scope.RespostaExercicio = 'Resposta avaliação excluída com sucesso!';
+							
+							
+						}).error(
+						function(data, status, header, config) {
+							$scope.Resposta = "Data: " + data + "<hr />status: "
+									+ status + "<hr />headers: " + header
+									+ "<hr />config: " + config;
+						});
+				
+				$scope.BuscarInformacaoRespostaAvaliacao();
+				
+			};
+		
+		
 	  
 	// função que inicia a tela
 		$scope.iniciaTela = function() {
@@ -340,6 +489,8 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 			$scope.BuscarInformacaoUsuarios();
 			// Exercicios
 			$scope.BuscarInformacaoExercicio();
+			// Respostas
+			$scope.BuscarInformacaoRespostaAvaliacao();
 		};
 		$scope.iniciaTela();
 	
