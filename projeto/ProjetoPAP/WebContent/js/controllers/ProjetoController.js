@@ -79,9 +79,18 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
     $scope.usuariosDoProjeto = [
                     //Iniciar a lista usuários do projeto vazia.
                 ];	
+    
+    $scope.orientadoresDoProjeto = [
+                                //Iniciar a lista usuários do projeto vazia.
+                            ];	
    $scope.adicionaUsuario = function () {
         $scope.usuariosDoProjeto.push({ idUsuario : $scope.projeto.usuarios.idUsuario,
         	                            nomeUsuario : $scope.projeto.usuarios.nomeUsuario});
+    };
+    
+    $scope.adicionaOrientador = function () {
+        $scope.orientadoresDoProjeto.push({ idUsuario : $scope.projeto.orientador.idUsuario,
+        	                            nomeUsuario : $scope.projeto.orientador.nomeUsuario});
     };
 
 	// envia a informação de um novo cadastro de para o banco ... Via rest
@@ -100,11 +109,12 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 									vagas : projeto.vagas,
 									dataEntrega : projeto.dataEntrega,
 									competencias : $scope.competenciasDoProjeto,
-									usuarios : $scope.usuariosDoProjeto,
+									usuarios : $scope.usuariosDoProjeto.concat($scope.orientadoresDoProjeto),
 									tipoProjeto : $scope.tipoProjeto,
 									organizador : {idUsuario : $scope.UsuarioLogado}
 								});
-	
+								
+								console.log(parameter);
 								$http.post($rootScope.pattern_url+'rest/projetorest/postcad',
 										parameter, $rootScope.GetPostconfig).success(
 										function(data, status, headers, config) {
@@ -293,7 +303,8 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 				$scope.usuariosDoProjeto = [];
 			    for (var i = 0; i < $scope.projeto.usuarios.length; i++) {
 			    	$scope.usuariosDoProjeto.push({ idUsuario : $scope.projeto.usuarios[i].idUsuario,
-	                    							nomeUsuario : $scope.projeto.usuarios[i].nomeUsuario});
+	                    							nomeUsuario : $scope.projeto.usuarios[i].nomeUsuario,
+	                    							tipoUsuario :  $scope.projeto.usuarios[i].tipoUsuario});
 			    	// Validação para seber se é participante do projeto
 					if($scope.UsuarioLogado == $scope.projeto.usuarios[i].idUsuario ){
 						$scope.istrueparticipante=false;
@@ -303,7 +314,8 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 			   	if($scope.projeto.usuarios != null){
 			   		$scope.usuariosDoProjeto = [];
 			   		$scope.usuariosDoProjeto.push({ idUsuario : $scope.projeto.usuarios.idUsuario,
-			   			nomeUsuario : $scope.projeto.usuarios.nomeUsuario});
+			   										nomeUsuario : $scope.projeto.usuarios.nomeUsuario, 
+			   										tipoUsuario :  $scope.projeto.usuarios[i].tipoUsuario});
 			   		// Validação para seber se é participante do projeto
 					if($scope.UsuarioLogado == $scope.projeto.usuarios.idUsuario ){
 						$scope.istrueparticipante=false;
@@ -554,6 +566,20 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 		    }
 		}
 	}
+	
+	$scope.ApagarOrientadoresDoprojetoACriar = function(orientadorDoProjeto){
+		for(var i=0; i<=$scope.orientadoresDoProjeto.length; i++) {
+		    if($scope.orientadoresDoProjeto[i].idUsuario == orientadorDoProjeto.idUsuario){
+		    	if(i == 0){
+		    		$scope.orientadoresDoProjeto.shift();
+		    	}else{
+		    		$scope.orientadoresDoProjeto.splice(i,i);
+		    	}
+		    	break;
+		    }
+		}
+	}
+	
 	$scope.habilitarTCC = function(){
 		console.log($scope.projetoDeTCC);
 		if($scope.projetoDeTCC){
@@ -565,6 +591,25 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 			console.log($scope.tipoProjeto);
 		}
 	}
+	
+	$scope.filtroProfessor = function(usuario){
+		if(typeof usuario != 'undefined'){
+			if(usuario.tipoUsuario.tipoUsuario == "Professor"){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	$scope.filtroAluno = function(usuario){
+		if(typeof usuario != 'undefined'){
+			if(usuario.tipoUsuario.tipoUsuario == "Aluno"){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	// função que inicia a tela
 	$scope.iniciaTela = function() {
 		$scope.BuscarInformacao();

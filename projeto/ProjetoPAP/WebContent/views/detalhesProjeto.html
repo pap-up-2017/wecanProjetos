@@ -39,12 +39,30 @@
                      <div class="sombra card">
                         <h6 style="color: #253238 !important" class="text-primary">Integrantes</h6>
                         <div id="card-content"  class="card-content">
-                           <div class="padding col-md-12">
+                           <div class="padding col-md-12" ng-show="filtroAluno(projeto.organizador)">
                               <a style="font-size:15px;" class="label label-primary" ui-sref="perfil({idUsuario: projeto.organizador.idUsuario })" ui-sref-active="active">
                               <i class="fa fa-user" aria-hidden="true"></i> {{projeto.organizador.nomeUsuario}}
                               </a>
                            </div>
-                           <div ng-repeat="usuarioDoProjeto in usuariosDoProjeto" class=" padding col-md-12">
+                           <div ng-repeat="usuarioDoProjeto in usuariosDoProjeto | filter: tipoUsuario = 'Aluno' " class=" padding col-md-12">
+                              <a style="font-size:15px;" class="label label-primary" ui-sref="perfil({idUsuario: {{usuarioDoProjeto.idUsuario}} })" ui-sref-active="active">
+                              <i class="fa fa-user" aria-hidden="true"></i> {{usuarioDoProjeto.nomeUsuario}}
+                              
+                              </a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="sombra card">
+                        <h6 style="color: #253238 !important" class="text-primary">Orientadores</h6>
+                        <div id="card-content"  class="card-content">
+                           <div class="padding col-md-12" ng-show="filtroProfessor(projeto.organizador)">
+                              <a style="font-size:15px;" class="label label-primary" ui-sref="perfil({idUsuario: projeto.organizador.idUsuario })" ui-sref-active="active">
+                              <i class="fa fa-user" aria-hidden="true"></i> {{projeto.organizador.nomeUsuario}}
+                              </a>
+                           </div>
+                           <div ng-repeat="usuarioDoProjeto in usuariosDoProjeto | filter: tipoUsuario = 'Professor'" class=" padding col-md-12">
                               <a style="font-size:15px;" class="label label-primary" ui-sref="perfil({idUsuario: {{usuarioDoProjeto.idUsuario}} })" ui-sref-active="active">
                               <i class="fa fa-user" aria-hidden="true"></i> {{usuarioDoProjeto.nomeUsuario}}
                               </a>
