@@ -5,6 +5,6 @@ angular.module("app").controller('HomePageCtrl', function($scope, $http, $cookie
 	}
 	
 	$scope.carregarPaginaHome = function(){
-		window.location.href = $rootScope.pattern_url+"home.html";
+		window.location.href = $rootScope.pattern_url+"index.html";
 	}
 });

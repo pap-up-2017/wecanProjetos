@@ -1,318 +1,239 @@
 <!doctype html>
-<html ng-app='app'>
+<html>
    <head>
-      <meta charset="utf-8" />
+      <meta charset="utf-8">
       <link rel="icon" type="image/png" href="dash/img/favicon.ico">
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-      <title>WECAN</title>
       <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-      <meta name="viewport" content="width=device-width" />
-      <!-- Bootstrap core CSS     -->
-      <link href="dash/css/bootstrap.min.css" rel="stylesheet" />
-      <link href="css/dashboard.css" rel="stylesheet" />
-      <!-- Animation library for notifications   -->
-      <link href="dash/css/animate.min.css" rel="stylesheet"/>
-      <!--  Light Bootstrap Table core CSS    -->
-      <link href="dash/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
-      <!--     Fonts and icons     -->
-      <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-      <link href="http://fonts.googleapis.com/css?family=Roboto:400,700,300" rel="stylesheet" type="text/css">
-      <link href="dash/css/pe-icon-7-stroke.css" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link href="css/home.css" rel="stylesheet">
+      <link rel="stlesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"/>
+      <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+      <link href="assets/css/material-kit.css" rel="stylesheet"/>
+      <!-- sweet alert -->
       <link rel="stylesheet" href="css/sweetalert.css">
+      <title>Wecan</title>
    </head>
-   <body>
-      <div class="wrapper">
-         <div class="sidebar" data-color="white" data-image="dash/img/sidebar-4.jpg" ng-controller="IndexCtrl">
-            <!--
-               Tip 1: you can change the color of the sidebar using: data-color=" white | blue | azure | green | orange | red | purple"
-               Tip 2: you can also add an image using data-image tag
-               
-               -->
-            <div class="sidebar-wrapper">
-               <ul class="nav">
-                  <li style="background: #253238;" ng-controller="PerfilCtrl">
-                     <div class="infoUser">
-                        <div class="content">
-                           <div class="author">
-                              <a ui-sref="perfil({idUsuario: {{UsuarioLogado}} })" ui-sref-active="active">
-                                 <img src="dash/img/faces/face-1.png" alt="..."/>
-                                 <h5 class="text-info">{{nomeUsuario}}<br/>
-                                    <small>{{cursoUsuario}}</small>
-                                 </h5>
-                              </a>
-                           </div>
+   <body ng-app='app'>
+      <div class="index-page">
+         <nav class="navbar navbar-transparent navbar-fixed-top navbar-color-on-scroll">
+            <div class="container">
+               <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-index">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  </button>
+                  <a id="logo" href="javascript:void(0)" onclick="scrollToHome()">
+                     <div class="logo-container">
+                        <div class="logo">
+                           <img src="http://i68.tinypic.com/ojnt3r.png" alt="Wecan logo" rel="tooltip" title="<b>Wecan</b>, plataforma ágil na criação de projetos universitários." data-placement="bottom" data-html="true">
                         </div>
                      </div>
-                  </li>
-                  <li>
-                     <a href="#">
-                        <i class="pe-7s-graph"></i>
-                        <p>Dashboard</p>
-                     </a>
-                  </li>
-                  <li>
-                     <a ng-hide="tipoUsuarioFiltro()" ui-sref="pageMeusProjetos" ui-sref-active="active">
-                        <i ng-hide="tipoUsuarioFiltro()" class="pe-7s-note2"></i>
-                        <p>Meus projetos</p>
-                     </a>
-                  </li>
-                  <li>
-                     <a ng-show="idUsuairiod == UsuarioLogado" ui-sref="altPerfil" ui-sref-active="active">
-                        <i class="pe-7s-user"></i>
-                        <p>Editar perfil</p>
-                     </a>
-                  </li>
-               </ul>
+                  </a>
+               </div>
+               <div class="collapse navbar-collapse" id="navigation-index">
+                  <ul class="nav navbar-nav navbar-right">
+                     <li>
+                        <a href="javascript:void(0)" onclick="scrollToSobre()">
+                        <i class="material-icons">chat</i> Sobre
+                        </a>
+                     </li>
+                     <li>
+                        <a href="javascript:void(0)" onclick="scrollToLogin()">
+                        <i class="material-icons">account_box</i> Login
+                        </a>
+                     </li>
+                     <li class="active" ng-controller="HomePageCtrl">
+                        <a ng-click="carregarPaginaRegister()" href="">
+                        <i class="material-icons">person_add</i> Cadastre-se
+                        </a>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </nav>
+         <div class="wrapper" id="home">
+            <div class="header header-filter" style="background-image: url('http://i66.tinypic.com/96xi0o.jpg'); background-attachment: fixed;">
+               <div class="container">
+                  <div class="row">
+                     <div class="col-md-8 col-md-offset-2">
+                        <div class="brand" ng-controller="HomePageCtrl">
+                           <h1>WECAN</h1>
+                           <h3><b>Plataforma</b> ágil na criação de projetos universitários.</h3>
+                           <a ng-click="carregarPaginaRegister()" href="" class="btn btn-primary btn-lg">Crie sua conta</a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
             </div>
          </div>
-         <div class="main-panel">
-            <nav class="navbar navbar-default navbar-fixed" ng-controller="IndexCtrl">
-               <div class="container-fluid">
-                  <div class="navbar-header">
-                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
-                     <span class="sr-only">Toggle navigation</span>
-                     <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                     </button>
-                  </div>
-                  <div class="collapse navbar-collapse">
-                     <ul class="nav navbar-nav navbar-left">
-                        <li>
-                           <a ng-hide="tipoUsuarioFiltro()" ui-sref="pageAvaliacao" ui-sref-active="active">
-                           <i ng-hide="tipoUsuarioFiltro()" class="fa fa-tasks" aria-hidden="true"></i>
-                           Avaliações
-                           </a>
-                        </li>
-                        <li>
-                           <a ng-hide="tipoUsuarioFiltro()" ui-sref="pageListaProjetos" ui-sref-active="active">
-                           <i ng-hide="tipoUsuarioFiltro()" class="fa fa-area-chart" aria-hidden="true"></i>
-                           Grade de projetos
-                           </a>
-                        </li>
-                        <li>
-                           <a ng-hide="tipoUsuarioFiltro()" ui-sref="pageListaProjetosConcluidos" ui-sref-active="active">
-                           <i ng-hide="tipoUsuarioFiltro()" class="fa fa-check-circle" aria-hidden="true"></i>
-                           Projetos concluídos
-                           </a>
-                        </li>
-                        <li>
-                           <a ng-show="tipoUsuarioFiltro()" ui-sref="cadastrosAdmin" ui-sref-active="active">
-                           <i ng-show="tipoUsuarioFiltro()" class="fa fa-clipboard" aria-hidden="true"></i> 
-                           Administrador
-                           </a>
-                        </li>
-                        <li>
-                           <a ng-hide="tipoUsuarioFiltro()" href="#pageListaNotificacoes">
-                              <div ng-hide="tipoUsuarioFiltro()" class="noti" ng-controller="PageNotificacaoCtrl">
-                                 <i ng-hide="tipoUsuarioFiltro()" class="fa fa-bell" aria-hidden="true">
-                                 <span ng-hide="NotificacoesPendentes == 0" class="noti__badge">			{{NotificacoesPendentes}}
-                                 </span>
-                                 </i>
-                              </div>
-                              Notificações
-                           </a>
-                        </li>
-                     </ul>
-                     <ul class="nav navbar-nav navbar-right">
-                        <li ng-controller="loginCtrl">
-                           <a ng-click="logout()">
-                           <i class="fa fa-sign-out" aria-hidden="true"></i>
-                           Sair
-                           </a>
-                        </li>
-                     </ul>
+      </div>
+      <div class="section" id="sobre">
+         <div class="container">
+            <div class="row">
+               <div class="title-area">
+                  <h2>Crie projetos</h2>
+                  <i class="material-icons">add_to_queue</i>
+                  <p class="description">Você pode criar quantos projetos quiser, sobre o assunto que preferir.</p>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-6">
+                  <div class="info-icon">
+                     <div class="icon text-danger">
+                        <i class="pe-7s-graph1"></i>
+                     </div>
+                     <h3>Encontre membros</h3>
+                     <i class="material-icons">group_add</i>
+                     <p class="description">Escolha membros com mais habilidades e pontuação para sua equipe.</p>
                   </div>
                </div>
-            </nav>
-            <div class="content" ui-view></div>
-            <footer class="footer">
-               <div class="container-fluid">
-                  <div class="copyright pull-left">
-                     Plataforma desenvolvida pela equipe do curso de análise e desenvolvimento de sistemas.
-                  </div>
-                  <div class="copyright pull-right">
-                     &copy; 2017, WECAN.
+               <div class="col-md-6">
+                  <div class="info-icon">
+                     <div class="icon text-danger">
+                        <i class="pe-7s-note2"></i>
+                     </div>
+                     <h3>Trabalhe com a melhor equipe</h3>
+                     <i class="material-icons">group_work</i>
+                     <p class="description">Desenvolva projetos com pessoas capacitadas e com o mesmo objetivo.</p>
                   </div>
                </div>
-            </footer>
+               <div class="col-md-6">
+                  <div class="info-icon">
+                     <div class="icon text-danger">
+                        <i class="pe-7s-note2"></i>
+                     </div>
+                     <h3>Desenvolva e gerencie</h3>
+                     <i class="material-icons">poll</i>
+                     <p class="description">Desenvolva seu projeto com efiência e gerencie as atividades necessárias.</p>
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <div class="info-icon">
+                     <div class="icon text-danger">
+                        <i class="pe-7s-note2"></i>
+                     </div>
+                     <h3>Conclua seus projetos</h3>
+                     <i class="material-icons">assignment_turned_in</i>
+                     <p class="description">Tenha seu projeto concluído no tempo previsto e com a qualidade desejada.</p>
+                  </div>
+               </div>
+            </div>
          </div>
       </div>
+      <div class="section" id="section">
+         <div class="container">
+            <div class="col-md-12">
+               <div class="info-icon" ng-controller="HomePageCtrl">
+                  <div class="icon text-danger">
+                     <i class="pe-7s-note2"></i>
+                  </div>
+                  <img src="http://i64.tinypic.com/k450l.png"/>
+                  <h3>Encontre pessoas qualificadas para a sua equipe.</h3>
+                  <p class="description">A Wecan te ajuda a encontrar membros interessados e dedicados, chegando no seu resultado final com qualidade.</p>
+                  <a ng-click="carregarPaginaRegister()" href="" class="btn btn-primary btn-lg">Crie sua conta</a>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="signup-page" id="login">
+         <div class="wrapper">
+            <div class="header header-filter" style="background-image: url('http://i65.tinypic.com/34q1ixv.jpg'); background-size: cover; background-position: top center; background-attachment: fixed;">
+               <div class="container">
+                  <div class="row">
+                     <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+                        <div class="card card-signup">
+                           <form ng-controller="loginCtrl" class="form">
+                              <div class="header header-primary text-center">
+                                 <h4>Entre com sua conta</h4>
+                              </div>
+                              <div class="content">
+                                 <div class="input-group">
+                                    <span class="input-group-addon">
+                                    <i class="material-icons">face</i>
+                                    </span>
+                                    <input ng-model="usernameLogin" type="text" class="form-control" placeholder="Username..." required>
+                                 </div>
+                                 <div class="input-group">
+                                    <span class="input-group-addon">
+                                    <i class="material-icons">lock_outline</i>
+                                    </span>
+                                    <input ng-model="senhaUsername" type="password" placeholder="Senha..." class="form-control" required/>
+                                 </div>
+                              </div>
+                              <div class="footer text-center">
+                                 <button ng-click="ValidarLogin()" class="btn btn-simple btn-primary btn-lg">Entrar</button>
+                              </div>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <footer class="footer">
+         <div class="container">
+            <div class="copyright pull-left">
+               <i class="material-icons">dashboard</i> Plataforma desenvolvida pela equipe do curso de análise e desenvolvimento de sistemas.
+            </div>
+            <div class="copyright pull-right">
+               &copy; 2017, WECAN.
+            </div>
+         </div>
+      </footer>
       <!--   Core JS Files   -->
-      <script src="dash/js/jquery-1.10.2.js" type="text/javascript"></script>
-      <script src="dash/js/bootstrap.min.js" type="text/javascript"></script>
-      <!--  Checkbox, Radio & Switch Plugins -->
-      <script src="dash/js/bootstrap-checkbox-radio-switch.js"></script>
-      <!--  Charts Plugin -->
-      <script src="dash/js/chartist.min.js"></script>
-      <!--  Notifications Plugin    -->
-      <script src="dash/js/bootstrap-notify.js"></script>
-      <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-      <script src="dash/js/light-bootstrap-dashboard.js"></script>
+      <script src="assets/js/jquery.min.js" type="text/javascript"></script>
+      <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+      <script src="assets/js/material.min.js"></script>
+      <!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
+      <script src="assets/js/material-kit.js" type="text/javascript"></script>
+      <script src="https://use.fontawesome.com/2af5f88198.js"></script>
       <!-- Libs angular.js -->
       <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
       <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
       <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-cookies.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
+      <script type="text/javascript" src="js/angular-ui-router.js"></script>
       <!-- javaScript controllers Angular -->
       <script type="text/javascript" src="js/app.js"></script>
+      <script src="js/controllers/loginController.js"></script>
+      <script src="js/controllers/homepageController.js"></script>
       <!-- Sweet Alert -->
       <script src="js/sweetalert.min.js"></script>
-      <!-- More javaScript controllers Angular -->	
-      <script type="text/javascript" src="js/controllers/EstadoController.js"></script>
-      <script type="text/javascript" src="js/controllers/CidadeController.js"></script>
-      <script type="text/javascript" src="js/controllers/InstituicaoController.js"></script>
-      <script type="text/javascript" src="js/controllers/ProjetoController.js"></script>
-      <script type="text/javascript" src="js/controllers/MeusProjetosController.js"></script>
-      <script type="text/javascript" src="js/controllers/TarefaController.js"></script>
-      <script type="text/javascript" src="js/controllers/CursoController.js"></script>
-      <script type="text/javascript" src="js/controllers/CompetenciaController.js"></script>
-      <script type="text/javascript" src="js/controllers/TipoUsuarioController.js"></script>
-      <script type="text/javascript" src="js/controllers/UsuarioController.js"></script>
-      <script type="text/javascript" src="js/controllers/DisciplinaController.js"></script>
-      <script type="text/javascript" src="js/controllers/AvaliacaoController.js"></script>
-      <script type="text/javascript" src="js/controllers/DashBoardController.js"></script>
-      <script type="text/javascript" src="js/controllers/loginController.js"></script>
-      <script type="text/javascript" src="js/controllers/FeedController.js"></script>
-      <script type="text/javascript" src="js/controllers/PerfilController.js"></script>
-      <script type="text/javascript" src="js/controllers/ExcluirUsuarioController.js"></script>
-      <script type="text/javascript" src="js/controllers/ListarProjetosController.js"></script>
-      <script type="text/javascript" src="js/controllers/NotificacaoController.js"></script>
-      <script type="text/javascript" src="js/controllers/IndexController.js"></script>
-      <!--         			<li class=""><a ui-sref="pageTarefa" ui-sref-active="active">Tarefas</a></li>
-         <li class=""><a ui-sref="pageCompetencia" ui-sref-active="active">Competencias</a></li>
-         <li class=""><a ui-sref="pageDisciplina" ui-sref-active="active">Disciplinas</a></li> -->
+      <script type="text/javascript">
+         $().ready(function(){
+         	// the body of this function is in assets/material-kit.js
+         	//materialKit.initSliders();
+         
+         	window_width = $(window).width();
+         
+         	if (window_width >= 992){
+         		big_image = $('.wrapper > .header');
+         
+         		$(window).on('scroll', materialKit.checkScrollForParallax);
+         	}
+         
+         });
+         
+         function scrollToLogin(){
+         	$("html, body").animate({
+         		scrollTop: $('#login').offset().top
+         	},1000);
+         }
+         
+         function scrollToSobre(){
+         	$("html, body").animate({
+         		scrollTop: $('#sobre').offset().top
+         	},1000);
+         }
+         
+         function scrollToHome(){
+         	$("html, body").animate({
+         		scrollTop: $('#home').offset().top
+         	},1000);
+         }
+      </script>
    </body>
 </html>
-<!--  <!doctype html>
-   <html ng-app='app'>
-   <!-- Configurações da página 
-   	<head>
-   		<meta charset="utf-8">
-   		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-   		<meta name="viewport" content="width=device-width, initial-scale=1">
-   		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet"> 
-   		<link rel="stylesheet" href="css/style.css">
-   		<link rel="stylesheet" href="css/bootstrap.css">
-   		<link rel="stylesheet" href="css/principal.css">
-   		<link rel="stylesheet" href="css/slicknav.css">
-   		<link rel="stylesheet" href="css/reset.css">
-   		<!-- Sweet Alert 
-   		<link rel="stylesheet" href="css/sweetalert.css">
-   		<!-- end Stylesheet  
-   		<title>WECAN</title>
-   	</head>
-   <!-- ------------------------- -->
-<!-- Divisões da página 
-   <body>
-   	<header ng-controller="IndexCtrl">
-   		<div class="menu_mluv_retratil">
-   			<nav>
-   				<ul id="menuPerfil">
-   					<li ><div ng-controller="loginCtrl"><a href="#" ng-click="logout()"><i style="font-size: 20px;" class="fa fa-sign-out" aria-hidden="true"></i> Sair</a></div></li>	
-   					<li><a ng-hide="tipoUsuarioFiltro()" ui-sref="pageMeusProjetos" ui-sref-active="active"><i ng-hide="tipoUsuarioFiltro()" style="font-size: 20px;" class="fa fa-area-chart" aria-hidden="true"></i> Meus projetos</a></li>
-   					<li ng-controller="PerfilCtrl"><a ui-sref="perfil({idUsuario: {{UsuarioLogado}} })" ui-sref-active="active"><i style="font-size: 20px;" class="fa fa-user-circle" aria-hidden="true"></i> Perfil</a></li>
-   				</ul>
-   			</nav>
-   			<div class="perfilInf">
-   				<div id="img"><img src="http://lastpage.in/blogAsset/img/avatar-na.png"/></div>
-   				<div id="inf" ng-controller="PerfilCtrl">
-   					<label for="nome" class="label">NOME</label><br/>
-   					<label><p id="nome">{{nomeUsuario}}</p></label><br/>
-   					<label for="curso" class="label">CURSO</label><br/>
-   					<label><p id="curso">{{cursoUsuario}}</p></label><br/>
-   					<label for="instituicao" class="label">INSTITUICAO</label><br/>
-   					<label><p id="instituicao">{{instituicaoUsuario}}</p></label>
-   				</div>
-   			</div>
-   			<div class="perfilHab">
-   				<label class="label">HABILIDADES</label><br/>
-   				<label><p>Nome da habilidade</p></label>
-   				<div class="progress">
-   				  <div class="progress-bar" role="progressbar" aria-valuenow="VALOR DA HABILIDADE" aria-valuemin="0" aria-valuemax="100">
-   					0%
-   				  </div>
-   			</div>
-   			</div>
-   			<a class="mostra-esconde-menu" href="javascript:void(0);">Perfil ▼</a>
-   		</div>
-   		<div>
-   			<ul id="menu">	
-                  	<li><a ng-hide="tipoUsuarioFiltro()" href="#pageListaNotificacoes">
-                  		<div ng-hide="tipoUsuarioFiltro()" class="button" ng-controller="PageNotificacaoCtrl">
-                  		<i ng-hide="tipoUsuarioFiltro()" style="font-size: 20px;" class="fa fa-bell" aria-hidden="true">
-                  		<span ng-hide="NotificacoesPendentes == 0" class="button__badge">{{NotificacoesPendentes}}</span>
-                  		</i></div> Notificações</a>
-                  	</li>
-   				<!-- <li><a href="#">
-   					<i style="font-size: 20px;" class="fa fa-users" aria-hidden="true"></i> Fórum</a>
-   				</li> 
-   				<li><a ng-hide="tipoUsuarioFiltro()" ui-sref="pageListaProjetos" ui-sref-active="active">
-   					<i ng-hide="tipoUsuarioFiltro()" style="font-size: 20px;" class="fa fa-area-chart" aria-hidden="true">
-   					</i> Projetos</a>
-   				</li>
-   				<li><a ng-hide="tipoUsuarioFiltro()" href="#">
-   					<i ng-hide="tipoUsuarioFiltro()" style="font-size: 20px;" class="fa fa-clipboard" aria-hidden="true">
-   					</i> Avaliações</a></li>
-   				<li><a ng-show="tipoUsuarioFiltro()" ui-sref="cadastrosAdmin" ui-sref-active="active">
-   					<i ng-show="tipoUsuarioFiltro()" style="font-size: 20px;" class="fa fa-clipboard" aria-hidden="true"></i> Administrador</a>
-   				</li>
-   			</ul>
-   		</div>
-   	</header>
-   	<br/><br/>
-   	<div class="conteudo" ui-view></div>	
-   	<div class="rodape">
-   		<p>Plataforma criada para a finalização do curso superior de Análise e Desenvolvimento de Sistemas.</p>
-   		<p>©2017 Wecan</p>
-   	</div>
-   	<!-- Scripts tela 
-   	<script src="js/jquery-3.2.0.min.js"></script>
-   	<script src="js/bootstrap.js"></script>
-   	<script src="js/principal.js"></script>
-   	<script src="js/modernizr.js"></script>
-   	<script src="https://use.fontawesome.com/2af5f88198.js"></script>
-   	<script src="js/jquery.slicknav.js"></script>
-   	<script type="text/javascript">
-   		$(document).ready(function()
-   		{
-   			$('#menu').slicknav();
-   		});
-   	</script>
-   	
-   	<!-- Libs angular.js 
-   	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-   	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
-   	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-cookies.js"></script>
-   	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
-   	
-   	<!-- javaScript controllers Angular 
-   	<script type="text/javascript" src="js/app.js"></script>
-   	
-   	<!-- Sweet Alert 
-   	<script src="js/sweetalert.min.js"></script>
-   	
-   	<!-- More javaScript controllers Angular 	
-   	<script type="text/javascript" src="js/controllers/EstadoController.js"></script>
-   	<script type="text/javascript" src="js/controllers/CidadeController.js"></script>
-   	<script type="text/javascript" src="js/controllers/InstituicaoController.js"></script>
-   	<script type="text/javascript" src="js/controllers/ProjetoController.js"></script>
-   	<script type="text/javascript" src="js/controllers/MeusProjetosController.js"></script>
-   	<script type="text/javascript" src="js/controllers/TarefaController.js"></script>
-   	<script type="text/javascript" src="js/controllers/CursoController.js"></script>
-   	<script type="text/javascript" src="js/controllers/CompetenciaController.js"></script>
-   	<script type="text/javascript" src="js/controllers/TipoUsuarioController.js"></script>
-   	<script type="text/javascript" src="js/controllers/UsuarioController.js"></script>
-   	<script type="text/javascript" src="js/controllers/DisciplinaController.js"></script>
-   	<script type="text/javascript" src="js/controllers/DashBoardController.js"></script>
-   	<script type="text/javascript" src="js/controllers/loginController.js"></script>
-   	<script type="text/javascript" src="js/controllers/FeedController.js"></script>
-   	<script type="text/javascript" src="js/controllers/PerfilController.js"></script>
-   	<script type="text/javascript" src="js/controllers/ExcluirUsuarioController.js"></script>
-   	<script type="text/javascript" src="js/controllers/ListarProjetosController.js"></script>
-   	<script type="text/javascript" src="js/controllers/NotificacaoController.js"></script>
-   	<script type="text/javascript" src="js/controllers/IndexController.js"></script>
-   </html>
-   <!--         			<li class=""><a ui-sref="pageTarefa" ui-sref-active="active">Tarefas</a></li>
-          				<li class=""><a ui-sref="pageCompetencia" ui-sref-active="active">Competencias</a></li>
-          				<li class=""><a ui-sref="pageDisciplina" ui-sref-active="active">Disciplinas</a></li> -->

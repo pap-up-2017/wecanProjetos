@@ -18,7 +18,7 @@ angular.module("app").controller('loginCtrl', function($scope, $http, $cookieSto
 			$cookieStore.remove("session_token_val");
 			$cookieStore.remove("session_tipo_usuario");
 			$cookieStore.remove("session_username");
-			window.location.href = $rootScope.pattern_url+"home.html";
+			window.location.href = $rootScope.pattern_url+"index.html";
 		});
 	}
 	
@@ -33,7 +33,7 @@ angular.module("app").controller('loginCtrl', function($scope, $http, $cookieSto
 				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					if(loginfactory(data)){
-						window.location.href = $rootScope.pattern_url+"index.html";
+						window.location.href = $rootScope.pattern_url+"pvt.html";
 					}
 					else{
 						swal("Login incorreto.");

@@ -8,7 +8,7 @@ function autentication($rootScope, $state, $location, $cookieStore){
     			// verifica se não há usuarios, e se não tiver ele retorna para a home
     	       if($cookieStore.get("session_user_id") == null){
     	    	    //window.location.href = "http://wecanprojetos.com.br/home.html";
-    	    	    window.location.href = $rootScope.pattern_url+"home.html";
+    	    	    window.location.href = $rootScope.pattern_url+"index.html";
     	        	//window.location.href = "http://env-6524972.jelasticlw.com.br/home.html";
     	        }
     	    });
