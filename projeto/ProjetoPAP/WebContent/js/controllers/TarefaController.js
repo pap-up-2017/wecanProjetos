@@ -70,6 +70,7 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 			projetoTarefa : { idProjeto: $stateParams.idProjeto},
 			descricaoTarefa : tarefa.descricaoTarefa,
 			prazoEntrega: tarefa.prazoEntrega,
+			responsavel : tarefa.responsavel,
 			statusTarefa : 'Pendente'
 			
 		});
@@ -77,7 +78,7 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 		tarefa.nomeTarefa = '';
 		tarefa.descricaoTarefa = '';
 		tarefa.prazoEntrega = '';
-
+		
 		$http.post($rootScope.pattern_url+'rest/tarefarest/postcad/'+$scope.UsuarioLogado,
 				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
@@ -96,7 +97,7 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 	};
 	
 	// Envia a informação de alteração de um elemento para o banco ... Via rest
-	$scope.SalvarAlteracao = function(editedidTarefa, editednameTarefa, editedProjetoTarefa, editeddescricaoTarefa, editedprazoEntrega ){
+	$scope.SalvarAlteracao = function(editedidTarefa, editednameTarefa, editedProjetoTarefa, editeddescricaoTarefa, editedprazoEntrega, editedresponsavel ){
 		
 		var parameter = JSON.stringify({
 			type : "tarefa",
@@ -104,7 +105,8 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 			nomeTarefa : editednameTarefa,
 			projetoTarefa : editedProjetoTarefa,
 			descricaoTarefa : editeddescricaoTarefa,
-			prazoEntrega: editedprazoEntrega
+			prazoEntrega: editedprazoEntrega,
+			responsavel : editedresponsavel
 		});
 
 		$http.post($rootScope.pattern_url+'rest/tarefarest/postalt/'+$scope.UsuarioLogado,
@@ -122,7 +124,7 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 							+ "<hr />config: " + config;
 					
 				
-				});
+				});	
 		
 		//$scope.BuscarInformacao();
 		
@@ -194,6 +196,7 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 			  		"Criado em: "+ $filter('date')(tarefa.dataCriacao, 'dd/MM/yyyy - HH:mm:ss')+"<br/>"+
 			  		"Prazo: "+ $filter('date')(tarefa.prazoEntrega, 'dd/MM/yyyy')+"<br/>"+
 			  		"Status: "+tarefa.statusTarefa+"<br/>"+
+			  		"Responsavel: "+tarefa.responsavel.usernameUsuario+"<br/>"+
 			  		"Responsavel pela ultima modificação: "+tarefa.usuarioModificacao.usernameUsuario+ '</p>'
 				  ,
 			  html: true
@@ -208,6 +211,7 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 	    $scope.editedProjetoTarefa = tarefa.projetoTarefa;
 	    $scope.editedProjetoTarefaOld = tarefa.projetoTarefa;
 	    $scope.editeddescricaoTarefa = tarefa.descricaoTarefa;
+	    $scope.editedresponsavel = tarefa.responsavel;
 	    $scope.editedprazoEntrega = new Date(tarefa.prazoEntrega);
 	};
 	

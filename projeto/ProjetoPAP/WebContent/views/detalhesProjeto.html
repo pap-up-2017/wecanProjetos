@@ -121,6 +121,10 @@
                            <a class="text-info">Data de entrega:</a>
                            <input placeholder="Prazo de entrega" class="form-control" type="date" ng-model="tarefa.prazoEntrega" required/>
                            <br/>
+                           <a class="text-info">Responsavel:</a>
+                           <select class="form-control" ng-model="tarefa.responsavel" ng-options="usuario.nomeUsuario for usuario in usuariosSelect">
+                     	      <option value="">Selecione um participante</option>
+                           </select>
                            <button class="btn btn-info btn-fill btn-sm" ng-click="SalvarCadastro(tarefa)">Concluir</button>
                            <button class="btn btn-danger btn-fill btn-sm" ng-click="FecharPopUpCriacao()">Cancelar</button>
                         </div>
@@ -136,7 +140,11 @@
                            <a class="text-info">Data de entrega:</a>
                            <input class="form-control" type="date" ng-model="editedprazoEntrega"/>
                            <br/>
-                           <button class="btn btn-info btn-fill btn-sm" ng-click="SalvarAlteracao(editedidTarefa, editednameTarefa, editedProjetoTarefa, editeddescricaoTarefa, editedprazoEntrega)">Salvar</button>
+                           <a class="text-info">Responsavel:</a>
+                           <select class="form-control" ng-model="editedresponsavel" ng-options="usuario.nomeUsuario for usuario in usuariosSelect">
+                     	      <option ng-show="!editedresponsavel" value="">{{editedresponsavel.nomeUsuario}}</option>
+                           </select>
+                           <button class="btn btn-info btn-fill btn-sm" ng-click="SalvarAlteracao(editedidTarefa, editednameTarefa, editedProjetoTarefa, editeddescricaoTarefa, editedprazoEntrega, editedresponsavel)">Salvar</button>
                            <button class="btn btn-danger btn-fill btn-sm" ng-click="FecharPopUpEdicao()">Cancelar</button>
                         </div>
                      </div>

@@ -310,6 +310,16 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 						$scope.istrueparticipante=false;
 					}
 			    }
+			    $scope.usuariosSelect = [];
+			    for(var i = 0; i < $scope.usuariosDoProjeto.length; i++){
+			    	 $scope.usuariosSelect.push({idUsuario : $scope.usuariosDoProjeto[i].idUsuario,
+	                    							nomeUsuario : $scope.usuariosDoProjeto[i].nomeUsuario,
+	                    							tipoUsuario :  $scope.usuariosDoProjeto[i].tipoUsuario});
+			    		 
+			    }
+			    $scope.usuariosSelect.push({ idUsuario : $scope.projeto.organizador.idUsuario,
+	                    							nomeUsuario : $scope.projeto.organizador.nomeUsuario,
+	                    							tipoUsuario :  $scope.projeto.organizador.tipoUsuario});
 			}else{
 			   	if($scope.projeto.usuarios != null){
 			   		$scope.usuariosDoProjeto = [];
@@ -321,8 +331,18 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 						$scope.istrueparticipante=false;
 					}
 			   	}
+			   	$scope.usuariosSelect = [];
+			    for(var i = 0; i < $scope.usuariosDoProjeto.length; i++){
+			    	 $scope.usuariosSelect.push({idUsuario : $scope.usuariosDoProjeto[i].idUsuario,
+	                    							nomeUsuario : $scope.usuariosDoProjeto[i].nomeUsuario,
+	                    							tipoUsuario :  $scope.usuariosDoProjeto[i].tipoUsuario});
+			    		 
+			    }
+			    $scope.usuariosSelect.push({ idUsuario : $scope.projeto.organizador.idUsuario,
+	                    							nomeUsuario : $scope.projeto.organizador.nomeUsuario,
+	                    							tipoUsuario :  $scope.projeto.organizador.tipoUsuario});
 			}
-
+			console.log($scope.usuariosDoProjeto);
 			$http.get($rootScope.pattern_url+'rest/projetorest/GetAprov/'+$scope.projeto.idProjeto)
 			.success(function(data) {
 				//$scope.aprovacaoUsuarios = data["aprovacaoParticipante"];

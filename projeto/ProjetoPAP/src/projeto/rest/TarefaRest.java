@@ -44,6 +44,7 @@ public class TarefaRest {
 	@Path("/postcad/{id}")
 	public void cadastrarTarefa(@PathParam("id") int id, Tarefa tarefa) {	
 		
+		System.out.println("id do usuario responsavel:"+ tarefa.getResponsavel().getIdUsuario());
 		TarefaBusiness bus = new TarefaBusiness();
 		bus.create(id, tarefa);
 	}

@@ -34,6 +34,8 @@ public class Tarefa {
 	private Projeto projetoTarefa;
 	@ManyToOne
 	private Usuario usuarioModificacao;
+	@ManyToOne
+	private Usuario responsavel;
 	
 	public int getIdTarefa() {
 		return idTarefa;
@@ -82,6 +84,12 @@ public class Tarefa {
 	}
 	public void setUsuarioModificacao(Usuario usuarioModificacao) {
 		this.usuarioModificacao = usuarioModificacao;
+	}
+	public Usuario getResponsavel() {
+		return responsavel;
+	}
+	public void setResponsavel(Usuario responsavel) {
+		this.responsavel = responsavel;
 	}	
 
 }
