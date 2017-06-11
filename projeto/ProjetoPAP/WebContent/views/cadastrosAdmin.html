@@ -288,3 +288,45 @@
       </table>
    </div>
 </div>
+<div ng-controller="ItemProjetoCtrl" class="divMaster">
+   <h2>Itens de avaliação de projetos</h2>
+   <div class="divCadastros">
+      {{ Resposta }}
+      <p class="form-group">
+         <input placeholder="Nome" class="form-control" type="text" ng-model="item.nomeItem" required />
+      </p>
+      <p class="form-group">
+         <input placeholder="Nome" class="form-control" type="text" ng-model="item.descricaoItem" required />
+      </p>
+      <button class="btn btn-success" ng-click="SalvarCadastro(item)">Cadastrar</button>
+   </div>
+   <div class="divListas">
+      <button class="btn btn-primary" ng-click="BuscarAllItens()">Buscar itens</button>
+       <div class="editpopup editpopup-{{istrue}} ">
+         <p>edit Id:<input type="text" ng-model="editedid"></p>
+         <p>edit nome:<input type="text" ng-model="editednomeItem"></p>
+         <p>edit descrição:<input type="text" ng-model="editeddescricaoItem"></p>s
+         <button ng-click="SalvarAlteracao(editedid, editednomeItem, editeddescricaoItem)">Salvar</button>
+         <button ng-click="FecharPopUpEdicao()">Cancelar</button>
+      </div>
+      <br/><br/>
+      <br/><br/>
+      <table class="table ">
+         <tr>
+            <td>ID</td>
+            <td>NOME</td>
+            <td>DESCRIÇÃO</td>
+            <td>DISPONIVEL</td>
+         </tr>
+         <tr ng:repeat="item in allItensProjeto">
+            <td>{{item.id}}</td>
+           	<td>{{item.nomeItem}}</td>
+           	<td>{{item.descricaoItem}}</td>
+           	<td>{{item.isActivated}}</td>
+            <td><button ng-click="CarregarEdicao(item)" class="btn btn-primary">Alterar</button></td>
+            <td><button class="btn btn-primary" ng-click="DesativarItem(item)">Desativar</button></td>
+            <td><button class="btn btn-primary" ng-click="AtivarItem(item)">Ativar</button></td>
+         </tr>
+      </table>
+   </div>
+</div>

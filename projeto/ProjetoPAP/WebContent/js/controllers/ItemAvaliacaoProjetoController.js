@@ -1,152 +1,155 @@
 angular.module("app").controller('ItemProjetoCtrl', function($scope, $http, $rootScope) {
 	
-	// Busca informações salvas no banco... via rest
-	$scope.BuscarInformacao = function() {
+	// Busca os itens disponiveis ... 
+	$scope.BuscarItensDisponiveis = function() {
 
-		$http.get($rootScope.pattern_url+'rest/cursorest')
+		$http.get($rootScope.pattern_url+'rest/itemprojetorest')
 				.success(function(data) {
-					var cursosBanco = data["curso"];
+					var itensBanco = data["itemAvaliacaoProjeto"];
 					var arrayBanco = [];
-					if(Array.isArray(cursosBanco)){
-						arrayBanco = cursosBanco; 
+					if(Array.isArray(itensBanco)){
+						arrayBanco = itensBanco; 
 					}
 					else{
-						arrayBanco.push(cursosBanco);
+						arrayBanco.push(itensBanco);
 					}
-					$scope.cursos = arrayBanco;
+					$scope.itensProjeto = arrayBanco;
 				}).error(
 						function(data, status, header, config) {
-							$scope.Resposta = "Data: " + data + "<hr />status: "
-									+ status + "<hr />headers: " + header
-									+ "<hr />config: " + config;
+							console.log("Data: " + data + " | status: " + status + " | headers: " + header
+									+ " | config: " + config);
 						});
 	};
 	
-	// Busca informações de todos as faculdades salvas no banco..
-	// para carregar o comboBox..
-	$scope.BuscarInformacaoInstituuicoesEnsino = function() {
+	// Busca todos os itens ... 
+	$scope.BuscarAllItens = function() {
 
-		$http.get($rootScope.pattern_url+'rest/instituicaorest')
+		$http.get($rootScope.pattern_url+'rest/itemprojetorest/getallitens')
 				.success(function(data) {
-					var instituicoesBanco = data["instituicaoEnsino"];
+					var itensBanco = data["itemAvaliacaoProjeto"];
 					var arrayBanco = [];
-					if(Array.isArray(instituicoesBanco)){
-						arrayBanco = instituicoesBanco; 
+					if(Array.isArray(itensBanco)){
+						arrayBanco = itensBanco; 
 					}
 					else{
-						arrayBanco.push(instituicoesBanco);
+						arrayBanco.push(itensBanco);
 					}
-					$scope.instituicoes = arrayBanco;
+					$scope.allItensProjeto = arrayBanco;
 				}).error(
 						function(data, status, header, config) {
-							$scope.Resposta = "Data: " + data + "<hr />status: "
-									+ status + "<hr />headers: " + header
-									+ "<hr />config: " + config;
+							console.log("Data: " + data + " | status: " + status + " | headers: " + header
+									+ " | config: " + config);
 						});
-
 	};
 	
-	// envia a informação de um novo cadastro no banco .. via rest .. 
-	$scope.SalvarCadastro = function(curso) {
+	// Salva um item
+	$scope.SalvarCadastro = function(item) {
 
 		var parameter = JSON.stringify({
-			type : "curso",
-			nomeCurso : curso.nomeCurso,
-			instituicaoCurso : curso.instituicaoCurso
+			type : "itemAvaliacaoProjeto",
+			nomeItem : item.nomeItem,
+			descricaoItem : item.descricaoItem
 		});
 
-		$http.post($rootScope.pattern_url+'rest/cursorest/postcad',
+		$http.post($rootScope.pattern_url+'rest/itemprojetorest/postcad',
 				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
-					$scope.Resposta = 'Curso Salvo com Sucesso!';
+					$scope.Resposta = 'Item Salvo com Sucesso!';
 					
 					
 				}).error(
 				function(data, status, header, config) {
-					$scope.Resposta = "Data: " + data + "<hr />status: "
-							+ status + "<hr />headers: " + header
-							+ "<hr />config: " + config;
+					console.log("Data: " + data + " | status: " + status + " | headers: " + header
+							+ " | config: " + config);
 				});
-		
-		$scope.BuscarInformacao();
+		$scope.BuscarAllItens();
 	};
 	
 	// Envia a informação de alteração de um elemento para o banco ... Via rest
-	$scope.SalvarAlteracao = function(editedidCurso, editednameCurso, editedInstituicaoCurso){
+	$scope.SalvarAlteracao = function(editedid, editednomeItem, editeddescricaoItem){
 		
 		var parameter = JSON.stringify({
 			type : "curso",
-			idCurso : editedidCurso,
-			nomeCurso : editednameCurso,
-			instituicaoCurso : editedInstituicaoCurso
+			id : editedid,
+			nomeItem : editednomeItem,
+			descricaoItem : editeddescricaoItem
 		});
 
-		$http.post($rootScope.pattern_url+'rest/cursorest/postalt',
+		$http.post($rootScope.pattern_url+'rest/itemprojetorest/postalt',
 				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
-					$scope.Resposta = 'Curso salvo com Sucesso!';
+					$scope.Resposta = 'Item Salvo com Sucesso!';
 					
 					
 				}).error(
 				function(data, status, header, config) {
-					$scope.Resposta = "Data: " + data + "<hr />status: "
-							+ status + "<hr />headers: " + header
-							+ "<hr />config: " + config;
-					
-				
+					console.log("Data: " + data + " | status: " + status + " | headers: " + header
+							+ " | config: " + config);
 				});
-		
-		$scope.BuscarInformacao();
-		
+		$scope.BuscarAllItens();
 	};
 	
-	// carrega os dados do elemento selecionado para exclusão .. 
-	$scope.ExcluirElemento = function(curso){
+	// desativa um item 
+	$scope.DesativarItem = function(item){
 
 		var parameter = JSON.stringify({
 			type : "curso",
-			idCurso : curso.idCurso,
-			nomeCurso : curso.nomeCurso,
-			instituicaoCurso : curso.instituicaoCurso
+			id : item.id,
+			nomeItem : item.nomeItem,
+			descricaoItem : item.descricaoItem
 		});
 
-		$http.post($rootScope.pattern_url+'rest/cursorest/postdel',
+		$http.post($rootScope.pattern_url+'rest/itemprojetorest/desativa',
 				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
-					$scope.Resposta = 'Curso excluido com Sucesso!';
-					
-					
+					$scope.Resposta = 'item desativado com Sucesso!';
 				}).error(
 				function(data, status, header, config) {
-					$scope.Resposta = "Data: " + data + "<hr />status: "
-							+ status + "<hr />headers: " + header
-							+ "<hr />config: " + config;
+					console.log("Data: " + data + " | status: " + status + " | headers: " + header
+							+ " | config: " + config);
 				});
 		
-		$scope.BuscarInformacao();
-		
+		$scope.BuscarAllItens();
+	};
+	
+	// ativa um item 
+	$scope.AtivarItem = function(item){
+
+		var parameter = JSON.stringify({
+			type : "curso",
+			id : item.id,
+			nomeItem : item.nomeItem,
+			descricaoItem : item.descricaoItem
+		});
+
+		$http.post($rootScope.pattern_url+'rest/itemprojetorest/ativa',
+				parameter, $rootScope.GetPostconfig).success(
+				function(data, status, headers, config) {
+					$scope.Resposta = 'item ativado com Sucesso!';
+				}).error(
+				function(data, status, header, config) {
+					console.log("Data: " + data + " | status: " + status + " | headers: " + header
+							+ " | config: " + config);
+				});
+		$scope.BuscarAllItens();
 	};
 	
 	// carrega os dados do elemento selecionado para edição .. 
-	// TODO fazer carregamento do combobox com o estado para edição
-	$scope.CarregarEdicao = function(curso){
+	$scope.CarregarEdicao = function(item){
 		$scope.istrue=true;
-	    $scope.editedidCurso = curso.idCurso;
-	    $scope.editednameCurso = curso.nomeCurso;
-	    $scope.editedInstituicaoCurso = curso.instituicaoCurso;
-	    $scope.editedInstituicaoCursoOld = curso.instituicaoCurso;
+	    $scope.editedid = item.id;
+	    $scope.editednomeItem = item.nomeItem;
+	    $scope.editeddescricaoItem = item.descricaoItem;
 	};
 	
 	// função para fechar o popUp de edição ... 
 	$scope.FecharPopUpEdicao = function(){
 	     $scope.istrue=false;
 	  };
-	
+
 	// função que inicia a tela
 	$scope.iniciaTela = function() {
-		
-		$scope.BuscarInformacao();
-		$scope.BuscarInformacaoInstituuicoesEnsino();
+		$scope.BuscarAllItens();
 	};
 	$scope.iniciaTela();
 });

@@ -57,11 +57,22 @@ public class ItemAvaliacaoProjetoRest {
 		//del logico
 		@POST
 		@Consumes(MediaType.APPLICATION_JSON)
-		@Path("/postdel")
-		public void removerItem(ItemAvaliacaoProjeto item) {
+		@Path("/desativa")
+		public void desativarItem(ItemAvaliacaoProjeto item) {
 			ItemAvaliacaoProjetoBusiness itemBus = new ItemAvaliacaoProjetoBusiness();
 			if (item.getId() > 0){
 				itemBus.deleteLogico(item);
+			}
+		}
+		
+		//ativa item
+		@POST
+		@Consumes(MediaType.APPLICATION_JSON)
+		@Path("/ativa")
+		public void ativarItem(ItemAvaliacaoProjeto item) {
+			ItemAvaliacaoProjetoBusiness itemBus = new ItemAvaliacaoProjetoBusiness();
+			if (item.getId() > 0){
+				itemBus.ativaItem(item);
 			}
 		}
 }
