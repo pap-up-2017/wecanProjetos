@@ -20,10 +20,79 @@
    .editpopup-false{
    display: none;
    }
+   
+   .liAvaliacao{
+   list-style-type:none;
+   }
+   
+   
 </style>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<br/><br/><br/><br/>
+<!--<br/><br/><br/><br/>
+ <fieldset>
+         <legend>What is Your Favorite Pet?</legend>
+                 <input type="radio" name="animal" value="Cat" />Cats<br />
+                 <input type="radio" name="animal" value="Dog" />Dogs<br />
+                 <input type="radio" name="animal" value="Bird" />Birds<br />
+                 <input type="submit" value="Submit now" />
+ </fieldset>
+
+<div ng-controller="PageAvaliacaoCtrl">
+  <ul >
+      <li class='liAvaliacao' ng:repeat="disciplina in disciplinas">
+         {{disciplina.idDisciplina}} - {{disciplina.nomeDisciplina}}
+	      <ul>
+	         <li class='liAvaliacao' ng-repeat="avaliacao in avaliacoes | filter:filtroDisciplina(disciplina)">
+	              {{avaliacao.idAvaliacao}} - {{avaliacao.nomeAvaliacao}} - {{avaliacao.disciplina.nomeDisciplina}} - {{avaliacao.professor.nomeUsuario}} 
+	          <ul>
+		        <li class='liAvaliacao' ng:repeat="exercicio in exercicios | filter: exercicio.avaliacao.idAvaliacao = avaliacao.idAvaliacao">
+		             {{exercicio.idExercicio}} - {{exercicio.tituloExercicio}} - {{exercicio.descricaoExercicio}}
+		             <ul>
+		              <li class='liAvaliacao' ng:repeat="respostaAvaliacao in respostaAvaliacoes | filter:filtroExercicio(exercicio) ">
+				         {{respostaAvaliacao.idRespostaAvaliacao}} - {{respostaAvaliacao.textoRespostaAvaliacao}} - {{respostaAvaliacao.statusRespostaAvaliacao}} - {{respostaAvaliacao.exercicio.tituloExercicio}}
+		             </li>
+		             </ul>
+		               
+		      	</li>
+		      </ul>
+	        </li>
+      	  </ul>
+      </li>
+    </ul>
+</div>
+ -->
+
+<div ng-controller="PageAvaliacaoCtrl">
+
+	<fieldset>
+	<li class='liAvaliacao' ng:repeat="disciplina in disciplinas">
+		 <legend>Disciplina: {{disciplina.nomeDisciplina}}</legend>
+	 	      <ul>
+		         <li class='liAvaliacao' ng-repeat="avaliacao in avaliacoes | filter:filtroDisciplina(disciplina)">
+		              <legend>Avaliação: {{avaliacao.nomeAvaliacao}} - Professor: {{avaliacao.professor.nomeUsuario}} </legend>
+			          <ol>
+			          <li  ng:repeat="exercicio in exercicios | filter: exercicio.avaliacao.idAvaliacao = avaliacao.idAvaliacao">
+			             Exercício: {{exercicio.tituloExercicio}} - {{exercicio.descricaoExercicio}}
+			             
+				             <fieldset>
+				                 <ol type="a">
+						              <li ng:repeat="respostaAvaliacao in respostaAvaliacoes | filter:filtroExercicio(exercicio) ">
+								         <input type="radio" name="{{respostaAvaliacao.idRespostaAvaliacao}}" value="{{respostaAvaliacao.idRespostaAvaliacao}}" /> {{respostaAvaliacao.textoRespostaAvaliacao}}
+						             </li>
+					             </ol>
+					         </fieldset>
+			          </li>
+			          </ol>
+		         
+		         </li>
+		      </ul>
+		 	      
+	</li>
+ 	</fieldset>
+
+</div>
+
 <div ng-controller="PageAvaliacaoCtrl"	>
    {{ Resposta }}
    <h2>Cadastro de Avaliações</h2>

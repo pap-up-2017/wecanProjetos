@@ -105,9 +105,21 @@ function route($stateProvider, $urlRouterProvider, $locationProvider){
 	
 	var listaAvaliacoes = {
 			  name: 'pageListaAvaliacoes',
-			  url: '/pageListaAvaliacoes',
+			  url: '/pageListaAvaliacoes/{idDisciplina}',
 			  templateUrl: 'views/listaAvaliacoes.html'
 			}
+	var listaExercicios = {
+			  name: 'pageListaExercicios',
+			  url: '/pageListaExercicios/{idAvaliacao}',
+			  templateUrl: 'views/listaExercicios.html'
+			}
+	var listaDisciplinas = {
+		  name: 'pageListaDisciplinas',
+		  url: '/pageListaDisciplinas',
+		  templateUrl: 'views/listaDisciplinas.html'
+		}
+	  
+	
 	
 	var listaProjetosConcluidos = {
 			name: 'pageListaProjetosConcluidos',
@@ -131,6 +143,8 @@ function route($stateProvider, $urlRouterProvider, $locationProvider){
 	  $stateProvider.state(altPerfil);
 	  $stateProvider.state(listaNotificacoes);
 	  $stateProvider.state(listaAvaliacoes);
+	  $stateProvider.state(listaExercicios);
+	  $stateProvider.state(listaDisciplinas);
 	  $stateProvider.state(listaProjetosConcluidos);
 }
 

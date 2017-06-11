@@ -1,3 +1,9 @@
+<style type="text/css">
+   .liAvaliacao{
+   list-style-type:none;
+   }
+</style>
+<link rel="stylesheet" href="css/projeto.css">
 <link href="css/dashboard.css" rel="stylesheet"/>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
@@ -8,12 +14,24 @@
             <div class="card">
                <div class="header">
                   <label style="color: #fff;" class="label label-primary">
-                     Avaliações
+                  Avaliações
                   </label>
                </div>
                <br/>
                <div class="col-md-6">
-					Em breve...
+                  <div ng-controller="PageAvaliacaoCtrl">
+                     <legend>Selecione uma avaliação:</legend>
+                     <form>
+                        <br/>
+                        <input ng-model="buscaAvaliacao" ng-change="BuscarInformacaoAvaliacao()" type="text" name="search" placeholder="Localizar">
+                     </form>
+                     <br>
+                     <li class='liAvaliacao' ng-repeat="avaliacao in avaliacoes | filter:filtroDisciplina(disciplina) | filter: buscaAvaliacao ">
+                        Avaliação: {{avaliacao.nomeAvaliacao}} - Professor: {{avaliacao.professor.nomeUsuario}} <a class="btn btn-info btn-fill" ui-sref="pageListaExercicios({idAvaliacao: {{avaliacao.idAvaliacao}} })" id="titulo">Iniciar</a>
+                     </li>
+                     <br>	
+                     <button class="btn btn-info btn-fill" ng-click="voltar()">Voltar</button>
+                  </div>
                </div>
             </div>
          </div>
