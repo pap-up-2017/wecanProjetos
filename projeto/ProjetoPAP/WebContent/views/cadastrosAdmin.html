@@ -288,8 +288,8 @@
       </table>
    </div>
 </div>
-<div ng-controller="ItemProjetoCtrl" class="divMaster">
-   <h2>Itens de avaliação de projetos</h2>
+<div ng-controller="ItemUsuarioCtrl" class="divMaster">
+   <h2>Itens de avaliação de usuarios</h2>
    <div class="divCadastros">
       {{ Resposta }}
       <p class="form-group">
@@ -318,7 +318,7 @@
             <td>DESCRIÇÃO</td>
             <td>DISPONIVEL</td>
          </tr>
-         <tr ng:repeat="item in allItensProjeto">
+         <tr ng:repeat="item in allItensUsuario">
             <td>{{item.id}}</td>
            	<td>{{item.nomeItem}}</td>
            	<td>{{item.descricaoItem}}</td>

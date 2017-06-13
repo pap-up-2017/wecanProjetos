@@ -5,15 +5,14 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import projeto.entity.Disciplina;
-import projeto.entity.ItemAvaliacaoProjeto;
+import projeto.entity.ItemAvaliacaoUsuario;
 
-public class ItemAvaliacaoProjetoDao {
+public class ItemAvaliacaoUsuarioDao {
 	
 	// cria a instancia
 	EntityManager em = SingletonConection.getInstance();
 
-	public void salvar(ItemAvaliacaoProjeto t) {
+	public void salvar(ItemAvaliacaoUsuario t){
 		// inicia a instancia
 		em.getTransaction().begin();
 		// persiste os dados 
@@ -24,20 +23,20 @@ public class ItemAvaliacaoProjetoDao {
 		em.close();
 	}
 
-	public List<ItemAvaliacaoProjeto> listar() {
+	public List<ItemAvaliacaoUsuario> listar(){
 		// cria a Query para encontrar os itens
-		Query q = em.createQuery("from ItemAvaliacaoProjeto");
+		Query q = em.createQuery("from ItemAvaliacaoUsuario");
 		// retorna os dados encontrados
 		return q.getResultList();
 	}
 
-	public ItemAvaliacaoProjeto getObjById(int id) {
+	public ItemAvaliacaoUsuario getObjById(int id){
 		// cria a Query para encontrar de acordo com o id
-		Query q = em.createQuery("from ItemAvaliacaoProjeto where id = " + id);
-		return (ItemAvaliacaoProjeto) q.getSingleResult();
+		Query q = em.createQuery("from ItemAvaliacaoUsuario where id = " + id);
+		return (ItemAvaliacaoUsuario) q.getSingleResult();
 	}
 
-	public void alterar(ItemAvaliacaoProjeto t) {
+	public void alterar(ItemAvaliacaoUsuario t){
 		// inicia a instancia
 		em.getTransaction().begin();
 		// da um merge nos dados
@@ -48,24 +47,21 @@ public class ItemAvaliacaoProjetoDao {
 		em.close();
 	}
 
-	public void excluir(ItemAvaliacaoProjeto t) {
+	public void excluir(ItemAvaliacaoUsuario t){
 		// inicia a instancia
 		em.getTransaction().begin();
 		// cria uma query para para exclusão do objeto no banco..
-		em.createQuery("DELETE FROM ItemAvaliacaoProjeto WHERE id=" + t.getId()).executeUpdate();
+		em.createQuery("DELETE FROM ItemAvaliacaoUsuario WHERE id=" + t.getId()).executeUpdate();
 		// envia os dados
 		em.getTransaction().commit();
 		// fecha a instancia
 		em.close();
 	}
 	
-	public List<ItemAvaliacaoProjeto> listarNotDeleted() {
+	public List<ItemAvaliacaoUsuario> listarNotDeleted(){
 		// cria a Query para encontrar os itens
-		Query q = em.createQuery("from ItemAvaliacaoProjeto WHERE isActivated= "+true);
+		Query q = em.createQuery("from ItemAvaliacaoUsuario WHERE isActivated= "+true);
 		// retorna os dados encontrados
 		return q.getResultList();
 	}
-	
-	
-
 }

@@ -1,11 +1,11 @@
-angular.module("app").controller('ItemProjetoCtrl', function($scope, $http, $rootScope) {
+angular.module("app").controller('ItemUsuarioCtrl', function($scope, $http, $rootScope) {
 	
 	// Busca os itens disponiveis ... 
 	$scope.BuscarItensDisponiveis = function() {
 
-		$http.get($rootScope.pattern_url+'rest/itemprojetorest')
+		$http.get($rootScope.pattern_url+'rest/itemusuariorest')
 				.success(function(data) {
-					var itensBanco = data["itemAvaliacaoProjeto"];
+					var itensBanco = data["itemAvaliacaoUsuario"];
 					var arrayBanco = [];
 					if(Array.isArray(itensBanco)){
 						arrayBanco = itensBanco; 
@@ -13,7 +13,7 @@ angular.module("app").controller('ItemProjetoCtrl', function($scope, $http, $roo
 					else{
 						arrayBanco.push(itensBanco);
 					}
-					$scope.itensProjeto = arrayBanco;
+					$scope.itensUsuario = arrayBanco;
 				}).error(
 						function(data, status, header, config) {
 							console.log("Data: " + data + " | status: " + status + " | headers: " + header
@@ -24,9 +24,9 @@ angular.module("app").controller('ItemProjetoCtrl', function($scope, $http, $roo
 	// Busca todos os itens ... 
 	$scope.BuscarAllItens = function() {
 
-		$http.get($rootScope.pattern_url+'rest/itemprojetorest/getallitens')
+		$http.get($rootScope.pattern_url+'rest/itemusuariorest/getallitens')
 				.success(function(data) {
-					var itensBanco = data["itemAvaliacaoProjeto"];
+					var itensBanco = data["itemAvaliacaoUsuario"];
 					var arrayBanco = [];
 					if(Array.isArray(itensBanco)){
 						arrayBanco = itensBanco; 
@@ -34,7 +34,7 @@ angular.module("app").controller('ItemProjetoCtrl', function($scope, $http, $roo
 					else{
 						arrayBanco.push(itensBanco);
 					}
-					$scope.allItensProjeto = arrayBanco;
+					$scope.allItensUsuario = arrayBanco;
 				}).error(
 						function(data, status, header, config) {
 							console.log("Data: " + data + " | status: " + status + " | headers: " + header
@@ -46,12 +46,12 @@ angular.module("app").controller('ItemProjetoCtrl', function($scope, $http, $roo
 	$scope.SalvarCadastro = function(item) {
 
 		var parameter = JSON.stringify({
-			type : "itemAvaliacaoProjeto",
+			type : "itemAvaliacaoUsuario",
 			nomeItem : item.nomeItem,
 			descricaoItem : item.descricaoItem
 		});
 
-		$http.post($rootScope.pattern_url+'rest/itemprojetorest/postcad',
+		$http.post($rootScope.pattern_url+'rest/itemusuariorest/postcad',
 				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Item Salvo com Sucesso!';
@@ -75,7 +75,7 @@ angular.module("app").controller('ItemProjetoCtrl', function($scope, $http, $roo
 			descricaoItem : editeddescricaoItem
 		});
 
-		$http.post($rootScope.pattern_url+'rest/itemprojetorest/postalt',
+		$http.post($rootScope.pattern_url+'rest/itemusuariorest/postalt',
 				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Item Salvo com Sucesso!';
@@ -99,7 +99,7 @@ angular.module("app").controller('ItemProjetoCtrl', function($scope, $http, $roo
 			descricaoItem : item.descricaoItem
 		});
 
-		$http.post($rootScope.pattern_url+'rest/itemprojetorest/desativa',
+		$http.post($rootScope.pattern_url+'rest/itemusuariorest/desativa',
 				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'item desativado com Sucesso!';
@@ -122,7 +122,7 @@ angular.module("app").controller('ItemProjetoCtrl', function($scope, $http, $roo
 			descricaoItem : item.descricaoItem
 		});
 
-		$http.post($rootScope.pattern_url+'rest/itemprojetorest/ativa',
+		$http.post($rootScope.pattern_url+'rest/itemusuariorest/ativa',
 				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'item ativado com Sucesso!';

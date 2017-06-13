@@ -10,17 +10,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 //tag para o hibernate
 @Entity
-public class ItemAvaliacaoProjeto {
-	
-	private int id;
-	private String nomeItem;
-	private String descricaoItem;
-	private boolean isActivated;
+public class ItemAvaliacaoUsuario {
 	
 	// tag para indicar o id da classe
 	@Id
 	// geração de ids
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+	private String nomeItem;
+	private String descricaoItem;
+	private boolean isActivated;
+
 	public int getId() {
 		return id;
 	}
