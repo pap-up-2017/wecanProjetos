@@ -325,7 +325,8 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 			   		$scope.usuariosDoProjeto = [];
 			   		$scope.usuariosDoProjeto.push({ idUsuario : $scope.projeto.usuarios.idUsuario,
 			   										nomeUsuario : $scope.projeto.usuarios.nomeUsuario, 
-			   										tipoUsuario :  $scope.projeto.usuarios[i].tipoUsuario});
+			   										tipoUsuario :  $scope.projeto.usuarios.tipoUsuario
+			   										});
 			   		// Validação para seber se é participante do projeto
 					if($scope.UsuarioLogado == $scope.projeto.usuarios.idUsuario ){
 						$scope.istrueparticipante=false;
@@ -343,6 +344,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 	                    							tipoUsuario :  $scope.projeto.organizador.tipoUsuario});
 			}
 			console.log($scope.usuariosDoProjeto);
+			
 			$http.get($rootScope.pattern_url+'rest/projetorest/GetAprov/'+$scope.projeto.idProjeto)
 			.success(function(data) {
 				//$scope.aprovacaoUsuarios = data["aprovacaoParticipante"];
