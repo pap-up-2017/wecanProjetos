@@ -75,7 +75,8 @@ public class ProjetoBusiness {
 			}
 		}
 		if(concluido){
-			p.setStatus("Concluído");
+			p.setStatus("Avaliacao");
+			//p.setStatus("Concluído");
 			dao.alterar(p);
 			return "Projeto concluído com sucesso."; 
 		}

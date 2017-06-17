@@ -343,8 +343,6 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 	                    							nomeUsuario : $scope.projeto.organizador.nomeUsuario,
 	                    							tipoUsuario :  $scope.projeto.organizador.tipoUsuario});
 			}
-			console.log($scope.usuariosDoProjeto);
-			
 			$http.get($rootScope.pattern_url+'rest/projetorest/GetAprov/'+$scope.projeto.idProjeto)
 			.success(function(data) {
 				//$scope.aprovacaoUsuarios = data["aprovacaoParticipante"];
@@ -632,6 +630,126 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 		return false;
 	}
 	
+	/* --------------------------------------------------------------- */
+					/* *** AVALIAÇÃO USUARIO *** */
+	
+	
+	// Busca os itens disponiveis ... 
+	$scope.BuscarItensDisponiveis = function() {
+
+		$http.get($rootScope.pattern_url+'rest/itemusuariorest')
+				.success(function(data) {
+					var itensBanco = data["itemAvaliacaoUsuario"];
+					var arrayBanco = [];
+					if(Array.isArray(itensBanco)){
+						arrayBanco = itensBanco; 
+					}
+					else{
+						arrayBanco.push(itensBanco);
+					}
+					$scope.itensUsuario = arrayBanco;
+				}).error(
+						function(data, status, header, config) {
+							console.log("Data: " + data + " | status: " + status + " | headers: " + header
+									+ " | config: " + config);
+						});
+	};
+	
+	// Busca as avaliacoes por projeto no banco 
+	$scope.BuscarAvaliacoesPorProjeto = function() {
+		$http.get($rootScope.pattern_url+'rest/avaliacaousuariorest/getporprojeto/'+ $stateParams.idProjeto)
+				.success(function(data) {
+					var avaliacoesBanco = data["avaliacaoUsuario"];
+					var arrayBanco = [];
+					if(Array.isArray(avaliacoesBanco)){
+						arrayBanco = avaliacoesBanco; 
+					}
+					else{
+						arrayBanco.push(avaliacoesBanco);
+					}
+					$scope.avaliacoesUsuario_projeto = arrayBanco;
+					$scope.gerarConclusaoProjeto();
+				}).error(
+						function(data, status, header, config) {
+							console.log("Data: " + data + " | status: " + status + " | headers: " + header
+									+ " | config: " + config);
+						});
+	};
+	
+	$scope.salvarAvaliacao = function(nota, item, usuarioAvaliado, projeto){
+
+		var parameter = JSON.stringify({
+			type : "avaliacaoUsuario",
+			notaAvaliacao : nota,
+			itemAvaliado : item,
+			usuarioAvaliado : usuarioAvaliado,
+			projeto : projeto
+		});
+		
+		$http.post($rootScope.pattern_url+'rest/avaliacaousuariorest/postcad/'+$scope.UsuarioLogado,
+				parameter, $rootScope.GetPostconfig).success(
+				function(data, status, headers, config) {
+					$scope.Resposta = 'Avaliacao Salva com Sucesso!';
+					$scope.iniciaTelaAvaliacoes();
+				}).error(
+				function(data, status, header, config) {
+					console.log("Data: " + data + " | status: " + status + " | headers: " + header
+							+ " | config: " + config);
+				});
+	}
+	
+	$scope.gerarConclusaoProjeto = function(){
+		if(typeof $scope.avaliacoesUsuario_projeto != 'undefined'){
+			console.log("Numero de avaliacoes do projeto: "+$scope.avaliacoesUsuario_projeto.length);
+			var totalUsuariosProjeto = $scope.usuariosDoProjeto.length + 1;
+			var totalItensAvaliacao = $scope.itensUsuario.length;
+			var totalAvaliacoesProjeto = totalUsuariosProjeto * (totalItensAvaliacao * (totalUsuariosProjeto -1));
+			console.log("conta de avaliacoes por projeto: "+totalAvaliacoesProjeto);
+		}
+		
+	}
+	
+	$scope.filtroAvaliacaoUsuario = function(item, usuarioAvaliado){
+		if(typeof $scope.avaliacoesUsuario_projeto != 'undefined'){
+			for(var i = 0; i < $scope.avaliacoesUsuario_projeto.length ; i++){
+				if($scope.avaliacoesUsuario_projeto[i].itemAvaliado.id == item.id){
+					if($scope.avaliacoesUsuario_projeto[i].usuarioAvaliado.idUsuario == usuarioAvaliado.idUsuario){
+						if($scope.avaliacoesUsuario_projeto[i].usuarioAvaliador.idUsuario == $scope.UsuarioLogado){
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+		}
+	}
+	
+	$scope.filtroAvaliacaoExibicao = function(avaliacao, usuarioAvaliadoLista){
+		if(avaliacao.usuarioAvaliado.idUsuario == usuarioAvaliadoLista.idUsuario){
+			if(avaliacao.usuarioAvaliador.idUsuario == $scope.UsuarioLogado){
+				return true;
+			}
+		}
+		return false;	
+	}
+	
+	$scope.filtroExibirAvaliacao = function(usuarioAvaliado){
+		if(typeof usuarioAvaliado != 'undefined'){
+			if(usuarioAvaliado.idUsuario == $scope.UsuarioLogado){
+				return true;
+			}
+			return false;
+		}
+	}
+
+				/* *** FIM AVALIAÇÃO USUARIO *** */
+	/* --------------------------------------------------------------- */
+	
+	$scope.iniciaTelaAvaliacoes = function(){
+		$scope.BuscarItensDisponiveis();
+		$scope.BuscarAvaliacoesPorProjeto();
+	}
+	
 	// função que inicia a tela
 	$scope.iniciaTela = function() {
 		$scope.BuscarInformacao();
@@ -642,8 +760,13 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 		// Validação para não carregar dados no cadastro de novo projetos
 		if($stateParams.idProjeto != null){
 			$scope.CarregarEdicao();
-			$rootScope.projeto_selecionado_id = $stateParams.idProjeto;			
+			$rootScope.projeto_selecionado_id = $stateParams.idProjeto;		
+			
+			// avaliacaoUsuario
+			$scope.iniciaTelaAvaliacoes();
+			// fim avaliacaoUsuario
 		}			
 	};
+	
 	$scope.iniciaTela();
 });
