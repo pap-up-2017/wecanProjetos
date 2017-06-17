@@ -53,8 +53,8 @@ public class ProjetoBusiness {
 		return "Projeto iniciado com sucesso."; 
 	}
 	
-	// Concluir projeto
-	public String concluir(int id){
+	// Fecha projeto para avaliação
+	public String FecharProjetoParaAvaliacao(int id){
 		boolean concluido = true;
 		InterfaceProjetoDao<Projeto> dao = FactoryDao.createProjetoDao();
 		TarefaDao daoT = FactoryDao.createTarefaDao();
@@ -78,9 +78,18 @@ public class ProjetoBusiness {
 			p.setStatus("Avaliacao");
 			//p.setStatus("Concluído");
 			dao.alterar(p);
-			return "Projeto concluído com sucesso."; 
+			return "Projeto concluído com sucesso. Agora está na hora da avaliação entre os usuários"; 
 		}
 		return null;
+	}
+	
+	// Fecha projeto para avaliação
+	public String concluirProjeto(int id){
+		InterfaceProjetoDao<Projeto> dao = FactoryDao.createProjetoDao();
+		Projeto p = dao.getObjById(id);
+		p.setStatus("Concluído");
+		dao.alterar(p);
+		return "Projeto concluído com sucesso."; 
 	}
 
 	public List<Projeto> projetosPorUsuario(int id){

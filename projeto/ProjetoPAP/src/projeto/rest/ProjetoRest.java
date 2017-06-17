@@ -146,14 +146,25 @@ public class ProjetoRest {
 		return gson.toJson(result);
 	}
 	
-	// post recusar participação no projeto 
+	// post fecha o projeto para avaliação
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/concluir/{id}")
+	@Path("/fecharProjetoAvaliacao/{id}")
+	public String fecharProjetoAvaliacaoProjeto(@PathParam("id") int id) {
+		ProjetoBusiness pBus = new ProjetoBusiness();
+		String result = pBus.FecharProjetoParaAvaliacao(id);
+		return gson.toJson(result);
+	}
+	
+	// conclui o projeto
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/concluirProjeto/{id}")
 	public String concluirProjeto(@PathParam("id") int id) {
 		ProjetoBusiness pBus = new ProjetoBusiness();
-		String result = pBus.concluir(id);
+		String result = pBus.concluirProjeto(id);
 		return gson.toJson(result);
 	}
 	

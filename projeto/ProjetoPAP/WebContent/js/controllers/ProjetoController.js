@@ -149,7 +149,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 			IniciarProjeto(projeto);
 		}else{
 			if(projeto.status == "Em andamento"){
-				ConcluirProjeto(projeto);
+				FecharProjetoAvaliacaoProjeto(projeto);
 			}
 		}
 	}
@@ -190,8 +190,8 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 		}		
 	}
 	
-	var ConcluirProjeto = function(projeto){
-		$http.post($rootScope.pattern_url+'rest/projetorest/concluir/'+projeto.idProjeto).success(
+	var FecharProjetoAvaliacaoProjeto = function(projeto){
+		$http.post($rootScope.pattern_url+'rest/projetorest/fecharProjetoAvaliacao/'+projeto.idProjeto).success(
 				function(data) {
 					swal(data);
 					$scope.iniciaTela();
@@ -200,8 +200,18 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 				function(data, status, header, config) {
 					swal("Ops","Não foi possivel concluir o projeto, tente novamente.");
 			});
-
-
+	}
+	
+	var ConcluirProjeto = function(projeto){
+		$http.post($rootScope.pattern_url+'rest/projetorest/concluirProjeto/'+projeto.idProjeto).success(
+			function(data) {
+				swal(data);
+				$scope.iniciaTela();
+				carregaTarefas(projeto.idProjeto);
+			}).error(
+				function(data, status, header, config) {
+				swal("Ops","Não foi possivel concluir o projeto, tente novamente.");
+			});
 	}
 	
 	var carregaTarefas = function(idprojeto){
@@ -659,16 +669,18 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 	$scope.BuscarAvaliacoesPorProjeto = function() {
 		$http.get($rootScope.pattern_url+'rest/avaliacaousuariorest/getporprojeto/'+ $stateParams.idProjeto)
 				.success(function(data) {
-					var avaliacoesBanco = data["avaliacaoUsuario"];
-					var arrayBanco = [];
-					if(Array.isArray(avaliacoesBanco)){
-						arrayBanco = avaliacoesBanco; 
+					if(data != null){
+						var avaliacoesBanco = data["avaliacaoUsuario"];
+						var arrayBanco = [];
+						if(Array.isArray(avaliacoesBanco)){
+							arrayBanco = avaliacoesBanco; 
+						}
+						else{
+							arrayBanco.push(avaliacoesBanco);
+						}
+						$scope.avaliacoesUsuario_projeto = arrayBanco;
+						$scope.gerarConclusaoProjeto();
 					}
-					else{
-						arrayBanco.push(avaliacoesBanco);
-					}
-					$scope.avaliacoesUsuario_projeto = arrayBanco;
-					$scope.gerarConclusaoProjeto();
 				}).error(
 						function(data, status, header, config) {
 							console.log("Data: " + data + " | status: " + status + " | headers: " + header
@@ -700,11 +712,14 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 	
 	$scope.gerarConclusaoProjeto = function(){
 		if(typeof $scope.avaliacoesUsuario_projeto != 'undefined'){
-			console.log("Numero de avaliacoes do projeto: "+$scope.avaliacoesUsuario_projeto.length);
-			var totalUsuariosProjeto = $scope.usuariosDoProjeto.length + 1;
-			var totalItensAvaliacao = $scope.itensUsuario.length;
-			var totalAvaliacoesProjeto = totalUsuariosProjeto * (totalItensAvaliacao * (totalUsuariosProjeto -1));
-			console.log("conta de avaliacoes por projeto: "+totalAvaliacoesProjeto);
+			if($scope.projeto.status != "Concluído"){
+				var totalUsuariosProjeto = $scope.usuariosDoProjeto.length + 1;
+				var totalItensAvaliacao = $scope.itensUsuario.length;
+				var totalAvaliacoesProjeto = totalUsuariosProjeto * (totalItensAvaliacao * (totalUsuariosProjeto -1));
+				if(totalAvaliacoesProjeto == $scope.avaliacoesUsuario_projeto.length){
+					ConcluirProjeto($scope.projeto);
+				}
+			}
 		}
 		
 	}
