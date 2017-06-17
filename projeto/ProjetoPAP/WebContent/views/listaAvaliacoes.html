@@ -27,7 +27,7 @@
                      </form>
                      <br>
                      <li class='liAvaliacao' ng-repeat="avaliacao in avaliacoes | filter:filtroDisciplina(disciplina) | filter: buscaAvaliacao ">
-                        Avaliação: {{avaliacao.nomeAvaliacao}} - Professor: {{avaliacao.professor.nomeUsuario}} <a class="btn btn-info btn-fill" ui-sref="pageListaExercicios({idAvaliacao: {{avaliacao.idAvaliacao}} })" id="titulo">Iniciar</a>
+                        Avaliação: {{avaliacao.nomeAvaliacao}} - Professor: {{avaliacao.professor.nomeUsuario}} <a ng-hide="ValidaAcessoAvaliacao({{avaliacao.idAvaliacao}})" class="btn btn-info btn-fill" ui-sref="pageListaExercicios({idAvaliacao: {{avaliacao.idAvaliacao}} })" id="titulo">Iniciar</a> <label style="color: #228B22;"  ng-show="ValidaAcessoAvaliacao({{avaliacao.idAvaliacao}})"><b>Avaliação realizada</b></label>
                      </li>
                      <br>	
                      <button class="btn btn-info btn-fill" ng-click="voltar()">Voltar</button>

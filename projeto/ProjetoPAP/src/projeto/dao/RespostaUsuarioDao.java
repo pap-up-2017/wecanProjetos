@@ -43,6 +43,15 @@ public class RespostaUsuarioDao {
 		// retorna os dados encontrados
 		return q.getResultList();
 	}
+	
+	public List<RespostaUsuario> listarPorUsuario(int id) {
+		// cria a instancia
+		EntityManager em = SingletonConection.getInstance();
+		// cria a Query para encontrar as respostaAvaliacao
+		Query q = em.createQuery("from RespostaUsuario where usuario_idUsuario = "+ id);
+		// retorna os dados encontrados
+		return q.getResultList();
+	}
 
 
 
