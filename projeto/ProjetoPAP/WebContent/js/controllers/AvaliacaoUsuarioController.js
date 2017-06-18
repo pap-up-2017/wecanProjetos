@@ -26,17 +26,20 @@ angular.module("app").controller('AvaliacoUsuarioCtrl', function($scope, $http, 
 	// Busca as avaliacoes por projeto no banco 
 	$scope.BuscarAvaliacoesPorProjeto = function() {
 
-		$http.get($rootScope.pattern_url+'rest/avaliacaousuariorest/getporprojeto/')
+		$http.get($rootScope.pattern_url+'rest/avaliacaousuariorest/getporusuario/'+$scope.UsuarioLogado)
 				.success(function(data) {
-					var itensBanco = data["itemAvaliacaoUsuario"];
-					var arrayBanco = [];
-					if(Array.isArray(itensBanco)){
-						arrayBanco = itensBanco; 
+					if(data != null){
+						var avalBanco = data["itemAvaliacaoUsuario"];
+						var arrayBanco = [];
+						if(Array.isArray(avalBanco)){
+							arrayBanco = avalBanco; 
+						}
+						else{
+							arrayBanco.push(avalBanco);
+						}
+						$scope.avaliacoesDoUsuario = arrayBanco;
+						console.log($scope.avaliacoesDoUsuario);
 					}
-					else{
-						arrayBanco.push(itensBanco);
-					}
-					$scope.itensUsuario = arrayBanco;
 				}).error(
 						function(data, status, header, config) {
 							console.log("Data: " + data + " | status: " + status + " | headers: " + header
