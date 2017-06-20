@@ -54,7 +54,7 @@ angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieSt
 						});
 	};
 	
-	// Busca os itens disponiveis ... 
+	// Busca os itens disponiveis ...
 	$scope.BuscarItensDisponiveis = function() {
 
 		$http.get($rootScope.pattern_url+'rest/itemusuariorest')
@@ -111,6 +111,148 @@ angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieSt
 	$scope.fecharPopUpPontuacao = function(){
 		$scope.openPopUpPontuacao = false;
 	}
+	
+	// ******** Mostra habilidades do perfil *****************//
+	
+	$scope.buscarRespostasUsuario = function(){
+		
+		 $http.get($rootScope.pattern_url+'rest/respostausuariorest/listarespostausuario/'+$stateParams.idUsuario)
+			.success(function(data) {
+				var respostaUsuarioBanco = data["respostaUsuario"];
+				var arrayBanco = [];
+				if(Array.isArray(respostaUsuarioBanco)){
+					arrayBanco = respostaUsuarioBanco; 
+				}
+				else{
+					arrayBanco.push(respostaUsuarioBanco);
+				}
+				$scope.respostasUsuario = arrayBanco;
+				
+				$scope.calculaHabilidadesUsuario($scope.respostasUsuario);
+				
+			}).error(
+					function(data, status, header, config) {
+						$scope.Resposta = "Data: " + data + "<hr />status: "
+								+ status + "<hr />headers: " + header
+								+ "<hr />config: " + config;
+					});
+		
+	}
+	
+	
+
+		$scope.calculaHabilidadesUsuario = function(
+			respostasUsuario) {
+
+		var habilidades = [];
+		var disciplinas = [];
+		var respostas = [];
+		
+
+		for (i = 0; i < respostasUsuario.length; i++) {
+
+			var disciplina = respostasUsuario[i].respostaAvaliacao.exercicio.avaliacao.disciplina.nomeDisciplina;
+			var statusReposta = respostasUsuario[i].statusRespostaUsuario;
+			var idAvaliacao = respostasUsuario[i].respostaAvaliacao.exercicio.avaliacao.idAvaliacao;
+			var resposta = [];
+			var avaliacaoExiste = false;
+			var avaliacaoExistePos = -1;
+			
+			// Inclui a primeira habilidade
+			if (habilidades.length == 0) {
+				resposta.push({
+					idAvaliacao : idAvaliacao,
+					respostasCorretas : ((statusReposta == 'Correta') ? 1: 0),
+					totalRespostas : 1,
+					idRespUser : [respostasUsuario[i].idRespostaUsuario],
+					percentualAcerto : ((statusReposta == 'Correta') ? 1 : 0)/1*100
+					
+				});
+				
+				habilidades.push({
+							disciplina : disciplina,
+							totalAvaliacoes : 1,
+							avaliacoes : resposta,
+							percentualDisciplina : ((statusReposta == 'Correta') ? 1 : 0)/1*100
+
+						});
+			} else {
+				// Verifico se a habilidade foi incluída
+				for (j = 0; j < habilidades.length; j++) {
+
+					// Valido se a disciplina não existe
+					if (habilidades[j].disciplina.indexOf(disciplina) == -1) {
+						// Valido se a avaliação já existe
+						resposta.push({
+							idAvaliacao : idAvaliacao,
+							respostasCorretas : ((statusReposta == 'Correta') ? 1 : 0),
+							totalRespostas : 1,
+							idRespUser : [respostasUsuario[i].idRespostaUsuario],
+							percentualAcerto : ((statusReposta == 'Correta') ? 1 : 0)/1*100
+						});
+						
+						habilidades.push({
+							disciplina : disciplina,
+							totalAvaliacoes : 1,
+							avaliacoes : resposta,
+							percentualDisciplina : ((statusReposta == 'Correta') ? 1 : 0)/1*100
+						});
+					}else{
+						for (k = 0; k < habilidades[j].avaliacoes.length; k++) {
+							for(x = 0; x < habilidades[j].avaliacoes.length;x++ ){
+								
+								if(idAvaliacao === habilidades[j].avaliacoes[x].idAvaliacao){
+									avaliacaoExiste = true;
+									avaliacaoExistePos = x;
+								}
+							}
+							if (!avaliacaoExiste) {
+								// Caso não exista, incluo
+								// Sempre que adiciona uma avaliação, adiciona no total
+								habilidades[j].totalAvaliacoes = habilidades[j].totalAvaliacoes + 1; 
+								
+								habilidades[j].avaliacoes.push({
+												idAvaliacao : idAvaliacao,
+												respostasCorretas : ((statusReposta == 'Correta') ? 1 : 0),
+												totalRespostas : 1,
+												idRespUser : [respostasUsuario[i].idRespostaUsuario],
+												percentualAcerto : ((statusReposta == 'Correta') ? 1 : 0)/1*100
+											})
+							} else {
+								if(habilidades[j].avaliacoes[k].idRespUser.indexOf(respostasUsuario[i].idRespostaUsuario) == -1){
+									if(habilidades[j].avaliacoes[avaliacaoExistePos].idAvaliacao == habilidades[j].avaliacoes[k].idAvaliacao){
+										if (statusReposta == 'Correta' ) {									
+											habilidades[j].avaliacoes[k].respostasCorretas += 1;
+											habilidades[j].avaliacoes[k].idRespUser.push(respostasUsuario[i].idRespostaUsuario);
+											habilidades[j].avaliacoes[k].totalRespostas = habilidades[j].avaliacoes[k].totalRespostas + 1;
+											habilidades[j].avaliacoes[k].percentualAcerto =  habilidades[j].avaliacoes[k].respostasCorretas/habilidades[j].avaliacoes[k].totalRespostas*100;
+											habilidades[j].percentualDisciplina += habilidades[j].avaliacoes[k].percentualAcerto;
+										} else {
+											habilidades[j].avaliacoes[k].totalRespostas = habilidades[j].avaliacoes[k].totalRespostas + 1;
+											habilidades[j].avaliacoes[k].idRespUser.push(respostasUsuario[i].idRespostaUsuario);
+											habilidades[j].avaliacoes[k].percentualAcerto =  habilidades[j].avaliacoes[k].respostasCorretas/habilidades[j].avaliacoes[k].totalRespostas*100;
+											habilidades[j].percentualDisciplina = habilidades[j].avaliacoes[k].percentualAcerto;
+										}
+									}
+								}
+							}
+						}
+					}
+
+				}
+				
+			}
+			
+		}
+		$scope.habilidades = habilidades;
+	}
+		
+	$scope.divisao = function(num1, num2){
+		
+		return Math.round(num1/num2);
+	}
+			
+	
 
 	// função que inicia a tela
 	$scope.iniciaTela = function() {
@@ -118,6 +260,8 @@ angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieSt
 			$scope.detalharUsuario();
 			$scope.BuscarAvaliacoesPorUsuario();
 			$scope.openPopUpPontuacao = false;
+			$scope.buscarRespostasUsuario();
+			
 		}
 		$rootScope.BuscarPerfilUsuario();
 	};

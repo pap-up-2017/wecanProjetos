@@ -621,7 +621,7 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 		
 	};
 	
-	$scope.buscarRespostasUsuário = function(){
+	$scope.buscarRespostasUsuario = function(){
 		
 		 $http.get($rootScope.pattern_url+'rest/respostausuariorest/listarespostausuario/'+$scope.UsuarioLogado)
 			.success(function(data) {
@@ -657,7 +657,7 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 			$scope.BuscarInformacaoRespostaAvaliacao();
 			$scope.BuscarDisciplinas();
 			//Respostas do usuário
-			$scope.buscarRespostasUsuário();
+			$scope.buscarRespostasUsuario();
 		};
 		$scope.iniciaTela();
 	
