@@ -157,25 +157,22 @@
                                  Não iniciado
                               </h5>
                            </div>
-                           <div style="padding-top: 60px; padding-bottom: 40px; height: 400px; overflow-y: auto;" id="Pendente" class="card-content">
+                           <div style="padding-top: 30px; padding-bottom: 30px; height: 400px; overflow-y: auto;" id="Pendente" class="card-content">
                               <div id="{{tarefa.idTarefa}}rep" ng:repeat="tarefa in tarefas | filter: {statusTarefa : 'Pendente'}" draggable="false">
-                                 <div class="backTarefa col-md-12" id="{{tarefa.idTarefa}}" draggable="true" ondragstart="angular.element(this).scope().drag(event)">
-                                    <h5 style="text-align: left; word-wrap: break-word;" class="text-primary">
-                                       {{tarefa.nomeTarefa}}<br/>
-                                       <small style="word-wrap: break-word;" class="text-default">{{tarefa.descricaoTarefa}}</small>
-                                    </h5>
+                                 <div class="backTarefaNI col-md-12" id="{{tarefa.idTarefa}}" draggable="true" ondragstart="angular.element(this).scope().drag(event)">
+                                       <p style="word-wrap: break-word;" class="description">{{tarefa.descricaoTarefa}}</p>
                                     <div class="col-md-2">
                                        <button class="btn btn-default btn-fill btn-xs" ng-click="CarregarEdicao(tarefa)">
                                        <i class="fa fa-pencil" aria-hidden="true"></i>
                                        </button>
                                     </div>
                                     <div class="col-md-2">
-                                       <button class="btn btn-primary btn-fill btn-xs" ng-click="DetalhesTarefa(tarefa)">
+                                       <button class="btn btn-default btn-fill btn-xs" ng-click="DetalhesTarefa(tarefa)">
                                        <i class="fa fa-eye" aria-hidden="true"></i>
                                        </button>
                                     </div>
                                     <div class="col-md-2">
-                                       <button class="btn btn-danger btn-fill btn-xs" ng-click="ExcluirElemento(tarefa)">
+                                       <button class="btn btn-default btn-fill btn-xs" ng-click="ExcluirElemento(tarefa)">
                                        <i class="fa fa-times" aria-hidden="true"></i>
                                        </button>
                                     </div>
@@ -191,25 +188,22 @@
                                  Em andamento
                               </h5>
                            </div>
-                           <div style="padding-top: 60px; padding-bottom: 40px; height: 400px; overflow-y: auto;" id="Em andamento" class="card-content">
+                           <div style="padding-top: 30px; padding-bottom: 30px; height: 400px; overflow-y: auto;" id="Em andamento" class="card-content">
                               <div id="{{tarefa.idTarefa}}rep"ng:repeat="tarefa in tarefas | filter: {statusTarefa : 'Em andamento'}">
-                                 <div class="backTarefa col-md-12" id="{{tarefa.idTarefa}}" draggable="true" ondragstart="angular.element(this).scope().drag(event)">
-                                    <h5 style="text-align: left; word-wrap: break-word;" class="text-primary">
-                                       {{tarefa.nomeTarefa}}<br/>
-                                       <small style="word-wrap: break-word;" class="text-default">{{tarefa.descricaoTarefa}}</small>
-                                    </h5>
+                                 <div class="backTarefaAN col-md-12" id="{{tarefa.idTarefa}}" draggable="true" ondragstart="angular.element(this).scope().drag(event)">
+                                       <p style="word-wrap: break-word;" class="description">{{tarefa.descricaoTarefa}}</p>
                                     <div class="col-md-2">
                                        <button class="btn btn-default btn-fill btn-xs" ng-click="CarregarEdicao(tarefa)">
                                        <i class="fa fa-pencil" aria-hidden="true"></i>
                                        </button>
                                     </div>
                                     <div class="col-md-2">
-                                       <button class="btn btn-primary btn-fill btn-xs" ng-click="DetalhesTarefa(tarefa)">
+                                       <button class="btn btn-default btn-fill btn-xs" ng-click="DetalhesTarefa(tarefa)">
                                        <i class="fa fa-eye" aria-hidden="true"></i>
                                        </button>
                                     </div>
                                     <div class="col-md-2">
-                                       <button class="btn btn-danger btn-fill btn-xs" ng-click="ExcluirElemento(tarefa)">
+                                       <button class="btn btn-default btn-fill btn-xs" ng-click="ExcluirElemento(tarefa)">
                                        <i class="fa fa-times" aria-hidden="true"></i>
                                        </button>
                                     </div>
@@ -225,25 +219,22 @@
                                  Concluído
                               </h5>
                            </div>
-                           <div style="padding-top: 60px; padding-bottom: 40px; height: 400px; overflow-y: auto;" id="Concluído" class="card-content">
+                           <div style="padding-top: 30px; padding-bottom: 30px; height: 400px; overflow-y: auto;" id="Concluído" class="card-content">
                               <div id="{{tarefa.idTarefa}}rep"ng:repeat="tarefa in tarefas | filter: {statusTarefa : 'Concluído'}">
-                                 <div class="backTarefa col-md-12" id="{{tarefa.idTarefa}}" draggable="true" ondragstart="angular.element(this).scope().drag(event)">
-                                    <h5 style="word-wrap: break-word; text-align: left;" class="text-primary">
-                                       {{tarefa.nomeTarefa}}<br/>
-                                       <small  style="word-wrap: break-word" class="text-default">{{tarefa.descricaoTarefa}}</small>
-                                    </h5>
+                                 <div class="backTarefaCN col-md-12" id="{{tarefa.idTarefa}}" draggable="true" ondragstart="angular.element(this).scope().drag(event)">
+                                       <p  style="word-wrap: break-word" class="description">{{tarefa.descricaoTarefa}}</p>
                                     <div class="col-md-2">
                                        <button class="btn btn-default btn-fill btn-xs" ng-click="CarregarEdicao(tarefa)">
                                        <i class="fa fa-pencil" aria-hidden="true"></i>
                                        </button>
                                     </div>
                                     <div class="col-md-2">
-                                       <button class="btn btn-primary btn-fill btn-xs" ng-click="DetalhesTarefa(tarefa)">
+                                       <button class="btn btn-default btn-fill btn-xs" ng-click="DetalhesTarefa(tarefa)">
                                        <i class="fa fa-eye" aria-hidden="true"></i>
                                        </button>
                                     </div>
                                     <div class="col-md-2">
-                                       <button class="btn btn-danger btn-fill btn-xs" ng-click="ExcluirElemento(tarefa)">
+                                       <button class="btn btn-default btn-fill btn-xs" ng-click="ExcluirElemento(tarefa)">
                                        <i class="fa fa-times" aria-hidden="true"></i>
                                        </button>
                                     </div>

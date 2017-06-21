@@ -9,8 +9,8 @@
             <div style="z-index: 99" class="content">
                <div class="author">
                   <img class="avatar" src="dash/img/faces/face-1.png" alt="..."/><br/>
-                  {{mediaPontuacaoUsuario}} / 5.0 <br/>
-                  <button ng-click="detalharPontuacaoUsuario()">detalhes</button>
+                  <h6 class="title">Pontuação</h6>
+                  <span style="color: #1dc7ea; font-size: 15px;">0.0{{mediaPontuacaoUsuario}}</span><span style="color: #adadad; font-size: 15px;">/5.0</span> <br/>
                   <h4 class="text-info">
                      {{nomeUsuariod}}<br/>
                      <small class="sm">{{usernameUsuariod}}</small> |
@@ -35,27 +35,6 @@
             </div>
          </div>
       </div>
-      <div ng-show="openPopUpPontuacao" class="col-md-4">
-         <div class="hab card">
-               <label style="color: #fff;" class="label label-primary">
-               Pontuação do usuário
-               </label>
-               <div class="habilidade">
-               		<div ng-repeat="pontuacao in arrayPontuacao">
-               			<div>
-                     		<label style="color: rgba(37, 50, 56, 1) !important;"  class="text-info">{{pontuacao.item.nomeItem}}</label><br/>
-							{{pontuacao.pontuacaoItem}}
-                  		</div>
-               		</div>               
-                  <div class="col-md-6">
-                  	<a style="width: 100%;" class="btn btn-info btn-fill pull-right" ng-click="fecharPopUpPontuacao()">
-                  		Fechar
-                  	</a> 
-               	  </div>
-               </div>
-         </div>
-         
-      </div>
       <div class="col-md-4">
       	<div class="hab card">
 	        <label style="color: #fff;" class="label label-primary">
@@ -73,6 +52,21 @@
 	           		</div>
 	        		</div>               
 	         </div>
+         </div>
+      </div>
+      <div class="col-md-4">
+         <div class="hab card">
+               <label style="color: #fff;" class="label label-primary">
+               Pontuação do usuário
+               </label>
+               <div class="habilidade">
+               		<div ng-repeat="pontuacao in arrayPontuacao">
+               			<div>
+                     		<label style="color: rgba(37, 50, 56, 1) !important;"  class="text-info">{{pontuacao.item.nomeItem}}</label><br/>
+							{{pontuacao.pontuacaoItem}}
+                  		</div>
+               		</div>               
+               </div>
          </div>
       </div>
    </div>

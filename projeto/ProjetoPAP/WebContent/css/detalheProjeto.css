@@ -1,3 +1,29 @@
+/* Largura da barra de rolagem */
+::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 3px;
+}
+
+/* Fundo da barra de rolagem */
+::-webkit-scrollbar-track-piece {
+    background-color: #EEE;
+    border-radius: 3px;
+}
+
+/* Cor do indicador de rolagem */
+::-webkit-scrollbar-thumb:vertical,
+::-webkit-scrollbar-thumb:horizontal {
+    background-color: #BAC0C4;
+    border-radius: 3px;
+}
+
+/* Cor do indicador de rolagem - ao passar o mouse */
+::-webkit-scrollbar-thumb:vertical:hover,
+::-webkit-scrollbar-thumb:horizontal:hover {
+    background-color: #717171;
+    border-radius: 3px;
+}
+
 .header
 {
 	background: linear-gradient(60deg, #253238, #253238);
@@ -40,12 +66,25 @@
 	padding: 20px;
 	box-shadow: 0 12px 20px -10px rgba(37, 50, 56, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(37, 50, 56, 0.2);
 }
-.backTarefa
+.backTarefaNI
 {
-	border: 0px solid #3472f7;
-	border-radius: 8px;
+	border-radius: 3px;
 	padding: 10px !important;
-	box-shadow: 0 12px 20px -10px rgba(37, 50, 56, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(37, 50, 56, 0.2);
+	background: #fd8188;
+	margin-top: 15px;
+}
+.backTarefaAN
+{
+	border-radius: 3px;
+	padding: 10px !important;
+	background: #fda858;
+	margin-top: 15px;
+}
+.backTarefaCN
+{
+	border-radius: 3px;
+	padding: 10px !important;
+	background: #8adeef;
 	margin-top: 15px;
 }
 .padding
