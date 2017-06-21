@@ -1,8 +1,3 @@
-<style type="text/css">
-   .liAvaliacao{
-   list-style-type:none;
-   }
-</style>
 <link rel="stylesheet" href="css/projeto.css">
 <link href="css/dashboard.css" rel="stylesheet"/>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -18,19 +13,30 @@
                   </label>
                </div>
                <br/>
-               <div class="col-md-6">
+               <div class="col-md-12">
                   <div ng-controller="PageAvaliacaoCtrl">
-                     <legend>Selecione uma avaliação:</legend>
+                     <h5 style="border-bottom: 1px solid #dcdcdc;" class="text-default">
+	               			Selecione uma a avaliação:
+	               	 </h5>
+                     <button class="btn btn-info btn-fill btn-xs" ng-click="voltar()">Voltar para disciplinas</button>
                      <form>
                         <br/>
                         <input ng-model="buscaAvaliacao" ng-change="BuscarInformacaoAvaliacao()" type="text" name="search" placeholder="Localizar">
                      </form>
                      <br>
-                     <li class='liAvaliacao' ng-repeat="avaliacao in avaliacoes | filter:filtroDisciplina(disciplina) | filter: buscaAvaliacao ">
-                        Avaliação: {{avaliacao.nomeAvaliacao}} - Professor: {{avaliacao.professor.nomeUsuario}} <a ng-hide="ValidaAcessoAvaliacao({{avaliacao.idAvaliacao}})" class="btn btn-info btn-fill" ui-sref="pageListaExercicios({idAvaliacao: {{avaliacao.idAvaliacao}} })" id="titulo">Iniciar</a> <label style="color: #228B22;"  ng-show="ValidaAcessoAvaliacao({{avaliacao.idAvaliacao}})"><b>Avaliação realizada</b></label>
-                     </li>
+                     <div style="text-align: center; height: 200px; background-image: url('http://i67.tinypic.com/2zqfsp5.jpg'); padding-top: 30px; passing-bottom: 30px; border-radius: 3px;" class="col-md-4" ng-repeat="avaliacao in avaliacoes | filter:filtroDisciplina(disciplina) | filter: buscaAvaliacao ">
+                        <label class="text-info">Avaliação</label><br/>
+                        <label style="color: #fff;" class="description">{{avaliacao.nomeAvaliacao}}</label><br/>
+                        <label class="text-info">Professor</label><br/>
+                        <label style="color: #fff;" class="description">{{avaliacao.professor.nomeUsuario}}</label><br/>
+                        <a ng-hide="ValidaAcessoAvaliacao({{avaliacao.idAvaliacao}})" class="btn btn-info btn-fill btn-sm" ui-sref="pageListaExercicios({idAvaliacao: {{avaliacao.idAvaliacao}} })" id="titulo">
+                        	Iniciar avaliação
+                        </a> 
+                        <label style="color: #228B22;"  ng-show="ValidaAcessoAvaliacao({{avaliacao.idAvaliacao}})">
+                        	<b>Avaliação realizada</b>
+                        </label>
+                     </div>
                      <br>	
-                     <button class="btn btn-info btn-fill" ng-click="voltar()">Voltar</button>
                   </div>
                </div>
             </div>

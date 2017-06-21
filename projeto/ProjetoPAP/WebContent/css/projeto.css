@@ -45,3 +45,22 @@ input[type=text]:focus {
   background: #fff;
   padding: 15px;
 }
+.disciplina
+{
+	height: 150px;
+	border-radius: 5px;
+	border: 2px solid #fff;
+	color: #12171a;
+	background-image: url('http://i67.tinypic.com/29criic.png'); 
+	text-align: center; 
+	font-size: 20px; 
+	word-wrap: break-word; 
+	padding-top: 30px; 
+	padding-bottom: 30px;
+}
+.disciplina:hover
+{
+	
+	color: #fff;
+	background-image: url('http://i67.tinypic.com/2zqfsp5.jpg');
+}

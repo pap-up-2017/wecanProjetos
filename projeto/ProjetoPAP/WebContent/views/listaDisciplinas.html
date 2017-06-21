@@ -1,37 +1,41 @@
 <link rel="stylesheet" href="css/projeto.css">
-<style type="text/css">
-   .listv{
-   margin-bottom: 30px;
-   }
-   .editpopup{
-   width: 250px;
-   height: 250px;
-   border: 1px solid black;
-   display: none;
-   position: absolute;
-   top: center;
-   left: center;
-   bottom: center;
-   right: center;
-   background-color:gray;
-   }
-   .editpopup-true{
-   display: block;
-   }
-   .editpopup-false{
-   display: none;
-   }
-   
-   .liAvaliacao{
-   list-style-type:none;
-   }
-   
-   
-</style>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-
 <div class="container-fluid">
+	<div ng-controller="DashBoardCtrl">
+		<div class="row">
+			<div class="col-md-12">
+	            <div class="card">
+	               <div class="header">
+	                  <label style="color: #fff;" class="label label-primary">
+	                     Avaliações
+	                  </label>
+	               </div>
+	               <div ng-controller="PageAvaliacaoCtrl">
+	               		<h5 style="border-bottom: 1px solid #dcdcdc;" class="text-default">
+	               			Selecione uma disciplina para realizar a avaliação:
+	               		</h5>
+	               		<form>
+				   			<br/>
+							<input ng-model="buscaDisciplina" ng-change="BuscarDisciplinas()" type="text" name="search" placeholder="Localizar">
+				   		</form>
+	               		<div class="content">
+	               			<div>
+	                    		<a ui-sref="pageListaAvaliacoes({idDisciplina: {{disciplina.idDisciplina}} })" id="titulo" ng:repeat="disciplina in disciplinas | filter: buscaDisciplina" style="text-align: center;">
+	                    			<div class="col-md-2 disciplina">
+	                    				<i class="fa fa-pencil" aria-hidden="true"></i><br/>
+	                        			{{disciplina.nomeDisciplina}}
+	                        		</div>
+	                        	</a>
+	                    	</div>
+	               		</div>
+	               </div>
+	        	</div>
+	    	</div>
+		</div>
+	</div>
+</div>
+<!-- <div class="container-fluid">
 
    <div ng-controller="DashBoardCtrl">
       <div class="row">
@@ -65,3 +69,4 @@
       </div>
    </div>
 </div>
+-->
