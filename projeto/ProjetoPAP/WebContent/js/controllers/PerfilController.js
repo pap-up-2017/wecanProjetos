@@ -173,7 +173,7 @@ angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieSt
 							disciplina : disciplina,
 							totalAvaliacoes : 1,
 							avaliacoes : resposta,
-							percentualDisciplina : ((statusReposta == 'Correta') ? 1 : 0)/1*100
+							percentualDisciplina : 0//((statusReposta == 'Correta') ? 1 : 0)/1*100
 
 						});
 			} else {
@@ -195,7 +195,7 @@ angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieSt
 							disciplina : disciplina,
 							totalAvaliacoes : 1,
 							avaliacoes : resposta,
-							percentualDisciplina : ((statusReposta == 'Correta') ? 1 : 0)/1*100
+							percentualDisciplina : 0//((statusReposta == 'Correta') ? 1 : 0)/1*100
 						});
 					}else{
 						for (k = 0; k < habilidades[j].avaliacoes.length; k++) {
@@ -218,20 +218,22 @@ angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieSt
 												idRespUser : [respostasUsuario[i].idRespostaUsuario],
 												percentualAcerto : ((statusReposta == 'Correta') ? 1 : 0)/1*100
 											})
+								
 							} else {
+								// Valida se resposta do usuário já está no array
 								if(habilidades[j].avaliacoes[k].idRespUser.indexOf(respostasUsuario[i].idRespostaUsuario) == -1){
+									
 									if(habilidades[j].avaliacoes[avaliacaoExistePos].idAvaliacao == habilidades[j].avaliacoes[k].idAvaliacao){
-										if (statusReposta == 'Correta' ) {									
+										if (statusReposta == 'Correta' ) {	
 											habilidades[j].avaliacoes[k].respostasCorretas += 1;
 											habilidades[j].avaliacoes[k].idRespUser.push(respostasUsuario[i].idRespostaUsuario);
 											habilidades[j].avaliacoes[k].totalRespostas = habilidades[j].avaliacoes[k].totalRespostas + 1;
 											habilidades[j].avaliacoes[k].percentualAcerto =  habilidades[j].avaliacoes[k].respostasCorretas/habilidades[j].avaliacoes[k].totalRespostas*100;
-											habilidades[j].percentualDisciplina += habilidades[j].avaliacoes[k].percentualAcerto;
 										} else {
 											habilidades[j].avaliacoes[k].totalRespostas = habilidades[j].avaliacoes[k].totalRespostas + 1;
 											habilidades[j].avaliacoes[k].idRespUser.push(respostasUsuario[i].idRespostaUsuario);
 											habilidades[j].avaliacoes[k].percentualAcerto =  habilidades[j].avaliacoes[k].respostasCorretas/habilidades[j].avaliacoes[k].totalRespostas*100;
-											habilidades[j].percentualDisciplina = habilidades[j].avaliacoes[k].percentualAcerto;
+											
 										}
 									}
 								}
@@ -244,7 +246,18 @@ angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieSt
 			}
 			
 		}
+		// Preenche o valor do percentual de acerto da disciplina
+		for(i = 0; i < habilidades.length; i++){
+			console.log(habilidades[i].disciplina);
+			for(j = 0; j < habilidades[i].avaliacoes.length; j++ ){
+				console.log(habilidades[i].avaliacoes[j].percentualAcerto);
+				habilidades[i].percentualDisciplina += habilidades[i].avaliacoes[j].percentualAcerto; 
+			}
+			
+		}
+		
 		$scope.habilidades = habilidades;
+		console.log(habilidades);
 	}
 		
 	$scope.divisao = function(num1, num2){
