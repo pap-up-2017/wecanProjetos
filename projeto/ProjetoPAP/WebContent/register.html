@@ -58,32 +58,32 @@
                                  <i class="material-icons">group</i>
                                  </span>
                                  <select class="form-control" ng-model="usuario.tipoUsuario" ng-options="tipoUsuario.tipoUsuario for tipoUsuario in tipoUsuarios | filter: { tipoUsuario : '!Administrador'}" required>
-                                    <option value="#">Selecione um tipo de usuário...*</option>
+                                    <option value="">Selecione um tipo de usuário</option>
                                  </select>
                               </div>
                               <div class="input-group">
                                  <span class="input-group-addon">
                                  <i class="material-icons">face</i>
                                  </span>
-                                 <input type="text" class="form-control" placeholder="Nome completo...*" ng-model="usuario.nomeUsuario" required>
+                                 <input type="text" class="form-control" placeholder="Nome completo" ng-model="usuario.nomeUsuario" required>
                               </div>
                               <div class="input-group">
                                  <span class="input-group-addon">
                                  <i class="material-icons">account_box</i>
                                  </span>
-                                 <input type="text" class="form-control" placeholder="Username...*" ng-model="usuario.usernameUsuario" required>
+                                 <input type="text" class="form-control" placeholder="Username" ng-model="usuario.usernameUsuario" required>
                               </div>
                               <div class="input-group">
                                  <span class="input-group-addon">
                                  <i class="material-icons">email</i>
                                  </span>
-                                 <input type="email" class="form-control" placeholder="Email...*"  ng-model="usuario.emailUsuario" required>
+                                 <input type="email" class="form-control" placeholder="Email"  ng-model="usuario.emailUsuario" required>
                               </div>
                               <div class="input-group">
                                  <span class="input-group-addon">
                                  <i class="material-icons">lock_outline</i>
                                  </span>
-                                 <input type="password" placeholder="Senha...*" class="form-control" ng-model="usuario.senhaUsuario" required/>
+                                 <input type="password" placeholder="Senha" class="form-control" ng-model="usuario.senhaUsuario" required/>
                               </div>
                               <!-- Estado -->
                               <div class="input-group">
@@ -91,7 +91,7 @@
                                  <i class="material-icons">location_city</i>
                                  </span>
                                  <select class="form-control" ng-change="BuscarInformacaoCidades()" ng-model="estadoSelecionado" ng-options="estado.nomeEstado for estado in estados">
-                                    <option value="#">Selecione um estado...*</option>
+                                    <option value="">Selecione um estado</option>
                                  </select>
                               </div>
                               <!-- Estado -->
@@ -100,7 +100,7 @@
                                  <i class="material-icons">store</i>
                                  </span>
                                  <select class="form-control" ng-change="BuscarInformacaoInstituicoes()" ng-model="usuario.cidadeUsuario" ng-options="cidade.nomeCidade for cidade in cidades | filter: estadoSelecionado.nomeEstado">
-                                    <option value="#">Selecione uma cidade...*</option>
+                                    <option value="">Selecione uma cidade</option>
                                  </select>
                               </div>
                               <!-- Instituição -->
@@ -109,7 +109,7 @@
                                  <i class="material-icons">account_balance</i>
                                  </span>
                                  <select class="form-control" ng-change="BuscarInformacaoCursos()" ng-model="usuario.instituicaoUsuario" ng-options="instituicaoEnsino.nomeInstituicao for instituicaoEnsino in instituicoes | filter: usuario.cidadeUsuario.nomeCidade">
-                                    <option value="#">Selecione uma instituição...*</option>
+                                    <option value="">Selecione uma instituição</option>
                                  </select>
                               </div>
                               <!-- Curso -->
@@ -118,7 +118,7 @@
                                  <i class="material-icons">work</i>
                                  </span>
                                  <select class="form-control" ng-model="usuario.cursoUsuario" ng-options="curso.nomeCurso for curso in cursos | filter: usuario.instituicaoUsuario.nomeInstituicao">
-                                    <option value="#">Selecione um curso...*</option>
+                                    <option value="">Selecione um curso</option>
                                  </select>
                               </div>
                            </div>
