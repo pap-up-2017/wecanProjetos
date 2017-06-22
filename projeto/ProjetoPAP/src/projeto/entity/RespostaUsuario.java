@@ -28,6 +28,10 @@ public class RespostaUsuario {
 	private RespostaAvaliacao respostaAvaliacao;
 
 	private Date dataResposta;
+	
+	private String statusRespostaUsuario;
+	
+	
 
 	public int getIdRespostaUsuario() {
 		return idRespostaUsuario;
@@ -59,6 +63,14 @@ public class RespostaUsuario {
 
 	public void setDataResposta(Date dataResposta) {
 		this.dataResposta = dataResposta;
+	}
+
+	public String getStatusRespostaUsuario() {
+		return statusRespostaUsuario;
+	}
+
+	public void setStatusRespostaUsuario(String statusRespostaUsuario) {
+		this.statusRespostaUsuario = statusRespostaUsuario;
 	}
 	
 }

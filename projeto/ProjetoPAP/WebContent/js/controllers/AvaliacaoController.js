@@ -1,9 +1,10 @@
-angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $rootScope, $stateParams) {
+angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $rootScope, $stateParams, $cookieStore) {
+	
+	$scope.UsuarioLogado = $cookieStore.get("session_user_id");
 	
 	// Busca informações de todas as avaliacoes salvas no banco ... Via rest
 	$scope.BuscarInformacaoAvaliacao = function() {
-		//console.log("função BuscarInformacao Avaliação...");
-
+		
 		$http.get($rootScope.pattern_url+'rest/avaliacaorest')
 				.success(function(data) {
 					var avaliacoesBanco = data["avaliacao"];
@@ -28,8 +29,6 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 
 	// envia a informação de um novo cadastro de para o banco ... Via rest
 	$scope.SalvarCadastro = function(avaliacao) {
-		//console.log("Salvar um novo cadastro de avaliação...")
-
 		var parameter = JSON.stringify({
 			type : "avaliacao",
 			nomeAvaliacao : avaliacao.nomeAvaliacao,
@@ -56,14 +55,12 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 							+ status + "<hr />headers: " + header
 							+ "<hr />config: " + config;
 				});
-		//console.log(avaliacao);
 		$scope.BuscarInformacaoAvaliacao();
 	};
 	
 	// Envia a informação de alteração de um elemento para o banco ... Via rest
 	$scope.SalvarAlteracao = function(editedidAvaliacao, editednomeAvaliacao){
-		//console.log("Salvar uma nova Alteração de avaliação ...")
-		
+	
 		var parameter = JSON.stringify({
 			type : "avaliacao",
 			idAvaliacao : editedidAvaliacao,
@@ -106,7 +103,6 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 	
 	// carrega os dados do elemento selecionado para exclusão .. 
 	$scope.ExcluirElemento = function(avaliacao){
-		//console.log("Excluir um elemento ...")
 
 		var parameter = JSON.stringify({
 			type : "avaliacao",
@@ -140,7 +136,6 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 	
 	// Busca informações de todas as disciplinas salvas no banco ... Via rest
 	$scope.BuscarInformacaoDisciplina = function() {
-		//console.log("função BuscarInformacao..");
 
 		$http.get($rootScope.pattern_url+'rest/disciplinarest')
 				.success(function(data) {
@@ -156,12 +151,10 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 	// Busca informações de todos os usuários salvas no banco ... Via rest
 	// para carregar o comboBox..
 	$scope.BuscarInformacaoUsuarios = function() {
-		//console.log("função buscar informações de usuários");
 
 		$http.get($rootScope.pattern_url+'rest/usuariorest')
 				.success(function(data) {
 					var usuariosBanco = data["usuario"];
-					////console.log(usuariosBanco);
 					var arrayBanco = [];
 					if(Array.isArray(usuariosBanco)){
 						arrayBanco = usuariosBanco; 
@@ -189,7 +182,6 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 		
 	  // Busca informações de todas as avaliacoes salvas no banco ... Via rest
 		$scope.BuscarInformacaoExercicio = function() {
-			////console.log("função BuscarInformacao Exercício...");
 
 			$http.get($rootScope.pattern_url+'rest/exerciciorest')
 					.success(function(data) {
@@ -214,7 +206,6 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 	  
 		// envia a informação de um novo cadastro de para o banco ... Via rest
 		$scope.SalvarCadastroExercicio = function(exercicio) {
-			////console.log("Salvar um novo cadastro de exercício...")
 
 			var parameter = JSON.stringify({
 				type : "exercicio",
@@ -246,8 +237,7 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 		
 		// Envia a informação de alteração de um elemento para o banco ... Via rest
 		$scope.SalvarAlteracaoExercicio = function(editedidExercicio, editedtituloExercicio, editeddescricaoExercicio){
-			//console.log("Salvar uma nova Alteração de exercício ...")
-			
+		
 			var parameter = JSON.stringify({
 				type : "exercicio",
 				idExercicio : editedidExercicio,
@@ -298,7 +288,6 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 		
 		// carrega os dados do elemento selecionado para exclusão .. 
 		$scope.ExcluirExercicio = function(exercicio){
-			//console.log("Excluir um elemento ...")
 
 			var parameter = JSON.stringify({
 				type : "exercicio",
@@ -334,7 +323,6 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 		
 		  // Busca informações de todas as respostas de avaliacoes salvas no banco ... Via rest
 			$scope.BuscarInformacaoRespostaAvaliacao = function() {
-				////console.log("função BuscarInformacao Resposta Avaliação...");
 
 				$http.get($rootScope.pattern_url+'rest/respostaavaliacaorest')
 						.success(function(data) {
@@ -359,7 +347,6 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 		  
 			// envia a informação de um novo cadastro de para o banco ... Via rest
 			$scope.SalvarCadastroRespostaAvaliacao = function(respostaavaliacao) {
-				//console.log("Salvar um novo cadastro de resposta avaliacao...")
 
 				var parameter = JSON.stringify({
 					type : "respostaavaliacao",
@@ -391,7 +378,6 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 			
 			// Envia a informação de alteração de um elemento para o banco ... Via rest
 			$scope.SalvarAlteracaoRespostaAvaliacao = function(editedidRespostaAvaliacao, editedtextoRespostaAvaliacao, editedstatusRespostaAvaliacao, editedRespostaAvaliacaoExercicio){
-				//console.log("Salvar uma nova Alteração de resposta exercício ...")
 				
 				var parameter = JSON.stringify({
 						type : "respostaavaliacao",
@@ -429,7 +415,6 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 			
 			// carrega os dados do elemento selecionado para edição .. 
 			$scope.CarregarEdicaoRespostaAvaliacao = function(respostaAvaliacao){
-				//console.log(respostaAvaliacao.exercicio);
 				$scope.istrueRespostaAvaliacao=true;
 			    $scope.editedidRespostaAvaliacao = respostaAvaliacao.idRespostaAvaliacao;
 			    $scope.editedtextoRespostaAvaliacao = respostaAvaliacao.textoRespostaAvaliacao;
@@ -446,7 +431,6 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 			
 			// carrega os dados do elemento selecionado para exclusão .. 
 			$scope.ExcluirRespostaAvaliacao = function(respostaAvaliacao){
-				//console.log("Excluir um elemento ...")
 
 				var parameter = JSON.stringify({
 					type : "respostaavaliacao",
@@ -494,8 +478,6 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 	
 	
 	$scope.filtroDisciplina = function( disciplina ) {
-		  //console.log(disciplina);
-		  //console.log($stateParams);
 		  
 		  if(typeof disciplina == 'undefined'){
 			  $scope.idDisciplina = $stateParams.idDisciplina;
@@ -509,8 +491,6 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 		};
 		
 	$scope.filtroAvaliacao = function( avaliacao ) {
-		//console.log("filtroAvaliacao: "+$stateParams.idAvaliacao);
-		//console.log(avaliacao);
 		if(typeof avaliacao == 'undefined'){
 			$scope.idAvaliacao = $stateParams.idAvaliacao;
 		}else{
@@ -523,8 +503,6 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 		};
 	
 	$scope.filtroExercicio = function( exercicio ) {
-		//console.log(exercicio);
-		//console.log($stateParams);
 		if(typeof exercicio == 'undefined'){
 			$scope.idExercicio = $stateParams.idExercicio;
 		}else{
@@ -539,19 +517,14 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 	$scope.voltar =	function() {
 		    window.history.back();
 		};
-
-	$('a#enviar').click(function() {
 		
-		//alert($("input:radio[name='3']:checked").val()+ ' '+
-		//      $("input:radio[name='4']:checked").val());
-		$scope.validateForm();
-		});
-	
-	var GrupoExercicios = [];
-
-	$scope.validateForm = function() {
+    
+    $scope.validarFormRespostas = function() {
 	    var radios = [];
 	    var formValid = true;
+	    var idRespostaselecionada;
+		var GrupoExercicios = [];
+		$scope.RespostasDoUsuario = [];
 	    
 	    //Verifico todos os radios da tela para pegar seus grupos
 		$('input:radio').each(function() {
@@ -561,17 +534,38 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 		});
 		
 		// Valida se alguma resposta não foi selecionada antes de enviar
-	    for (var i = 0; i< GrupoExercicios.length; i++){
-	       if(typeof $("input:radio[name='"+GrupoExercicios[i]+"']:checked").val() === 'undefined'){
+	    for (var i = 0; i < GrupoExercicios.length; i++){
+	    	idRespostaselecionada = $("input:radio[name='"+GrupoExercicios[i]+"']:checked").val();
+	    	
+	       if(typeof idRespostaselecionada === 'undefined'){
 	    	   formValid = false;
 	       }
-	        
+	       
+	       now = new Date;
+	       
+	       //Verifico se a resposta selecionada é correta ou incorreta
+	       for(var j = 0; j < $scope.respostaAvaliacoes.length; j++){
+	    	   if($scope.respostaAvaliacoes[j].idRespostaAvaliacao === idRespostaselecionada){
+	    		   $scope.RespostasDoUsuario.push({ usuario :  {idUsuario : $scope.UsuarioLogado},
+	    			   respostaAvaliacao : {idRespostaAvaliacao : idRespostaselecionada},
+	    			   statusRespostaUsuario : $scope.respostaAvaliacoes[j].statusRespostaAvaliacao,
+	    			   dataResposta : now });
+
+	    		   
+	    		   
+	    	   }
+	    	   
+	       }
+
+		        
 	    }
 
 	    if (!formValid){
 	    	swal("Para enviar a avaliação, todas as questões devem ser preenchidas.");
 	    }else{
+	    	$scope.salvaRespostasUsuario($scope.RespostasDoUsuario);
 	    	swal("Parabéns sua avaliação foi registrada.");
+	    	$scope.voltar();
 	    }
 	    
 	    return formValid;
@@ -579,10 +573,80 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 	    
 	};
 	
+	//*************** Valida e salva respostas do usuário ***************//
+	
+	// envia a informação de resposta de avaliação ... Via rest
+	$scope.salvaRespostasUsuario = function(respostaUsuario) {
+		for(i = 0; i < respostaUsuario.length ; i++){
+			var parameter = JSON.stringify({
+				type : "respostaUsuario",
+				usuario : respostaUsuario[i].usuario,
+				respostaAvaliacao : respostaUsuario[i].respostaAvaliacao,
+				statusRespostaUsuario : respostaUsuario[i].statusRespostaUsuario,
+				dataResposta : respostaUsuario[i].dataResposta
+			});
+			
+			var config = {
+				headers : {
+					'Content-Type' : 'application/json;charset=utf-8;'
+				}
+			}
+	
+			$http.post(
+					$rootScope.pattern_url+'rest/respostausuariorest/postenvio',
+					parameter, config).success(
+					function(data, status, headers, config) {
+						
+					}).error(
+					function(data, status, header, config) {
+						$scope.Resposta = "Data: " + data + "<hr />status: "
+								+ status + "<hr />headers: " + header
+								+ "<hr />config: " + config;
+					});
+		}
+
+	};
+	
+	// Valida se usuário já respondeu a avaliação
+	// Busca informações de todas as avaliacoes salvas no banco ... Via rest
+	$scope.ValidaAcessoAvaliacao = function(idAvaliacao) {
+		if(typeof $scope.respostasUsuario != 'undefined'){
+			for(i=0; i< $scope.respostasUsuario.length; i++){
+				if($scope.respostasUsuario[i].respostaAvaliacao.exercicio.avaliacao.idAvaliacao == idAvaliacao ){
+					return true;
+				}
+			}	
+			return false;
+		}
+		
+	};
+	
+	$scope.buscarRespostasUsuario = function(){
+		
+		 $http.get($rootScope.pattern_url+'rest/respostausuariorest/listarespostausuario/'+$scope.UsuarioLogado)
+			.success(function(data) {
+				var respostaUsuarioBanco = data["respostaUsuario"];
+				var arrayBanco = [];
+				if(Array.isArray(respostaUsuarioBanco)){
+					arrayBanco = respostaUsuarioBanco; 
+				}
+				else{
+					arrayBanco.push(respostaUsuarioBanco);
+				}
+				$scope.respostasUsuario = arrayBanco;
+				
+			}).error(
+					function(data, status, header, config) {
+						$scope.Resposta = "Data: " + data + "<hr />status: "
+								+ status + "<hr />headers: " + header
+								+ "<hr />config: " + config;
+					});
+		
+	}
+	
 	  
 	// função que inicia a tela
 		$scope.iniciaTela = function() {
-			//console.log("Iniciando a tela de avaliações");
 			
 			$scope.BuscarInformacaoAvaliacao();
 			$scope.BuscarInformacaoDisciplina();
@@ -592,6 +656,8 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 			// Respostas
 			$scope.BuscarInformacaoRespostaAvaliacao();
 			$scope.BuscarDisciplinas();
+			//Respostas do usuário
+			$scope.buscarRespostasUsuario();
 		};
 		$scope.iniciaTela();
 	

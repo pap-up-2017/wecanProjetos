@@ -4,25 +4,25 @@ import java.util.List;
 
 import org.junit.Test;
 
-import projeto.business.ItemAvaliacaoProjetoBusiness;
-import projeto.dao.ItemAvaliacaoProjetoDao;
-import projeto.entity.ItemAvaliacaoProjeto;
+import projeto.business.ItemAvaliacaoUsuarioBusiness;
+import projeto.dao.ItemAvaliacaoUsuarioDao;
+import projeto.entity.ItemAvaliacaoUsuario;
 
 public class TestItemAvaliacaoProjeto {
 	
 	@Test
 	public void cadastrarItem(){
-		ItemAvaliacaoProjeto item = new ItemAvaliacaoProjeto(); 
+		ItemAvaliacaoUsuario item = new ItemAvaliacaoUsuario(); 
 		item.setNomeItem("Item de teste");
 		item.setDescricaoItem("Descrição do item de teste");
-		ItemAvaliacaoProjetoBusiness itemBus = new ItemAvaliacaoProjetoBusiness();
+		ItemAvaliacaoUsuarioBusiness itemBus = new ItemAvaliacaoUsuarioBusiness();
 		itemBus.create(item);
 	}
 	
 	@Test
 	public void listarItens(){
-		ItemAvaliacaoProjetoBusiness itemBus = new ItemAvaliacaoProjetoBusiness();
-		List<ItemAvaliacaoProjeto> itens = itemBus.listaAll();
+		ItemAvaliacaoUsuarioBusiness itemBus = new ItemAvaliacaoUsuarioBusiness();
+		List<ItemAvaliacaoUsuario> itens = itemBus.listaAll();
 		if(itens.size() > 0){
 			// funcionou
 		}
@@ -30,25 +30,25 @@ public class TestItemAvaliacaoProjeto {
 	
 	@Test
 	public void deleteLogico (){
-		ItemAvaliacaoProjetoBusiness itemBus = new ItemAvaliacaoProjetoBusiness();
-		ItemAvaliacaoProjetoDao itemDao = new ItemAvaliacaoProjetoDao();
-		ItemAvaliacaoProjeto item = itemDao.getObjById(1);
+		ItemAvaliacaoUsuarioBusiness itemBus = new ItemAvaliacaoUsuarioBusiness();
+		ItemAvaliacaoUsuarioDao itemDao = new ItemAvaliacaoUsuarioDao();
+		ItemAvaliacaoUsuario item = itemDao.getObjById(1);
 		itemBus.deleteLogico(item);
 	}
 	
 	
 	@Test
 	public void alterar(){
-		ItemAvaliacaoProjetoBusiness itemBus = new ItemAvaliacaoProjetoBusiness();
-		ItemAvaliacaoProjetoDao itemDao = new ItemAvaliacaoProjetoDao();
-		ItemAvaliacaoProjeto item = itemDao.getObjById(1);
+		ItemAvaliacaoUsuarioBusiness itemBus = new ItemAvaliacaoUsuarioBusiness();
+		ItemAvaliacaoUsuarioDao itemDao = new ItemAvaliacaoUsuarioDao();
+		ItemAvaliacaoUsuario item = itemDao.getObjById(1);
 		itemBus.ativaItem(item);
 	}
 	
 	@Test 
 	public void listaAtivos(){
-		ItemAvaliacaoProjetoBusiness itemBus = new ItemAvaliacaoProjetoBusiness();
-		List<ItemAvaliacaoProjeto> itens = itemBus.listaAtivos();
+		ItemAvaliacaoUsuarioBusiness itemBus = new ItemAvaliacaoUsuarioBusiness();
+		List<ItemAvaliacaoUsuario> itens = itemBus.listaAtivos();
 		System.out.println("total de listados: "+itens.size());
 		if(itens.size() > 0){
 			// funcionou

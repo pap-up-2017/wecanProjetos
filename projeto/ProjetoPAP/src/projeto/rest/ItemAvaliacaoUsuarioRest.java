@@ -9,17 +9,17 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import projeto.business.ItemAvaliacaoProjetoBusiness;
-import projeto.entity.ItemAvaliacaoProjeto;
+import projeto.business.ItemAvaliacaoUsuarioBusiness;
+import projeto.entity.ItemAvaliacaoUsuario;
 
-@Path("/itemprojetorest")
-public class ItemAvaliacaoProjetoRest {
+@Path("/itemusuariorest")
+public class ItemAvaliacaoUsuarioRest {
 	
 		// puxa os ativos
 		@GET
 		@Produces(MediaType.APPLICATION_JSON)
-		public List<ItemAvaliacaoProjeto> listarItensDisponiveis() {
-			ItemAvaliacaoProjetoBusiness itemBus = new ItemAvaliacaoProjetoBusiness();
+		public List<ItemAvaliacaoUsuario> listarItensDisponiveis() {
+			ItemAvaliacaoUsuarioBusiness itemBus = new ItemAvaliacaoUsuarioBusiness();
 			return itemBus.listaAtivos();
 		}
 		
@@ -27,8 +27,8 @@ public class ItemAvaliacaoProjetoRest {
 		@GET
 		@Produces(MediaType.APPLICATION_JSON)
 		@Path("/getallitens")
-		public List<ItemAvaliacaoProjeto> listarAllItens() {
-			ItemAvaliacaoProjetoBusiness itemBus = new ItemAvaliacaoProjetoBusiness();
+		public List<ItemAvaliacaoUsuario> listarAllItens() {
+			ItemAvaliacaoUsuarioBusiness itemBus = new ItemAvaliacaoUsuarioBusiness();
 			return itemBus.listaAll();
 		}
 		
@@ -36,8 +36,8 @@ public class ItemAvaliacaoProjetoRest {
 		@POST
 		@Consumes(MediaType.APPLICATION_JSON)
 		@Path("/postcad")
-		public void cadastrarItem(ItemAvaliacaoProjeto item) {	
-			ItemAvaliacaoProjetoBusiness itemBus = new ItemAvaliacaoProjetoBusiness();
+		public void cadastrarItem(ItemAvaliacaoUsuario item) {	
+			ItemAvaliacaoUsuarioBusiness itemBus = new ItemAvaliacaoUsuarioBusiness();
 			if (item.getId() < 1){
 				itemBus.create(item);
 			}
@@ -47,8 +47,8 @@ public class ItemAvaliacaoProjetoRest {
 		@POST
 		@Consumes(MediaType.APPLICATION_JSON)
 		@Path("/postalt")
-		public void alterarItem(ItemAvaliacaoProjeto item) {
-			ItemAvaliacaoProjetoBusiness itemBus = new ItemAvaliacaoProjetoBusiness();
+		public void alterarItem(ItemAvaliacaoUsuario item) {
+			ItemAvaliacaoUsuarioBusiness itemBus = new ItemAvaliacaoUsuarioBusiness();
 			if (item.getId() > 0){
 				itemBus.alterar(item);
 			}
@@ -58,8 +58,8 @@ public class ItemAvaliacaoProjetoRest {
 		@POST
 		@Consumes(MediaType.APPLICATION_JSON)
 		@Path("/desativa")
-		public void desativarItem(ItemAvaliacaoProjeto item) {
-			ItemAvaliacaoProjetoBusiness itemBus = new ItemAvaliacaoProjetoBusiness();
+		public void desativarItem(ItemAvaliacaoUsuario item) {
+			ItemAvaliacaoUsuarioBusiness itemBus = new ItemAvaliacaoUsuarioBusiness();
 			if (item.getId() > 0){
 				itemBus.deleteLogico(item);
 			}
@@ -69,8 +69,8 @@ public class ItemAvaliacaoProjetoRest {
 		@POST
 		@Consumes(MediaType.APPLICATION_JSON)
 		@Path("/ativa")
-		public void ativarItem(ItemAvaliacaoProjeto item) {
-			ItemAvaliacaoProjetoBusiness itemBus = new ItemAvaliacaoProjetoBusiness();
+		public void ativarItem(ItemAvaliacaoUsuario item) {
+			ItemAvaliacaoUsuarioBusiness itemBus = new ItemAvaliacaoUsuarioBusiness();
 			if (item.getId() > 0){
 				itemBus.ativaItem(item);
 			}

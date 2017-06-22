@@ -9,6 +9,8 @@
             <div style="z-index: 99" class="content">
                <div class="author">
                   <img class="avatar" src="dash/img/faces/face-1.png" alt="..."/><br/>
+                  <h6 class="title">Pontuação</h6>
+                  <span style="color: #1dc7ea; font-size: 15px;">{{mediaPontuacaoUsuario}}</span><span style="color: #adadad; font-size: 15px;">/5.0</span> <br/>
                   <h4 class="text-info">
                      {{nomeUsuariod}}<br/>
                      <small class="sm">{{usernameUsuariod}}</small> |
@@ -34,35 +36,36 @@
          </div>
       </div>
       <div class="col-md-4">
+      	<div class="hab card">
+	        <label style="color: #fff;" class="label label-primary">
+	        Habilidades
+	        </label>
+	         <div class="habilidade">
+	        		<div ng-repeat="habilidade in habilidades">
+	        			<div>
+	              		<label style="color: rgba(37, 50, 56, 1) !important;" class="text-info">{{habilidade.disciplina}}</label>
+	              		 <div class="progress progress-line-primary">
+	                   <div class="progress-bar" role="progressbar" aria-valuenow="{{divisao(habilidade.percentualDisciplina,habilidade.totalAvaliacoes)}}" aria-valuemin="0" aria-valuemax="100" style="width: {{divisao(habilidade.percentualDisciplina,habilidade.totalAvaliacoes)}}%;">
+	                      <span class="sr-only">{{divisao(habilidade.percentualDisciplina,habilidade.totalAvaliacoes)}}% Complete</span>
+	                   </div>
+	                </div>
+	           		</div>
+	        		</div>               
+	         </div>
+         </div>
+      </div>
+      <div class="col-md-4">
          <div class="hab card">
                <label style="color: #fff;" class="label label-primary">
-               Habilidades
+               Pontuação do usuário
                </label>
                <div class="habilidade">
-                  <div>
-                     <label style="color: rgba(37, 50, 56, 1) !important;" class="text-info">Nome da habilidade</label>
-                     <div class="progress progress-line-primary">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
-                           <span class="sr-only">30% Complete</span>
-                        </div>
-                     </div>
-                  </div>
-                  <div>
-                     <label style="color: rgba(37, 50, 56, 1) !important;"  class="text-info">Nome da habilidade</label>
-                     <div class="progress progress-line-primary">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
-                           <span class="sr-only">80% Complete</span>
-                        </div>
-                     </div>
-                  </div>
-                  <div>
-                     <label style="color: rgba(37, 50, 56, 1) !important;"  class="text-info">Nome da habilidade</label>
-                     <div class="progress progress-line-primary">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">
-                           <span class="sr-only">10% Complete</span>
-                        </div>
-                     </div>
-                  </div>
+               		<div ng-repeat="pontuacao in arrayPontuacao">
+               			<div>
+                     		<label style="color: rgba(37, 50, 56, 1) !important;"  class="text-info">{{pontuacao.item.nomeItem}}</label><br/>
+							{{pontuacao.pontuacaoItem}}
+                  		</div>
+               		</div>               
                </div>
          </div>
       </div>
