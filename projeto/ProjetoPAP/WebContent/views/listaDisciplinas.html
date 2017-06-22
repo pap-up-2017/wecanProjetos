@@ -22,7 +22,7 @@
 	               		<div class="content">
 	               			<div>
 	                    		<a ui-sref="pageListaAvaliacoes({idDisciplina: {{disciplina.idDisciplina}} })" id="titulo" ng:repeat="disciplina in disciplinas | filter: buscaDisciplina" style="text-align: center;">
-	                    			<div class="col-md-2 disciplina">
+	                    			<div class="col-md-2 disciplina" style="transition: all 0.4s cubic-bezier(0.680, -0.550, 0.265, 1.550);">
 	                    				<i class="fa fa-pencil" aria-hidden="true"></i><br/>
 	                        			{{disciplina.nomeDisciplina}}
 	                        		</div>

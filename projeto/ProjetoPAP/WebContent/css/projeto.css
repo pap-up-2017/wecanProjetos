@@ -50,8 +50,10 @@ input[type=text]:focus {
 	height: 150px;
 	border-radius: 5px;
 	border: 2px solid #fff;
-	color: #12171a;
-	background-image: url('http://i67.tinypic.com/29criic.png'); 
+	color: #fff;
+	background-image: url('http://i63.tinypic.com/1zqfs3r.png');
+	background-repeat: no-repeat;
+	background-color: #3a464c;
 	text-align: center; 
 	font-size: 20px; 
 	word-wrap: break-word; 
@@ -60,7 +62,6 @@ input[type=text]:focus {
 }
 .disciplina:hover
 {
-	
-	color: #fff;
-	background-image: url('http://i67.tinypic.com/2zqfsp5.jpg');
+	border: 3px solid #253238;
 }
+a:hover .disciplina { transform: scale(1.1); }

@@ -24,17 +24,17 @@
                         <input ng-model="buscaAvaliacao" ng-change="BuscarInformacaoAvaliacao()" type="text" name="search" placeholder="Localizar">
                      </form>
                      <br>
-                     <div style="text-align: center; height: 200px; background-image: url('http://i67.tinypic.com/2zqfsp5.jpg'); padding-top: 30px; passing-bottom: 30px; border-radius: 3px;" class="col-md-4" ng-repeat="avaliacao in avaliacoes | filter:filtroDisciplina(disciplina) | filter: buscaAvaliacao ">
+                     <div style="text-align: center; word-wrap: break-word; height: 200px; background-color: #32464c; border: 2px solid #fff; padding-top: 30px; padding-bottom: 30px; border-radius: 6px;" class="col-md-4" ng-repeat="avaliacao in avaliacoes | filter:filtroDisciplina(disciplina) | filter: buscaAvaliacao ">
                         <label class="text-info">Avaliação</label><br/>
                         <label style="color: #fff;" class="description">{{avaliacao.nomeAvaliacao}}</label><br/>
                         <label class="text-info">Professor</label><br/>
                         <label style="color: #fff;" class="description">{{avaliacao.professor.nomeUsuario}}</label><br/>
-                        <a ng-hide="ValidaAcessoAvaliacao({{avaliacao.idAvaliacao}})" class="btn btn-info btn-fill btn-sm" ui-sref="pageListaExercicios({idAvaliacao: {{avaliacao.idAvaliacao}} })" id="titulo">
+                        <a ng-hide="ValidaAcessoAvaliacao({{avaliacao.idAvaliacao}})" class="btn btn-info btn-fill" ui-sref="pageListaExercicios({idAvaliacao: {{avaliacao.idAvaliacao}} })" id="titulo">
                         	Iniciar avaliação
                         </a> 
-                        <label style="color: #228B22;"  ng-show="ValidaAcessoAvaliacao({{avaliacao.idAvaliacao}})">
-                        	<b>Avaliação realizada</b>
-                        </label>
+                        <div ng-show="ValidaAcessoAvaliacao({{avaliacao.idAvaliacao}})" style="border-radius: 3px; padding: 1px; sclear:both; width: 100%; height: 20px; background-color: #72f290;">
+                        	<span style="color: #1e4c29">Concluída</span>
+                        </div>
                      </div>
                      <br>	
                   </div>

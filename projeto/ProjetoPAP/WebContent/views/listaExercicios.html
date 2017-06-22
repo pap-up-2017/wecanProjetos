@@ -28,14 +28,12 @@
                         <li ng:repeat="exercicio in exercicios | filter:filtroAvaliacao(avaliacao)">
                             <span style="font-size: 15px;"><b>[Exercício: {{exercicio.tituloExercicio}}]</b> {{exercicio.descricaoExercicio}}</span>
                               <ol type="a" style="padding-top: 10px;">
-                                <fieldset>
                                  <li class="radio" ng:repeat="respostaAvaliacao in respostaAvaliacoes | filter:filtroExercicio(exercicio) ">
                                    <label class="description">
                                     <input type="radio" name="{{exercicio.idExercicio}}" value="{{respostaAvaliacao.idRespostaAvaliacao}}" /> 
                                     {{respostaAvaliacao.textoRespostaAvaliacao}}
                                    </label>
                                  </li>
-                                 </fieldset>
                               </ol>
                         </li>
                      </ol>
