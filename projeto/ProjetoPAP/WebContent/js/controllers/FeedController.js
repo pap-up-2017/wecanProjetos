@@ -6,13 +6,14 @@ angular.module("app").controller('FeedCtrl', function($scope, $http, $cookieStor
 			if(data != null){
 				$scope.feed = data;
 				$scope.idFeed = data['idFeed']
+				console.log("idFeed: "+$scope.idFeed);
 				$scope.buscarRespostas();
 			}
 		});	
 	} 
 	
 	$scope.buscarRespostas = function(idFeed){
-		$http.post($rootScope.pattern_url+'rest/feedrest/getresposta/'+$scope.idFeed)
+		$http.get($rootScope.pattern_url+'rest/feedrest/getresposta/'+$scope.idFeed)
 		.success(function(data) {
 			if(data != null){
 				var respostaBanco = data["resposta"];
@@ -24,6 +25,7 @@ angular.module("app").controller('FeedCtrl', function($scope, $http, $cookieStor
 					arrayBanco.push(respostaBanco);
 				}
 				$scope.respostasFeed = arrayBanco;
+				console.log($scope.respostasFeed);
 			}
 		});
 	}

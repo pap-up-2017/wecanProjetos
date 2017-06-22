@@ -16,7 +16,6 @@ import projeto.dao.FactoryDao;
 import projeto.dao.InterfaceDao;
 import projeto.entity.Feed;
 import projeto.entity.Resposta;
-import projeto.entity.Usuario;
 
 @Path("/feedrest")
 public class FeedRest {
@@ -40,7 +39,7 @@ public class FeedRest {
 		return f;
 	}
 	
-	@POST
+	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getresposta/{id}")
