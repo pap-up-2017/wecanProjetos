@@ -790,10 +790,6 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 			projetoComentario : projeto
 		});
 		
-		console.log("comentario: "+ txtComentario);
-		console.log("usuarioComentado: "+ usuarioComentado.nomeUsuario);
-		console.log("projetoComentario: "+ projeto.nome);
-		
 		$http.post($rootScope.pattern_url+'rest/comentariousuariorest/postcad/'+$scope.UsuarioLogado,
 				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
