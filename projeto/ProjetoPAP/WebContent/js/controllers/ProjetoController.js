@@ -688,6 +688,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 						});
 	};
 	
+	// salva a avalaiação de cada usuário
 	$scope.salvarAvaliacao = function(nota, item, usuarioAvaliado, projeto){
 
 		var parameter = JSON.stringify({
@@ -710,6 +711,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 				});
 	}
 	
+	// função que conclui o projeto
 	$scope.gerarConclusaoProjeto = function(){
 		if(typeof $scope.avaliacoesUsuario_projeto != 'undefined'){
 			if($scope.projeto.status != "Concluído"){
@@ -755,6 +757,79 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 			}
 			return false;
 		}
+	}
+	
+	// Busca as comentarios por projeto no banco 
+	$scope.BuscarAvaliacoesPorProjeto = function() {
+		$http.get($rootScope.pattern_url+'rest/comentariousuariorest/getprojeto/'+ $stateParams.idProjeto)
+				.success(function(data) {
+					if(data != null){
+						var comentariosBanco = data["comentarioUsuario"];
+						var arrayBanco = [];
+						if(Array.isArray(comentariosBanco)){
+							arrayBanco = comentariosBanco; 
+						}
+						else{
+							arrayBanco.push(comentariosBanco);
+						}
+						$scope.comentariosUsuario_projeto = arrayBanco;
+					}
+				}).error(
+						function(data, status, header, config) {
+							console.log("Data: " + data + " | status: " + status + " | headers: " + header
+									+ " | config: " + config);
+						});
+	};
+	
+	// salva um comentario do usuário
+	$scope.salvarComentarioUsuario = function(txtComentario, usuarioComentado, projeto){
+		var parameter = JSON.stringify({
+			type : "comentarioUsuario",
+			comentario : txtComentario,
+			recebeComentario : usuarioComentado,
+			projetoComentario : projeto
+		});
+		
+		console.log("comentario: "+ txtComentario);
+		console.log("usuarioComentado: "+ usuarioComentado.nomeUsuario);
+		console.log("projetoComentario: "+ projeto.nome);
+		
+		$http.post($rootScope.pattern_url+'rest/comentariousuariorest/postcad/'+$scope.UsuarioLogado,
+				parameter, $rootScope.GetPostconfig).success(
+				function(data, status, headers, config) {
+					$scope.Resposta = 'Comentario Salvo com Sucesso!';
+					$scope.iniciaTelaAvaliacoes();
+				}).error(
+				function(data, status, header, config) {
+					console.log("Data: " + data + " | status: " + status + " | headers: " + header
+							+ " | config: " + config);
+				});
+		
+		
+		
+	}
+	// filtro para exibir os comentarios corretos de cada usuario de acordo com o usuario logado
+	$scope.filtroComentarioExibicao = function(comentario, usuarioAvaliadoLista){
+		if(comentario.recebeComentario.idUsuario == usuarioAvaliadoLista.idUsuario){
+			if(comentario.enviaComentario.idUsuario == $scope.UsuarioLogado){
+				return true;
+			}
+		}
+		return false;	
+	}
+	
+	// Filtro para permitir apenas um comentario por usuario
+	$scope.filtroComentarioUsuario = function(comentario, usuarioAvaliadoLista){
+		if(typeof $scope.comentariosUsuario_projeto != 'undefined'){
+			for(var i=0 ; i < $scope.comentariosUsuario_projeto.length ; i++){
+				if($scope.comentariosUsuario_projeto[i].recebeComentario.idUsuario == usuarioAvaliadoLista.idUsuario){
+					if($scope.comentariosUsuario_projeto[i].enviaComentario.idUsuario == $scope.UsuarioLogado){
+						return true;
+					}
+				}
+			}
+		}
+		return false;	
 	}
 
 				/* *** FIM AVALIAÇÃO USUARIO *** */

@@ -6,7 +6,6 @@ angular.module("app").controller('FeedCtrl', function($scope, $http, $cookieStor
 			if(data != null){
 				$scope.feed = data;
 				$scope.idFeed = data['idFeed']
-				console.log("idFeed: "+$scope.idFeed);
 				$scope.buscarRespostas();
 			}
 		});	
@@ -25,7 +24,6 @@ angular.module("app").controller('FeedCtrl', function($scope, $http, $cookieStor
 					arrayBanco.push(respostaBanco);
 				}
 				$scope.respostasFeed = arrayBanco;
-				console.log($scope.respostasFeed);
 			}
 		});
 	}
@@ -40,8 +38,7 @@ angular.module("app").controller('FeedCtrl', function($scope, $http, $cookieStor
 		
 		$http.post($rootScope.pattern_url+'rest/feedrest/postcadresposta/'+$cookieStore.get("session_user_id"),
 					parameter, $rootScope.GetPostconfig).success(
-					function(data, status, headers, config) {
-						console.log("Salvo com sucesso!");		
+					function(data, status, headers, config) {	
 						$scope.buscarRespostas();
 						$scope.comentarioFeed = null;
 					});
