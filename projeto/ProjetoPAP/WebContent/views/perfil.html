@@ -34,6 +34,16 @@
                </div>
             </div>
          </div>
+         <div style="padding: 0px" class="card card-user">
+           <h4 class="text-info">
+           		Comentarios: {{nomeUsuariod}}   
+           </h4>
+           <div ng-repeat="comentario in comentariosUsuario_Recebido">
+           		{{comentario.enviaComentario.usernameUsuario}}<br/>
+           		{{comentario.projetoComentario.nome}}<br/>
+           		{{comentario.comentario}}<br/><br/>
+           </div>
+         </div>
       </div>
       <div class="col-md-4">
       	<div class="hab card">

@@ -760,7 +760,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 	}
 	
 	// Busca as comentarios por projeto no banco 
-	$scope.BuscarAvaliacoesPorProjeto = function() {
+	$scope.BuscarComentariosPorProjeto = function() {
 		$http.get($rootScope.pattern_url+'rest/comentariousuariorest/getprojeto/'+ $stateParams.idProjeto)
 				.success(function(data) {
 					if(data != null){
@@ -834,6 +834,7 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 	$scope.iniciaTelaAvaliacoes = function(){
 		$scope.BuscarItensDisponiveis();
 		$scope.BuscarAvaliacoesPorProjeto();
+		$scope.BuscarComentariosPorProjeto();
 	}
 	
 	// função que inicia a tela

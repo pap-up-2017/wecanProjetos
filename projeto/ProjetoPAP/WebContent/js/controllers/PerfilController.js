@@ -46,6 +46,8 @@ angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieSt
 						}
 						$scope.avaliacoesDoUsuario = arrayBanco;
 						$scope.BuscarItensDisponiveis();
+					}else{
+						$scope.mediaPontuacaoUsuario = 0;
 					}
 				}).error(
 						function(data, status, header, config) {
@@ -77,31 +79,34 @@ angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieSt
 	};
 	
 	$scope.gerarPontuacaoDoUSuario = function(){
-		$scope.arrayPontuacao = [];
-		for(var i = 0 ; i < $scope.itensUsuario.length ; i++){
-			var somatorioItem = 0;
-			var totalItem = 0;
-			for(var j = 0 ; j < $scope.avaliacoesDoUsuario.length ; j++){
-				if($scope.itensUsuario[i].id == $scope.avaliacoesDoUsuario[j].itemAvaliado.id){
-					somatorioItem = somatorioItem + parseFloat($scope.avaliacoesDoUsuario[j].notaAvaliacao);
-					totalItem++;
+		if(typeof $scope.avaliacoesDoUsuario != 'undefined'){
+			$scope.arrayPontuacao = [];
+			for(var i = 0 ; i < $scope.itensUsuario.length ; i++){
+				var somatorioItem = 0;
+				var totalItem = 0;
+				for(var j = 0 ; j < $scope.avaliacoesDoUsuario.length ; j++){
+					if($scope.itensUsuario[i].id == $scope.avaliacoesDoUsuario[j].itemAvaliado.id){
+						somatorioItem = somatorioItem + parseFloat($scope.avaliacoesDoUsuario[j].notaAvaliacao);
+						totalItem++;
+					}
 				}
+				
+				var pontuacaoItem = somatorioItem / totalItem;
+				$scope.arrayPontuacao.push({ item : $scope.itensUsuario[i],
+											 pontuacaoItem : pontuacaoItem,
+											 somatorioItem : somatorioItem,
+											 totalItem : totalItem });
+			}
+		
+			var pontuacaoTotal = 0;
+			
+			for(var i = 0 ; i<$scope.arrayPontuacao.length;i++){
+					pontuacaoTotal = pontuacaoTotal + parseFloat($scope.arrayPontuacao[i].pontuacaoItem);
 			}
 			
-			var pontuacaoItem = somatorioItem / totalItem;
-			$scope.arrayPontuacao.push({ item : $scope.itensUsuario[i],
-										 pontuacaoItem : pontuacaoItem,
-										 somatorioItem : somatorioItem,
-										 totalItem : totalItem });
+			$scope.mediaPontuacaoUsuario = pontuacaoTotal / $scope.arrayPontuacao.length;
+			console.log("Media pontuação: "+$scope.mediaPontuacaoUsuario);
 		}
-	
-		var pontuacaoTotal = 0;
-		
-		for(var i = 0 ; i<$scope.arrayPontuacao.length;i++){
-				pontuacaoTotal = pontuacaoTotal + parseFloat($scope.arrayPontuacao[i].pontuacaoItem);
-		}
-		
-		$scope.mediaPontuacaoUsuario = pontuacaoTotal / $scope.arrayPontuacao.length;
 	}
 	
 	$scope.detalharPontuacaoUsuario = function(){
@@ -264,8 +269,32 @@ angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieSt
 		
 		return Math.round(num1/num2);
 	}
-			
 	
+	/* **** Comentarios do usuario *** */
+	
+	// Busca as comentarios do usuario
+	$scope.BuscarComentariosPorUsuario = function() {
+		$http.get($rootScope.pattern_url+'rest/comentariousuariorest/getrecebecomentario/'+ $stateParams.idUsuario)
+				.success(function(data) {
+					if(data != null){
+						var comentariosBanco = data["comentarioUsuario"];
+						var arrayBanco = [];
+						if(Array.isArray(comentariosBanco)){
+							arrayBanco = comentariosBanco; 
+						}
+						else{
+							arrayBanco.push(comentariosBanco);
+						}
+						$scope.comentariosUsuario_Recebido = arrayBanco;
+					}
+				}).error(
+						function(data, status, header, config) {
+							console.log("Data: " + data + " | status: " + status + " | headers: " + header
+									+ " | config: " + config);
+						});
+	};
+			
+	/* **** FIM Comentarios do usuario *** */
 
 	// função que inicia a tela
 	$scope.iniciaTela = function() {
@@ -274,6 +303,7 @@ angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieSt
 			$scope.BuscarAvaliacoesPorUsuario();
 			$scope.openPopUpPontuacao = false;
 			$scope.buscarRespostasUsuario();
+			$scope.BuscarComentariosPorUsuario();
 			
 		}
 		$rootScope.BuscarPerfilUsuario();
