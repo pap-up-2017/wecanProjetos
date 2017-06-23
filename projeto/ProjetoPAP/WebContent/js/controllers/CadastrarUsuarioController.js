@@ -139,7 +139,7 @@ angular.module("app").controller('CadastrarUsuarioCtrl', function($scope, $http,
 															swal("Este username já está em uso. Por favor, escolha outro.");
 														}
 														else{
-															window.location.href = $rootScope.pattern_url+"home.html";
+															window.location.href = $rootScope.pattern_url+"index.html";
 														}	
 											});
 										}
