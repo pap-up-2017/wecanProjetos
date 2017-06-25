@@ -10,7 +10,7 @@
                <div class="author">
                   <img class="avatar" src="dash/img/faces/face-1.png" alt="..."/><br/>
                   <h6 class="title">Pontuação</h6>
-                  <span style="color: #1dc7ea; font-size: 15px;">{{mediaPontuacaoUsuario}}</span><span style="color: #adadad; font-size: 15px;">/5.0</span> <br/>
+                  <span style="color: #1dc7ea; font-size: 15px;">{{ mediaPontuacaoUsuario | number : 1}}</span><span style="color: #adadad; font-size: 15px;">/5.0</span> <br/>
                   <h4 class="text-info">
                      {{nomeUsuariod}}<br/>
                      <small class="sm">{{usernameUsuariod}}</small> |
@@ -90,7 +90,7 @@
                		<div ng-repeat="pontuacao in arrayPontuacao">
                			<div>
                      		<label style="color: rgba(37, 50, 56, 1) !important;"  class="text-info">{{pontuacao.item.nomeItem}}</label><br/>
-							{{pontuacao.pontuacaoItem}}
+							{{ pontuacao.pontuacaoItem | number : 1}}
                   		</div>
                		</div>               
                </div>
