@@ -18,11 +18,21 @@
                <form>
                   <br/>
                   <input ng-model="search2" ng-change="BuscarInformacao()" type="text" name="search" placeholder="Search..">
-               </form>
+               </form><br/> 
+                <label>Projetos de TCC:
+    			<input type="checkbox" ng-model="checkBoxTCC"
+           			ng-true-value="'TCC'" ng-false-value="''">
+   				</label>  
+   				<label>{{cursoUsuario}}:
+    			 <input type="checkbox" ng-change="habilitarCursoUsuario()" ng-model="cursoUsuarioCheckBox">
+   				</label>
+   				<label>{{instituicaoUsuario}}:
+    			 <input type="checkbox" ng-change="habilitarInstituicaoUsuario()" ng-model="instituicaoUsuarioCheckBox">
+   				</label>                
                <br/>
             </div>
             <div class="content">
-               <div ng:repeat="projeto in projetos | filter: {status: 'Aberto'} | filter: search2">
+               <div ng:repeat="projeto in projetos | filter: {status: 'Aberto'} | filter: search2 | filter: checkBoxTCC | filter: checkBoxCursoUsuario | filter: checkBoxInstituicaoUsuario">
                   <div class="col-md-12">
                      <a ui-sref="pageDetalhesProjeto({idProjeto:{{projeto.idProjeto}}})">
                         <div id="card" class="card">

@@ -1,6 +1,35 @@
 angular.module("app").controller('ListarProjetosCtrl', function($scope, $http, $stateParams, $cookieStore, $rootScope) {
 	
 	$scope.UsuarioLogado = $cookieStore.get("session_user_id");
+
+	// Busca informação para preenchimento do perfil
+	$scope.BuscarPerfilUsuario = function() {
+		$http.post($rootScope.pattern_url+'rest/usuariorest/busca/'+$scope.UsuarioLogado)
+				.success(function(data) {
+					$scope.cursoUsuario = (data["cursoUsuario"]["nomeCurso"]);
+					$scope.instituicaoUsuario = (data["instituicaoUsuario"]["nomeInstituicao"]);
+				});
+	};
+	
+	$scope.habilitarCursoUsuario = function(){
+		$scope.funcaoHabilitarCursoUsuario = !$scope.funcaoHabilitarCursoUsuario;
+		if($scope.funcaoHabilitarCursoUsuario){
+			$scope.checkBoxCursoUsuario = $scope.cursoUsuario;
+		}
+		else{
+			$scope.checkBoxCursoUsuario = "";
+		}
+	}
+	
+	$scope.habilitarInstituicaoUsuario = function(){
+		$scope.funcaoHabilitarInstituicaoUsuario = !$scope.funcaoHabilitarInstituicaoUsuario;
+		if($scope.funcaoHabilitarInstituicaoUsuario){
+			$scope.checkBoxInstituicaoUsuario = $scope.instituicaoUsuario;
+		}
+		else{
+			$scope.checkBoxInstituicaoUsuario = "";
+		}
+	}
 	
 	// Busca projetos geral
 	$scope.BuscarInformacao = function() {
@@ -67,6 +96,9 @@ angular.module("app").controller('ListarProjetosCtrl', function($scope, $http, $
 	$scope.BuscarInformacao();
 	$scope.BuscarMeusProjetos();	
 	$scope.BuscarProjetosUsuario();
+	$scope.BuscarPerfilUsuario();
+	$scope.funcaoHabilitarCursoUsuario = false;
+	$scope.funcaoHabilitarInstituicaoUsuario = false;
 });
 
 
