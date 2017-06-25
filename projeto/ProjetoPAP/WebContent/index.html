@@ -18,7 +18,7 @@
    </head>
    <body ng-app='app'>
       <div class="index-page">
-         <nav class="navbar navbar-default navbar-fixed-top">
+         <nav class="navbar navbar-transparent navbar-fixed-top navbar-color-on-scroll">
             <div class="container">
                <div class="navbar-header">
                   <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-index">
@@ -43,6 +43,11 @@
                         </a>
                      </li>
                      <li>
+                        <a href="javascript:void(0)" onclick="scrollToComofazer()">
+                        <i class="material-icons">done</i> Como fazer
+                        </a>
+                     </li>
+                     <li>
                         <a href="javascript:void(0)" onclick="scrollToLogin()">
                         <i class="material-icons">account_box</i> Login
                         </a>
@@ -52,36 +57,72 @@
                         <i class="material-icons">person_add</i> Cadastre-se
                         </a>
                      </li>
+                     
                   </ul>
                </div>
             </div>
          </nav>
+           <div class="wrapper" id="home">
+           <div class="header header-filter" style="background-image: url('http://i66.tinypic.com/96xi0o.jpg'); background-attachment: fixed;">
+              <div class="container">
+                 <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                       <div class="brand" ng-controller="HomePageCtrl">
+                          <h1>WECAN</h1>
+                         <h3><b>Plataforma</b> ágil na criação de projetos universitários.</h3>
+                          <a ng-click="carregarPaginaRegister()" href="" class="btn btn-primary btn-lg">Crie sua conta</a>
+                      </div>
+                   </div>
+                </div>
+              </div>
       </div>
-      <div class="section" id="home">
-            <div class="header header-filter">
-<!-- Start WOWSlider.com BODY section -->
-<div id="wowslider-container1">
-<div class="ws_images"><ul>
-		<li><img src="data1/images/bnt1.png" alt="" title="" id="wows1_0"/></li>
-		<li><img src="data1/images/btn2.png" alt="" title="" id="wows1_1"/></li>
-		<li><img src="data1/images/btn3.png" alt="" title="" id="wows1_2"/></li>
-		<li><a href="http://wowslider.com/vi"><img src="data1/images/btn4.png" alt="bootstrap carousel" title="" id="wows1_3"/></a></li>
-		<li><img src="data1/images/btn5.png" alt="" title="" id="wows1_4"/></li>
-	</ul></div>
-	<div class="ws_bullets"><div>
-		<a href="#" title=""><span><img src="data1/tooltips/bnt1.png" alt=""/>1</span></a>
-		<a href="#" title=""><span><img src="data1/tooltips/btn2.png" alt=""/>2</span></a>
-		<a href="#" title=""><span><img src="data1/tooltips/btn3.png" alt=""/>3</span></a>
-		<a href="#" title=""><span><img src="data1/tooltips/btn4.png" alt=""/>4</span></a>
-		<a href="#" title=""><span><img src="data1/tooltips/btn5.png" alt=""/>5</span></a>
-	</div></div><div class="ws_script" style="position:absolute;left:-99%"><a href="http://wowslider.com">wowslideshow</a> by WOWSlider.com v8.7</div>
-<div class="ws_shadow"></div>
-</div>	
-<script type="text/javascript" src="engine1/wowslider.js"></script>
-<script type="text/javascript" src="engine1/script.js"></script>
-            </div>
-         </div>
-
+      </div>
+      </div>
+      <div id="comofazer">
+	      <div class="section" id="section">
+	         <div class="container">
+	            <div class="col-md-12">
+	            	<div class="col-md-8" style="padding: 0px;">
+	            		<div id="wowslider-container1" style="margin-bottom: 20px;">
+							<div class="ws_images">
+								<ul>
+									<li><img src="data1/images/bnt1.png" alt="" title="" id="wows1_0"/></li>
+									<li><img src="data1/images/btn2.png" alt="" title="" id="wows1_1"/></li>
+									<li><img src="data1/images/btn3.png" alt="" title="" id="wows1_2"/></li>
+									<li><a href="http://wowslider.com/vi"><img src="data1/images/btn4.png" alt="bootstrap carousel" title="" id="wows1_3"/></a></li>
+									<li><img src="data1/images/btn5.png" alt="" title="" id="wows1_4"/></li>
+								</ul></div>
+								<div class="ws_bullets"><div>
+									<a href="#" title=""><span><img src="data1/tooltips/bnt1.png" alt=""/>1</span></a>
+									<a href="#" title=""><span><img src="data1/tooltips/btn2.png" alt=""/>2</span></a>
+									<a href="#" title=""><span><img src="data1/tooltips/btn3.png" alt=""/>3</span></a>
+									<a href="#" title=""><span><img src="data1/tooltips/btn4.png" alt=""/>4</span></a>
+									<a href="#" title=""><span><img src="data1/tooltips/btn5.png" alt=""/>5</span></a>
+								</div>
+							</div><div class="ws_script" style="position:absolute;left:-99%">
+								<a href="http://wowslider.com">wowslideshow</a> 
+								by WOWSlider.com v8.7
+							</div>
+							<div class="ws_shadow"></div>
+							</div>	
+							<script type="text/javascript" src="engine1/wowslider.js"></script>
+							<script type="text/javascript" src="engine1/script.js"></script>
+	            	</div>
+	            	<div class="col-md-4">
+	            		<div class="info-icon" ng-controller="HomePageCtrl">
+		                  <div class="icon text-danger">
+		                     <i class="pe-7s-note2"></i>
+		                  </div>
+		                  <img src="http://i64.tinypic.com/k450l.png"/>
+		                  <h3>Encontre pessoas qualificadas para a sua equipe.</h3>
+		                  <p class="description">A Wecan te ajuda a encontrar membros interessados e dedicados, chegando no seu resultado final com qualidade.</p>
+		                  <a ng-click="carregarPaginaRegister()" href="" class="btn btn-primary btn-lg">Crie sua conta</a>
+		               	</div>
+	            	</div>
+	            </div>
+	         </div>
+	      </div>
+      </div>
       <div class="section" id="sobre">
          <div class="container">
             <div class="row">
@@ -131,21 +172,6 @@
                      <i class="material-icons">assignment_turned_in</i>
                      <p class="description">Tenha seu projeto concluído no tempo previsto e com a qualidade desejada.</p>
                   </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <div class="section" id="section">
-         <div class="container">
-            <div class="col-md-12">
-               <div class="info-icon" ng-controller="HomePageCtrl">
-                  <div class="icon text-danger">
-                     <i class="pe-7s-note2"></i>
-                  </div>
-                  <img src="http://i64.tinypic.com/k450l.png"/>
-                  <h3>Encontre pessoas qualificadas para a sua equipe.</h3>
-                  <p class="description">A Wecan te ajuda a encontrar membros interessados e dedicados, chegando no seu resultado final com qualidade.</p>
-                  <a ng-click="carregarPaginaRegister()" href="" class="btn btn-primary btn-lg">Crie sua conta</a>
                </div>
             </div>
          </div>
@@ -246,6 +272,12 @@
          		scrollTop: $('#home').offset().top
          	},1000);
          }
+         
+         function scrollToComofazer(){
+          	$("html, body").animate({
+          		scrollTop: $('#comofazer').offset().top
+          	},1000);
+          }
       </script>
    </body>
 </html>
