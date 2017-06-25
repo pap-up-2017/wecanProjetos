@@ -1,6 +1,9 @@
 angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $rootScope, $stateParams, $cookieStore) {
 	
 	$scope.UsuarioLogado = $cookieStore.get("session_user_id");
+	$scope.idDisciplina = $stateParams.idDisciplina;
+	$scope.idAvaliacao = $stateParams.idAvaliacao;
+	$scope.idExercicio = $stateParams.idExercicio;
 	
 	// Busca informações de todas as avaliacoes salvas no banco ... Via rest
 	$scope.BuscarInformacaoAvaliacao = function() {
@@ -16,7 +19,6 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 						arrayBanco.push(avaliacoesBanco);
 					}
 					$scope.avaliacoes = arrayBanco;
-					
 				}).error(
 						function(data, status, header, config) {
 							$scope.Resposta = "Data: " + data + "<hr />status: "
@@ -32,9 +34,12 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 		var parameter = JSON.stringify({
 			type : "avaliacao",
 			nomeAvaliacao : avaliacao.nomeAvaliacao,
-			disciplina : avaliacao.disciplina,
-			professor : avaliacao.professor
+			disciplina : {idDisciplina: $scope.idDisciplina },
+			professor : {idUsuario : $scope.UsuarioLogado }
+
 		});
+		
+		//console.log(parameter);
 		
 		var config = {
 			headers : {
@@ -47,7 +52,7 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 				parameter, config).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Avaliacao salva com sucesso!';
-					
+					$scope.BuscarInformacaoAvaliacao();
 					
 				}).error(
 				function(data, status, header, config) {
@@ -55,7 +60,7 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 							+ status + "<hr />headers: " + header
 							+ "<hr />config: " + config;
 				});
-		$scope.BuscarInformacaoAvaliacao();
+		
 	};
 	
 	// Envia a informação de alteração de um elemento para o banco ... Via rest
@@ -121,7 +126,7 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 				parameter, config).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Avaliacao excluida com sucesso!';
-					
+					$scope.BuscarInformacaoAvaliacao();
 					
 				}).error(
 				function(data, status, header, config) {
@@ -129,8 +134,7 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 							+ status + "<hr />headers: " + header
 							+ "<hr />config: " + config;
 				});
-		
-		$scope.BuscarInformacaoAvaliacao();
+
 		
 	};
 	
@@ -211,7 +215,7 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 				type : "exercicio",
 				tituloExercicio : exercicio.tituloExercicio,
 				descricaoExercicio : exercicio.descricaoExercicio,
-				avaliacao : exercicio.avaliacao
+				avaliacao : {idAvaliacao : $scope.idAvaliacao }
 			});
 			
 			var config = {
@@ -306,7 +310,7 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 					parameter, config).success(
 					function(data, status, headers, config) {
 						$scope.RespostaExercicio = 'Exercício excluído com sucesso!';
-						
+						$scope.BuscarInformacaoExercicio();	
 						
 					}).error(
 					function(data, status, header, config) {
@@ -315,7 +319,6 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 								+ "<hr />config: " + config;
 					});
 			
-			$scope.BuscarInformacaoExercicio();
 			
 		};
 		
@@ -352,7 +355,7 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 					type : "respostaavaliacao",
 					textoRespostaAvaliacao : respostaavaliacao.textoRespostaAvaliacao,
 					statusRespostaAvaliacao : respostaavaliacao.statusRespostaAvaliacao,
-					exercicio : respostaavaliacao.exercicio
+					exercicio : {idExercicio : $scope.idExercicio }//respostaavaliacao.exercicio
 				});
 				
 				var config = {
@@ -449,7 +452,7 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 						parameter, config).success(
 						function(data, status, headers, config) {
 							$scope.RespostaExercicio = 'Resposta avaliação excluída com sucesso!';
-							
+							$scope.BuscarInformacaoRespostaAvaliacao();	
 							
 						}).error(
 						function(data, status, header, config) {
@@ -458,7 +461,6 @@ angular.module("app").controller('PageAvaliacaoCtrl', function($scope, $http, $r
 									+ "<hr />config: " + config;
 						});
 				
-				$scope.BuscarInformacaoRespostaAvaliacao();
 				
 			};
 			

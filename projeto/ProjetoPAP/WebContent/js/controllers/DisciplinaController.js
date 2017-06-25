@@ -27,7 +27,7 @@ angular.module("app").controller('PageDisciplinaCtrl', function($scope, $http, $
 				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Disciplina salva com sucesso!';
-					
+					$scope.BuscarInformacao();
 					
 				}).error(
 				function(data, status, header, config) {
@@ -36,7 +36,7 @@ angular.module("app").controller('PageDisciplinaCtrl', function($scope, $http, $
 							+ "<hr />config: " + config;
 				});
 		
-		$scope.BuscarInformacao();
+		
 	};
 	
 	// Envia a informação de alteração de um elemento para o banco ... Via rest
@@ -85,7 +85,7 @@ angular.module("app").controller('PageDisciplinaCtrl', function($scope, $http, $
 				parameter, $rootScope.GetPostconfig).success(
 				function(data, status, headers, config) {
 					$scope.Resposta = 'Disciplina excluida com sucesso!';
-					
+					$scope.BuscarInformacao();
 					
 				}).error(
 				function(data, status, header, config) {
@@ -94,7 +94,7 @@ angular.module("app").controller('PageDisciplinaCtrl', function($scope, $http, $
 							+ "<hr />config: " + config;
 				});
 		
-		$scope.BuscarInformacao();
+		
 		
 	};
 	

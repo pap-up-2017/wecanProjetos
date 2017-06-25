@@ -103,6 +103,12 @@
                            </a>
                         </li>
                         <li>
+                           <a ng-show="tipoUsuarioFiltro()" ui-sref="pageDisciplina" ui-sref-active="active">
+                           <i ng-show="tipoUsuarioFiltro()" class="fa fa-clipboard" aria-hidden="true"></i> 
+                           Cadastro de Disciplinas / Avaliações
+                           </a>
+                        </li>
+                        <li>
                            <a ng-hide="tipoUsuarioFiltro()" href="#pageListaNotificacoes">
                               <div ng-hide="tipoUsuarioFiltro()" class="noti" ng-controller="PageNotificacaoCtrl">
                                  <i ng-hide="tipoUsuarioFiltro()" class="fa fa-bell" aria-hidden="true">

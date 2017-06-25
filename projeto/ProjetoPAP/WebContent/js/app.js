@@ -40,9 +40,22 @@ function route($stateProvider, $urlRouterProvider, $locationProvider){
 	  
 	  var avaliacao = {
 			  name: 'pageAvaliacao',
-			  url: '/pageAvaliacao',
+			  url: '/pageAvaliacao/{idDisciplina}',
 			  templateUrl: 'views/cadAvaliacao.html'
 			}
+	  
+	  var exercicio = {
+			  name: 'pageExercicio',
+			  url: '/pageExercicio/{idAvaliacao}',
+			  templateUrl: 'views/cadExercicio.html'
+			}
+	  
+	  var RespostaAvaliacao = {
+			  name: 'pageRespostaAvaliacao',
+			  url: '/pageRespostaAvaliacao/{idExercicio}',
+			  templateUrl: 'views/cadRespostaAvaliacao.html'
+			}	  
+	  
 	  
 	  var home = {
 			  name: 'pageHome',
@@ -133,6 +146,8 @@ function route($stateProvider, $urlRouterProvider, $locationProvider){
 	  $stateProvider.state(usuario);
 	  $stateProvider.state(disciplina);
 	  $stateProvider.state(avaliacao);
+	  $stateProvider.state(exercicio);
+	  $stateProvider.state(RespostaAvaliacao);
 	  $stateProvider.state(cadastrosAdmin);
 	  $stateProvider.state(listaProjetos);
 	  $stateProvider.state(meusProjetos);

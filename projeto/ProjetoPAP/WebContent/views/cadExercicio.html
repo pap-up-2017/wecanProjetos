@@ -34,58 +34,16 @@
 <div ng-controller="PageAvaliacaoCtrl"	>
    {{ Resposta }}
    
-   <h2>Cadastro de Avaliações</h2>
-   <p class="form-group">
-      <input placeholder="Nome" class="form-control" type="text" ng-model="avaliacao.nomeAvaliacao" required />
-     <!--  <select class="form-control" ng-model="avaliacao.disciplina" ng-options="disciplina.nomeDisciplina for disciplina in disciplinas">
-      	<option value="">Selecione uma disciplina...</option>
-      </select>
-       
-       <select class="form-control" ng-model="avaliacao.professor" ng-options="usuario.nomeUsuario for usuario in usuarios | filter: tipUsuario = 'Professor'">
-          <option value="">Selecione um professor...</option>
-       </select>
-       -->
-      
-      </p class="form-group">
-      <button class="btn btn-success" ng-click="SalvarCadastro(avaliacao)">Cadastrar</button>
-
-	<br/><br/>
-   <button class="btn btn-primary" ng-click="BuscarInformacaoAvaliacao()">Buscar Avaliações</button>
-   <div class="editpopup editpopup-{{istrue}} ">
-      <p>edit Id:<input type="text" ng-model="editedidAvaliacao"></p>
-      <p>edit Avaliacao:<input type="text" ng-model="editednomeAvaliacao"></p>
-      <button ng-click="SalvarAlteracao(editedidAvaliacao, editednomeAvaliacao)">Salvar</button>
-      <button ng-click="FecharPopUpEdicao()">Cancelar</button>
-   </div>
-	<br/><br/>
-   <table class="table ">
-      <tr>
-         <td>Id</td>
-         <td>Nome</td>
-         <td>Disciplina</td>
-         <td>Professor</td>
-      </tr>
-      <tr ng:repeat="avaliacao in avaliacoes | filter:filtroDisciplina(disciplina) ">
-         <td>{{avaliacao.idAvaliacao}}</td>
-         <td>{{avaliacao.nomeAvaliacao}}</td>
-         <td>{{avaliacao.disciplina.nomeDisciplina}}</td>
-         <td>{{avaliacao.professor.nomeUsuario}}</td>
-         <td><button ng-click="CarregarEdicao(avaliacao)" class="btn btn-primary">Alterar</button></td>
-		 <td><a class="btn btn-primary" ui-sref="pageExercicio({idAvaliacao:{{avaliacao.idAvaliacao}}})" ui-sref-active="active">Cadastrar Exercícios</td>
-         <td><button class="btn btn-primary" ng-click="ExcluirElemento(avaliacao)">Excluir</button></td>
-      </tr>
-   </table>
-<button class="btn btn-primary" ng-click="voltar()">Voltar</button>
-<!--    
    <h2>Cadastro de Exercícios</h2>
 
    {{ RespostaExercicio }}
    <p class="form-group">
    	  <input placeholder="Título" class="form-control" type="text" ng-model="exercicio.tituloExercicio" required />
       <input placeholder="Descrição" class="form-control" type="text" ng-model="exercicio.descricaoExercicio" required />
-      <select class="form-control" ng-model="exercicio.avaliacao" ng-options="avaliacao.nomeAvaliacao for avaliacao in avaliacoes">
+      <!-- <select class="form-control" ng-model="exercicio.avaliacao" ng-options="avaliacao.nomeAvaliacao for avaliacao in avaliacoes">
       	<option value="">Selecione uma avaliação...</option>
       </select>
+       -->
       </p class="form-group">
       <button class="btn btn-success" ng-click="SalvarCadastroExercicio(exercicio)">Cadastrar</button>
 
@@ -107,16 +65,18 @@
          <td>Descrição</td>
          <td>Avaliação</td>
       </tr>
-      <tr ng:repeat="exercicio in exercicios">
+      <tr ng:repeat="exercicio in exercicios | filter:filtroAvaliacao(avaliacao)">
          <td>{{exercicio.idExercicio}}</td>
          <td>{{exercicio.tituloExercicio}}</td>
          <td>{{exercicio.descricaoExercicio}}</td>
          <td>{{exercicio.avaliacao.nomeAvaliacao}}</td>
          <td><button ng-click="CarregarEdicaoExercicio(exercicio)" class="btn btn-primary">Alterar</button></td>
+         <td><a class="btn btn-primary" ui-sref="pageRespostaAvaliacao({idExercicio:{{exercicio.idExercicio}}})" ui-sref-active="active">Cadastrar Respostas</td>
          <td><button class="btn btn-primary" ng-click="ExcluirExercicio(exercicio)">Excluir</button></td>
       </tr>
    </table>
-   
+   <button class="btn btn-primary" ng-click="voltar()">Voltar</button>
+ <!--    
      <h2>Cadastro de Respostas</h2>
 
    {{ RespostaResposta }}
