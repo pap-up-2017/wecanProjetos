@@ -10,13 +10,15 @@
       <link rel="stlesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"/>
       <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
       <link href="assets/css/material-kit.css" rel="stylesheet"/>
+      <link rel="stylesheet" type="text/css" href="engine1/style.css" />
+	  <script type="text/javascript" src="engine1/jquery.js"></script>
       <!-- sweet alert -->
       <link rel="stylesheet" href="css/sweetalert.css">
       <title>Wecan</title>
    </head>
    <body ng-app='app'>
       <div class="index-page">
-         <nav class="navbar navbar-transparent navbar-fixed-top navbar-color-on-scroll">
+         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                <div class="navbar-header">
                   <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-index">
@@ -54,22 +56,32 @@
                </div>
             </div>
          </nav>
-         <div class="wrapper" id="home">
-            <div class="header header-filter" style="background-image: url('http://i66.tinypic.com/96xi0o.jpg'); background-attachment: fixed;">
-               <div class="container">
-                  <div class="row">
-                     <div class="col-md-8 col-md-offset-2">
-                        <div class="brand" ng-controller="HomePageCtrl">
-                           <h1>WECAN</h1>
-                           <h3><b>Plataforma</b> ágil na criação de projetos universitários.</h3>
-                           <a ng-click="carregarPaginaRegister()" href="" class="btn btn-primary btn-lg">Crie sua conta</a>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+      </div>
+      <div class="section" id="home">
+            <div class="header header-filter">
+<!-- Start WOWSlider.com BODY section -->
+<div id="wowslider-container1">
+<div class="ws_images"><ul>
+		<li><img src="data1/images/bnt1.png" alt="" title="" id="wows1_0"/></li>
+		<li><img src="data1/images/btn2.png" alt="" title="" id="wows1_1"/></li>
+		<li><img src="data1/images/btn3.png" alt="" title="" id="wows1_2"/></li>
+		<li><a href="http://wowslider.com/vi"><img src="data1/images/btn4.png" alt="bootstrap carousel" title="" id="wows1_3"/></a></li>
+		<li><img src="data1/images/btn5.png" alt="" title="" id="wows1_4"/></li>
+	</ul></div>
+	<div class="ws_bullets"><div>
+		<a href="#" title=""><span><img src="data1/tooltips/bnt1.png" alt=""/>1</span></a>
+		<a href="#" title=""><span><img src="data1/tooltips/btn2.png" alt=""/>2</span></a>
+		<a href="#" title=""><span><img src="data1/tooltips/btn3.png" alt=""/>3</span></a>
+		<a href="#" title=""><span><img src="data1/tooltips/btn4.png" alt=""/>4</span></a>
+		<a href="#" title=""><span><img src="data1/tooltips/btn5.png" alt=""/>5</span></a>
+	</div></div><div class="ws_script" style="position:absolute;left:-99%"><a href="http://wowslider.com">wowslideshow</a> by WOWSlider.com v8.7</div>
+<div class="ws_shadow"></div>
+</div>	
+<script type="text/javascript" src="engine1/wowslider.js"></script>
+<script type="text/javascript" src="engine1/script.js"></script>
             </div>
          </div>
-      </div>
+
       <div class="section" id="sobre">
          <div class="container">
             <div class="row">
