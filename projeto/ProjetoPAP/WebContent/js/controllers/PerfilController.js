@@ -295,7 +295,34 @@ angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieSt
 	};
 			
 	/* **** FIM Comentarios do usuario *** */
+	
+	/* **** Projetos concluidos do usuário **** */
+	
+	// Busca informações de todos os projetos salvas no banco ... Via rest
+	$scope.BuscarMeusProjetos = function(idUsuario) {
 
+		$http.get($rootScope.pattern_url+'rest/projetorest/user/'+$scope.UsuarioLogado)
+				.success(function(data) {
+					var projetosBanco = data["projeto"];
+					var arrayBanco = [];
+					if(Array.isArray(projetosBanco)){
+						arrayBanco = projetosBanco; 
+					}
+					else{
+						arrayBanco.push(projetosBanco);
+					}
+					$scope.projetosUsuario = arrayBanco;
+					
+				}).error(
+						function(data, status, header, config) {
+							$scope.Resposta = "Data: " + data + "<hr />status: "
+									+ status + "<hr />headers: " + header
+									+ "<hr />config: " + config;
+						});
+	};
+	
+	/* **** FIM Projetos concluidos do usuário **** */
+	
 	// função que inicia a tela
 	$scope.iniciaTela = function() {
 		if($stateParams.idUsuario != null){
@@ -304,6 +331,7 @@ angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieSt
 			$scope.openPopUpPontuacao = false;
 			$scope.buscarRespostasUsuario();
 			$scope.BuscarComentariosPorUsuario();
+			$scope.BuscarMeusProjetos();
 			
 		}
 		$rootScope.BuscarPerfilUsuario();

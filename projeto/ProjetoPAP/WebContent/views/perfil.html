@@ -36,12 +36,29 @@
          </div>
          <div style="padding: 0px" class="card card-user">
            <h4 class="text-info">
-           		Comentarios: {{nomeUsuariod}}   
+           		Projetos concluídos do usuário   
            </h4>
+           <div ng-repeat="projeto in projetosUsuario | filter: {status: 'Concluído'}">
+    			<a style="font-size:15px;" ui-sref="pageDetalhesProjeto({idProjeto: {{projeto.idProjeto}} })" ui-sref-active="active">
+                	{{projeto.nome}}
+                </a><br/>
+				
+           </div>
+         </div>
+         <div style="padding: 0px" class="card card-user">
+           <h4 class="text-info">
+           		Comentarios: {{nomeUsuariod}}   
+           </h4><hr/>
            <div ng-repeat="comentario in comentariosUsuario_Recebido">
-           		{{comentario.enviaComentario.usernameUsuario}}<br/>
-           		{{comentario.projetoComentario.nome}}<br/>
+                <a style="font-size:15px;" class="label label-primary" ui-sref="perfil({idUsuario: {{comentario.enviaComentario.idUsuario}} })" ui-sref-active="active">
+                	<i class="fa fa-user" aria-hidden="true"></i> {{comentario.enviaComentario.usernameUsuario}}
+                </a><br/>
+                <a style="font-size:15px;" ui-sref="pageDetalhesProjeto({idProjeto: {{comentario.projetoComentario.idProjeto}} })" ui-sref-active="active">
+                	{{comentario.projetoComentario.nome}}
+                </a><br/>
+           		<br/>
            		{{comentario.comentario}}<br/><br/>
+           		<hr/>
            </div>
          </div>
       </div>
