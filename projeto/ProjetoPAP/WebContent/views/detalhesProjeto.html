@@ -402,10 +402,6 @@
                     item: {{avaliacao.itemAvaliado.nomeItem}} | avaliado: {{avaliacao.usuarioAvaliado.nomeUsuario}} | avaliador: {{avaliacao.usuarioAvaliador.nomeUsuario}} | nota: {{avaliacao.notaAvaliacao}}
                 </div>
             </div>
-            <div class="col-md-12">  
-               <textarea class="form-control" cols="20" rows="6" maxlength="500" placeholder="Comente aqui sua opinião a respeito deste integrante da equipe (No máximo 500 caracteres)." id="dp" ng-model="txtComentario" required></textarea>
-               <button class="btn btn-primary btn-fill" ng-click="salvarComentarioUsuario(txtComentario, usuarioDoProjeto, projeto)">Comentar</button>
-           </div>
         </div>
         <div ng-repeat="usuarioDoProjeto in usuariosDoProjeto">
             <div class="sombra card" ng-hide="filtroExibirAvaliacao(usuarioDoProjeto)">
