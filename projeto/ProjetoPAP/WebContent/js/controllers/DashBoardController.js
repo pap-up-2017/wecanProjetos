@@ -29,15 +29,19 @@ angular.module("app").controller('DashBoardCtrl', function($scope, $http, $cooki
 	$scope.buscaCards = function(){
 		$http.post($rootScope.pattern_url+'rest/projetorest/cards/'+$scope.idUsuarioLogado)
 		.success(function(data) {
-			var cardsBanco = data["cardsDashBoard"];
-			var arrayBanco = [];
-			if(Array.isArray(cardsBanco)){
-				arrayBanco = cardsBanco; 
+			if(data != null){
+				var cardsBanco = data["cardsDashBoard"];
+				var arrayBanco = [];
+				if(Array.isArray(cardsBanco)){
+					arrayBanco = cardsBanco; 
+				}
+				else{
+					arrayBanco.push(cardsBanco);
+				}
+				$scope.cardsProjetos = arrayBanco;
+			}else{
+				$scope.cardsProjetos = null;
 			}
-			else{
-				arrayBanco.push(cardsBanco);
-			}
-			$scope.cardsProjetos = arrayBanco;
 			
 		}).error(
 				function(data, status, header, config) {
@@ -49,8 +53,15 @@ angular.module("app").controller('DashBoardCtrl', function($scope, $http, $cooki
 	$scope.BuscarMeusProjetos();
 	$scope.buscaCards();
 	
-	$scope.functionThatReturnsStyle = function(valor) {
+	$scope.functionThatReturnsStyle = function(valor){
 		var style1 = "width: "+valor+"%";
 		}
+	
+	$scope.filtroCardsProjetoZerado = function(){
+		if($scope.cardsProjetos == null){	
+			return true;
+		}
+		return false;
+	}
 	
 });
