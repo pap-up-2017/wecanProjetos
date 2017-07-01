@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <div ng-controller="PerfilCtrl">
    <div class="container-fluid">
-      <div class="col-md-8">
+      <div class="col-md-12">
          <div style="padding: 0px" class="card card-user">
             <div class="image image-filter"></div>
             <div style="z-index: 99" class="content">
@@ -24,45 +24,21 @@
                </p>
             </div>
             <div style="padding: 10px;" class="row" ng-controller="excluirUsuarioCtrl">
-               <div class="col-md-6">
+            	<div class="col-md-4"></div>
+               <div class="col-md-2">
                   <a style="width: 100%;" class="btn btn-info btn-fill pull-right" ng-show="idUsuairiod == UsuarioLogado" ui-sref="altPerfil" ui-sref-active="active">
                   Editar perfil
                   </a> 
                </div>
-               <div class="col-md-6">
-                  <button style="width: 100%" ng-click="ExcluirElemento()" class="btn btn-danger btn-fill pull-left" ng-show="idUsuairiod == UsuarioLogado">Excluir perfil</button>
+               <div class="col-md-2">
+                  <button style="width: 100%" ng-click="ExcluirElemento()" class="btn btn-danger btn-fill pull-left" ng-show="idUsuairiod == UsuarioLogado">
+                  Excluir perfil</button>
                </div>
+               <div class="col-md-4"></div>
             </div>
          </div>
-         <div style="padding: 0px" class="card card-user">
-           <h4 class="text-info">
-           		Projetos concluídos do usuário   
-           </h4>
-           <div ng-repeat="projeto in projetosUsuario | filter: {status: 'Concluído'}">
-    			<a style="font-size:15px;" ui-sref="pageDetalhesProjeto({idProjeto: {{projeto.idProjeto}} })" ui-sref-active="active">
-                	{{projeto.nome}}
-                </a><br/>
-				
-           </div>
-         </div>
-         <div style="padding: 0px" class="card card-user">
-           <h4 class="text-info">
-           		Comentarios: {{nomeUsuariod}}   
-           </h4><hr/>
-           <div ng-repeat="comentario in comentariosUsuario_Recebido">
-                <a style="font-size:15px;" class="label label-primary" ui-sref="perfil({idUsuario: {{comentario.enviaComentario.idUsuario}} })" ui-sref-active="active">
-                	<i class="fa fa-user" aria-hidden="true"></i> {{comentario.enviaComentario.usernameUsuario}}
-                </a><br/>
-                <a style="font-size:15px;" ui-sref="pageDetalhesProjeto({idProjeto: {{comentario.projetoComentario.idProjeto}} })" ui-sref-active="active">
-                	{{comentario.projetoComentario.nome}}
-                </a><br/>
-           		<br/>
-           		{{comentario.comentario}}<br/><br/>
-           		<hr/>
-           </div>
-         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
       	<div class="hab card">
 	        <label style="color: #fff;" class="label label-primary">
 	        Habilidades
@@ -81,7 +57,7 @@
 	         </div>
          </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
          <div class="hab card">
                <label style="color: #fff;" class="label label-primary">
                Pontuação do usuário
@@ -96,5 +72,32 @@
                </div>
          </div>
       </div>
+      <div class="col-md-12">
+      	<div class="card">
+           <label style="color: #fff;" class="label label-primary">
+	       	Projetos concluídos de {{nomeUsuariod}}
+	        </label><br/><br/>
+    		<a ng-repeat="projeto in projetosUsuario | filter: {status: 'Concluído'}" ui-sref="pageDetalhesProjeto({idProjeto: {{projeto.idProjeto}} })" ui-sref-active="active">
+               <div style="font-weight: bold; text-align: center; padding-top: 15px; height: 50px; color:#18a7c5; background: #c9e8ef; border: 2px solid #fff; border-radius: 5px;" class="col-md-4">{{projeto.nome}}</div>
+            </a><br/>
+         </div>
+         </div>
+         <div class="col-md-12">
+      		<div class="card">
+           <label style="color: #fff;" class="label label-primary">
+	       	Comentarios sobre {{nomeUsuariod}} 
+	        </label>
+           <div ng-repeat="comentario in comentariosUsuario_Recebido">
+                <a style="font-size:15px;" class="label label-primary" ui-sref="perfil({idUsuario: {{comentario.enviaComentario.idUsuario}} })" ui-sref-active="active">
+                	<i class="fa fa-user" aria-hidden="true"></i> {{comentario.enviaComentario.usernameUsuario}}
+                </a><br/>
+                <a style="font-size:15px;" ui-sref="pageDetalhesProjeto({idProjeto: {{comentario.projetoComentario.idProjeto}} })" ui-sref-active="active">
+                	{{comentario.projetoComentario.nome}}
+                </a><br/>
+           		<br/>
+           		{{comentario.comentario}}<br/><br/>
+           		<hr/>
+           </div>
+           </div>
    </div>
 </div>

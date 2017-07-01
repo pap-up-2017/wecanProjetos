@@ -341,7 +341,7 @@
                 <div class="card">
                     <h2 class="text-info">Tarefas concluídas</h2>
                     <hr/>
-                    <div class="success col-md-6" ng-repeat="tarefa in tarefas">
+                    <div style="border: 0px" class="success col-md-6" ng-repeat="tarefa in tarefas">
                         <h4 class="text-primary" style="text-transform: uppercase">{{tarefa.nomeTarefa}}<br/>
                      <small class="text-default" style="word-wrap: break-word;">{{tarefa.descricaoTarefa}}</small>
                   </h4>
@@ -358,7 +358,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-12" ng-show="projeto.status == 'Avaliacao'">
+    <div class="col-md-12" style="padding: 0px" ng-show="projeto.status == 'Avaliacao'">
     	<div class="card">
         <h2 id="h4" class="text-info">
             {{projeto.nome}}<br/>
@@ -370,19 +370,6 @@
                 <i class="fa fa-user" aria-hidden="true"></i> {{projeto.organizador.nomeUsuario}}
             </a>
             <br/>
-            <br/>
-            <div>
-				<div class="col-md-12" ng-hide="filtroComentarioUsuario(comentario, projeto.organizador)">  
-                	<textarea class="form-control" cols="20" rows="6" maxlength="500" placeholder="Comente aqui sua opinião a respeito deste integrante da equipe (No máximo 500 caracteres)." id="dp" ng-model="txtComentario" required></textarea>
-                    <button class="btn btn-primary btn-fill" ng-click="salvarComentarioUsuario(txtComentario, projeto.organizador, projeto)">Comentar</button>
-                </div>
-                <div class="col-md-12" ng-repeat="comentario in comentariosUsuario_projeto">  
-                	<div ng-show="filtroComentarioExibicao(comentario, projeto.organizador)">
-                   		Comentario: {{comentario.comentario}}
-                   	</div>
-                </div>
-			</div>
-			<br/>
             <div class="col-md-12" ng-repeat="item in itensUsuario">
                 <div ng-hide="filtroAvaliacaoUsuario(item, projeto.organizador)">
                     {{item.nomeItem}} |
@@ -397,11 +384,22 @@
                     <button ng-click="salvarAvaliacao(notaAvaliacao, item, projeto.organizador, projeto)">Salvar</button>
                 </div>
             </div>  
-            <div class="col-md-12" ng-repeat="avaliacao in avaliacoesUsuario_projeto">
+             <div class="col-md-12" ng-repeat="avaliacao in avaliacoesUsuario_projeto">
                 <div class="col-md-12" ng-show="filtroAvaliacaoExibicao(avaliacao, projeto.organizador)">
                     item: {{avaliacao.itemAvaliado.nomeItem}} | avaliado: {{avaliacao.usuarioAvaliado.nomeUsuario}} | avaliador: {{avaliacao.usuarioAvaliador.nomeUsuario}} | nota: {{avaliacao.notaAvaliacao}}
                 </div>
             </div>
+            <div class="col-md-12">
+				<div class="col-md-12" ng-hide="filtroComentarioUsuario(comentario, projeto.organizador)">  
+                	<textarea class="form-control" cols="20" rows="6" maxlength="500" placeholder="Comente aqui sua opinião a respeito deste integrante da equipe (No máximo 500 caracteres)." id="dp" ng-model="txtComentario" required></textarea>
+                    <button class="btn btn-primary btn-fill" ng-click="salvarComentarioUsuario(txtComentario, projeto.organizador, projeto)">Comentar</button>
+                </div>
+                <div class="col-md-12" ng-repeat="comentario in comentariosUsuario_projeto">  
+                	<div ng-show="filtroComentarioExibicao(comentario, projeto.organizador)">
+                   		Comentario: {{comentario.comentario}}
+                   	</div>
+                </div>
+			</div>
         </div>
         <div ng-repeat="usuarioDoProjeto in usuariosDoProjeto">
             <div class="sombra card" ng-hide="filtroExibirAvaliacao(usuarioDoProjeto)">
@@ -410,7 +408,33 @@
                 </a>
                 <br/>
                 <br/>
-              	<div>
+                <div class="col-md-12" ng-repeat="item in itensUsuario">
+                    <div style="border: 1px solid #253238; padding-left: 0px; padding-right: 0px; padding-bottom: 5px;" class="col-md-4" ng-hide="filtroAvaliacaoUsuario(item, usuarioDoProjeto)" style="margin-bottom: 10px;">
+                        <div class="col-md-12" style="background: #253238; color: #fff;">{{item.nomeItem}}</div>
+                        <div class="col-md-12">
+                        	<label style="font-weight: bold;" class="text-primary" for="multipleSelect"> Nota do usuario: </label>
+                        </div>
+                        <div class="col-md-12">
+	                        <select class="form-control" name="notaAvaliacao" id="nota" ng-model="notaAvaliacao">
+	                            <option value="1">1</option>
+	                            <option value="2">2</option>
+	                            <option value="3">3</option>
+	                            <option value="4">4</option>
+	                            <option value="5">5</option>
+	                        </select>
+						</div>
+                        <div class="col-md-12">
+                        	<button style="width: 100%;"class="btn btn-primary btn-fill btn-xs" ng-click="salvarAvaliacao(notaAvaliacao, item, usuarioDoProjeto, projeto)">Salvar</button>
+                   		</div>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-repeat="avaliacao in avaliacoesUsuario_projeto" style="margin-bottom: 10px;">
+                    <div ng-show="filtroAvaliacaoExibicao(avaliacao, usuarioDoProjeto)">
+                        item: {{avaliacao.itemAvaliado.nomeItem}} | avaliado: {{avaliacao.usuarioAvaliado.nomeUsuario}} | avaliador: {{avaliacao.usuarioAvaliador.nomeUsuario}} | nota: {{avaliacao.notaAvaliacao}}
+                    </div>
+                </div> 
+                <br/>
+                <div class="col-md-12">
 				    <div class="col-md-12" ng-hide="filtroComentarioUsuario(comentario, usuarioDoProjeto)">  
                     	<textarea class="form-control" cols="20" rows="6" maxlength="500" placeholder="Comente aqui sua opinião a respeito deste integrante da equipe (No máximo 500 caracteres)." id="dp" ng-model="txtComentario" required></textarea>
                     	<button class="btn btn-primary btn-fill" ng-click="salvarComentarioUsuario(txtComentario, usuarioDoProjeto, projeto)">Comentar</button>
@@ -421,26 +445,6 @@
                    		</div>
                    	</div>
 				</div>
-				<br/>
-                <div class="col-md-12" ng-repeat="item in itensUsuario">
-                    <div ng-hide="filtroAvaliacaoUsuario(item, usuarioDoProjeto)">
-                        {{item.nomeItem}} |
-                        <label for="multipleSelect"> Nota do usuario: </label>
-                        <select name="notaAvaliacao" id="nota" ng-model="notaAvaliacao">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                        <button ng-click="salvarAvaliacao(notaAvaliacao, item, usuarioDoProjeto, projeto)">Salvar</button>
-                    </div>
-                </div>
-                <div class="col-md-12" ng-repeat="avaliacao in avaliacoesUsuario_projeto">
-                    <div ng-show="filtroAvaliacaoExibicao(avaliacao, usuarioDoProjeto)">
-                        item: {{avaliacao.itemAvaliado.nomeItem}} | avaliado: {{avaliacao.usuarioAvaliado.nomeUsuario}} | avaliador: {{avaliacao.usuarioAvaliador.nomeUsuario}} | nota: {{avaliacao.notaAvaliacao}}
-                    </div>
-                </div> 
             </div>
         </div>
 		</div>

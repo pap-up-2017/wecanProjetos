@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="css/projeto.css">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <div ng-controller="ListarProjetosCtrl">
    <div class="container-fluid">
       <div class="row">
@@ -8,25 +9,31 @@
                   <label style="color: #fff;" class="label label-primary">
                      Meus projetos
                   </label>
-                  <form>
-                     <br/>
+                  <br/><br/>
+                  <div class="row">
+					<div class="col-md-2" style="margin-bottom: 10px;">
+						<a class="btn btn-info btn-fill" ng-href="#/pageProjeto"><i class="fa fa-plus-circle" aria-hidden="true"></i>Novo projeto</a>
+					</div>
+					<div class="col-md-10">
                      <input ng-model="search" ng-change="BuscarInformacao()" type="text" name="search" placeholder="Search..">
-                  </form>
-                  <br/>
-                  <a class="btn btn-info btn-fill" ng-href="#/pageProjeto"><i class="fa fa-plus-circle" aria-hidden="true"></i>Novo projeto</a>
-                  <br/>
+                 	</div>
                   </div>
-                  <h5 style="border-bottom: 1px solid #dcdcdc;" class="text-default">
-                     SEUS PROJETOS EM ANDAMENTO
-                  </h5>
+                  </div>
+                  <br/>
+                  <div class="col-md-12">
+                  <h5 style="border-bottom: 1px solid #dcdcdc; padding: 5px; background: #5cb85c; color: #ffffff;" class="text-default">
+			 	Seus projetos em avaliação de integrantes
+              </h5>
                <div class="content">
-                  <div ng:repeat="projeto in projetosPorUsuario | filter: {status: 'Em andamento'}  | filter: search">
+                  <div ng:repeat="projeto in projetosPorUsuario | filter: {status: 'Avaliacao'} | filter: search">
                      <div class="col-md-12">
                         <a ui-sref="pageDetalhesProjeto({idProjeto:{{projeto.idProjeto}}})">
                            <div id="card" class="card">
                               <h4 style="font-weight:bold" class="text-info">{{projeto.nome}}</h4>
                               <div class="form-group">
                                  <h4 class="title">
+                                    <label class="label label-default">Vagas:</label>
+                                    <label>{{projeto.vagas}}</label>
                                     <label class="label label-default">Integrantes:</label>
                                     <label>{{projeto.participantes}}</label>
                                     <label class="label label-default">Autor:</label>
@@ -34,18 +41,19 @@
                                     <label class="label label-default">Curso:</label>
                                     <label>{{projeto.organizador.cursoUsuario.nomeCurso}}</label>
                                  </h4>
-                                 <p class="description"  style="word-wrap: break-word">{{projeto.descricao}}</p>
-                                 <label style="color: #fff" class="label label-warning">{{projeto.status}}</label>
+                                 <p class="description" style="word-wrap: break-word">{{projeto.descricao}}</p>
+                                 <label style="color: #fff" class="label label-success">{{projeto.status}}</label>
                               </div>
                            </div>
                         </a>
                      </div>
                   </div>
                </div>
-              <h5 style="border-bottom: 1px solid #dcdcdc;" class="text-default">
-			 SEUS PROJETOS EM ABERTO
+               </div>
+               <div class="col-md-12">
+              <h5 style="border-bottom: 1px solid #dcdcdc; padding: 5px; background: #337ab7; color: #ffffff;" class="text-default">
+			 Seus projetos em aberto
               </h5>
-              <br/>
                <div class="content">
                   <div ng:repeat="projeto in meusProjetos | filter: {status: 'Aberto'} | filter: search">
                      <div class="col-md-12">
@@ -71,20 +79,19 @@
                      </div>
                   </div>
                </div>
-             <h5 style="border-bottom: 1px solid #dcdcdc;" class="text-default">
-			 SEUS PROJETOS EM AVALIACAO
-              </h5>
-              <br/>
+               </div>
+               <div class="col-md-12">
+               <h5 style="border-bottom: 1px solid #dcdcdc; padding: 5px; background: #f0ad4e; color: #ffffff;" class="text-default">
+                     Seus projetos em andamento
+                  </h5>
                <div class="content">
-                  <div ng:repeat="projeto in projetosPorUsuario | filter: {status: 'Avaliacao'} | filter: search">
+                  <div ng:repeat="projeto in projetosPorUsuario | filter: {status: 'Em andamento'}  | filter: search">
                      <div class="col-md-12">
                         <a ui-sref="pageDetalhesProjeto({idProjeto:{{projeto.idProjeto}}})">
                            <div id="card" class="card">
                               <h4 style="font-weight:bold" class="text-info">{{projeto.nome}}</h4>
                               <div class="form-group">
                                  <h4 class="title">
-                                    <label class="label label-default">Vagas:</label>
-                                    <label>{{projeto.vagas}}</label>
                                     <label class="label label-default">Integrantes:</label>
                                     <label>{{projeto.participantes}}</label>
                                     <label class="label label-default">Autor:</label>
@@ -92,13 +99,14 @@
                                     <label class="label label-default">Curso:</label>
                                     <label>{{projeto.organizador.cursoUsuario.nomeCurso}}</label>
                                  </h4>
-                                 <p class="description" style="word-wrap: break-word">{{projeto.descricao}}</p>
-                                 <label style="color: #fff" class="label label-primary">{{projeto.status}}</label>
+                                 <p class="description"  style="word-wrap: break-word">{{projeto.descricao}}</p>
+                                 <label style="color: #fff" class="label label-warning">{{projeto.status}}</label>
                               </div>
                            </div>
                         </a>
                      </div>
                   </div>
+               </div>
                </div>
             </div>
          </div>

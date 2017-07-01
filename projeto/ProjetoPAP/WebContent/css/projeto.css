@@ -1,5 +1,5 @@
 input[type=text] {
-    width: 130px;
+    width: 50%;
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
@@ -14,7 +14,9 @@ input[type=text] {
 }
 
 input[type=text]:focus {
+    border: 2px solid #1dc7ea;
     width: 100%;
+    -webkit-transition-timing-function: linear;
 }
 .label-default
 {
@@ -65,3 +67,9 @@ input[type=text]:focus {
 	border: 3px solid #253238;
 }
 a:hover .disciplina { transform: scale(1.1); }
+
+#checkbox label {
+  cursor: pointer;
+  padding-left: 0;
+  color: #253238;
+}

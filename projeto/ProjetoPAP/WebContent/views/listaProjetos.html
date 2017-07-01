@@ -11,26 +11,40 @@
                   Grade de projetos
                </label>
                <br/>
-               <h5 style="border-bottom: 1px solid #dcdcdc;" class="text-default">
-                  PROJETOS GERAL
-               </h5>
-               <a class="btn btn-info btn-fill" ng-href="#/pageProjeto"><i class="fa fa-plus-circle" aria-hidden="true"></i>Novo projeto</a><br/>
-               <form>
-                  <br/>
-                  <input ng-model="search2" ng-change="BuscarInformacao()" type="text" name="search" placeholder="Search..">
-               </form><br/> 
-                <label>Projetos de TCC:
-    			<input type="checkbox" ng-model="checkBoxTCC"
-           			ng-true-value="'TCC'" ng-false-value="''">
-   				</label>  
-   				<label>{{cursoUsuario}}:
-    			 <input type="checkbox" ng-change="habilitarCursoUsuario()" ng-model="cursoUsuarioCheckBox">
-   				</label>
-   				<label>{{instituicaoUsuario}}:
-    			 <input type="checkbox" ng-change="habilitarInstituicaoUsuario()" ng-model="instituicaoUsuarioCheckBox">
-   				</label>                
                <br/>
-            </div>
+               <div class="row">
+               <div class="col-md-2" style="margin-bottom:10px;">
+               	<a class="btn btn-info btn-fill" ng-href="#/pageProjeto"><i class="fa fa-plus-circle" aria-hidden="true"></i>Novo projeto</a>
+               </div>
+               <div class="col-md-10">
+               	<input ng-model="search2" ng-change="BuscarInformacao()" type="text" name="search" placeholder="Search..">
+               </div>
+               </div>
+               <div class="row" style="margin-top: 20px;">
+               <div class="col-md-12" id="checkbox">
+	               <div class="col-md-2" style="text-align: center;">
+		                <label style="cursor: pointer;">
+		    				<input type="checkbox" ng-model="checkBoxTCC" ng-true-value="'TCC'" ng-false-value="''">
+		   					Projetos de TCC
+		   				</label>  
+	   				</div>
+	   				<div class="col-md-4" style="text-align: center;">
+		   				<label style="cursor: pointer;">
+		    			 <input type="checkbox" ng-change="habilitarCursoUsuario()" ng-model="cursoUsuarioCheckBox">
+		   					{{cursoUsuario}}
+		   				</label>
+		   			</div>
+		   			<div class="col-md-4" style="text-align: center;">
+	   				<label style="cursor: pointer;">
+	    			 <input type="checkbox" ng-change="habilitarInstituicaoUsuario()" ng-model="instituicaoUsuarioCheckBox">
+	   					{{instituicaoUsuario}}
+	   				</label>
+	   				</div>
+	   				<div class="col-md-2">
+	   				</div>
+	   			</div>
+	   			</div>
+   			</div>                
             <div class="content">
                <div ng:repeat="projeto in projetos | filter: {status: 'Aberto'} | filter: search2 | filter: checkBoxTCC | filter: checkBoxCursoUsuario | filter: checkBoxInstituicaoUsuario">
                   <div class="col-md-12">
@@ -58,6 +72,7 @@
             </div>
          </div>
       </div>
+   </div>
    </div>
 </div>
 <!--  <link rel="stylesheet" href="css/interno/listarprojeto.css">
