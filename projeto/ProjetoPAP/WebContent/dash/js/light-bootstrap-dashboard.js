@@ -118,6 +118,39 @@ lbd = {
                        .addClass('has-image');                
             }
              
+            
+             $toggle1 = $('.navbar-collapse');
+             
+             $toggle1.click(function (){ 
+                if(lbd.misc.navbar_menu_visible == 1) {
+                    $('html').removeClass('nav-open'); 
+                    lbd.misc.navbar_menu_visible = 0;
+                    $('#bodyClick').remove();
+                     setTimeout(function(){
+                    	 $toggle1.removeClass('toggled');
+                     }, 400);
+                
+                } else {
+                    setTimeout(function(){
+                    	$toggle1.addClass('toggled');
+                    }, 430);
+                    
+                    div = '<div id="bodyClick"></div>';
+                    $(div).appendTo("body").click(function() {
+                        $('html').removeClass('nav-open');
+                        lbd.misc.navbar_menu_visible = 0;
+                        $('#bodyClick').remove();
+                         setTimeout(function(){
+                        	 $toggle1.removeClass('toggled');
+                         }, 400);
+                    });
+                   
+                    $('html').addClass('nav-open');
+                    lbd.misc.navbar_menu_visible = 1;
+                    
+                }
+            });
+    
              
              $toggle = $('.navbar-toggle');
              
@@ -125,7 +158,7 @@ lbd = {
              $navbar.find('button').removeClass('btn-round btn-fill btn-info btn-primary btn-success btn-danger btn-warning btn-neutral');
              $navbar.find('button').addClass('btn-simple btn-block');
             
-             $toggle.click(function (){    
+             $toggle.click(function (){ 
                 if(lbd.misc.navbar_menu_visible == 1) {
                     $('html').removeClass('nav-open'); 
                     lbd.misc.navbar_menu_visible = 0;
