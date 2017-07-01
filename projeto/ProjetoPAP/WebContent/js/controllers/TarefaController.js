@@ -97,7 +97,7 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 	};
 	
 	// Envia a informação de alteração de um elemento para o banco ... Via rest
-	$scope.SalvarAlteracao = function(editedidTarefa, editednameTarefa, editedProjetoTarefa, editeddescricaoTarefa, editedprazoEntrega, editedresponsavel ){
+	$scope.SalvarAlteracao = function(editedidTarefa, editednameTarefa, editedProjetoTarefa, editeddescricaoTarefa, editedprazoEntrega, editedresponsavel, editedStatusTarefa ){
 		
 		var parameter = JSON.stringify({
 			type : "tarefa",
@@ -106,8 +106,13 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 			projetoTarefa : editedProjetoTarefa,
 			descricaoTarefa : editeddescricaoTarefa,
 			prazoEntrega: editedprazoEntrega,
-			responsavel : editedresponsavel
+			responsavel : editedresponsavel,
+			statusTarefa : editedStatusTarefa.status
+			
 		});
+		
+		console.log(editedStatusTarefa.status);
+		console.log(parameter);
 
 		$http.post($rootScope.pattern_url+'rest/tarefarest/postalt/'+$scope.UsuarioLogado,
 				parameter, $rootScope.GetPostconfig).success(
@@ -205,6 +210,12 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 	
 	// carrega os dados do elemento selecionado para edição .. 
 	$scope.CarregarEdicao = function(tarefa){
+		
+		$scope.StatusTarefaArr = [];
+		$scope.StatusTarefaArr.push({ status : 'Pendente'});
+		$scope.StatusTarefaArr.push({ status : 'Em Andamento'});
+		$scope.StatusTarefaArr.push({ status : 'Concluído'});
+		
 		$scope.editIstrue=true;
 	    $scope.editedidTarefa = tarefa.idTarefa;
 	    $scope.editednameTarefa = tarefa.nomeTarefa;
@@ -212,6 +223,7 @@ angular.module("app").controller('PageTarefaCtrl', function($scope, $http, $stat
 	    $scope.editedProjetoTarefaOld = tarefa.projetoTarefa;
 	    $scope.editeddescricaoTarefa = tarefa.descricaoTarefa;
 	    $scope.editedresponsavel = tarefa.responsavel;
+	    $scope.editedStatusTarefa = tarefa.statusTarefa;
 	    $scope.editedprazoEntrega = new Date(tarefa.prazoEntrega);
 	};
 	

@@ -105,7 +105,6 @@ angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieSt
 			}
 			
 			$scope.mediaPontuacaoUsuario = pontuacaoTotal / $scope.arrayPontuacao.length;
-			console.log("Media pontuação: "+$scope.mediaPontuacaoUsuario);
 		}
 	}
 	
@@ -253,16 +252,13 @@ angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieSt
 		}
 		// Preenche o valor do percentual de acerto da disciplina
 		for(i = 0; i < habilidades.length; i++){
-			console.log(habilidades[i].disciplina);
 			for(j = 0; j < habilidades[i].avaliacoes.length; j++ ){
-				console.log(habilidades[i].avaliacoes[j].percentualAcerto);
 				habilidades[i].percentualDisciplina += habilidades[i].avaliacoes[j].percentualAcerto; 
 			}
 			
 		}
 		
 		$scope.habilidades = habilidades;
-		console.log(habilidades);
 	}
 		
 	$scope.divisao = function(num1, num2){

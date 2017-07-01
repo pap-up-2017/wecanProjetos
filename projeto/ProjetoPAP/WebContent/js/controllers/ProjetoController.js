@@ -156,10 +156,22 @@ angular.module("app").controller('PageProjetoCtrl', function($scope, $rootScope,
 		
 	var IniciarProjeto = function(projeto){
 
-		if($scope.usuariosDoProjeto.length < projeto.vagas){
+		// Inicia com um integrante que é o dono do projeto
+		var integrantes = 1;
+		
+		for(i=0; i < $scope.usuariosDoProjeto.length; i++){
+			if( $scope.usuariosDoProjeto[i].tipoUsuario.tipoUsuario != 'Professor'){
+				integrantes++
+			}
+		}
+		
+		console.log(integrantes);
+		if(integrantes < projeto.vagas){
 			swal({
+				
+
 				  title: "Você tem certeza?",
-				  text: "O projeto tem apenas "+$scope.usuariosDoProjeto.length+" integrantes, de um total de "
+				  text: "O projeto tem apenas "+integrantes+" integrantes, de um total de "
 				  	+projeto.vagas+" vagas, deseja continuar?",
 				  type: "warning",
 				  showCancelButton: true,

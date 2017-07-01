@@ -146,7 +146,13 @@
                                     <select class="form-control" ng-model="editedresponsavel" ng-options="usuario.nomeUsuario for usuario in usuariosSelect">
                                         <option ng-show="!editedresponsavel" value="">{{editedresponsavel.nomeUsuario}}</option>
                                     </select>
-                                    <button class="btn btn-info btn-fill btn-sm" ng-click="SalvarAlteracao(editedidTarefa, editednameTarefa, editedProjetoTarefa, editeddescricaoTarefa, editedprazoEntrega, editedresponsavel)">Salvar</button>
+                                    <a class="text-info">Status:</a>
+                                     
+                                    <select class="form-control" ng-model="editedStatusTarefa" ng-options="tarefa.status for tarefa in StatusTarefaArr">
+                                        <option ng-show="!editedStatusTarefa" value="">{{editedStatusTarefa}}</option>
+                                        
+                                    </select>
+                                    <button class="btn btn-info btn-fill btn-sm" ng-click="SalvarAlteracao(editedidTarefa, editednameTarefa, editedProjetoTarefa, editeddescricaoTarefa, editedprazoEntrega, editedresponsavel, editedStatusTarefa )">Salvar</button>
                                     <button class="btn btn-danger btn-fill btn-sm" ng-click="FecharPopUpEdicao()">Cancelar</button>
                                 </div>
                             </div>
