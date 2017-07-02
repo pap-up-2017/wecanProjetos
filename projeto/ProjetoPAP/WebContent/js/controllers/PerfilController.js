@@ -161,6 +161,8 @@ angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieSt
 			var resposta = [];
 			var avaliacaoExiste = false;
 			var avaliacaoExistePos = -1;
+			var disciplinaExiste = false;
+			var mesmaDisciplina = false;
 			
 			// Inclui a primeira habilidade
 			if (habilidades.length == 0) {
@@ -183,9 +185,16 @@ angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieSt
 			} else {
 				// Verifico se a habilidade foi incluída
 				for (j = 0; j < habilidades.length; j++) {
-
+					
+					for(y = 0; y < habilidades.length;y++ ){
+						if(disciplina === habilidades[y].disciplina){
+							disciplinaExiste = true;
+						}
+					}
+					
+					
 					// Valido se a disciplina não existe
-					if (habilidades[j].disciplina.indexOf(disciplina) == -1) {
+					if (!disciplinaExiste) {
 						// Valido se a avaliação já existe
 						resposta.push({
 							idAvaliacao : idAvaliacao,
@@ -205,39 +214,45 @@ angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieSt
 						for (k = 0; k < habilidades[j].avaliacoes.length; k++) {
 							for(x = 0; x < habilidades[j].avaliacoes.length;x++ ){
 								
+								if(habilidades[j].disciplina === disciplina){
+									mesmaDisciplina = true;
+								}
+								
 								if(idAvaliacao === habilidades[j].avaliacoes[x].idAvaliacao){
 									avaliacaoExiste = true;
 									avaliacaoExistePos = x;
 								}
 							}
-							if (!avaliacaoExiste) {
-								// Caso não exista, incluo
-								// Sempre que adiciona uma avaliação, adiciona no total
-								habilidades[j].totalAvaliacoes = habilidades[j].totalAvaliacoes + 1; 
-								
-								habilidades[j].avaliacoes.push({
-												idAvaliacao : idAvaliacao,
-												respostasCorretas : ((statusReposta == 'Correta') ? 1 : 0),
-												totalRespostas : 1,
-												idRespUser : [respostasUsuario[i].idRespostaUsuario],
-												percentualAcerto : ((statusReposta == 'Correta') ? 1 : 0)/1*100
-											})
-								
-							} else {
-								// Valida se resposta do usuário já está no array
-								if(habilidades[j].avaliacoes[k].idRespUser.indexOf(respostasUsuario[i].idRespostaUsuario) == -1){
+							if(mesmaDisciplina){
+								if (!avaliacaoExiste) {
+									// Caso não exista, incluo
+									// Sempre que adiciona uma avaliação, adiciona no total
+									habilidades[j].totalAvaliacoes = habilidades[j].totalAvaliacoes + 1; 
 									
-									if(habilidades[j].avaliacoes[avaliacaoExistePos].idAvaliacao == habilidades[j].avaliacoes[k].idAvaliacao){
-										if (statusReposta == 'Correta' ) {	
-											habilidades[j].avaliacoes[k].respostasCorretas += 1;
-											habilidades[j].avaliacoes[k].idRespUser.push(respostasUsuario[i].idRespostaUsuario);
-											habilidades[j].avaliacoes[k].totalRespostas = habilidades[j].avaliacoes[k].totalRespostas + 1;
-											habilidades[j].avaliacoes[k].percentualAcerto =  habilidades[j].avaliacoes[k].respostasCorretas/habilidades[j].avaliacoes[k].totalRespostas*100;
-										} else {
-											habilidades[j].avaliacoes[k].totalRespostas = habilidades[j].avaliacoes[k].totalRespostas + 1;
-											habilidades[j].avaliacoes[k].idRespUser.push(respostasUsuario[i].idRespostaUsuario);
-											habilidades[j].avaliacoes[k].percentualAcerto =  habilidades[j].avaliacoes[k].respostasCorretas/habilidades[j].avaliacoes[k].totalRespostas*100;
-											
+									habilidades[j].avaliacoes.push({
+													idAvaliacao : idAvaliacao,
+													respostasCorretas : ((statusReposta == 'Correta') ? 1 : 0),
+													totalRespostas : 1,
+													idRespUser : [respostasUsuario[i].idRespostaUsuario],
+													percentualAcerto : ((statusReposta == 'Correta') ? 1 : 0)/1*100
+												})
+									
+								} else {
+									// Valida se resposta do usuário já está no array
+									if(habilidades[j].avaliacoes[k].idRespUser.indexOf(respostasUsuario[i].idRespostaUsuario) == -1){
+										
+										if(habilidades[j].avaliacoes[avaliacaoExistePos].idAvaliacao == habilidades[j].avaliacoes[k].idAvaliacao){
+											if (statusReposta == 'Correta' ) {	
+												habilidades[j].avaliacoes[k].respostasCorretas += 1;
+												habilidades[j].avaliacoes[k].idRespUser.push(respostasUsuario[i].idRespostaUsuario);
+												habilidades[j].avaliacoes[k].totalRespostas = habilidades[j].avaliacoes[k].totalRespostas + 1;
+												habilidades[j].avaliacoes[k].percentualAcerto =  habilidades[j].avaliacoes[k].respostasCorretas/habilidades[j].avaliacoes[k].totalRespostas*100;
+											} else {
+												habilidades[j].avaliacoes[k].totalRespostas = habilidades[j].avaliacoes[k].totalRespostas + 1;
+												habilidades[j].avaliacoes[k].idRespUser.push(respostasUsuario[i].idRespostaUsuario);
+												habilidades[j].avaliacoes[k].percentualAcerto =  habilidades[j].avaliacoes[k].respostasCorretas/habilidades[j].avaliacoes[k].totalRespostas*100;
+												
+											}
 										}
 									}
 								}
