@@ -29,9 +29,9 @@
                Tip 2: you can also add an image using data-image tag
                
                -->
-            <div class="sidebar-wrapper">
+            <div class="sidebar-wrapper" ng-controller="PerfilCtrl">
                <ul class="nav">
-                  <li style="background: #253238;" ng-controller="PerfilCtrl">
+                  <li style="background: #253238;">
                      <div class="infoUser">
                         <div class="content">
                            <div class="author">
@@ -57,10 +57,11 @@
                         <p>Meus projetos</p>
                      </a>
                   </li>
+
                   <li>
-                     <a ng-show="idUsuairiod == UsuarioLogado" ui-sref="altPerfil" ui-sref-active="active">
+                     <a ui-sref="perfil({idUsuario: {{UsuarioLogado}} })"  ui-sref-active="active" >
                         <i class="pe-7s-user"></i>
-                        <p>Editar perfil</p>
+                        <p>Perfil</p>
                      </a>
                   </li>
                </ul>

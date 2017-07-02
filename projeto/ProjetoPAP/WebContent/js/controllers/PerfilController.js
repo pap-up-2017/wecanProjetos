@@ -312,7 +312,7 @@ angular.module("app").controller('PerfilCtrl', function($scope, $http, $cookieSt
 	// Busca informações de todos os projetos salvas no banco ... Via rest
 	$scope.BuscarMeusProjetos = function(idUsuario) {
 
-		$http.get($rootScope.pattern_url+'rest/projetorest/user/'+$scope.UsuarioLogado)
+		$http.get($rootScope.pattern_url+'rest/projetorest/buscaPorUsuario/'+$stateParams.idUsuario)
 				.success(function(data) {
 					var projetosBanco = data["projeto"];
 					var arrayBanco = [];
