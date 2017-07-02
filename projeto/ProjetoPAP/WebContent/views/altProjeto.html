@@ -1,122 +1,140 @@
-<style type="text/css">
-   .listv{
-   margin-bottom: 30px;
-   }
-   .editpopup{
-   width: 250px;
-   height: 250px;
-   border: 1px solid black;
-   display: none;
-   position: absolute;
-   top: center;
-   left: center;
-   bottom: center;
-   right: center;
-   background-color:gray;
-   }
-   .editpopup-true{
-   display: block;
-   }
-   .editpopup-false{
-   display: none;
-   }
-   .campos_projeto
-   {
-   width: 50%;
-   height: auto;
-   float: left;
-   padding: 20px;
-   }
-   .tabelas_projeto
-   {
-   width: 50%;
-   height: auto;
-   float: left;
-   padding: 20px;
-   padding-top: 20px;
-   }
-   .headerLogo
-   {
-   background-attachment: fixed;
-   background-image: url(img/wallpaper02.png);
-   background-repeat: no-repeat;
-   background-position: center;
-   padding-top: 0px;
-   }
-</style>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<br/>
-<div class="panel-body" ng-controller="PageProjetoCtrl"	>
-   {{ Resposta }}
-   <div class="headerLogo">
-      <div class="campos_projeto">
-         <p class="form-group">
-            <label class="label label-default" for="nc">Titulo do projeto:</label>
-            <input placeholder="Nome" class="form-control" type="text" ng-model="projeto.nome" required />
-            <label class="label label-default" for="nc">Descrição do projeto:</label>
-            <textarea placeholder="Descrição" class="form-control" style="resize:none" rows="4" type="text" ng-model="projeto.descricao" required></textarea>
-            <label class="label label-default" for="nc">Data da entrega:</label>		
-            <!--<input class="form-control" type="date" ng-model="projeto.dataEntrega" required /> -->
-            <!-- <select class="form-control" ng-model="projeto.organizador" ng-options="usuario.nomeUsuario for usuario in usuarios">
-               <option value="">Selecione o organizador do projeto...</option>					
-               </select>
-               -->
-            <label class="label label-default" for="nc">Vagas:</label>		
-            <input placeholder="Vagas" class="form-control" type="text" ng-model="projeto.vagas" required />
-            <label class="label label-default" for="nc">Competências necessárias:</label>		
-            <select class="form-control" ng-model="projeto.competencias" ng-options="competencia.nomeCompetencia for competencia in competencias">
-               <option value="">Selecione uma competência...</option>
-            </select>
-            <button class="btn btn-default btnAcao" ng-click="adicionaCompetencia()">Adicionar competência</button>
-            </br>
-            <label class="label label-default" for="nc">Participantes:</label>
-            <select class="form-control" ng-model="projeto.usuarios" ng-options="usuario.nomeUsuario for usuario in usuarios">
-               <option value="">Selecione um usuário...</option>
-            </select>
-            <button class="btn btn-default btnAcao" ng-click="adicionaUsuario()">Adicionar usuário</button>
-            </p class="form-group">	
+<meta charset="utf-8" />
+<link rel="stylesheet" href="css/criarProjeto.css">
+<div class="content" ng-controller="PageProjetoCtrl">
+   <div class="container-fluid">
+      <div class="row">
+      	<div class="col-md-4">
+            <div class="col-md-12">
+               <div class="card">
+                  <div style="padding-bottom: 15px;" class="header">
+                     <label style="color: #fff;" class="label label-primary">Competências necessárias</label>
+                  </div>
+                  <div style="padding: 0px !important" class="card-content">
+                     <div ng-repeat="competenciaDoProjeto in competenciasDoProjeto">
+                        <i class="fa fa-caret-right" aria-hidden="true"></i>
+                        {{competenciaDoProjeto.nomeCompetencia}} 
+                        <button ng-click="ApagarCompetenciaDoprojetoACriar(competenciaDoProjeto)" type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                        <i class="fa fa-times"></i></button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-12">
+               <div class="card">
+                  <div style="padding-bottom: 15px;" class="header">
+                     <label style="color: #fff;" class="label label-primary">Integrantes do projeto</label>
+                  </div>
+                  <div style="padding: 0px !important" class="card-content">
+                     <div ng-repeat="usuarioDoProjeto in usuariosDoProjeto">
+                        <i class="fa fa-caret-right" aria-hidden="true"></i>
+                        {{usuarioDoProjeto.nomeUsuario}} 
+                        <button ng-click="ApagarUsuariosDoprojetoACriar(usuarioDoProjeto)" type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                        <i class="fa fa-times"></i></button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-12">
+               <div class="card">
+                  <div style="padding-bottom: 15px;" class="header">
+                     <label style="color: #fff;" class="label label-primary">Orientadores do projeto</label>
+                  </div>
+                  <div style="padding: 0px !important" class="card-content">
+                     <div ng-repeat="orientadorDoProjeto in orientadoresDoProjeto">
+                        <i class="fa fa-caret-right" aria-hidden="true"></i>
+                        {{orientadorDoProjeto.nomeUsuario}} 
+                        <button ng-click="ApagarOrientadoresDoprojetoACriar(orientadorDoProjeto)" type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                        <i class="fa fa-times"></i></button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-md-8">
+            <div class="card">
+               <div class="header">
+                  <label style="color: #fff;" class="label label-primary">Criar projeto</label>
+               </div>
+               <div class="content">
+                  <form>
+                     <div class="row">
+                        <div class="col-md-6">
+                              <label>Título do projeto</label>
+                              <input type="text" class="form-control" ng-model="projeto.nome" placeholder="Insira um título para o projeto..." required>
+                        </div>
+                        <div class="col-md-4">
+                              <label>Data de entrega</label>
+                              <input type="date" class="form-control" placeholder="dd/mm/aaaa" ng-model="projeto.dataEntrega" required/>
+                        </div>
+                        <div class="col-md-2">
+                              <label>Vagas</label>
+                              <input class="form-control" type="number" max="10" min="1" placeholder="" id="sn" pattern="[0-9]+$" ng-model="projeto.vagas" required>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-12">
+                              <label>Descrição do projeto</label>
+                              <textarea class="form-control" cols="20" rows="4" maxlength="500" placeholder="Descreva sobre o seu projeto (No máximo 500 caracteres)." ng-model="projeto.descricao" required></textarea>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-12">
+                              <label>Competências necessárias:</label>		
+                              <select class="form-control" ng-model="projeto.competencias" ng-options="competencia.nomeCompetencia for competencia in competencias">
+                                 <option value="">Selecione uma competência...</option>
+                              </select>
+                              <label>&nbsp;</label>
+                              <button class="btn btn-info btn-fill btn-xs" ng-click="adicionaCompetencia()">
+                              <i class="fa fa-plus" aria-hidden="true"></i> Adicionar competência
+                              </button>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-12">
+                              <label>Participantes:</label>
+                              <select class="form-control" ng-model="projeto.usuarios" ng-options="usuario.usernameUsuario for usuario in usuarios | filter: tipUsuario = 'Aluno' | filter: {idUsuario: '!'+UsuarioLogado}">
+                                 <option value="">Selecione um participante</option>
+                              </select>
+                              <label>&nbsp;</label>
+                              <button class="btn btn-info btn-fill btn-xs" ng-click="adicionaUsuario()">
+                              <i class="fa fa-plus" aria-hidden="true"></i>Adicionar participante
+                              </button>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-12">
+                              <label>Este Projeto é de TCC:</label>
+                               <input type="checkbox" ng-change="habilitarTCC()" ng-model="projetoDeTCC">
+                        </div>
+                     </div>
+                     <div class="row">
+                       <div class="col-md-12">
+                              <label>Orientadores:</label>
+                              <select class="form-control" ng-model="projeto.orientador" ng-options="usuario.usernameUsuario for usuario in usuarios | filter: tipUsuario = 'Professor' | filter: {idUsuario: '!'+UsuarioLogado}">
+                                 <option value="">Selecione um orientador</option>
+                              </select>
+                              <label>&nbsp;</label>
+                              <button class="btn btn-info btn-fill btn-xs" ng-click="adicionaOrientador()">
+                              <i class="fa fa-plus" aria-hidden="true"></i>Adicionar orientador
+                              </button>
+                        </div>
+                     </div>
+                  </form>
+                  <div style="margin-top: 40px;" class="col-md-6">
+                        <button style="width: 100%" class="btn btn-info btn-fill" ng-click="SalvarCadastro(projeto)">Criar projeto</button>
+                  </div>
+                  <div style="margin-top: 40px;" class="col-md-6">
+                        <script type="text/javascript">
+                           function home()
+                           {
+                               location.href="wecanHome.html";
+                            }
+                        </script>
+                        <a style="width: 100%; text-decoration:none; text-align:center" class="btn btn-danger btn-fill" ng-href="#/dashboard">Cancelar</a>
+                  </div>
+               </div>
+            </div>
+         </div>
       </div>
-      <div class="tabelas_projeto">
-         <button class="btn btn-success" ng-click="SalvarAlteracao(projeto)">Salvar projeto</button>
-         <a class="btn btn-success" ng-href="#/pageListaProjetos">Cancelar</a>
-         </br></br>		    	
-         <table class="table-bordered" width="100%" style="background-color:#f2f2f2">
-            <thead>
-               <tr>
-                  <th>Competências necessárias no projeto</th>
-               </tr>
-            </thead>
-            <tbody>
-               <tr ng-repeat="competenciaDoProjeto in competenciasDoProjeto">
-                  <td>{{ competenciaDoProjeto.nomeCompetencia }}</td>
-               </tr>
-            </tbody>
-         </table>
-         </br>
-         <table class="table-bordered" width="100%" style="background-color:#f2f2f2">
-            <thead>
-               <tr>
-                  <th>Equipe do projeto</th>
-               </tr>
-            </thead>
-            <tbody>
-               <tr ng-repeat="usuarioDoProjeto in usuariosDoProjeto">
-                  <td>{{ usuarioDoProjeto.nomeUsuario }}</td>
-               </tr>
-            </tbody>
-         </table>
-      </div>
-   </div>
-</div>
-<br/><br/>
-<div ng-controller="PageProjetoCtrl">
-   <div class="editpopup editpopup-{{istrue}} ">
-      <p>edit Id:<input type="text" ng-model="editedidProjeto"></p>
-      <p>edit Projeto:<input type="text" ng-model="editednome"></p>
-      <p>edit Descrição:<input type="text" ng-model="editeddescricao"></p>
-      <p>edit Data:<input type="date" ng-model="editeddataEntrega"></p>
-      <button ng-click="SalvarAlteracao(editedidProjeto, editednome, editeddescricao,editeddataEntrega)">Salvar</button>
-      <button ng-click="FecharPopUpEdicao()">Cancelar</button>
    </div>
 </div>
