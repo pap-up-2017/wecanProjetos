@@ -43,7 +43,7 @@
 	        <label style="color: #fff;" class="label label-primary">
 	        Habilidades
 	        </label>
-	         <div class="habilidade">
+	         <div style="margin-top: 10px;" class="habilidade">
 	        		<div ng-repeat="habilidade in habilidades">
 	        			<div>
 	              		<label style="color: rgba(37, 50, 56, 1) !important;" class="text-info">{{habilidade.disciplina}}</label>
@@ -60,20 +60,20 @@
       <div class="col-md-6">
          <div class="hab card">
                <label style="color: #fff;" class="label label-primary">
-               Pontuação do usuário
+               Avaliações de equipe
                </label>
-               <div class="habilidade">
+               <div style="margin-top: 10px;" class="habilidade">
                		<div ng-repeat="pontuacao in arrayPontuacao">
-               			<div>
-                     		<label style="color: rgba(37, 50, 56, 1) !important;"  class="text-info">{{pontuacao.item.nomeItem}}</label><br/>
-							{{ pontuacao.pontuacaoItem | number : 1}}
+               			<div class="col-md-12" style="border-bottom: 1px solid #dcdcdc; padding-top: 5px;">
+                     		<label class="description">{{pontuacao.item.nomeItem}}</label>: 
+							<label class="description" style="font-weight:bold;">{{ pontuacao.pontuacaoItem | number : 1}} pontos</label>
                   		</div>
                		</div>               
                </div>
          </div>
       </div>
       <div class="col-md-12">
-      	<div class="card">
+      	<div class="card hab">
            <label style="color: #fff;" class="label label-primary">
 	       	Projetos concluídos de {{nomeUsuariod}}
 	        </label><br/><br/>
@@ -83,20 +83,19 @@
          </div>
          </div>
          <div class="col-md-12">
-      		<div class="card">
+      		<div class="card hab">
            <label style="color: #fff;" class="label label-primary">
 	       	Comentarios sobre {{nomeUsuariod}} 
-	        </label>
-           <div ng-repeat="comentario in comentariosUsuario_Recebido">
-                <a style="font-size:15px;" class="label label-primary" ui-sref="perfil({idUsuario: {{comentario.enviaComentario.idUsuario}} })" ui-sref-active="active">
+	        </label><br/><br/>
+           <div style="border-bottom: 1px solid #dcdcdc; border-right: 1px solid #dcdcdc" class="col-md-4" ng-repeat="comentario in comentariosUsuario_Recebido">
+                <a style="font-size:15px; margin-bottom: 10px;" class="label label-primary col-md-12" ui-sref="perfil({idUsuario: {{comentario.enviaComentario.idUsuario}} })" ui-sref-active="active">
                 	<i class="fa fa-user" aria-hidden="true"></i> {{comentario.enviaComentario.usernameUsuario}}
-                </a><br/>
-                <a style="font-size:15px;" ui-sref="pageDetalhesProjeto({idProjeto: {{comentario.projetoComentario.idProjeto}} })" ui-sref-active="active">
-                	{{comentario.projetoComentario.nome}}
+                </a><br/><br/>
+                <a class="col-md-12" style="font-size:15px;" ui-sref="pageDetalhesProjeto({idProjeto: {{comentario.projetoComentario.idProjeto}} })" ui-sref-active="active">
+                	<span style="font-weight: bold; word-wrap: break-word;">Projeto: {{comentario.projetoComentario.nome}}</span>
                 </a><br/>
            		<br/>
-           		{{comentario.comentario}}<br/><br/>
-           		<hr/>
+           		<span class="description col-md-12" style="word-wrap: break-word;">{{comentario.comentario}}</span><br/><br/>
            </div>
            </div>
    </div>

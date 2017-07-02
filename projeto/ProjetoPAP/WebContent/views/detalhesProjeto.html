@@ -409,14 +409,14 @@
         </div>
         <div ng-repeat="usuarioDoProjeto in usuariosDoProjeto">
             <div class="sombra card" ng-hide="filtroExibirAvaliacao(usuarioDoProjeto)">
-                <a style="font-size:15px;" class="label label-primary" ui-sref="perfil({idUsuario: {{usuarioDoProjeto.idUsuario}} })" ui-sref-active="active">
+                <a style="font-size:15px;" class="label label-danger" ui-sref="perfil({idUsuario: {{usuarioDoProjeto.idUsuario}} })" ui-sref-active="active">
                     <i class="fa fa-user" aria-hidden="true"></i> {{usuarioDoProjeto.nomeUsuario}}
                 </a>
                 <br/>
                 <br/>
-                <div class="col-md-12" ng-repeat="item in itensUsuario">
-                    <div style="border: 1px solid #253238; padding-left: 0px; padding-right: 0px; padding-bottom: 5px;" class="col-md-4" ng-hide="filtroAvaliacaoUsuario(item, usuarioDoProjeto)" style="margin-bottom: 10px;">
-                        <div class="col-md-12" style="background: #253238; color: #fff;">{{item.nomeItem}}</div>
+                <div class="col-md-4" ng-repeat="item in itensUsuario">
+                    <div style="margin-bottom:10px; border-radius: 5px; border: 1px solid #dcdcdc; padding-left: 0px; padding-right: 0px; padding-bottom: 5px;" class="col-md-12" ng-hide="filtroAvaliacaoUsuario(item, usuarioDoProjeto)" style="margin-bottom: 10px;">
+                        <div class="col-md-12" style="padding: 3px; border-top-left-radius: 5px; border-top-right-radius: 5px; background: #253238; color: #fff;">{{item.nomeItem}}</div>
                         <div class="col-md-12">
                         	<label style="font-weight: bold;" class="text-primary" for="multipleSelect"> Nota do usuario: </label>
                         </div>
@@ -434,13 +434,13 @@
                    		</div>
                     </div>
                 </div>
-                <div class="col-md-12" ng-repeat="avaliacao in avaliacoesUsuario_projeto" style="margin-bottom: 10px;">
-                    <div ng-show="filtroAvaliacaoExibicao(avaliacao, usuarioDoProjeto)">
-                        item: {{avaliacao.itemAvaliado.nomeItem}} | avaliado: {{avaliacao.usuarioAvaliado.nomeUsuario}} | avaliador: {{avaliacao.usuarioAvaliador.nomeUsuario}} | nota: {{avaliacao.notaAvaliacao}}
+                <div class="col-md-4" ng-repeat="avaliacao in avaliacoesUsuario_projeto">
+                    <div class="col-md-12" style="padding: 0px; margin-bottom:10px; border-radius: 5px; border: 1px solid #dcdcdc; ng-show="filtroAvaliacaoExibicao(avaliacao, usuarioDoProjeto)">
+                        <div class="col-md-12" style="padding: 3px; border-top-left-radius: 5px; border-top-right-radius: 5px; background: #2BA14B; color:#fff;">{{avaliacao.itemAvaliado.nomeItem}}: <span style="font-weight: bold;">nota {{avaliacao.notaAvaliacao}}</span></div>
+                        <div class="col-md-12">avaliação realizada por {{avaliacao.usuarioAvaliador.nomeUsuario}}</div>
                     </div>
                 </div> 
-                <br/>
-                <div class="col-md-12">
+                
 				    <div class="col-md-12" ng-hide="filtroComentarioUsuario(comentario, usuarioDoProjeto)">  
                     	<textarea class="form-control" cols="20" rows="6" maxlength="500" placeholder="Comente aqui sua opinião a respeito deste integrante da equipe (No máximo 500 caracteres)." id="dp" ng-model="txtComentario" required></textarea>
                     	<button class="btn btn-primary btn-fill" ng-click="salvarComentarioUsuario(txtComentario, usuarioDoProjeto, projeto)">Comentar</button>
@@ -450,7 +450,7 @@
                    			Comentario: {{comentario.comentario}}
                    		</div>
                    	</div>
-				</div>
+
             </div>
         </div>
 		</div>
