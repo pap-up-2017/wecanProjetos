@@ -46,7 +46,7 @@
 	         <div style="margin-top: 10px;" class="habilidade">
 	        		<div ng-repeat="habilidade in habilidades">
 	        			<div>
-	              		<label style="color: rgba(37, 50, 56, 1) !important;" class="text-info">{{habilidade.disciplina}}</label>
+	              		<label style="color: rgba(37, 50, 56, 1) !important;" class="text-info">{{habilidade.disciplina}} - {{divisao(habilidade.percentualDisciplina,habilidade.totalAvaliacoes)}}%</label>
 	              		 <div class="progress progress-line-primary">
 	                   <div class="progress-bar" role="progressbar" aria-valuenow="{{divisao(habilidade.percentualDisciplina,habilidade.totalAvaliacoes)}}" aria-valuemin="0" aria-valuemax="100" style="width: {{divisao(habilidade.percentualDisciplina,habilidade.totalAvaliacoes)}}%;">
 	                      <span class="sr-only">{{divisao(habilidade.percentualDisciplina,habilidade.totalAvaliacoes)}}% Complete</span>

@@ -80,7 +80,7 @@
                      <div class="row">
                         <div class="col-md-12">
                               <label>Competências necessárias:</label>
-                              <input type="text" class="form-control" ng-model="searchCompetencia" placeholder="Pesquise uma competência" required>
+                              <input type="text" class="form-control" ng-model="searchCompetencia" placeholder="Pesquise uma competência" >
                               <select class="form-control" ng-model="projeto.competencias" ng-options="competencia.nomeCompetencia for competencia in competencias | filter: searchCompetencia">
                                  <option value="">Selecione uma competência...</option>
                               </select>
@@ -93,7 +93,7 @@
                      <div class="row">
                         <div class="col-md-12">
                               <label>Participantes:</label>
-                              <input type="text" class="form-control" ng-model="searchParticipante" placeholder="Pesquise um participante" required>
+                              <input type="text" class="form-control" ng-model="searchParticipante" placeholder="Pesquise um participante" >
                               <select class="form-control" ng-model="projeto.usuarios" ng-options="usuario.usernameUsuario for usuario in usuarios | filter: tipUsuario = 'Aluno' | filter: searchParticipante |filter: {idUsuario: '!'+UsuarioLogado}">
                                  <option value="">Selecione um participante</option>
                               </select>
@@ -112,7 +112,7 @@
                      <div class="row">
                        <div class="col-md-12">
                               <label>Orientadores:</label>
-                              <input type="text" class="form-control" ng-model="searchOrientador" placeholder="Pesquise um orientador" required>
+                              <input type="text" class="form-control" ng-model="searchOrientador" placeholder="Pesquise um orientador">
                               <select class="form-control" ng-model="projeto.orientador" ng-options="usuario.usernameUsuario for usuario in usuarios | filter: tipUsuario = 'Professor' | filter: searchOrientador | filter: {idUsuario: '!'+UsuarioLogado}">
                                  <option value="">Selecione um orientador</option>
                               </select>
